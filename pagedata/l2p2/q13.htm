@@ -1,0 +1,62 @@
+<div class="Q13">
+    <div class="question_img">
+        <img class="" src="assets/images/question.png" aria-hidden="true">
+    </div>
+    <div class="question_txt">
+
+        <p>
+            <span>To identify who should specialize in fishing, calculate your and Friday’s opportunity costs of fishing. Note
+                that this is the number of logs you give up per calorie of fish caught by spending an additional hour fishing.
+                Recall that Friday produces 500 calories of fish per hour or 4 logs of firewood per hour while you produce
+                250 calories or 8 logs per hour. </span>
+            <table class="noborder">
+                <tr>
+                    <td>Your Opportunity Cost of Fishing</td>
+                    <td style="text-align: center;">=</td>
+                    <td style="text-align: left;">
+                        <input maxlength="8" type="number" id="inputlogwoodlosty" name="inputbox1" class="inputbox" style="width:80px" tabindex="16">
+                        <div class="hline">&nbsp;</div>
+                        <input maxlength="8" type="number" id="inputcalfishgainy" name="inputbox2" class="inputbox" style="width:80px" tabindex="16">
+                    </td>
+                    <td style="text-align: center;">=</td>
+                    <td style="text-align: left;">
+                        <input maxlength="8" type="number" id="inputlogpercaly" name="inputbox3" class="inputbox" style="width:80px" tabindex="16">
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="5" style="height:20px;">
+                        <hr style="width:100%;color:#f1f1f1;height: 0px;border: 1px;border-bottom: 1px solid #f1f1f1;">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Friday's Opportunity Cost of Fishing</td>
+                    <td style="text-align: center;">=</td>
+                    <td style="text-align: left;">
+                        <input maxlength="8" onblur="return twoDecims(this)" type="number" id="inputlogwoodlostF" name="inputbox1" class="inputbox"
+                            style="width:80px" tabindex="16">
+
+                        <div class="hline">&nbsp;</div>
+                        <input maxlength="8" onblur="return twoDecims(this)" type="number" id="inputlogpercalyF" name="inputbox3" class="inputbox"
+                            style="width:80px" tabindex="16">
+
+                    </td>
+                    <td style="text-align: center;">=</td>
+                    <td style="text-align: left;">
+                        <input maxlength="8" onblur="return twoDecims(this)" type="number" id="inputcalfishgainF" name="inputbox2" class="inputbox"
+                            style="width:80px" tabindex="16">
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="5" style="height:20px;">
+                        <hr>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="5">
+                        <input class="btncheckanswer" type="button" tabindex="17" value="Check Answer" />
+                    </td>
+                </tr>
+            </table>
+        </p>
+    </div>
+</div>

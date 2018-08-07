@@ -1,0 +1,56 @@
+#appmenu {    
+    padding: 0px; 
+    position: absolute;   
+}
+#appmenu li {
+    white-space: nowrap;
+    display: block;
+    margin: 15px 0px;
+    padding: 5px;    
+}
+#appmenu > li {
+	float: left;
+	background-color: #045C42;
+	text-align: center;
+	position:relative;
+	cursor: pointer;
+    color:#000;    
+}
+#appmenu :hover,
+#appmenu :focus {
+	text-decoration: none;
+}
+#appmenu ul li:first :focus {
+    border:2px solid #045C42;
+	border-bottom:0px;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+}
+
+#appmenu :hover li, #appmenu :focus li {
+    text-decoration: none;    
+}
+#appmenu :focus li {
+	text-decoration: none;
+}
+#appmenu > li > ul {
+    display: none;
+    position: absolute;
+    left: -1px;
+    right: 0;
+    top: 100%;
+    padding: 0;
+    margin: 0;
+    width: 200%;
+    text-align: left;
+	border:1px solid #045C42;
+    border-top: 0px;
+    background-color: #ffffff;
+    padding: 0px 25px 0px 5px;
+}
+#appmenu li ul li {
+    margin: 0px 0px;
+}
+#appmenu > li[aria-expanded="true"] > ul {
+	display:block;
+}
