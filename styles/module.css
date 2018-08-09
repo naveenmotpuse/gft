@@ -55,9 +55,9 @@
 .firePit {
     position: absolute;
     top: 5%;
-    left: 20%;
-    width: 100px;
-    height: 150px;
+    left: 22%;
+    width: 60px;
+    height: 128px;
     background: url(../assets/images/firePit1.png) left center;
     background-size: 100% 100%;
 }
@@ -171,8 +171,8 @@
 }
 .castawaySprites{
     position: absolute;
-    top: 35%;
-    left: 28%;
+    top: 37%;
+    left: 30%;
     width: 42px;
     right: 0;
     bottom: 0;
@@ -195,8 +195,8 @@
 }
 .castawaySprites1{
     position: absolute;
-    top: 35%;
-    left: 28%;
+    top: 37%;
+    left: 30%;
     width: 42px;
     right: 0;
     bottom: 0;
@@ -240,9 +240,9 @@
 .firePit2{
       position:absolute;
       top: 5%; 
-      left: 20%;
-      width: 100px;
-      height: 150px;
+      left: 22%;
+      width: 60px;
+      height: 128px;
       background: url(../assets/images/firePitGlow2.png) left center;
       background-size: 100% 100%;    
       z-index: 2 
@@ -251,15 +251,15 @@
     position:absolute;
     z-index: 3;
     top: -4%;
-    left: 20%;
-    width: 100px;
-    height: 180px;
+    left: 22%;
+    width: 60px;
+    height: 152px;
    background:url(../assets/images/flameHiSprites.png) left center;
    background-size: 500% 100%;
    animation:flamelow .8s steps(5) infinite
 } 
 @keyframes flamelow{
-    100%{background-position:-500px}
+    100%{background-position:-300px}
 }
 .flamelow{
     display:inline-block;
@@ -269,8 +269,8 @@
     text-align:left;
     position:absolute;
     z-index: 3;
-    top:-10%;
-    left: 20%;
+    top:-19%;
+    left: 17%;
     width: 100px;
     height: 200px;
     background-size: 200% 300%;
@@ -331,15 +331,34 @@
     top: 180px;
     bottom: 0;
     width: 75px;
+    height: 120px;
     background: url(../assets/images/fridaySprites.png) no-repeat 0 0%;
     background-size: 1200%;
     background-position: -796px;
     animation: lady 2.5s steps(11);
 }
 @keyframes lady {
-    0% { top: 292px; left: -74px; background-position: -0px } 
-    50% { top: 235.5px; left: -15px; background-position: 0px }  
+    0% { top: 221px; left: -70px; background-position: -0px } 
+    50% { top: 204.5px; left: -11px; background-position: 0px }  
     100% {top: 180px; left: 39px;  background-position: -794px }
+}
+
+.fridaySprites2 {
+    position: absolute;
+    left: -74px;
+    right: 0;
+    top: 292px;
+    bottom: 0;
+    width: 75px;
+    background: url(../assets/images/fridaySprites.png) no-repeat 0 0%;
+    background-size: 1200%;
+    background-position: -796px;
+    animation: lady2 2.5s steps(11);
+}
+@keyframes lady2 {
+    0% { top: 180px; left: 39px;  background-position: -794px; } 
+    50% { top: 235.5px; left: -15px; background-position: 0px }  
+    100% { top: 292px; left: -74px; background-position: -0px; }
 }
 
 /* Raft Animation Css start */
@@ -359,24 +378,7 @@
   0% {top:291px; left: -72px;}
   100% { top:235px; left: 41px; }
 }
-/*
-.fridaySprites2 {
-    position: absolute;
-    left: -74px;
-    right: 0;
-    top: 292px;
-    bottom: 0;
-    width: 75px;
-    background: url(../assets/images/fridaySprites.png) no-repeat 0 0%;
-    background-size: 1200%;
-    background-position: -796px;
-    animation: lady2 2.5s steps(11);
-}
-@keyframes lady2 {
-    0% { top: 180px; left: 39px;  background-position: -794px; } 
-    50% { top: 235.5px; left: -15px; background-position: 0px }  
-    100% { top: 292px; left: -74px; background-position: -0px; }
-}
+
 /* Raft and lady Bye Animation*/
 .friday-raftSprites2 {
     position: absolute;
@@ -394,15 +396,15 @@
   100% { top:291px; left: -72px;}
 }
 
-/* Raft, lady come with stick barrel*/
-.stickBarrelRaft2 {
+/* Raft, lady come with fish barrel*/
+.fishBarrelRaft2 {
     position: absolute;
     left: 100px;
     right: 0;
     top: 235px;
     bottom: 0;
     width: 30px;
-    background: url(../assets/images/stickBarrelRaft.png) no-repeat 0 0%;
+    background: url(../assets/images/fishBarrelRaft.png) no-repeat 0 0%;
     background-size: 100%;
     animation: barrel2 2.5s steps(22);
 }
@@ -410,15 +412,15 @@
     0% {top:290px; left: -11px;}
     100% { top:235px; left: 100px; }
 }
-/* Raft, lady go with fish barrel*/
-.fishBarrelRaft2 {
+/* Raft, lady go with stick barrel*/
+.stickBarrelRaft2 {
     position: absolute;
     left: -11px;
     right: 0;
     top: 290px;
     bottom: 0;
     width: 30px;
-    background: url(../assets/images/fishBarrelRaft.png) no-repeat 0 0%;
+    background: url(../assets/images/stickBarrelRaft.png) no-repeat 0 0%;
     background-size: 100%;
     animation: barrel3 2.5s steps(22);
 }
@@ -717,6 +719,16 @@
     margin-left:10px;
     margin-right: 10px;
 }
+fieldset{
+    width:100%;
+}
+
+fieldset label[for]{
+    -webkit-display:inline-flex;
+    -moz-display:inline-flex;
+    -o-display:inline-flex;
+    display:inline-flex;
+}
 /*Question Css End*/
 
 /* Table Css Start */
@@ -788,3 +800,81 @@ td[rowspan] {
 .noborder td {
     border: none;
 }
+/*student and friday slider css start*/
+.trade_slider_wrapper{
+    width: 96%
+}
+.tradepanel{
+    float: left;
+    width: 50%;
+}
+.trade_slider_wrapper .graphwrapper, .trade_slider_wrapper .slider-wrapper{
+    float: left;
+    width: 100%;
+}
+.tot-range-wrapper{
+    width: 100%;
+    height: 11px;
+    position: relative;
+    margin-top: 10px;
+    margin-bottom: 28px;
+}
+#student-tot{
+    width: 95%;
+    height: 11px;
+    position: relative;
+    margin-top: 10px;
+    margin-bottom: 28px;
+}
+.tot-slider{
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -o-appearance: none;
+    -ms-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 11px;
+    background: #575694;
+    border-radius: 5px;
+}
+.tot-slider::-webkit-slider-thumb{
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -o-appearance: none;
+    -ms-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 30px;
+    background: #575694;
+    cursor: pointer;
+    border-radius: 5px;
+}
+.l_label{
+    float: left;   
+    padding-left: 5px; 
+    margin-top: 10px;
+}
+.r_label{
+    float: right;    
+    margin-top: 10px;
+}
+.tradepanel .slider-wrapper p {margin-top: 0px;}
+.tot-range-wrapper div, .tot-range-wrapper input[type='range']  {float: left; width: 95%;}
+
+.summaryband{
+    float: left;
+    width: 100%;    
+    padding: 20px 0px;
+    
+}
+.summary_img{
+    float: left;
+    width: 60px;
+}
+.summary_text{
+    margin-left: 60px;
+}
+
+
+
+

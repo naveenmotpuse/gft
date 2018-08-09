@@ -3,97 +3,177 @@
 var _Navigator = (function () {
     var _currentPageId = "";
     var _currentPageObject = {};
-    var progressLevels = [1, 8, 7, 0];
+    var progressLevels = [1, 8, 7, 1];
     var _NData = {
-        "l1p1": {  
-            pageId:  "l1p1",        
+        "l1p1": {
+            pageId: "l1p1",
             prevPageId: "",
             nextPageId: "l1p2",
             dataurl: "l1p1.htm",
-            datalevel: 0,            
+            datalevel: 0,
             questions: [],
             isStartPage: true,
-            hasAnimation:true,
+            hasAnimation: true,
         },
-        "l1p2": {           
-            pageId:  "l1p2", 
+        "l1p2": {
+            pageId: "l1p2",
             prevPageId: "l1p1",
             nextPageId: "l1p3",
             dataurl: "l1p2.htm",
             datalevel: 1,
-            questions: [{ Id: "Q1", dataurl: "l1p2/q1.htm" }, { Id: "Q2", dataurl: "l1p2/q2.htm" }, { Id: "Q3", dataurl: "l1p2/q3.htm" }],
-            hasAnimation:true,
+            questions: [{
+                Id: "Q1",
+                dataurl: "l1p2/q1.htm"
+            }, {
+                Id: "Q2",
+                dataurl: "l1p2/q2.htm"
+            }, {
+                Id: "Q3",
+                dataurl: "l1p2/q3.htm"
+            }],
+            hasAnimation: true,
         },
-        "l1p3": {   
-            pageId:  "l1p3",          
+        "l1p3": {
+            pageId: "l1p3",
             prevPageId: "l1p2",
             nextPageId: "l1p4",
             dataurl: "l1p3.htm",
             datalevel: 1,
-            questions: [{ Id: "Q4", dataurl: "l1p3/q4.htm" }],
+            questions: [{
+                Id: "Q4",
+                dataurl: "l1p3/q4.htm"
+            }],
             hasTimeSlider: true,
-            hasAnimation:true,
+            hasAnimation: true,
         },
-        "l1p4": { 
-            pageId:  "l1p4",              
+        "l1p4": {
+            pageId: "l1p4",
             prevPageId: "l1p3",
             nextPageId: "l1p5",
             dataurl: "l1p4.htm",
-            datalevel: 1,            
-            questions: [{ Id: "Q5", dataurl: "l1p4/q5.htm" }, { Id: "Q6", dataurl: "l1p4/q6.htm" }, { Id: "Q7", dataurl: "l1p4/q7.htm" }],            
-            hasAnimation:true,
+            datalevel: 1,
+            questions: [{
+                Id: "Q5",
+                dataurl: "l1p4/q5.htm"
+            }, {
+                Id: "Q6",
+                dataurl: "l1p4/q6.htm"
+            }, {
+                Id: "Q7",
+                dataurl: "l1p4/q7.htm"
+            }],
+            hasAnimation: true,
             isFriday: true,
         },
-        "l1p5": {  
-            pageId:  "l1p5",                       
+        "l1p5": {
+            pageId: "l1p5",
             prevPageId: "l1p4",
             nextPageId: "l2p1",
             dataurl: "l1p5.htm",
             datalevel: 1,
-            questions: [{ Id: "Q8", dataurl: "l1p5/q8.htm" }],
-            hasTimeSlider: true,  
-            hasAnimation:true,
+            questions: [{
+                Id: "Q8",
+                dataurl: "l1p5/q8.htm"
+            }],
+            hasTimeSlider: true,
+            hasAnimation: true,
             isFriday: true,
         },
         "l2p1": {
-            pageId:  "l2p1",   
+            pageId: "l2p1",
             prevPageId: "l1p5",
             nextPageId: "l2p2",
             dataurl: "l2p1.htm",
             datalevel: 2,
             questions: [],
-            hasAnimation:true,
+            hasAnimation: true,
         },
-        "l2p2": {  
-            pageId:  "l2p2",             
+        "l2p2": {
+            pageId: "l2p2",
             prevPageId: "l2p1",
             nextPageId: "l2p3",
             dataurl: "l2p2.htm",
             datalevel: 2,
-            questions: [{ Id: "Q9", dataurl: "l2p2/q9.htm" },
-                        { Id: "Q10", dataurl: "l2p2/q10.htm" },
-                        { Id: "Q11", dataurl: "l2p2/q11.htm" },
-                        { Id: "Q12", dataurl: "l2p2/q12.htm" },
-                        { Id: "Q13", dataurl: "l2p2/q13.htm" },
-                        { Id: "Q14", dataurl: "l2p2/q14.htm" }]
+            questions: [{
+                    Id: "Q9",
+                    dataurl: "l2p2/q9.htm"
+                },
+                {
+                    Id: "Q10",
+                    dataurl: "l2p2/q10.htm"
+                },
+                {
+                    Id: "Q11",
+                    dataurl: "l2p2/q11.htm"
+                },
+                {
+                    Id: "Q12",
+                    dataurl: "l2p2/q12.htm"
+                },
+                {
+                    Id: "Q13",
+                    dataurl: "l2p2/q13.htm"
+                },
+                {
+                    Id: "Q14",
+                    dataurl: "l2p2/q14.htm"
+                }
+            ]
         },
-        "summary":{
-            pageId:  "summary",            
-            prevPageId: "",
-            nextPageId: "", 
-            dataurl: "summary.htm",           
+        "l2p3": {
+            pageId: "l2p3",
+            prevPageId: "l1p2",
+            nextPageId: "l3p1",
+            dataurl: "l2p3.htm",
+            datalevel: 2,
+            questions: [{
+                Id: "Q15",
+                dataurl: "l2p3/q15.htm"
+            }],
+            hasTimeSlider: true,
+            hasTradeSlider: true,
+            hasAnimation: true,
+        },
+        "l3p1": {
+            pageId: "l3p1",
+            prevPageId: "l2p3",
+            nextPageId: "l3p2",
+            dataurl: "l3p1.htm",
+            datalevel: 3,
+            questions: [],
+            hasActivity: true,
+            hasAnimation: true,
+        },
+        "l3p2": {
+            pageId: "l3p2",
+            prevPageId: "l3p1",
+            nextPageId: "l3p3",
+            dataurl: "l3p2.htm",
+            datalevel: 3,
+            questions: [{
+                Id: "Q16",
+                dataurl: "l3p2/q16.htm"
+            }],
+            hasTimeSlider: true,
+            hasTradeSlider: true,
+            hasAnimation: true,
+        },
+        "summary": {
+            pageId: "summary",
+            prevPageId: "l3p2",
+            nextPageId: "",
+            dataurl: "summary.htm",
             datalevel: 5,
             questions: [],
-            isLastPage: true,            
-        }        
+            isLastPage: true,
+        }
     }
     var _StateData = {}
 
-    function OnPageLoad(){
-        _TopSlider.OnLoad();   
-        _CustomPage.OnPageLoad();                    
+    function OnPageLoad() {
+        _TopSlider.OnLoad();
+        _CustomPage.OnPageLoad();
         _Navigator.LoadDefaultQuestion();
-        $("h2.pageheading").focus();
     }
     return {
         Get: function () {
@@ -102,38 +182,39 @@ var _Navigator = (function () {
         Start: function () {
             var Dataurl = $.url('?page');
             if (Dataurl == "" || Dataurl == undefined) {
-                this.LoadPage("l1p1");                
-            }
-            else {
-                this.LoadPage(Dataurl);                
+                this.LoadPage("l1p1");
+            } else {
+                this.LoadPage(Dataurl);
             }
         },
-        LoadPage: function (pageId) {
+        LoadPage: function (pageId, jsonObj) {
+            if (jsonObj == undefined) {
+                jsonObj = {};
+            }
             _currentPageId = pageId;
             this.UpdateProgressBar();
-            _currentPageObject = _NData[_currentPageId]            
-            if(_currentPageObject.isStartPage!=undefined && _currentPageObject.isStartPage)
-            {
+            _currentPageObject = _NData[_currentPageId]
+            if (_currentPageObject.isStartPage != undefined && _currentPageObject.isStartPage) {
                 $("#linkprevious").k_disable();
-                $("#linknext").k_enable();  
+                $("#linknext").k_enable();
             }
-            if(_currentPageObject.isLastPage!=undefined && _currentPageObject.isLastPage)
-            {
-               $("#linknext").k_disable();
+            if (_currentPageObject.isLastPage != undefined && _currentPageObject.isLastPage) {
+                $("#linknext").k_disable();
             }
-            _currentPageObject.isVisited = true; 
-            
-            var pageUrl = dataRoot + _currentPageObject.dataurl + "?npage=" + Math.random();
+            _currentPageObject.isVisited = true;
+
+            var pageUrl = _Settings.dataRoot + _currentPageObject.dataurl + _Caching.GetUrlExtension();;
             if (_currentPageObject.isStartPage) {
                 $(".main-content").load(pageUrl, function () {
                     OnPageLoad();
+                    $("h1").focus();
                 });
-            }
-            else {
+            } else {
                 $(".main-content").fadeTo(250, 0.25, function () {
                     $(".main-content").load(pageUrl, function () {
                         $(this).fadeTo(600, 1)
-                        OnPageLoad();                        
+                        OnPageLoad();
+                        $("h2.pageheading").focus();
                     });
                 })
             }
@@ -149,15 +230,16 @@ var _Navigator = (function () {
                     }
                 }
                 //second parameter is to disable question effect.
-                _Question.Load(_currentPageObject.questions[_questionId],true);
+                _Question.Load(_currentPageObject.questions[_questionId], {
+                    disableEffect: true
+                });
             }
         },
         Prev: function () {
             if (_currentPageObject.questions.length > 0) {
                 if (_currentPageObject.questions[0].isCurrent) {
                     this.LoadPage(_currentPageObject.prevPageId);
-                }
-                else {
+                } else {
                     _Question.Prev();
                 }
             } else {
@@ -178,8 +260,7 @@ var _Navigator = (function () {
                 if (IsAllQCompleted) {
                     this.LoadPage(_currentPageObject.nextPageId);
 
-                }
-                else {
+                } else {
                     this.UpdateProgressBar();
                     _Question.Next();
                 }
@@ -203,8 +284,7 @@ var _Navigator = (function () {
                                     visitpage++;
                                 }
                             }
-                        }
-                        else {
+                        } else {
                             if (_NData[i].IsComplete) {
                                 visitpage++;
                             }
@@ -233,14 +313,14 @@ var _Navigator = (function () {
             _currentPageObject = $.extend(true, _currentPageObject, extendedJson)
             _StateData[_currentPageObject.pageId] = $.extend(true, {}, _currentPageObject);
         },
-        GetTotalScore: function(){
+        GetTotalScore: function () {
             var ObtainPoint = 0;
             var totalPoints = 0;
             for (let i in _NData) {
                 if (_NData[i].questions.length > 0) {
                     for (var j = 0; j < _NData[i].questions.length; j++) {
                         totalPoints = totalPoints + _QData[_NData[i].questions[j].Id].totalPoints;
-                        if (_NData[i].questions[j].isAnswered!=undefined && _NData[i].questions[j].isAnswered) {
+                        if (_NData[i].questions[j].isAnswered != undefined && _NData[i].questions[j].isAnswered) {
                             ObtainPoint = ObtainPoint + (_NData[i].questions[j].points);
                         }
                     }
@@ -249,7 +329,7 @@ var _Navigator = (function () {
             var score = (ObtainPoint / totalPoints) * 100;
             return score.toFixed(0);
         },
-        UpdateScore: function () {            
+        UpdateScore: function () {
             var percScore = this.GetTotalScore()
             $("#scoreInnrDiv").html(percScore + "%");
         },

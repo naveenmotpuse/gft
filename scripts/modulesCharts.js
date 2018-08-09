@@ -26,9 +26,14 @@ var _ModuleCharts = (function () {
                     title: {
                         text: 'Firewood (logs)'
                     },
-                    min: 0, max: 120, gridLineWidth: 1, tickInterval: 20,
+                    min: 0,
+                    max: 120,
+                    gridLineWidth: 1,
+                    tickInterval: 20,
                     plotLines: [{
-                        value: 0, width: 1, color: ColorCodes.gray
+                        value: 0,
+                        width: 1,
+                        color: ColorCodes.gray
                     }]
                 },
                 yAxis: {
@@ -38,9 +43,13 @@ var _ModuleCharts = (function () {
                     labels: {
                         format: '{value}'
                     },
-                    min: 0, gridLineWidth: 1, tickInterval: 500,
+                    min: 0,
+                    gridLineWidth: 1,
+                    tickInterval: 500,
                     plotLines: [{
-                        value: 0, width: 1, color: ColorCodes.gray
+                        value: 0,
+                        width: 1,
+                        color: ColorCodes.gray
                     }]
                 },
                 legend: {
@@ -50,40 +59,41 @@ var _ModuleCharts = (function () {
                     enabled: false
                 },
                 series: [{
-                    id: ser1,
-                    name: ser1,
-                    type: 'line',
-                    lineWidth: 1,
-                    data: _data,
-                    color: ColorCodes.gray,
-                    marker: {
-                        enabled: true,
-                        radius: 5,
-                        symbol: "circle"
+                        id: ser1,
+                        name: ser1,
+                        type: 'line',
+                        lineWidth: 1,
+                        data: _data,
+                        color: ColorCodes.gray,
+                        marker: {
+                            enabled: true,
+                            radius: 5,
+                            symbol: "circle"
+                        },
+                        states: {
+                            hover: {
+                                lineWidthPlus: 0
+                            }
+                        }
                     },
-                    states: {
-                        hover: {
-                            lineWidthPlus: 0
+                    {
+                        id: ser2,
+                        name: ser2,
+                        type: 'line',
+                        lineWidth: 0,
+                        color: ColorCodes.blue,
+                        marker: {
+                            enabled: true,
+                            radius: 5,
+                            symbol: "circle"
+                        },
+                        states: {
+                            hover: {
+                                lineWidthPlus: 0
+                            }
                         }
                     }
-                },
-                {
-                    id: ser2,
-                    name: ser2,
-                    type: 'line',
-                    lineWidth: 0,
-                    color: ColorCodes.blue,
-                    marker: {
-                        enabled: true,
-                        radius: 5,
-                        symbol: "circle"
-                    },
-                    states: {
-                        hover: {
-                            lineWidthPlus: 0
-                        }
-                    }
-                }]
+                ]
             });
         },
         DrawL2P2QuestionChart: function () {
@@ -101,9 +111,14 @@ var _ModuleCharts = (function () {
                     title: {
                         text: 'Firewood (logs)'
                     },
-                    min: 0, max: 120, gridLineWidth: 1, tickInterval: 10,
+                    min: 0,
+                    max: 120,
+                    gridLineWidth: 1,
+                    tickInterval: 10,
                     plotLines: [{
-                        value: 0, width: 1, color: ColorCodes.gray
+                        value: 0,
+                        width: 1,
+                        color: ColorCodes.gray
                     }]
                 },
                 yAxis: {
@@ -113,9 +128,13 @@ var _ModuleCharts = (function () {
                     labels: {
                         format: '{value}'
                     },
-                    min: 0, gridLineWidth: 1, tickInterval: 1000,
+                    min: 0,
+                    gridLineWidth: 1,
+                    tickInterval: 1000,
                     plotLines: [{
-                        value: 0, width: 1, color: ColorCodes.gray
+                        value: 0,
+                        width: 1,
+                        color: ColorCodes.gray
                     }]
                 },
                 legend: {
@@ -126,60 +145,62 @@ var _ModuleCharts = (function () {
                     enabled: false
                 },
                 series: [{
-                    id: 'userppfser',
-                    name: 'Your PPF',
-                    type: 'spline',
-                    lineWidth: 1,
-                    data: userPPF,
-                    color: ColorCodes.user,
-                    marker: {
-                        enabled: true,
-                        radius: 7,
-                        symbol: "circle"
+                        id: 'userppfser',
+                        name: 'Your PPF',
+                        type: 'spline',
+                        lineWidth: 1,
+                        data: userPPF,
+                        color: ColorCodes.user,
+                        marker: {
+                            enabled: true,
+                            radius: 7,
+                            symbol: "circle"
+                        },
+                        states: {
+                            hover: {
+                                lineWidthPlus: 0
+                            }
+                        }
                     },
-                    states: {
-                        hover: {
-                            lineWidthPlus: 0
+                    {
+                        id: 'fridayppfser',
+                        name: "Friday's PPF",
+                        type: 'spline',
+                        lineWidth: 1,
+                        data: fridayPPF,
+                        color: ColorCodes.friday,
+                        marker: {
+                            enabled: true,
+                            radius: 5,
+                            symbol: "circle"
+                        },
+                        states: {
+                            hover: {
+                                lineWidthPlus: 0
+                            }
+                        }
+                    },
+                    {
+                        id: 'bothppfppoint',
+                        name: "Both Student and Friday's Production Point",
+                        type: 'spline',
+                        lineWidth: 0,
+                        data: [
+                            [32, 2000]
+                        ],
+                        color: ColorCodes.transparent,
+                        marker: {
+                            fillOpacity: 0,
+                            lineWidth: 2,
+                            lineColor: ColorCodes.both,
+                            radius: 10,
+                        },
+                        states: {
+                            hover: {
+                                lineWidthPlus: 0
+                            }
                         }
                     }
-                },
-                {
-                    id: 'fridayppfser',
-                    name: "Friday's PPF",
-                    type: 'spline',
-                    lineWidth: 1,
-                    data: fridayPPF,
-                    color: ColorCodes.friday,
-                    marker: {
-                        enabled: true,
-                        radius: 5,
-                        symbol: "circle"
-                    },
-                    states: {
-                        hover: {
-                            lineWidthPlus: 0
-                        }
-                    }
-                },
-                {
-                    id: 'bothppfppoint',
-                    name: "Both Student and Friday's Production Point",
-                    type: 'spline',
-                    lineWidth: 0,
-                    data: [[32,2000]],
-                    color: ColorCodes.transparent,
-                    marker: {
-                        fillOpacity:0,
-                        lineWidth: 2,
-                        lineColor: ColorCodes.both,  
-                        radius:10,                      
-                    },
-                    states: {
-                        hover: {
-                            lineWidthPlus: 0
-                        }
-                    }
-                }
                 ]
             });
 
@@ -199,11 +220,16 @@ var _ModuleCharts = (function () {
                             color: ColorCodes.black
                         }
                     },
-                    min: 0, gridLineWidth: 1, tickInterval: 1
+                    min: 0,
+                    gridLineWidth: 1,
+                    tickInterval: 1
                 }],
                 yAxis: [{ // Primary yAxis
                     categories: [0, 10, 20, 30, 40, 50, 60, 70, 80],
-                    min: 0, max: 80, gridLineWidth: 0, tickInterval: 10,
+                    min: 0,
+                    max: 80,
+                    gridLineWidth: 0,
+                    tickInterval: 10,
                     labels: {
                         format: '{value}',
 
@@ -221,7 +247,10 @@ var _ModuleCharts = (function () {
 
                 }, { // Secondary yAxis
                     categories: [0, 1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000],
-                    min: 0, max: 8000, gridLineWidth: 1, tickInterval: 1000,
+                    min: 0,
+                    max: 8000,
+                    gridLineWidth: 1,
+                    tickInterval: 1000,
                     title: {
                         text: 'Fish (cals)',
                         style: {
@@ -311,9 +340,14 @@ var _ModuleCharts = (function () {
                     title: {
                         text: 'Firewood (logs)'
                     },
-                    min: 0, max: 120, gridLineWidth: 1, tickInterval: 10,
+                    min: 0,
+                    max: 120,
+                    gridLineWidth: 1,
+                    tickInterval: 10,
                     plotLines: [{
-                        value: 0, width: 1, color: ColorCodes.gray
+                        value: 0,
+                        width: 1,
+                        color: ColorCodes.gray
                     }]
                 },
                 yAxis: {
@@ -323,9 +357,99 @@ var _ModuleCharts = (function () {
                     labels: {
                         format: '{value}'
                     },
-                    min: 0, gridLineWidth: 1, tickInterval: 1000,
+                    min: 0,
+                    gridLineWidth: 1,
+                    tickInterval: 1000,
                     plotLines: [{
-                        value: 0, width: 1, color: ColorCodes.gray
+                        value: 0,
+                        width: 1,
+                        color: ColorCodes.gray
+                    }]
+                },
+                legend: {
+                    enabled: true,
+                    align: 'center',
+                },
+                exporting: {
+                    enabled: false
+                },
+                series: [{
+                        id: 'userppfser',
+                        name: 'Your PPF',
+                        type: 'spline',
+                        lineWidth: 0,
+                        data: [],
+                        color: ColorCodes.user,
+                        marker: {
+                            enabled: true,
+                            radius: 5,
+                            symbol: "circle"
+                        },
+                        states: {
+                            hover: {
+                                lineWidthPlus: 0
+                            }
+                        }
+                    },
+                    {
+                        id: 'fridayppfser',
+                        name: "Friday's PPF",
+                        type: 'spline',
+                        lineWidth: 0,
+                        data: [],
+                        color: ColorCodes.friday,
+                        marker: {
+                            enabled: true,
+                            radius: 5,
+                            symbol: "circle"
+                        },
+                        states: {
+                            hover: {
+                                lineWidthPlus: 0
+                            }
+                        }
+                    }
+                ]
+            });
+        },
+        DrawTradeCharts: function () {
+            Highcharts.chart('studenttradeGraph', {
+                title: {                    
+                    text: ' '
+                },
+                tooltip: {
+                    formatter: function () {
+                        return this.x + ' logs, ' + this.y + ' Cals';
+                    }
+                },
+                xAxis: {
+                    title: {
+                        text: 'Firewood (logs)'
+                    },
+                    min: 0,
+                    max: 120,
+                    gridLineWidth: 1,
+                    tickInterval: 10,
+                    plotLines: [{
+                        value: 0,
+                        width: 1,
+                        color: ColorCodes.gray
+                    }]
+                },
+                yAxis: {
+                    title: {
+                        text: 'Fish (Cals)'
+                    },
+                    labels: {
+                        format: '{value}'
+                    },
+                    min: 0,
+                    gridLineWidth: 1,
+                    tickInterval: 1000,
+                    plotLines: [{
+                        value: 0,
+                        width: 1,
+                        color: ColorCodes.gray
                     }]
                 },
                 legend: {
@@ -339,39 +463,75 @@ var _ModuleCharts = (function () {
                     id: 'userppfser',
                     name: 'Your PPF',
                     type: 'spline',
-                    lineWidth: 0,
-                    data: [],
+                    lineWidth: 1,
+                    data: userPPF,
                     color: ColorCodes.user,
                     marker: {
                         enabled: true,
                         radius: 5,
                         symbol: "circle"
-                    },
-                    states: {
-                        hover: {
-                            lineWidthPlus: 0
-                        }
+                    }
+                }]
+            });
+            Highcharts.chart('fridaytradeGraph', {
+                title: {
+                    text: ' '
+                },
+                tooltip: {
+                    formatter: function () {
+                        return this.x + ' logs, ' + this.y + ' Cals';
                     }
                 },
-                {
+                xAxis: {
+                    title: {
+                        text: 'Firewood (logs)'
+                    },
+                    min: 0,
+                    max: 120,
+                    gridLineWidth: 1,
+                    tickInterval: 10,
+                    plotLines: [{
+                        value: 0,
+                        width: 1,
+                        color: ColorCodes.gray
+                    }]
+                },
+                yAxis: {
+                    title: {
+                        text: 'Fish (Cals)'
+                    },
+                    labels: {
+                        format: '{value}'
+                    },
+                    min: 0,
+                    gridLineWidth: 1,
+                    tickInterval: 1000,
+                    plotLines: [{
+                        value: 0,
+                        width: 1,
+                        color: ColorCodes.gray
+                    }]
+                },
+                legend: {
+                    enabled: true,
+                    align: 'center',
+                },
+                exporting: {
+                    enabled: false
+                },
+                series: [{
                     id: 'fridayppfser',
                     name: "Friday's PPF",
                     type: 'spline',
-                    lineWidth: 0,
-                    data: [],
+                    lineWidth: 1,
+                    data: fridayPPF,
                     color: ColorCodes.friday,
                     marker: {
                         enabled: true,
                         radius: 5,
                         symbol: "circle"
-                    },
-                    states: {
-                        hover: {
-                            lineWidthPlus: 0
-                        }
                     }
-                }
-                ]
+                }]
             });
         },
         AddPointToPPFChart: function (seriesid, _point) {

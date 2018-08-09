@@ -1,6 +1,6 @@
 <h2 class="pageheading">
     Time Spent on Activities</h2>
-<div class="intro-content marginLR" >
+<div class="intro-content marginLR">
     <div class="intro-p">
         <p>
             Use the time allocation sliders to split your time between gathering firewood, fishing, and leisure (any unallocated time).
@@ -8,41 +8,16 @@
             <br>
             <br> Notice that as you change the sliders, your production point is shown on the PPF.
         </p>
-
         <div class="selecttimeslider t_range-slider_c">
-            
         </div>
-        <div class="runtimeslider"  style="z-index: 2; background: transparent; display:none; border-width: 1px; padding: 5px; float: left;">
-            <div>
-                    <h4 class="ds-heading">Daytime Schedule</h4>
-                <div id="animation-slider" aria-label="Collect Wood 3 hr Collect Fish 7 hr">
-                    <img src="assets/images/slider-arrow.png" id="slider-arrow-day" alt="" style="left: 0px;">
-                    <div class="animate-slider3" style="width: 0%;"></div>
-                    <div class="animate-slider1" style="width: 30%;"></div>
-                    <div class="animate-slider2" style="width: 70%;"></div>
-                </div>
-                    <div id="animate-slider-range">
-                        <span class="h_left">0 hr </span><span class="h_right">12 hr</span>
-                    </div>
-            </div>
+        <div class="runtimeslider daytime_scheduler">
         </div>
-
-        <div class="nighttimeslider">
-            <div>
-                <h4 class="ds-heading">Night Time Schedule</h4>
-                <div id="animation-night-slider">
-                    <img src="assets/images/slider-arrow.png" id="slider-arrow-night" alt="" style="left: 0px;">
-                </div>
-                <div id="animate-slider-range">
-                    <span class="h_left">0 hr </span>
-                    <span class="h_right">12 hr</span>
-                </div>
-            </div>
+        <div class="nighttimeslider nighttime_scheduler">
         </div>
         <center>
-        <div class="startbtnpanel">
-            <input class="btnstartslider" type="button" id="btnstartslider" value="Start" tabindex="15"  />
-        </div>
+            <div class="startbtnpanel">
+                <input class="btnstartslider" type="button" id="btnstartslider" value="Start" />
+            </div>
         </center>
     </div>
     <div class="wrapperanimation">
@@ -53,5 +28,5 @@
 </div>
 <div id="div_question" class="questionband marginLR displaynone">
 </div>
-<div id="div_feedback" class="feedbackdiv">    
+<div id="div_feedback" class="feedbackdiv">
 </div>

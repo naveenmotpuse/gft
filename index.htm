@@ -14,13 +14,14 @@
 
     <script src="scripts/external/jquery-2.1.4.min.js"></script>  
     <script src="scripts/external/highcharts.js"></script>
-    <script src="scripts/external/menu/menu.js"></script>  
+    <script src="scripts/external/menu/menu.js"></script>    
     <script src="scripts/data.js"></script>
-    <script src="scripts/topslider.js"></script>    
+    <script src="scripts/caching.js"></script>      
     <script src="scripts/navigator.js"></script>
     <script src="scripts/question.js"></script>
     <script src="scripts/modulesCharts.js"></script>
     <script src="scripts/customQuestion.js"></script>
+    <script src="scripts/topslider.js"></script>    
     <script src="scripts/module.js"></script>
     <script src="scripts/slider.js"></script>
     <script src="scripts/animate.js"></script>
@@ -30,8 +31,8 @@
 </head>
 <body>
     <div id="wrapper" class="mxwidth">
-        <center>
-            <header>
+        <header role="banner">
+            <center>
                 <div id="header-content" class="mxwidth">
                     <div id="header-title">                        
                         <ul role="menubar" aria-label="functions" id="appmenu" class="wrapper">
@@ -73,7 +74,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="scale" aria-hidden="true">
+                            <div class="scale">
                                 <div class="section ">
                                     <div class="filler">Intro</div>
                                 </div>
@@ -89,48 +90,48 @@
                             </div>
                         </div>
                         <div id="scorediv" class="scoreDiv wrapper" >Overall Score:&nbsp;
-                            <div id="scoreInnrDiv" aria-hidden="true">0%</div>
+                            <div id="scoreInnrDiv">0%</div>
                         </div>
                     </div>
                     <div id="header-btn-container">
                         <div class="wrapper">
-							<button role="button" class="linksurplus-p" id="linksurplus" tabindex="3" >
+							<button role="button" class="linksurplus-p" id="linksurplus">
                                 <span>Inventory</span>
                                 <img src="assets/images/down-chevron.png" alt="">
                             </button>
-                            <button role="button" class="linkppf-p" id="linkppf" tabindex="2" >
+                            <button role="button" class="linkppf-p" id="linkppf" >
                                 <span>PPF</span>
                                 <img src="assets/images/down-chevron.png" alt="">
                             </button>                            
                         </div>
                     </div>
                 </div>
-            </header>
-        </center>
-        <section>
+            </center>
+        </header>
+        <main role="main">
             <div class="top-slider innerWrapper headmargin"></div>
             <div class="main-content innerWrapper"></div>
-        </section>
-        <center>
-            <footer>
-                <nav>
+        </main>
+        <footer>
+            <center>
+                <nav role="navigation">
                     <div id="footer-navigation">
                         <div class="previous">
-                            <a id="linkprevious" href="#" tabindex="50">
+                            <a id="linkprevious" href="#">
                                 <img class="prevImg" src="assets/images/back-button-v2.png">
                                 <span>Previous</span>
                             </a>
                         </div>
                         <div class="next">
-                            <a id="linknext" href="#" tabindex="51" >
+                            <a id="linknext" href="#">
                                 <span>Next</span>
                                 <img class="nextImg" src="assets/images/next-button-v2.png">
                             </a>
                         </div>
                     </div>
                 </nav>
-            </footer>
-        </center>
+            </center>
+        </footer>
     </div>
 </body>
 

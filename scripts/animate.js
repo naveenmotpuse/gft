@@ -1,12 +1,18 @@
 var round = function (val) {
-    if (Math.round(val) !== val) { val = val.toFixed(1); }
+    if (Math.round(val) !== val) {
+        val = val.toFixed(1);
+    }
     return val;
 }
 
 var AnimationPlace = "#img-stranded-island";
 var _Animation = (function () {
-    var getDiv = function () { return "<div></div>"; }
-    var getImage = function () { return new Image(); };
+    var getDiv = function () {
+        return "<div></div>";
+    }
+    var getImage = function () {
+        return new Image();
+    };
 
     var _delay = function (_ele, _dur, callback) {
         $(_ele).show().delay(_dur).queue(function (nxt) {
@@ -48,21 +54,24 @@ var _Animation = (function () {
     }
     var _gatheringWood = function (_dur, data) {
         var div = getDiv();
-        if(_Navigator.GetCurrentPage().isFriday){
+        if (_Navigator.GetCurrentPage().isFriday) {
             var _gatheringwood = $(div).addClass("fridaygatheringSprites").hide();
             $(_gatheringwood).insertAfter(AnimationPlace);
             _SetWood(data, _dur);
             _delay(".fridaygatheringSprites", _dur, function () {
                 $(".fridaygatheringSprites").remove();
             })
-        }
-        else{
-        var _gatheringwood = $(div).addClass("gatheringSprites").hide();
-        $(_gatheringwood).insertAfter(AnimationPlace);
-        _SetWood(data, _dur);
-        _delay(".gatheringSprites", _dur, function () {
-            $(".gatheringSprites").remove();
-        })
+        } else {
+            var _gatheringwood = $(div).addClass("gatheringSprites").hide();
+            $(_gatheringwood).insertAfter(AnimationPlace);
+            _SetWood(data, _dur);
+            _delay(".gatheringSprites", _dur, function () {
+                $(".gatheringSprites").remove();
+                var currPage = _Navigator.GetCurrentPage();
+                if (currPage.pageId == 'l2p3' || currPage.pageId == 'l3p2') {
+                    _Animation.LadyComeWithFish();
+                }
+            });
         }
     }
     var _chopping = function (_dur, data) {
@@ -76,7 +85,7 @@ var _Animation = (function () {
     }
     var _fishing = function (_dur, data) {
         var div = getDiv();
-        if(_Navigator.GetCurrentPage().isFriday){
+        if (_Navigator.GetCurrentPage().isFriday) {
             var _gatheringwood = $(div).addClass("fridayfishing1Sprites").hide();
             $(_gatheringwood).insertAfter(AnimationPlace);
             _SetFish(data, _dur);
@@ -84,8 +93,7 @@ var _Animation = (function () {
                 $(".fridayfishing1Sprites").remove();
                 $(".pondFish").hide();
             });
-        }
-        else{
+        } else {
             var _gatheringwood = $(div).addClass("fishing1Sprites").hide();
             $(_gatheringwood).insertAfter(AnimationPlace);
             _SetFish(data, _dur);
@@ -109,10 +117,33 @@ var _Animation = (function () {
         debugger;
         var _dur = dur || 1000;
         if (val >= 0) {
-            $('.woodcounter .count').each(function () { $(this).prop('Counter', $(this).text()).animate({ Counter: val }, { duration: _dur, easing: 'swing', step: function (now) { $(this).text(round(now)) } }) });
+            $('.woodcounter .count').each(function () {
+                $(this).prop('Counter', $(this).text()).animate({
+                    Counter: val
+                }, {
+                    duration: _dur,
+                    easing: 'swing',
+                    step: function (now) {
+                        $(this).text(round(now))
+                    }
+                })
+            });
         } else {
             val = 0;
-            $('.woodcounter .count').each(function () { $(this).prop('Counter', $(this).text()).animate({ Counter: val }, { duration: _dur, complete: function () { EventManager.onDie("less_wood") }, easing: 'swing', step: function (now) { $(this).text(round(now)) } }) });
+            $('.woodcounter .count').each(function () {
+                $(this).prop('Counter', $(this).text()).animate({
+                    Counter: val
+                }, {
+                    duration: _dur,
+                    complete: function () {
+                        EventManager.onDie("less_wood")
+                    },
+                    easing: 'swing',
+                    step: function (now) {
+                        $(this).text(round(now))
+                    }
+                })
+            });
         }
         //DataStorage.setWoodRemaining(val);
 
@@ -123,10 +154,33 @@ var _Animation = (function () {
         debugger;
         var _dur = dur || 1000;
         if (val >= 0) {
-            $('.fishcounter .count').each(function () { $(this).prop('Counter', $(this).text()).animate({ Counter: val }, { duration: _dur, easing: 'swing', step: function (now) { $(this).text(round(now)) } }) });
+            $('.fishcounter .count').each(function () {
+                $(this).prop('Counter', $(this).text()).animate({
+                    Counter: val
+                }, {
+                    duration: _dur,
+                    easing: 'swing',
+                    step: function (now) {
+                        $(this).text(round(now))
+                    }
+                })
+            });
         } else {
             val = 0;
-            $('.fishcounter .count').each(function () { $(this).prop('Counter', $(this).text()).animate({ Counter: val }, { duration: _dur, complete: function () { EventManager.onDie("less_fish") }, easing: 'swing', step: function (now) { $(this).text(round(now)) } }) });
+            $('.fishcounter .count').each(function () {
+                $(this).prop('Counter', $(this).text()).animate({
+                    Counter: val
+                }, {
+                    duration: _dur,
+                    complete: function () {
+                        EventManager.onDie("less_fish")
+                    },
+                    easing: 'swing',
+                    step: function (now) {
+                        $(this).text(round(now))
+                    }
+                })
+            });
         }
         //DataStorage.setFishRemaining(val);
         _setimgaccessibility();
@@ -152,7 +206,7 @@ var _Animation = (function () {
             _delay(".flameHiSprites", 500, function () {
                 $(".overlay").removeClass("dayTime").addClass("nightTime");
                 $(".flameHiSprites").show();
-                $(".firePit2").css("backgroundImage", "url(" + dataRoot + "'firePitGlow3.png')");
+                $(".firePit2").css("backgroundImage", "url(" + _Settings.dataRoot + "'firePitGlow3.png')");
             })
         });
     }
@@ -163,7 +217,7 @@ var _Animation = (function () {
         $(".flameHiSprites").hide();
         _delay(".flamelow", 500, function () {
             $(".flamelow").remove();
-            $(".firePit2").css("backgroundImage", "url(" + dataRoot + "'firePitGlow2.png')");
+            $(".firePit2").css("backgroundImage", "url(" + _Settings.dataRoot + "'firePitGlow2.png')");
             $(".firePit2").hide();
             $(".overlay").removeClass("nightTime").addClass("dayTime");
         });
@@ -237,7 +291,7 @@ var _Animation = (function () {
                 $(".fishcounter").addClass("activecounter")
                 _fishingNet(_dur2, potData.fish);
                 _delay(".dummy", (_dur2), function () {
-                    $(".fishcounter").removeClass("activecounter")
+                    $(".fishcounter").removeClass("activecounter");
                 });
                 if (typeof callback == "function") {
                     _delay(".dummy", (_dur2), function () {
@@ -261,31 +315,49 @@ var _Animation = (function () {
             var _gatheringwood = $(div).addClass("fishingNet");
             $(_gatheringwood).insertAfter(AnimationPlace);
         },
-        MngAnimationEle: function(){
+        MngAnimationEle: function () {
             var CurrPage = _Navigator.GetCurrentPage();
-            if(CurrPage.pageId == 'l1p1' || CurrPage.pageId == 'l1p2' || CurrPage.pageId == 'l1p3'){
-                $('.friday-raftSprites, .fridaySprites, .stickBarrelRaft2').hide();
-            }
-            else if(CurrPage.pageId == 'l1p4' || CurrPage.pageId == 'l1p5'){
-                $('.friday-raftSprites, .fridaySprites, .stickBarrelRaft2').hide();
+            if (CurrPage.pageId == 'l1p1' || CurrPage.pageId == 'l1p2' || CurrPage.pageId == 'l1p3') {
+                $('.friday-raftSprites, .fridaySprites, .stickBarrelRaft2, .fishBarrelRaft2').hide();
+            } else if (CurrPage.pageId == 'l1p4' || CurrPage.pageId == 'l1p5') {
+                $('.friday-raftSprites, .fridaySprites, .stickBarrelRaft2, .fishBarrelRaft2').hide();
                 $('.castawaySprites1').removeClass('castawaySprites1').addClass('fridaycastawaySprites');
-            }
-            else if(CurrPage.pageId == "l2p1"){
-                $('.stickBarrelRaft2').hide();
+            } else if (CurrPage.pageId == "l2p1") {
+                $('.stickBarrelRaft2, .fishBarrelRaft2').hide();
                 $('.castawaySprites1').removeClass('castawaySprites1').addClass('castawaySprites');
                 $('.friday-raftSprites, .fridaySprites').show();
+            } else if (CurrPage.pageId == "l2p3") {
+                $('.fishBarrelRaft2').hide();
+                $('.castawaySprites1').removeClass('castawaySprites1').addClass('castawaySprites');
+            } else if (CurrPage.pageId == "l3p2") {
+                $('.fishBarrelRaft2').hide();
+                $('.castawaySprites1').removeClass('castawaySprites1').addClass('castawaySprites');
             }
+        },
+        LadyComeWithFish: function () {
+            debugger;
+            $('.castawaySprites1').removeClass('castawaySprites1').addClass('castawaySprites');
+            $('.friday-raftSprites2').removeClass('friday-raftSprites2').addClass('friday-raftSprites');
+            $('.fishBarrelRaft2').show();
+            $('.castawaySprites').show();
+            $('.fridaySprites2').removeClass('fridaySprites2').addClass('fridaySprites');
+        },
+        LadyGoWithWood: function () {
+            debugger;
+            $('.fishBarrelRaft2').removeClass('fishBarrelRaft2').addClass('stickBarrelRaft2');
+            $('friday-raftSprites').removeClass('friday-raftSprites').addClass('friday-raftSprites2');
         }
     }
 })();
 
 var EventManager = function () {
     return {
-        onStart: function () {
-        },
+        onStart: function () {},
         onFind: function () {
             debugger;
-            $('html,body').animate({ scrollTop: 0 }, 200);
+            $('html,body').animate({
+                scrollTop: 0
+            }, 200);
 
             var potData = DataStorage.getPotData();
             var potDataremainLastDay = DataStorage.getRemainingPotData();
@@ -301,8 +373,8 @@ var EventManager = function () {
             if (wood < 0) {
                 wood = 0;
             }
-            Table.setfish(DataStorage.getProducedData().fish, fish);
-            Table.setWood(DataStorage.getProducedData().wood, wood);
+            //Table.setfish(DataStorage.getProducedData().fish, fish);
+            //Table.setWood(DataStorage.getProducedData().wood, wood);
             // update datastroage 
             DataStorage.setFishRemaining(fish);
             DataStorage.setWoodRemaining(wood);
@@ -314,7 +386,7 @@ var EventManager = function () {
             $("#linknext").k_enable();
         },
         OnTryAgain: function () {
-          debugger;
+            debugger;
             _Slider.Reset();
             _Animation.day();
             DataStorage.retry();
@@ -351,7 +423,11 @@ var EventManager = function () {
             if ($(".removeonnextday").length > 0) {
                 $(".removeonnextday").remove();
                 $("li.c-tool").remove();
-                ValidationProps = { "wood": 0, "fish": 0, "tool": false }
+                ValidationProps = {
+                    "wood": 0,
+                    "fish": 0,
+                    "tool": false
+                }
                 AnimConfig.toolTime = 0;
             }
             $("#day").text(currentDay);
@@ -377,9 +453,11 @@ var EventManager = function () {
             $(".questionband").hide();
             $(".findout").hide();
             $(".pgfeedback").hide();
-            $(".row.retrybuttonpanelfind").hide();            
-            
-            $('html,body').animate({ scrollTop: 0 }, 200);
+            $(".row.retrybuttonpanelfind").hide();
+
+            $('html,body').animate({
+                scrollTop: 0
+            }, 200);
             $(".fishcounter .count").text(0);
             $(".woodcounter .count").text(0);
 
@@ -390,7 +468,7 @@ var EventManager = function () {
             }, 100)
         },
         onNightAnimComplete: function () {
-          debugger;
+            debugger;
             _Animation.day();
             _Slider.Reset();
             $("#btnfindout").k_disable()
@@ -399,40 +477,55 @@ var EventManager = function () {
             var currentDay = DataStorage.getCurrentDay();
             // var days = { 1: "1st", 2: "2nd", 3: "3rd", 4: "4th", 5: "5", 6: "6th", 7: "7th", 8: '8th', 9: "9th", 10: '10th', 11: '11th', 12: '12th', 13: '13th', 14: '14th', 15: '15th', 16: '16th', 17: '17th', 18: '18th', 19: '19th', 20:'20th' };
             var dayval = ""
-            var days = { 1: "st", 2: "nd", 3: "rd" }
-            if ((currentDay > 10 && currentDay < 14) || (currentDay % 10)==0  || (currentDay % 10)>3) {
+            var days = {
+                1: "st",
+                2: "nd",
+                3: "rd"
+            }
+            if ((currentDay > 10 && currentDay < 14) || (currentDay % 10) == 0 || (currentDay % 10) > 3) {
                 dayval = currentDay + "th";
-            }            
-            else {
+            } else {
                 dayval = currentDay + days[(currentDay % 10)]
             }
-            FindOutComplete({ IsAlive: true, totalRemainingLbs: remdata.wood, totalRemainingCals: remdata.fish, day: dayval });
+            FindOutComplete({
+                IsAlive: true,
+                totalRemainingLbs: remdata.wood,
+                totalRemainingCals: remdata.fish,
+                day: dayval
+            });
+            Table.setfish(DataStorage.getProducedData().fish, remdata.fish);
+            Table.setWood(DataStorage.getProducedData().wood, remdata.wood);
         },
         onDie: function (because) {
-          debugger;
+            debugger;
             //_Animation.die();
             AnimConfig.die = true;
-            FindOutComplete({ IsAlive: false, DiedReason: because });
+            FindOutComplete({
+                IsAlive: false,
+                DiedReason: because
+            });
             $("#btnfindout").k_disable();
         },
-        ActivityPrevAnswer: function(){
+        ActivityPrevAnswer: function () {
             var pageId = _Navigator.GetCurrentPage().pageId;
             debugger;
             var datacoll = DataStorage.getCollection();
-            for(var i=0;i<datacoll.length;i++){
-                if(datacoll[i].pageId == pageId){
+            for (var i = 0; i < datacoll.length; i++) {
+                if (datacoll[i].pageId == pageId) {
                     Table.setWood(datacoll[i]._woodsLbs, 0);
                     Table.setfish(datacoll[i]._fishCals, 0);
-                    break;                    
+                    break;
                 }
-            }            
+            }
             _Question.Loadfeedback(0);
-            
+
             $(".selecttimeslider").hide();
             $(".startbtnpanel").hide();
             $(".runtimeslider").hide();
             $(".nighttimeslider").show();
-            $(".slider-arrow-night").css({"right":"0px"});
+            $(".slider-arrow-night").css({
+                "right": "0px"
+            });
             $("#div_question").removeClass("displaynone").show();
             $(".findout").k_disable();
             $("#linknext").k_enable();
@@ -441,7 +534,9 @@ var EventManager = function () {
 }();
 var Table = function () {
     var round = function (val) {
-        if (Math.round(val) !== val) { val = val.toFixed(1); }
+        if (Math.round(val) !== val) {
+            val = val.toFixed(1);
+        }
         return val;
     }
     return {
@@ -467,5 +562,3 @@ var Table = function () {
         },
     }
 }();
-
-

@@ -62,6 +62,8 @@ var _CustomPage = (function(){
             }
             if(pageobj.hasTimeSlider!=undefined && pageobj.hasTimeSlider){
                 _Template.LoadRangeSlider();
+                _Template.LoadDaytimeScheduler();
+                _Template.LoadNighttimeScheduler();
             }
             if(pageobj.hasAnimation != undefined && pageobj.hasAnimation){
                 _Template.LoadAnimateArea();
@@ -69,8 +71,21 @@ var _CustomPage = (function(){
             if(pageobj.isFriday!=undefined && pageobj.isFriday){
                 AnimConfig.isFriday = true;
             }
+            if(pageobj.hasTradeSlider!=undefined && pageobj.hasTradeSlider){
+                _Template.LoadRangeSlider();
+                _Template.LoadDaytimeScheduler();
+                _Template.LoadNighttimeScheduler();
+                _Template.LoadTradeSlider();
+            }
             else{
                 AnimConfig.isFriday = false;
+            }
+            if(pageobj.hasActivity != undefined && pageobj.hasActivity)
+            {
+                if(pageobj.isAnswered!=undefined && pageobj.isAnswered)
+                {
+                    $("#" + ToolProps.tool).attr('checked', 'checked');                    
+                }
             }
         }
     };
@@ -311,6 +326,34 @@ function GraphRetry() {
     }
     chart.redraw();
 }
+
+
+function UpdateToolProps(toolval)
+{
+    pageobj = _Navigator.GetCurrentPage();
+    pageobj.isAnswered = true;
+    
+    if(toolval=="shelter")
+    {
+        ToolProps.tool = toolval;
+        ToolProps.goal = 90;
+        ToolProps.unit = "logs";
+
+    }
+    else if(toolval=="feast")
+    {
+        ToolProps.tool = toolval;
+        ToolProps.goal = 5000;
+        ToolProps.unit = "cals";
+    }
+    else
+    {
+        ToolProps.tool = toolval;
+        ToolProps.goal = 10;
+        ToolProps.unit = "hrs";
+    }
+    $("#linknext").k_enable();
+}
 $(document).on("click", "#addpointbtn", function (event) {
     if ($(this).k_IsDisabled()) return;
     var fish = $('#fishlogtools').val();
@@ -336,4 +379,8 @@ $(document).on("click", "#btnfindout", function (event) {
     debugger;
     if ($(this).k_IsDisabled()) return;
     EventManager.onFind();
+});
+$(document).on("click", ".ToolPropsRadio", function (event) {   
+    var tool = $(this).val();
+    UpdateToolProps(tool);
 });
