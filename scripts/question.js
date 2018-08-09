@@ -139,7 +139,7 @@
                     }
                     $("#" + _optD.selectedId).attr('checked', 'checked');
                 } else if (_optD.type == "input") {
-                    debugger;
+                    
                     var inputval = _optD.selectedAnswer;
                     $("#" + _optD.id).val(_optD.selectedAnswer);
                     if (_optD.answer != _optD.selectedAnswer) {
@@ -147,11 +147,10 @@
                     } else {
                         $("#" + _optD.id).addClass("correct")
                     }
-                } else if (_optD.type == "graph") {
-                    debugger;
-                    PrevGraphAnswer();
-                } else if (_optD.type == "activity") {
-                    debugger;
+                } else if (_optD.type == "graph") {                    
+                    //NM: Need to separate Custom Question from standard question.
+                    _CustomQuestion.PrevGraphAnswer();
+                } else if (_optD.type == "activity") {                    
                     EventManager.ActivityPrevAnswer();
                 }
             }
@@ -337,8 +336,4 @@ $(document).on("click", ".btncheckanswer", function (event) {
 $(document).on("click", ".btnretry", function (event) {
     if ($(this).k_IsDisabled()) return;
     _Question.Retry();
-});
-$(document).on("click", "#btnaddpoint", function (event) {
-    if ($(this).k_IsDisabled()) return;
-    _Question.AddGraphPoints();
 });

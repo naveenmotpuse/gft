@@ -114,7 +114,7 @@ var _Animation = (function () {
         });
     }
     var _SetWood = function (val, dur) {
-        debugger;
+        
         var _dur = dur || 1000;
         if (val >= 0) {
             $('.woodcounter .count').each(function () {
@@ -151,7 +151,7 @@ var _Animation = (function () {
 
     }
     var _SetFish = function (val, dur) {
-        debugger;
+        
         var _dur = dur || 1000;
         if (val >= 0) {
             $('.fishcounter .count').each(function () {
@@ -237,7 +237,7 @@ var _Animation = (function () {
             _Die();
         },
         collectWoodnfish: function (_dur1, _dur2, potData, callback) {
-            debugger;
+            
             $(".castawaySprites").hide();
             //console.time("wood");
             $(".woodcounter").addClass("activecounter")
@@ -335,7 +335,7 @@ var _Animation = (function () {
             }
         },
         LadyComeWithFish: function () {
-            debugger;
+            
             $('.castawaySprites1').removeClass('castawaySprites1').addClass('castawaySprites');
             $('.friday-raftSprites2').removeClass('friday-raftSprites2').addClass('friday-raftSprites');
             $('.fishBarrelRaft2').show();
@@ -343,7 +343,7 @@ var _Animation = (function () {
             $('.fridaySprites2').removeClass('fridaySprites2').addClass('fridaySprites');
         },
         LadyGoWithWood: function () {
-            debugger;
+            
             $('.fishBarrelRaft2').removeClass('fishBarrelRaft2').addClass('stickBarrelRaft2');
             $('friday-raftSprites').removeClass('friday-raftSprites').addClass('friday-raftSprites2');
         }
@@ -354,9 +354,9 @@ var EventManager = function () {
     return {
         onStart: function () {},
         onFind: function () {
-            debugger;
+            
             $('html,body').animate({
-                scrollTop: 0
+                scrollTop: $(".t_animation_c").position().top - _Settings.topMargin
             }, 200);
 
             var potData = DataStorage.getPotData();
@@ -386,7 +386,7 @@ var EventManager = function () {
             $("#linknext").k_enable();
         },
         OnTryAgain: function () {
-            debugger;
+            
             _Slider.Reset();
             _Animation.day();
             DataStorage.retry();
@@ -487,7 +487,7 @@ var EventManager = function () {
             } else {
                 dayval = currentDay + days[(currentDay % 10)]
             }
-            FindOutComplete({
+            _CustomQuestion.FindOutComplete({
                 IsAlive: true,
                 totalRemainingLbs: remdata.wood,
                 totalRemainingCals: remdata.fish,
@@ -496,19 +496,16 @@ var EventManager = function () {
             Table.setfish(DataStorage.getProducedData().fish, remdata.fish);
             Table.setWood(DataStorage.getProducedData().wood, remdata.wood);
         },
-        onDie: function (because) {
-            debugger;
-            //_Animation.die();
+        onDie: function (because) {            
             AnimConfig.die = true;
-            FindOutComplete({
+            _CustomQuestion.FindOutComplete({
                 IsAlive: false,
                 DiedReason: because
             });
             $("#btnfindout").k_disable();
         },
         ActivityPrevAnswer: function () {
-            var pageId = _Navigator.GetCurrentPage().pageId;
-            debugger;
+            var pageId = _Navigator.GetCurrentPage().pageId;            
             var datacoll = DataStorage.getCollection();
             for (var i = 0; i < datacoll.length; i++) {
                 if (datacoll[i].pageId == pageId) {

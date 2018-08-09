@@ -284,10 +284,12 @@ input[type='button'], button{
     width: 90px;
 }
 #ppfchart .imggraph, #ppfchart .imgtable {
-    width: 22px;
     float: left;
-    margin: 15px;
+    margin: 10px;
     cursor: pointer;
+    min-width: 0px;
+    background-color: transparent;
+    padding: 5px;
 }
 #surpluschart div#surpluscharttable_c, #surpluschart div#surpluschart_c {    
     float: left;

@@ -534,12 +534,43 @@ var _ModuleCharts = (function () {
                 }]
             });
         },
+        ShowSliderPoint: function (_data) {
+            var chart = $('#ppfchart_c').highcharts();
+            if (chart.get("sliderpointser") != undefined && chart.get("sliderpointser") != null) {
+                chart.get("sliderpointser").remove()
+            }
+            if (_data != undefined) {
+                chart.addSeries({
+                    id: "sliderpointser",
+                    name: "sliderpointser",
+                    data: _data,
+                    type: 'spline',
+                    lineWidth: 0,
+                    color: ColorCodes.transparent,
+                    showInLegend: false,
+                    marker: {
+                        fillOpacity: 0,
+                        lineWidth: 2,
+                        lineColor: ColorCodes.sliderPoint,
+                        radius: 6,
+                        symbol: "circle"
+                    },                    
+                    states: {
+                        hover: {
+                            lineWidthPlus: 0
+                        }
+                    }
+                });
+            }
+        },
         AddPointToPPFChart: function (seriesid, _point) {
+            this.ShowSliderPoint(undefined);
             var chart = $('#ppfchart_c').highcharts();
             var series = chart.get(seriesid);
             series.addPoint(_point);
         },
         UpdatePPFChartSeries: function (seriesid, _data) {
+            this.ShowSliderPoint(undefined);
             var chart = $('#ppfchart_c').highcharts();
             chart.get(seriesid).setData(_data);
             chart.get(seriesid).update({

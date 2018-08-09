@@ -246,8 +246,7 @@ var _Navigator = (function () {
                 this.LoadPage(_currentPageObject.prevPageId);
             }
         },
-        Next: function () {
-            debugger;
+        Next: function () {            
             $("#linkprevious").k_enable();
             if (_currentPageObject.questions.length > 0) {
                 var IsAllQCompleted = true;

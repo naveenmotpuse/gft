@@ -200,9 +200,7 @@ var DataStorage = DataStorage || function (ui) {
 var _Slider = (function () {
     var ep_slider;
     return {
-
-        StartScheduler: function () {
-            debugger;
+        StartScheduler: function () {            
             $(".runtimeslider").show();
             $(".selecttimeslider").hide();
             $(".startbtnpanel").hide();
@@ -221,8 +219,7 @@ var _Slider = (function () {
             _Slider.sliderSchedule();
 
         },
-        onAnimComplete: function () {
-            debugger;
+        onAnimComplete: function () {            
             var fish = DataStorage.getPotData().fish;
             var wood = DataStorage.getPotData().wood;
             if (fish < 0) {
@@ -248,8 +245,7 @@ var _Slider = (function () {
             DataStorage.setFishSliderVal(0);
         },
 
-        UpdateSliderFromInput: function (slidertype, woodhrs, fishhrs) {
-            debugger;
+        UpdateSliderFromInput: function (slidertype, woodhrs, fishhrs) {            
             if (slidertype == "wood") {} else {}
             $("#w_val").text(woodhrs);
             $("#f_val").text(fishhrs);
@@ -260,8 +256,7 @@ var _Slider = (function () {
             $(".colorful-slider2").css("width", (woodhrs * 10) + "%");
             $(".animate-slider2").css("width", (woodhrs * 10) + "%");
         },
-        compare: function (currentSlider) {
-            // debugger;
+        compare: function (currentSlider) {            
             var workingSlider = $("#collect-wood .wood-slider");
             var val1 = DataStorage.getWoodSliderVal();
             var val2 = DataStorage.getFishSliderVal();
@@ -310,6 +305,12 @@ var _Slider = (function () {
             $(".colorful-slider3").css("width", (AnimConfig.toolTime * (100 / AnimConfig.dayTime)) + "%");
 
             var totalhrs = val1 + val2;
+            if (AnimConfig.isFriday) {
+                _ModuleCharts.ShowSliderPoint([[fridayPPFTable[val1][0],fridayPPFTable[val2][1]]]);
+            }
+            else {
+                _ModuleCharts.ShowSliderPoint([[userPPFTable[val1][0],userPPFTable[val2][1]]]);
+            }
             if ($("#inputtotalhrs").length > 0) {
                 $("#inputtotalhrs").val(totalhrs);
             }
@@ -329,8 +330,7 @@ var _Slider = (function () {
                 _Slider.onAnimComplete();
             });
         },
-        nightSliderSchedule: function () {
-            debugger;
+        nightSliderSchedule: function () {            
             var duration = (AnimConfig.totalTime - AnimConfig.dayTime) * AnimConfig.duration;
             $("#slider-arrow-night").css("left", "0px");
             $("#slider-arrow-night").animate({
@@ -341,36 +341,31 @@ var _Slider = (function () {
                 }
             });
         },
-        InitSelectTimeSlider: function () {
-            //  debugger;            
+        InitSelectTimeSlider: function () {                      
             $("#wood-range").attr("max", AnimConfig.dayTime);
             $("#fish-range").attr("max", AnimConfig.dayTime);
 
-            $('#collect-wood .wood-slider').on("input", document, function (e) {
-                // debugger;
-                e.preventDefault();
+            $('#collect-wood .wood-slider').on("input", document, function (event) {                
+                event.preventDefault();
                 w_val = $(this).val();
                 $('.wood').find('#w_val').text(w_val);
             });
 
-            $('#collect-fish .fish-slider').on("input", document, function (e) {
-                //  debugger;
-                e.preventDefault();
+            $('#collect-fish .fish-slider').on("input", document, function (event) {                
+                event.preventDefault();
                 f_val = $(this).val();
                 $('.fish').find('#f_val').text(f_val);
             });
-            $('#collect-wood .wood-slider').on("change", document, function (e) {
-                //  debugger;
-                e.preventDefault();
+            $('#collect-wood .wood-slider').on("change", document, function (event) {                
+                event.preventDefault();
                 var val = $(this).val();
                 $('.wood').find('#w_val').text(val);
                 DataStorage.setWoodSliderVal(Number(val));
                 _Slider.compare($(this));
             });
 
-            $('#collect-fish .fish-slider').on("change", document, function (e) {
-                //  debugger;
-                e.preventDefault();
+            $('#collect-fish .fish-slider').on("change", document, function (event) {                
+                event.preventDefault();
                 var val = $(this).val();
                 $('.fish').find('#f_val').text(val);
                 DataStorage.setFishSliderVal(Number(val));
@@ -408,8 +403,7 @@ var _Slider = (function () {
                 $("#inputfish").val(fish);
             }
         },
-        submitValidate: function () {
-            debugger;
+        submitValidate: function () {            
             var submitButton = "#btnstartslider";
             var _slidervalue = DataStorage.getSliderValue();
             if (_slidervalue.wood == ValidationProps.wood && _slidervalue.fish === ValidationProps.fish) {
@@ -421,15 +415,13 @@ var _Slider = (function () {
     }
 })();
 
-$(document).on("click", "#btnstartslider", function (event) {
-    debugger;
+$(document).on("click", "#btnstartslider", function (event) {    
     $(".questionband").hide();
     $('.castawaySprites1, .fridaycastawaySprites').hide();
     _Slider.setDefaultValue();
     _Slider.StartScheduler();
 });
-$(document).on("click", "#tarttradesliderbtn", function (event) {
-    debugger;
+$(document).on("click", "#tarttradesliderbtn", function (event) {    
     $('html,body').animate({
         scrollTop: 0
     }, 200);
@@ -444,19 +436,43 @@ $(document).on("click", "#tarttradesliderbtn", function (event) {
 var TradeSlider = (function () {
     return {
         InitSlider: function () {
-            $('#student_tot .student_tot').on("input", document, function (e) {
-                debugger;
-                e.preventDefault();
+            $('#student_tot .student_tot').on("input", document, function (event) {                
+                event.preventDefault();
                 var sf_val = $(this).val();
                 $('.s_fish').find('#sfish_val').text(sf_val);
             });
 
-            $('#student_trade .student_trade').on("input", document, function (e) {
-                debugger;
-                e.preventDefault();
+            $('#student_trade .student_trade').on("input", document, function (event) {                
+                event.preventDefault();
                 var sw_val = $(this).val();
                 $('.s_wood').find('#swood_val').text(sw_val);
             });
+        },
+        UpdateToolProps: function(toolval)
+        {
+            pageobj = _Navigator.GetCurrentPage();
+            pageobj.isAnswered = true;
+            
+            if(toolval=="shelter")
+            {
+                ToolProps.tool = toolval;
+                ToolProps.goal = 90;
+                ToolProps.unit = "logs";
+
+            }
+            else if(toolval=="feast")
+            {
+                ToolProps.tool = toolval;
+                ToolProps.goal = 5000;
+                ToolProps.unit = "cals";
+            }
+            else
+            {
+                ToolProps.tool = toolval;
+                ToolProps.goal = 10;
+                ToolProps.unit = "hrs";
+            }
+            $("#linknext").k_enable();
         }
     }
 })();
