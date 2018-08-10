@@ -92,3 +92,21 @@ $(document).on("click", ".ToolPropsRadio", function (event) {
     var tool = $(this).val();
     _TradeSlider.UpdateToolProps(tool);
 });
+
+$(document).on("click", "#btnstartslider", function (event) {    
+    $(".questionband").hide();
+    $('.castawaySprites1, .fridaycastawaySprites').hide();
+    _Slider.setDefaultValue();
+    _Slider.StartScheduler();
+});
+$(document).on("click", "#btntradestartslider", function (event) {    
+    $('html,body').animate({
+        scrollTop: $(".t_animation_c").position().top - _Settings.topMargin
+    }, 200);
+    var val = 12;
+    $('.friday-raftSprites').removeClass('friday-raftSprites').addClass('friday-raftSprites2');
+    $('.fridaySprites').removeClass('fridaySprites').addClass('fridaySprites2');
+    DataStorage.setWoodSliderVal(Number(val));
+    _Slider.setDefaultValue();
+    _Slider.StartScheduler();
+});

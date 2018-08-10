@@ -681,6 +681,9 @@
 
 
 /*Question Css*/
+.questionband {
+    float: left;
+}
 .questionband input[type='text'], .questionband input[type='number']{
     text-align: center;
     width: 100px;  

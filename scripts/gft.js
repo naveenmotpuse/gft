@@ -74,6 +74,7 @@ var _TopSlider = (function () {
 })();
 
 var _Template = (function () {
+    
     return {
         LoadTopSlider: function () {
             var pageUrl = "templates/topslider.htm" + _Caching.GetUrlExtension();
@@ -94,8 +95,7 @@ var _Template = (function () {
             var pageUrl = "templates/slider.htm" + _Caching.GetUrlExtension();
             $(".t_range-slider_c").load(pageUrl, function () {
                 _Slider.InitSelectTimeSlider();
-
-
+                _Template.OnTemplateLoad();
             });
         },
         LoadDaytimeScheduler: function () {
@@ -109,9 +109,20 @@ var _Template = (function () {
         LoadTradeSlider: function () {
             var pageUrl = "templates/tradeslider.htm" + _Caching.GetUrlExtension();
             $(".trade_slider_wrapper").load(pageUrl, function () {
-                TradeSlider.InitSlider();
+                _TradeSlider.InitSlider();
                 _ModuleCharts.DrawTradeCharts();
             });
+        },
+        OnTemplateLoad : function(){
+            var pageobj = _Navigator.GetCurrentPage();            
+            if(pageobj.pageId == "l2p3"){
+                $("#wood-range").val(AnimConfig.dayTime)
+                $('.wood').find('#w_val').text(AnimConfig.dayTime);
+                DataStorage.setWoodSliderVal(Number(AnimConfig.dayTime));
+                _Slider.compare($("#wood-range"))
+                $("#wood-range").k_disable()
+                $("#fish-range").k_disable()
+            }
         }
     }
 })();
@@ -391,6 +402,7 @@ var _CustomPage = (function () {
             if (pageobj.pageId == "l2p2") {
                 _ModuleCharts.DrawL2P2QuestionChart();
             }
+            
             if (pageobj.hasTimeSlider != undefined && pageobj.hasTimeSlider) {
                 _Template.LoadRangeSlider();
                 _Template.LoadDaytimeScheduler();
@@ -415,6 +427,7 @@ var _CustomPage = (function () {
                     $("#" + ToolProps.tool).attr('checked', 'checked');
                 }
             }
+            
         }
     };
 })();

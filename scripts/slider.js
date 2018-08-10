@@ -32,29 +32,6 @@ var DataStorage = DataStorage || function (ui) {
         }
     }
 
-    var _DataCollections = [{
-            pageid: 5,
-            _woodsLbs: 27,
-            _fishCals: 4900,
-            woodcollectingHr: 3,
-            fishcollectingHr: 7
-        },
-        {
-            pageid: 7,
-            _woodsLbs: 49,
-            _fishCals: 2700,
-            woodcollectingHr: 7,
-            fishcollectingHr: 3
-        },
-        {
-            pageid: 9,
-            _woodsLbs: 40,
-            _fishCals: 4000,
-            woodcollectingHr: 5,
-            fishcollectingHr: 5
-        }
-    ];
-
     var _RetryDataCollection = [];
     var _DataCollection = [];
     var timeSpent = '';
@@ -415,38 +392,46 @@ var _Slider = (function () {
     }
 })();
 
-$(document).on("click", "#btnstartslider", function (event) {    
-    $(".questionband").hide();
-    $('.castawaySprites1, .fridaycastawaySprites').hide();
-    _Slider.setDefaultValue();
-    _Slider.StartScheduler();
-});
-$(document).on("click", "#tarttradesliderbtn", function (event) {    
-    $('html,body').animate({
-        scrollTop: 0
-    }, 200);
-    var val = 12;
-    $('.friday-raftSprites').removeClass('friday-raftSprites').addClass('friday-raftSprites2');
-    $('.fridaySprites').removeClass('fridaySprites').addClass('fridaySprites2');
-    DataStorage.setWoodSliderVal(Number(val));
-    _Slider.setDefaultValue();
-    _Slider.StartScheduler();
-});
 
-var TradeSlider = (function () {
+
+var _TradeSlider = (function () {
+    var TradeSettings ={
+        yourwoodlogs: 96,        
+        fridayfishCals: 6000,
+        onewoodfor : 250,
+        givewood:5        
+    }
+    var TradeResults = {
+        receivefish:1250,
+        consumptionwood:(96-5),
+        consumptionfish:1250,
+        fridayconsumtionfish:(6000-1250),
+        fridayconsumptionwood:5
+    }
     return {
         InitSlider: function () {
-            $('#student_tot .student_tot').on("input", document, function (event) {                
+            $("#onewoodfor-range").on("input", document, function (event) {                
                 event.preventDefault();
-                var sf_val = $(this).val();
-                $('.s_fish').find('#sfish_val').text(sf_val);
+                var onewoodfor = $(this).val();                
+                TradeSettings.onewoodfor = onewoodfor;                
+                _TradeSlider.SetTradeResult();
             });
 
-            $('#student_trade .student_trade').on("input", document, function (event) {                
+            $("#givewood-range").on("input", document, function (event) {                
                 event.preventDefault();
-                var sw_val = $(this).val();
-                $('.s_wood').find('#swood_val').text(sw_val);
+                var givewood = $(this).val();                
+                TradeSettings.givewood = givewood;
+                _TradeSlider.SetTradeResult();                              
             });
+        },
+        SetTradeResult: function(){
+            TradeResults.receivefish = TradeSettings.givewood * TradeSettings.onewoodfor; 
+            this.ShowTradeResultLabels() 
+        },
+        ShowTradeResultLabels: function(){            
+            $("#onewoodfor-fish").text(TradeSettings.onewoodfor);
+            $("#givewood-lbs").text(TradeSettings.givewood);
+            $("#receivefish-cals").text(TradeResults.receivefish)
         },
         UpdateToolProps: function(toolval)
         {
