@@ -139,7 +139,7 @@
                     }
                     $("#" + _optD.selectedId).attr('checked', 'checked');
                 } else if (_optD.type == "input") {
-                    
+
                     var inputval = _optD.selectedAnswer;
                     $("#" + _optD.id).val(_optD.selectedAnswer);
                     if (_optD.answer != _optD.selectedAnswer) {
@@ -147,10 +147,10 @@
                     } else {
                         $("#" + _optD.id).addClass("correct")
                     }
-                } else if (_optD.type == "graph") {                    
+                } else if (_optD.type == "graph") {
                     //NM: Need to separate Custom Question from standard question.
                     _CustomQuestion.PrevGraphAnswer();
-                } else if (_optD.type == "activity") {                    
+                } else if (_optD.type == "activity") {
                     EventManager.ActivityPrevAnswer();
                 }
             }

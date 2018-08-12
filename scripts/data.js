@@ -32,8 +32,6 @@ var userPPFTable = [
     [88, 2750],
     [96, 3000]
 ]
-
-
 var userPPF = [
     [0, 3000],
     [8, 2750],
@@ -92,8 +90,7 @@ var ToolProps = {
 var AnimConfig = {
     duration: 400,
     totalTime: 24,
-    dayTime: 12,
-    die: false,
+    dayTime: 12,    
     nightWoodValueDeduction: 32,
     nightFishValueDeduction: 2000,
     AnimType: "default",
@@ -162,10 +159,10 @@ var _QData = {
         type: "activity",
         tryCount: "",
         totalPoints: 1,
-        feedback: ["l1p3/q4c1.htm", "l1p3/q4ic1.htm", "l1p3/q4ic2.htm"],
         options: [{
             type: "activity"
         }],
+        feedback: ["l1p3/q4c1.htm", "l1p3/q4ic1.htm", "l1p3/q4ic2.htm"],        
     },
     "Q5": {
         Qid: "Q5",
@@ -217,11 +214,11 @@ var _QData = {
         Qid: "Q8",
         type: "activity",
         tryCount: "",
-        totalPoints: 1,
-        feedback: ["l1p5/q8c1.htm", "l1p5/q8ic1.htm", "l1p5/q8ic2.htm"],
+        totalPoints: 1,        
         options: [{
             type: "activity"
         }],
+        feedback: ["l1p5/q8c1.htm", "l1p5/q8ic1.htm", "l1p5/q8ic2.htm"]
     },
     "Q9": {
         Qid: "Q9",
@@ -243,7 +240,7 @@ var _QData = {
                 answerId: ""
             }
         ],
-        feedback: ["l2p2/q9c1.htm", "ic1.htm", "l2p2/q9ic2.htm"],
+        feedback: ["l2p2/q9c1.htm", "ic1.htm", "l2p2/q9ic2.htm"]
     },
     "Q10": {
         Qid: "Q10",
@@ -271,7 +268,7 @@ var _QData = {
                 answerId: ""
             }
         ],
-        feedback: ["l2p2/q10c1.htm", "ic1.htm", "l2p2/q10ic2.htm"],
+        feedback: ["l2p2/q10c1.htm", "ic1.htm", "l2p2/q10ic2.htm"]
     },
     "Q11": {
         Qid: "Q11",
@@ -299,7 +296,7 @@ var _QData = {
                 answerId: ""
             }
         ],
-        feedback: ["l2p2/q11c1.htm", "ic1.htm", "l2p2/q11ic2.htm"],
+        feedback: ["l2p2/q11c1.htm", "ic1.htm", "l2p2/q11ic2.htm"]
     },
     "Q12": {
         Qid: "Q12",
@@ -314,7 +311,7 @@ var _QData = {
             answer: "You should specialize in gathering firewood because you give up fewer fish per log",
             answerId: "option1"
         }],
-        feedback: ["l2p2/q12c1.htm", "ic1.htm", "l2p2/q12ic2.htm"],
+        feedback: ["l2p2/q12c1.htm", "ic1.htm", "l2p2/q12ic2.htm"]
     },
     "Q13": {
         Qid: "Q13",
@@ -360,7 +357,7 @@ var _QData = {
                 answerId: ""
             },
         ],
-        feedback: ["l2p2/q13c1.htm", "ic1.htm", "l2p2/q13ic2.htm"],
+        feedback: ["l2p2/q13c1.htm", "ic1.htm", "l2p2/q13ic2.htm"]
     },
     "Q14": {
         Qid: "Q14",
@@ -375,7 +372,7 @@ var _QData = {
             answer: "Friday should specialize in fishing because he has a smaller opportunity cost of fishing",
             answerId: "option2"
         }],
-        feedback: ["l2p2/q14c1.htm", "ic1.htm", "l2p2/q14ic2.htm"],
+        feedback: ["l2p2/q14c1.htm", "ic1.htm", "l2p2/q14ic2.htm"]
     },
     "Q15": {
         Qid: "Q15",
@@ -387,7 +384,7 @@ var _QData = {
         options: [{
             type: "activity"
         }],
-        feedback: ["l2p3/q15c1.htm", "ic1.htm", "l2p3/q15ic2.htm"],
+        feedback: ["l2p3/q15c1.htm", "l2p3/q15ic1.htm", "l2p3/q15ic2.htm"]
     },
     "Q16": {
         Qid: "Q16",
@@ -399,6 +396,6 @@ var _QData = {
         options: [{
             type: "activity"
         }],
-        feedback: ["l3p2/q16c1.htm", "ic1.htm", "l3p2/q16ic2.htm"],
+        feedback: ["l3p2/q16c1.htm", "ic1.htm", "l3p2/q16ic2.htm"]
     }
 }

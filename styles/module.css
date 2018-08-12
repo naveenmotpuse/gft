@@ -682,7 +682,7 @@
 
 /*Question Css*/
 .questionband {
-    float: left;
+    float: left;     
 }
 .questionband input[type='text'], .questionband input[type='number']{
     text-align: center;
@@ -801,9 +801,6 @@ td[rowspan] {
     border: none;
 }
 /*student and friday slider css start*/
-.trade_slider_wrapper{
-    width: 96%
-}
 .tradepanel{
     float: left;
     width: 50%;

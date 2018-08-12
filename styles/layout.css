@@ -340,9 +340,13 @@ table.smallfont tr th, table.smallfont tr td {
     padding: 3px 5px;
 }
 /*Custom Header Css End*/
-
-.wrapper, .marginLR {
-    margin: 0% 2%;
+.wrapper{margin: 0% 2%; }
+.marginLR {
+    margin: 0% 2%; 
+    width: 96%;     
+}
+.autowidth{
+    width: auto;
 }
  .posrel{
      position: relative; 

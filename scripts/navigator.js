@@ -44,7 +44,7 @@ var _Navigator = (function () {
                 dataurl: "l1p3/q4.htm"
             }],
             hasTimeSlider: true,
-            hasAnimation: true,
+            hasAnimation: true            
         },
         "l1p4": {
             pageId: "l1p4",
@@ -158,9 +158,65 @@ var _Navigator = (function () {
             hasTradeSlider: true,
             hasAnimation: true,
         },
+        "l3p3": {
+            pageId: "l3p3",
+            prevPageId: "l3p2",
+            nextPageId: "l3p4",
+            dataurl: "l3p3.htm",
+            datalevel: 3,
+            questions: [{
+                Id: "Q16",
+                dataurl: "l3p2/q16.htm"
+            }],
+            hasTimeSlider: true,
+            hasTradeSlider: true,
+            hasAnimation: true,
+        },
+        "l3p4": {
+            pageId: "l3p4",
+            prevPageId: "l3p3",
+            nextPageId: "l3p5",
+            dataurl: "l3p4.htm",
+            datalevel: 3,
+            questions: [{
+                Id: "Q16",
+                dataurl: "l3p2/q16.htm"
+            }],
+            hasTimeSlider: true,
+            hasTradeSlider: true,
+            hasAnimation: true,
+        },
+        "l3p5": {
+            pageId: "l3p5",
+            prevPageId: "l3p4",
+            nextPageId: "l3p6",
+            dataurl: "l3p5.htm",
+            datalevel: 3,
+            questions: [{
+                Id: "Q16",
+                dataurl: "l3p2/q16.htm"
+            }],
+            hasTimeSlider: true,
+            hasTradeSlider: true,
+            hasAnimation: true,
+        },
+        "l4p1": {
+            pageId: "l4p1",
+            prevPageId: "l3p4",
+            nextPageId: "l4p2",
+            dataurl: "l4p1.htm",
+            datalevel: 3,
+            questions: [{
+                Id: "Q16",
+                dataurl: "l3p2/q16.htm"
+            }],
+            hasTimeSlider: true,
+            hasTradeSlider: true,
+            hasAnimation: true,
+        },
         "summary": {
             pageId: "summary",
-            prevPageId: "l3p2",
+            prevPageId: "l4p1",
             nextPageId: "",
             dataurl: "summary.htm",
             datalevel: 5,
@@ -246,7 +302,7 @@ var _Navigator = (function () {
                 this.LoadPage(_currentPageObject.prevPageId);
             }
         },
-        Next: function () {            
+        Next: function () {
             $("#linkprevious").k_enable();
             if (_currentPageObject.questions.length > 0) {
                 var IsAllQCompleted = true;

@@ -5,71 +5,21 @@ var DataStorage = DataStorage || function (ui) {
         _fishCals: 0,
         _woodsLbs: 0,
         day: 1,
-        remainingCals: 0,
-        remainingLbs: 0
+        remFish: 0,
+        remWood: 0,
+        tradeData: {}
     };
-
-    LevelData = {
-        "Level0": {
-            wood: 0,
-            fish: 0,
-            carry: false
-        },
-        "Level1": {
-            wood: 0,
-            fish: 0,
-            carry: true
-        },
-        "Level2": {
-            wood: 0,
-            fish: 0,
-            carry: true
-        },
-        "Level3": {
-            wood: 0,
-            fish: 0,
-            carry: true
-        }
-    }
 
     var _RetryDataCollection = [];
     var _DataCollection = [];
     var timeSpent = '';
     return {
         ModuleRetry: function () {
-            _DataMap = {
-                woodcollectingHr: 0,
-                fishcollectingHr: 0,
-                _fishCals: 0,
-                _woodsLbs: 0,
-                day: 1,
-                remainingCals: 0,
-                remainingLbs: 0
-            };
-            LevelData = {
-                "Level0": {
-                    wood: 0,
-                    fish: 0,
-                    carry: false
-                },
-                "Level1": {
-                    wood: 0,
-                    fish: 0,
-                    carry: true
-                },
-                "Level2": {
-                    wood: 0,
-                    fish: 0,
-                    carry: true
-                },
-                "Level3": {
-                    wood: 0,
-                    fish: 0,
-                    carry: true
-                }
-            }
             _RetryDataCollection = $.extend(true, [], _DataCollection)
             _DataCollection = [];
+        },
+        ResetDataMap: function(jsonObj){
+            _DataMap = $(true,{},_DataMap,jsonObj);
         },
         retry: function () {
             var pageid = _Navigator.GetCurrentPage().pageId;
@@ -80,10 +30,20 @@ var DataStorage = DataStorage || function (ui) {
                 }
             }
         },
+        retryDay: function(){
+            var pageid = _Navigator.GetCurrentPage().pageId;
+            var i = _DataCollection.length            
+            while (i--) {
+                if (_DataCollection[i].pageId == pageid && _DataCollection[i].day == _DataMap.day) {
+                    _DataCollection.splice(i, 1);
+                }
+            }
+        },
         getCurrentDay: function () {
             return _DataMap.day;
         },
         setWoodSliderVal: function (hrs) {
+            //debugger;
             if (AnimConfig.isFriday) {
                 _DataMap._woodsLbs = Number(hrs) * AnimConfig.fridayWoodPerHr;
                 _DataMap.isFriday = true;
@@ -117,8 +77,8 @@ var DataStorage = DataStorage || function (ui) {
         },
         getPotData: function () {
             return {
-                "wood": _DataMap._woodsLbs + _DataMap.remainingLbs,
-                "fish": _DataMap._fishCals + _DataMap.remainingCals
+                "wood": _DataMap._woodsLbs + _DataMap.remWood,
+                "fish": _DataMap._fishCals + _DataMap.remFish
             };
         },
         getProducedData: function () {
@@ -127,24 +87,24 @@ var DataStorage = DataStorage || function (ui) {
                 "fish": _DataMap._fishCals
             };
         },
-        setWoodRemaining: function (wood) {
-
-            _DataMap.remainingLbs = wood;
-        },
-        setFishRemaining: function (fish) {
-
-            _DataMap.remainingCals = fish;
+        SetRemainingData: function (remdata) {
+            _DataMap.remWood = remdata.wood;
+            _DataMap.remFish = remdata.fish;
+            if (remdata.fridaywood != undefined) {
+                _DataMap.fridayRemWood = remdata.fridaywood;
+                _DataMap.fridayRemFish = remdata.fridayfish;
+            }
         },
         getRemainingPotData: function () {
             return {
-                "wood": _DataMap.remainingLbs,
-                "fish": _DataMap.remainingCals
+                "wood": _DataMap.remWood,
+                "fish": _DataMap.remFish
             }
         },
         getLastDayPotData: function () {
             return {
-                "wood": _DataMap.remainingLbs,
-                "fish": _DataMap.remainingCals
+                "wood": _DataMap.remWood,
+                "fish": _DataMap.remFish
             };
         },
         getAnim_Dur: function (type) {
@@ -160,7 +120,6 @@ var DataStorage = DataStorage || function (ui) {
         },
         updateDay: function () {
             _DataMap.day += 1;
-
         },
         updateCollection: function (isComplete) {
             var copy = $.extend({}, _DataMap);
@@ -170,6 +129,10 @@ var DataStorage = DataStorage || function (ui) {
         },
         getCollection: function () {
             return _DataCollection;
+        },
+        SetTradeData: function () {
+            _DataMap.tradeData.TS = $.extend(true, {}, _TradeSlider.GetTradeSettings());
+            _DataMap.tradeData.TR = $.extend(true, {}, _TradeSlider.GetTradeResult());
         }
     }
 }();
@@ -177,26 +140,22 @@ var DataStorage = DataStorage || function (ui) {
 var _Slider = (function () {
     var ep_slider;
     return {
-        StartScheduler: function () {            
+        StartScheduler: function () {
             $(".runtimeslider").show();
             $(".selecttimeslider").hide();
             $(".startbtnpanel").hide();
-
-            //var potDataAsperSlider = DataStorage.getSliderValue();
             var potDataAsperSlider = DataStorage.getPotData();
             var calculatedData = {
                 "wood": potDataAsperSlider.wood,
                 "fish": potDataAsperSlider.fish
             };
-            //var calculatedData = { "wood": 5, "fish": 5};
             if (AnimConfig.AnimType == "default") {
                 _Animation.collectWoodnfish(DataStorage.getAnim_Dur().wood, DataStorage.getAnim_Dur().fish, calculatedData, "");
             }
-            // End  
             _Slider.sliderSchedule();
-
         },
-        onAnimComplete: function () {            
+        onAnimComplete: function () {
+            var pageobj = _Navigator.GetCurrentPage();
             var fish = DataStorage.getPotData().fish;
             var wood = DataStorage.getPotData().wood;
             if (fish < 0) {
@@ -208,21 +167,34 @@ var _Slider = (function () {
             Table.setfish(DataStorage.getProducedData().fish, fish);
             Table.setWood(DataStorage.getProducedData().wood, wood);
             DataStorage.updateCollection();
-            $(".questionband").show();
-            $('.startbtnpanel').hide();
-            $(".questionband .tableInventory").show();
-            $('.castawaySprites1, .fridaycastawaySprites').show();
-            $(".questionband").removeClass("displaynone");
-            $('html,body').animate({
-                scrollTop: document.body.scrollHeight
-            }, 1000);
-        },
-        Reset: function () {
-            DataStorage.setWoodSliderVal(0);
-            DataStorage.setFishSliderVal(0);
-        },
+            if (pageobj.hasTradeSlider != undefined && pageobj.hasTradeSlider) {
+                $('.startbtnpanel').hide();
+                $('.castawaySprites1, .fridaycastawaySprites').show();
+                _Animation.LadyComeWithFish();
+                setTimeout(function () {
+                    $("p#firstpara").hide();
+                    $("p#secondpara").show();
+                    $(".trade_slider_wrapper").show()
+                    _ModuleCharts.DrawTradeCharts();
+                    $(".questionband").show();
+                    $(".questionband").removeClass("displaynone");
+                    $('html,body').animate({
+                        scrollTop: 0
+                    }, 1000);
+                }, 2500)
+            } else {
+                $('.startbtnpanel').hide();
+                $(".questionband").show();
+                $(".questionband .tableInventory").show();
+                $('html,body').animate({
+                    scrollTop: document.body.scrollHeight
+                }, 1000);
 
-        UpdateSliderFromInput: function (slidertype, woodhrs, fishhrs) {            
+                $('.castawaySprites1, .fridaycastawaySprites').show();
+                $(".questionband").removeClass("displaynone");
+            }
+        },        
+        UpdateSliderFromInput: function (slidertype, woodhrs, fishhrs) {
             if (slidertype == "wood") {} else {}
             $("#w_val").text(woodhrs);
             $("#f_val").text(fishhrs);
@@ -233,11 +205,11 @@ var _Slider = (function () {
             $(".colorful-slider2").css("width", (woodhrs * 10) + "%");
             $(".animate-slider2").css("width", (woodhrs * 10) + "%");
         },
-        compare: function (currentSlider) {            
+        compare: function (currentSlider) {
             var workingSlider = $("#collect-wood .wood-slider");
             var val1 = DataStorage.getWoodSliderVal();
             var val2 = DataStorage.getFishSliderVal();
-            console.log("wood:" + val1 + ", fish:" + val2);
+            //console.log("wood:" + val1 + ", fish:" + val2);
             if (currentSlider != undefined && currentSlider != null) {
                 workingSlider = currentSlider;
             } else {
@@ -283,18 +255,15 @@ var _Slider = (function () {
 
             var totalhrs = val1 + val2;
             if (AnimConfig.isFriday) {
-                _ModuleCharts.ShowSliderPoint([[fridayPPFTable[val1][0],fridayPPFTable[val2][1]]]);
-            }
-            else {
-                _ModuleCharts.ShowSliderPoint([[userPPFTable[val1][0],userPPFTable[val2][1]]]);
-            }
-            if ($("#inputtotalhrs").length > 0) {
-                $("#inputtotalhrs").val(totalhrs);
-            }
-            _Slider.submitValidate();
-            var _slidervalue = DataStorage.getSliderValue();
-            _Slider.updateInputValue(_slidervalue.wood, _slidervalue.fish);
-
+                _ModuleCharts.ShowSliderPoint([
+                    [fridayPPFTable[val1][0], fridayPPFTable[val2][1]]
+                ]);
+            } else {
+                _ModuleCharts.ShowSliderPoint([
+                    [userPPFTable[val1][0], userPPFTable[val2][1]]
+                ]);
+            }            
+            _Slider.submitValidate();            
         },
         sliderSchedule: function () {
             var ep_slider1 = Number($(".animate-slider1").width());
@@ -307,33 +276,31 @@ var _Slider = (function () {
                 _Slider.onAnimComplete();
             });
         },
-        nightSliderSchedule: function () {            
+        nightSliderSchedule: function () {
             var duration = (AnimConfig.totalTime - AnimConfig.dayTime) * AnimConfig.duration;
             $("#slider-arrow-night").css("left", "0px");
             $("#slider-arrow-night").animate({
                 left: ep_slider + "px"
             }, duration, "linear", function () {
-                if (!AnimConfig.die) {
-                    EventManager.onNightAnimComplete();
-                }
+                EventManager.onNightAnimComplete();
             });
         },
-        InitSelectTimeSlider: function () {                      
+        InitSelectTimeSlider: function () {
             $("#wood-range").attr("max", AnimConfig.dayTime);
             $("#fish-range").attr("max", AnimConfig.dayTime);
 
-            $('#collect-wood .wood-slider').on("input", document, function (event) {                
+            $('#collect-wood .wood-slider').on("input", document, function (event) {
                 event.preventDefault();
                 w_val = $(this).val();
                 $('.wood').find('#w_val').text(w_val);
             });
 
-            $('#collect-fish .fish-slider').on("input", document, function (event) {                
+            $('#collect-fish .fish-slider').on("input", document, function (event) {
                 event.preventDefault();
                 f_val = $(this).val();
                 $('.fish').find('#f_val').text(f_val);
             });
-            $('#collect-wood .wood-slider').on("change", document, function (event) {                
+            $('#collect-wood .wood-slider').on("change", document, function (event) {
                 event.preventDefault();
                 var val = $(this).val();
                 $('.wood').find('#w_val').text(val);
@@ -341,7 +308,7 @@ var _Slider = (function () {
                 _Slider.compare($(this));
             });
 
-            $('#collect-fish .fish-slider').on("change", document, function (event) {                
+            $('#collect-fish .fish-slider').on("change", document, function (event) {
                 event.preventDefault();
                 var val = $(this).val();
                 $('.fish').find('#f_val').text(val);
@@ -380,7 +347,7 @@ var _Slider = (function () {
                 $("#inputfish").val(fish);
             }
         },
-        submitValidate: function () {            
+        submitValidate: function () {
             var submitButton = "#btnstartslider";
             var _slidervalue = DataStorage.getSliderValue();
             if (_slidervalue.wood == ValidationProps.wood && _slidervalue.fish === ValidationProps.fish) {
@@ -395,64 +362,73 @@ var _Slider = (function () {
 
 
 var _TradeSlider = (function () {
-    var TradeSettings ={
-        yourwoodlogs: 96,        
+    var TradeSettings = {
+        yourwoodlogs: 96,
+        yourfishcals: 0,
+        fridaywoodlogs: 0,
         fridayfishCals: 6000,
-        onewoodfor : 250,
-        givewood:5        
+        onewoodfor: 250,
+        givewood: 5
     }
     var TradeResults = {
-        receivefish:1250,
-        consumptionwood:(96-5),
-        consumptionfish:1250,
-        fridayconsumtionfish:(6000-1250),
-        fridayconsumptionwood:5
+        receivefish: 1250,
+        consumptionwood: (96 - 5),
+        consumptionfish: 1250,
+        fridayconsumtionfish: (6000 - 1250),
+        fridayconsumptionwood: 5
     }
     return {
         InitSlider: function () {
-            $("#onewoodfor-range").on("input", document, function (event) {                
+            $("#onewoodfor-range").on("input", document, function (event) {
                 event.preventDefault();
-                var onewoodfor = $(this).val();                
-                TradeSettings.onewoodfor = onewoodfor;                
+                var onewoodfor = Number($(this).val());
+                TradeSettings.onewoodfor = onewoodfor;
                 _TradeSlider.SetTradeResult();
             });
 
-            $("#givewood-range").on("input", document, function (event) {                
+            $("#givewood-range").on("input", document, function (event) {
                 event.preventDefault();
-                var givewood = $(this).val();                
+                var givewood = Number($(this).val());
                 TradeSettings.givewood = givewood;
-                _TradeSlider.SetTradeResult();                              
+                _TradeSlider.SetTradeResult();
             });
         },
-        SetTradeResult: function(){
-            TradeResults.receivefish = TradeSettings.givewood * TradeSettings.onewoodfor; 
-            this.ShowTradeResultLabels() 
+        SetTradeResult: function () {
+            TradeResults.receivefish = TradeSettings.givewood * TradeSettings.onewoodfor;
+            TradeResults.consumptionwood = TradeSettings.yourwoodlogs - TradeSettings.givewood;
+            TradeResults.consumptionfish = TradeSettings.yourfishcals + (TradeSettings.givewood * TradeSettings.onewoodfor);
+            TradeResults.fridayconsumptionwood = TradeSettings.fridaywoodlogs + TradeSettings.givewood;
+            TradeResults.fridayconsumtionfish = TradeSettings.fridayfishCals - (TradeSettings.givewood * TradeSettings.onewoodfor);
+            this.ShowTradeResult()
         },
-        ShowTradeResultLabels: function(){            
+        GetTradeSettings: function () {
+            return TradeSettings;
+        },
+        GetTradeResult: function () {
+            return TradeResults;
+        },
+        ShowTradeResult: function () {
             $("#onewoodfor-fish").text(TradeSettings.onewoodfor);
             $("#givewood-lbs").text(TradeSettings.givewood);
-            $("#receivefish-cals").text(TradeResults.receivefish)
+            $("#receivefish-cals").text(TradeResults.receivefish);
+            $("#consumption-wood").text(TradeResults.consumptionwood);
+            $("#consumption-fish").text(TradeResults.consumptionfish);
+            $("#consumption-wood-range").val(TradeResults.consumptionwood);
+            $("#consumption-fish-range").val(TradeResults.consumptionfish);
         },
-        UpdateToolProps: function(toolval)
-        {
+        UpdateToolProps: function (toolval) {
             pageobj = _Navigator.GetCurrentPage();
             pageobj.isAnswered = true;
-            
-            if(toolval=="shelter")
-            {
+
+            if (toolval == "shelter") {
                 ToolProps.tool = toolval;
                 ToolProps.goal = 90;
                 ToolProps.unit = "logs";
-
-            }
-            else if(toolval=="feast")
-            {
+            } else if (toolval == "feast") {
                 ToolProps.tool = toolval;
                 ToolProps.goal = 5000;
                 ToolProps.unit = "cals";
-            }
-            else
-            {
+            } else {
                 ToolProps.tool = toolval;
                 ToolProps.goal = 10;
                 ToolProps.unit = "hrs";

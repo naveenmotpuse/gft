@@ -74,7 +74,7 @@ var _TopSlider = (function () {
 })();
 
 var _Template = (function () {
-    
+
     return {
         LoadTopSlider: function () {
             var pageUrl = "templates/topslider.htm" + _Caching.GetUrlExtension();
@@ -110,18 +110,23 @@ var _Template = (function () {
             var pageUrl = "templates/tradeslider.htm" + _Caching.GetUrlExtension();
             $(".trade_slider_wrapper").load(pageUrl, function () {
                 _TradeSlider.InitSlider();
-                _ModuleCharts.DrawTradeCharts();
+                _Template.OnTemplateLoad();
             });
         },
-        OnTemplateLoad : function(){
-            var pageobj = _Navigator.GetCurrentPage();            
-            if(pageobj.pageId == "l2p3"){
+        OnTemplateLoad: function () {
+            var pageobj = _Navigator.GetCurrentPage();
+            if (pageobj.pageId == "l2p3") {
                 $("#wood-range").val(AnimConfig.dayTime)
                 $('.wood').find('#w_val').text(AnimConfig.dayTime);
                 DataStorage.setWoodSliderVal(Number(AnimConfig.dayTime));
                 _Slider.compare($("#wood-range"))
                 $("#wood-range").k_disable()
                 $("#fish-range").k_disable()
+
+                $("#consumption-wood-range").k_disable()
+                $("#consumption-fish-range").k_disable()
+
+                $(".trade_slider_wrapper").hide();
             }
         }
     }
@@ -130,7 +135,7 @@ var _Template = (function () {
 var _CustomQuestion = (function () {
     return {
         OnCheckAnswer: function () {
-            
+
             var _currentQuestionObj = _Question.GetCurrentQuestion();
             if (_currentQuestionObj.Id == "Q1") {
                 _ModuleCharts.AddPointToPPFChart("userppfser", [0, 3000])
@@ -141,7 +146,7 @@ var _CustomQuestion = (function () {
                 $(".userppftable tbody tr:nth-child(13) td:nth-child(3)").text(96)
                 $(".userppftable tbody tr:nth-child(13) td:nth-child(4)").text(0)
             } else if (_currentQuestionObj.Id == "Q3") {
-                
+
                 _ModuleCharts.UpdatePPFChartSeries("userppfser", _currentQuestionObj.correctData)
                 for (var i = 0; i < _currentQuestionObj.correctData.length; i++) {
                     var point = _currentQuestionObj.correctData[i];
@@ -296,7 +301,7 @@ var _CustomQuestion = (function () {
             }
             $("#linknext").k_enable();
         },
-        PrevGraphAnswer: function(){
+        PrevGraphAnswer: function () {
             var point1 = {}
             var _currentQuestionObj = _Question.GetCurrentQuestion();
             point1.x = _currentQuestionObj.graphData[0][0];
@@ -304,67 +309,53 @@ var _CustomQuestion = (function () {
             var point2 = {}
             point2.x = _currentQuestionObj.graphData[1][0];
             point2.y = _currentQuestionObj.graphData[1][1];
-            
+
             var selectedAnswer_point1 = {}
             selectedAnswer_point1.x = _currentQuestionObj.selectedAnswer[0][0];
             selectedAnswer_point1.y = _currentQuestionObj.selectedAnswer[0][1];
             var selectedAnswer_point2 = {}
             selectedAnswer_point2.x = _currentQuestionObj.selectedAnswer[1][0];
-            selectedAnswer_point2.y = _currentQuestionObj.selectedAnswer[1][1];        
-            
-            this.AddGraphPoints(selectedAnswer_point1.x,selectedAnswer_point1.y,2);
-            this.AddGraphPoints(selectedAnswer_point2.x,selectedAnswer_point2.y,2);   
-            _Question.Loadfeedback(_currentQuestionObj.fNo);            
-            _CustomQuestion.UpdateGraphSubmitStatus();    
+            selectedAnswer_point2.y = _currentQuestionObj.selectedAnswer[1][1];
+
+            this.AddGraphPoints(selectedAnswer_point1.x, selectedAnswer_point1.y, 2);
+            this.AddGraphPoints(selectedAnswer_point2.x, selectedAnswer_point2.y, 2);
+            _Question.Loadfeedback(_currentQuestionObj.fNo);
+            _CustomQuestion.UpdateGraphSubmitStatus();
             $("#linknext").k_enable();
-        },
-        FindOutComplete: function(jsonObj) {
-            var _currentQuestionObj = _Question.GetCurrentQuestion();
-            
-            if (jsonObj.IsAlive) {
-                _currentQuestionObj.isAnswered = true;
-                _currentQuestionObj.points = parseFloat(_currentQuestionObj.totalPoints);
-                _Question.Loadfeedback(0);
-            }
-            else if (jsonObj.DiedReason == "less_fish") {
-                _currentQuestionObj.isAnswered = true;
-                _currentQuestionObj.points = 0.0;
-                _Question.Loadfeedback(1);
-            }
-            else if (jsonObj.DiedReason == "less_wood") {
-                _currentQuestionObj.isAnswered = true;
-                _currentQuestionObj.points = 0.0;
-                _Question.Loadfeedback(2);
-            }
-        },
-        UpdateGraphSubmitStatus: function() {
+        },        
+        UpdateGraphSubmitStatus: function () {
             var _currentQuestionObj = _Question.GetCurrentQuestion();
             var chart = $('#questionchart').highcharts();
             chart.get('defaultSeries').setData(_currentQuestionObj.correctData)
             chart.get('defaultSeries').update({
                 color: ColorCodes.green
             });
-            var point1 = {}    
+            var point1 = {}
             point1.x = _currentQuestionObj.graphData[0][0];
             point1.y = _currentQuestionObj.graphData[0][1];
             var point2 = {}
             point2.x = _currentQuestionObj.graphData[1][0];
             point2.y = _currentQuestionObj.graphData[1][1];
-        
-            
+
+
             var newSerData = chart.get('new_series').options.data;
             var refArray = [];
             for (var i = 0; i < newSerData.length; i++) {
-                var currPoint = { x: newSerData[i][0], y: newSerData[i][1] };
+                var currPoint = {
+                    x: newSerData[i][0],
+                    y: newSerData[i][1]
+                };
                 var isonline = this.IsPointOnLine(currPoint, point1, point2)
                 if (!isonline) {
-                    chart.get('new_series').data[i].graphic.attr({ fill: ColorCodes.red });
+                    chart.get('new_series').data[i].graphic.attr({
+                        fill: ColorCodes.red
+                    });
                 }
-            }    
+            }
         },
-        GraphRetry: function() {
+        GraphRetry: function () {
             _Question.UnloadFeedback();
-            $("#div_question").find("input[type='number']").val("");    
+            $("#div_question").find("input[type='number']").val("");
             $("#addpointbtn").k_enable()
             $("#woodlogtools").k_enable()
             $("#fishlogtools").k_enable()
@@ -376,12 +367,15 @@ var _CustomQuestion = (function () {
             var point2 = {}
             point2.x = _currentQuestionObj.graphData[1][0];
             point2.y = _currentQuestionObj.graphData[1][1];
-        
+
             var chart = $('#questionchart').highcharts();
             var newSerData = chart.get('new_series').options.data;
             var refArray = [];
             for (var i = 0; i < newSerData.length; i++) {
-                var currPoint = { x: newSerData[i][0], y: newSerData[i][1] };
+                var currPoint = {
+                    x: newSerData[i][0],
+                    y: newSerData[i][1]
+                };
                 var isonline = this.IsPointOnLine(currPoint, point1, point2)
                 if (!isonline) {
                     refArray.push(chart.get('new_series').data[i]);
@@ -398,11 +392,12 @@ var _CustomQuestion = (function () {
 var _CustomPage = (function () {
     return {
         OnPageLoad: function () {
-            pageobj = _Navigator.GetCurrentPage();
+            debugger
+            var pageobj = _Navigator.GetCurrentPage();
             if (pageobj.pageId == "l2p2") {
                 _ModuleCharts.DrawL2P2QuestionChart();
             }
-            
+
             if (pageobj.hasTimeSlider != undefined && pageobj.hasTimeSlider) {
                 _Template.LoadRangeSlider();
                 _Template.LoadDaytimeScheduler();
@@ -411,23 +406,26 @@ var _CustomPage = (function () {
             if (pageobj.hasAnimation != undefined && pageobj.hasAnimation) {
                 _Template.LoadAnimateArea();
             }
+
             if (pageobj.isFriday != undefined && pageobj.isFriday) {
                 AnimConfig.isFriday = true;
             }
+            else {
+                AnimConfig.isFriday = false;
+            }
+
             if (pageobj.hasTradeSlider != undefined && pageobj.hasTradeSlider) {
                 _Template.LoadRangeSlider();
                 _Template.LoadDaytimeScheduler();
                 _Template.LoadNighttimeScheduler();
                 _Template.LoadTradeSlider();
-            } else {
-                AnimConfig.isFriday = false;
-            }
+            } 
             if (pageobj.hasActivity != undefined && pageobj.hasActivity) {
                 if (pageobj.isAnswered != undefined && pageobj.isAnswered) {
                     $("#" + ToolProps.tool).attr('checked', 'checked');
                 }
             }
-            
+
         }
     };
 })();
