@@ -3,11 +3,13 @@ var _TopSlider = (function () {
         if ($(_this).find("img").length > 0) {
             if ($(_this).find("img").attr("src").indexOf("down-chevron.png") > 0) {
                 $(_this).find("img").attr("src", "assets/images/up-chevron.png")
-                $('html,body').animate({
+                $(_this).attr("aria-expanded", "true").attr("aria-current","true");
+                $('body').animate({
                     scrollTop: 0
                 }, 1000);
             } else {
                 $(_this).find("img").attr("src", "assets/images/down-chevron.png")
+                $(_this).attr("aria-expanded", "false").attr("aria-current","false");
             }
         }
         if (_type == "ppf") {
@@ -50,8 +52,10 @@ var _TopSlider = (function () {
         if ($(_this).find("img").length > 0) {
             if ($(_this).find("img").attr("src").indexOf("down-chevron.png") > 0) {
                 $(_this).find("img").attr("src", "assets/images/up-chevron.png");
+                $(_this).attr("aria-expanded", "true").attr("aria-current","true");
             } else {
                 $(_this).find("img").attr("src", "assets/images/down-chevron.png");
+                $(_this).attr("aria-expanded", "false").attr("aria-current","false");
             }
         }
     }
@@ -115,18 +119,17 @@ var _Template = (function () {
         },
         OnTemplateLoad: function () {
             var pageobj = _Navigator.GetCurrentPage();
-            if (pageobj.pageId == "l2p3") {
-                $("#wood-range").val(AnimConfig.dayTime)
-                $('.wood').find('#w_val').text(AnimConfig.dayTime);
-                DataStorage.setWoodSliderVal(Number(AnimConfig.dayTime));
-                _Slider.compare($("#wood-range"))
-                $("#wood-range").k_disable()
-                $("#fish-range").k_disable()
-
+            if (pageobj.hasTradeSlider != undefined && pageobj.hasTradeSlider) {
+                if (pageobj.pageId == "l2p3") {
+                    $("#wood-range").val(AnimConfig.dayTime)
+                    $('.wood').find('#w_val').text(AnimConfig.dayTime);
+                    DataStorage.setWoodSliderVal(Number(AnimConfig.dayTime));
+                    _Slider.compare($("#wood-range"))
+                    $("#wood-range").k_disable()
+                    $("#fish-range").k_disable()
+                }
                 $("#consumption-wood-range").k_disable()
-                $("#consumption-fish-range").k_disable()
-
-                $(".trade_slider_wrapper").hide();
+                $("#consumption-fish-range").k_disable()                
             }
         }
     }
@@ -217,7 +220,6 @@ var _CustomQuestion = (function () {
                             $("#woodlogtools").k_disable()
                             $("#fishlogtools").k_disable()
                             $(".graphbtncheckanswer").k_enable()
-                            //$("html, body").animate({ scrollTop: $(document).height() }, 1000);
                         } else {
                             $("#woodlogtools").focus();
                         }
@@ -322,7 +324,7 @@ var _CustomQuestion = (function () {
             _Question.Loadfeedback(_currentQuestionObj.fNo);
             _CustomQuestion.UpdateGraphSubmitStatus();
             $("#linknext").k_enable();
-        },        
+        },
         UpdateGraphSubmitStatus: function () {
             var _currentQuestionObj = _Question.GetCurrentQuestion();
             var chart = $('#questionchart').highcharts();
@@ -409,8 +411,7 @@ var _CustomPage = (function () {
 
             if (pageobj.isFriday != undefined && pageobj.isFriday) {
                 AnimConfig.isFriday = true;
-            }
-            else {
+            } else {
                 AnimConfig.isFriday = false;
             }
 
@@ -419,13 +420,18 @@ var _CustomPage = (function () {
                 _Template.LoadDaytimeScheduler();
                 _Template.LoadNighttimeScheduler();
                 _Template.LoadTradeSlider();
-            } 
+
+                var toolDetails = _TradeSlider.GetToolDetails();
+                if (toolDetails.tool != "notool") {
+                    $("p.tooldesc").hide();
+                    $("p.tooldesc[tool='" + toolDetails.tool + "']").show()
+                }
+            }
             if (pageobj.hasActivity != undefined && pageobj.hasActivity) {
                 if (pageobj.isAnswered != undefined && pageobj.isAnswered) {
                     $("#" + ToolProps.tool).attr('checked', 'checked');
                 }
             }
-
         }
     };
 })();

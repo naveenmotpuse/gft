@@ -180,7 +180,7 @@
     background: url(../assets/images/castawaySprites.png) no-repeat 0 0%;
     background-size: 400%;
     background-position: 0px;
-    animation: play5 2.5s steps(1);
+    animation: play5 2s steps(1);
 }
 @keyframes play5 {
 	0% { background-position: 0px}
@@ -350,6 +350,7 @@
     top: 292px;
     bottom: 0;
     width: 75px;
+    height: 120px;
     background: url(../assets/images/fridaySprites.png) no-repeat 0 0%;
     background-size: 1200%;
     background-position: -796px;
@@ -357,7 +358,7 @@
 }
 @keyframes lady2 {
     0% { top: 180px; left: 39px;  background-position: -794px; } 
-    50% { top: 235.5px; left: -15px; background-position: 0px }  
+    50% { top: 204.5px; left: -11px; background-position: 0px } 
     100% { top: 292px; left: -74px; background-position: -0px; }
 }
 
@@ -904,6 +905,7 @@ td[rowspan] {
 }
 .tradepanel .slider-wrapper p {margin-top: 0px;}
 .tot-range-wrapper div, .tot-range-wrapper input[type='range']  {float: left; width: 95%;}
+.daycount{}
 
 .summaryband{
     float: left;

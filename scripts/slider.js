@@ -7,7 +7,7 @@ var DataStorage = DataStorage || function (ui) {
         day: 1,
         remFish: 0,
         remWood: 0,
-        tradeData: {}
+        tradeData: {}        
     };
 
     var _RetryDataCollection = [];
@@ -178,7 +178,8 @@ var _Slider = (function () {
                     _ModuleCharts.DrawTradeCharts();
                     $(".questionband").show();
                     $(".questionband").removeClass("displaynone");
-                    $('html,body').animate({
+                    $('.castawaySprites').removeClass('castawaySprites').addClass('castawaySprites1');
+                    $('body').animate({
                         scrollTop: 0
                     }, 1000);
                 }, 2500)
@@ -186,12 +187,15 @@ var _Slider = (function () {
                 $('.startbtnpanel').hide();
                 $(".questionband").show();
                 $(".questionband .tableInventory").show();
-                $('html,body').animate({
+                $('body').animate({
                     scrollTop: document.body.scrollHeight
                 }, 1000);
 
                 $('.castawaySprites1, .fridaycastawaySprites').show();
                 $(".questionband").removeClass("displaynone");
+                setTimeout(function (){
+                    $('.castawaySprites').removeClass('castawaySprites').addClass('castawaySprites1');
+                },2500);
             }
         },        
         UpdateSliderFromInput: function (slidertype, woodhrs, fishhrs) {
@@ -359,8 +363,6 @@ var _Slider = (function () {
     }
 })();
 
-
-
 var _TradeSlider = (function () {
     var TradeSettings = {
         yourwoodlogs: 96,
@@ -376,6 +378,11 @@ var _TradeSlider = (function () {
         consumptionfish: 1250,
         fridayconsumtionfish: (6000 - 1250),
         fridayconsumptionwood: 5
+    }
+    var ToolDetails = {
+        tool: "shelter",
+        goal: 90,
+        unit: "logs"
     }
     return {
         InitSlider: function () {
@@ -407,6 +414,9 @@ var _TradeSlider = (function () {
         GetTradeResult: function () {
             return TradeResults;
         },
+        GetToolDetails: function(){
+            return ToolDetails;
+        },
         ShowTradeResult: function () {
             $("#onewoodfor-fish").text(TradeSettings.onewoodfor);
             $("#givewood-lbs").text(TradeSettings.givewood);
@@ -414,25 +424,57 @@ var _TradeSlider = (function () {
             $("#consumption-wood").text(TradeResults.consumptionwood);
             $("#consumption-fish").text(TradeResults.consumptionfish);
             $("#consumption-wood-range").val(TradeResults.consumptionwood);
-            $("#consumption-fish-range").val(TradeResults.consumptionfish);
+            $("#consumption-fish-range").val(TradeResults.consumptionfish);            
+            this.ShowSliderPoint("studenttradeGraph",[[TradeResults.consumptionwood,TradeResults.consumptionfish]]);  
+            this.ShowSliderPoint("fridaytradeGraph",[[TradeResults.fridayconsumptionwood,TradeResults.fridayconsumtionfish]]); 
+           
         },
+        ShowSliderPoint: function (chartid, data) {
+            var chart = $('#' + _chartid).highcharts();
+            if (chart.get("sliderpointser") != undefined && chart.get("sliderpointser") != null) {
+                chart.get("sliderpointser").remove()
+            }
+            if (_data != undefined) {
+                chart.addSeries({
+                    id: "sliderpointser",
+                    name: "sliderpointser",
+                    data: _data,
+                    type: 'spline',
+                    lineWidth: 0,
+                    color: ColorCodes.transparent,
+                    showInLegend: false,
+                    marker: {
+                        fillOpacity: 0,
+                        lineWidth: 2,
+                        lineColor: ColorCodes.sliderPoint,
+                        radius: 6,
+                        symbol: "circle"
+                    },                    
+                    states: {
+                        hover: {
+                            lineWidthPlus: 0
+                        }
+                    }
+                });
+            }
+        },      
         UpdateToolProps: function (toolval) {
             pageobj = _Navigator.GetCurrentPage();
             pageobj.isAnswered = true;
-
+            //ToolDetails ={}
             if (toolval == "shelter") {
-                ToolProps.tool = toolval;
-                ToolProps.goal = 90;
-                ToolProps.unit = "logs";
+                ToolDetails.tool = toolval;
+                ToolDetails.goal = 90;
+                ToolDetails.unit = "logs";
             } else if (toolval == "feast") {
-                ToolProps.tool = toolval;
-                ToolProps.goal = 5000;
-                ToolProps.unit = "cals";
-            } else {
-                ToolProps.tool = toolval;
-                ToolProps.goal = 10;
-                ToolProps.unit = "hrs";
-            }
+                ToolDetails.tool = toolval;
+                ToolDetails.goal = 5000;
+                ToolDetails.unit = "cals";
+            } else if (toolval == "book") {
+                ToolDetails.tool = toolval;
+                ToolDetails.goal = 10;
+                ToolDetails.unit = "hrs";
+            }                       
             $("#linknext").k_enable();
         }
     }

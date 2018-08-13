@@ -4,6 +4,8 @@
     line-height: 1.5em;    
 }
 
+
+
 body {    
     display: block;
     margin: 0px 2px;
@@ -49,6 +51,13 @@ input[type='button'], button{
     border-width: 0px;    
     cursor: pointer;
     min-width: 100px;
+}
+
+a:focus, input:focus, button:focus, textarea:focus, select:focus, a:active, input:active, button:active, textarea:active, select:active {
+    outline: #ff8c00 solid 2px;
+}
+#appmenu *:focus, #appmenu *:active{
+    outline: #ff8c00 solid 2px;
 }
 
 .mxwidth{

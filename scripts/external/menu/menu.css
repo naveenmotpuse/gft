@@ -1,6 +1,7 @@
 #appmenu {    
     padding: 0px; 
     position: absolute;   
+    top:0px;
 }
 #appmenu li {
     white-space: nowrap;
@@ -53,4 +54,8 @@
 }
 #appmenu > li[aria-expanded="true"] > ul {
 	display:block;
+}
+li[role='menuitem'] a {
+    text-decoration:none;
+    color:#000;
 }

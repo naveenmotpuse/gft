@@ -141,8 +141,12 @@ $(function(){
                         prevdef = true;
                         break;
                     case keys.enter:
+                         var levelPageId = $(event.target).find(".menuitem").attr("data-id");
+                         _Navigator.LoadPage(levelPageId);
+                         $("#appmenu li").attr("aria-expanded",false).css({'background':'#045C42'});
+                         $("#appmenu li img").attr("src","scripts/external/menu/menu-icon.png");
                     case keys.space:
-					    addEventListener();
+					   //addEventListener();
                         prevdef = true;
                         break;
                 }
@@ -153,7 +157,10 @@ $(function(){
                 return false;
             });
         el.addEventListener("click", function(event) {
-                //alert(this.innerHTML);
+                var levelPageId = event.target.getAttribute("data-id");
+               _Navigator.LoadPage(levelPageId);
+               $("#appmenu li").attr("aria-expanded",false).css({'background':'#045C42'});
+               $("#appmenu li img").attr("src","scripts/external/menu/menu-icon.png");
                 event.preventDefault();
                 event.stopPropagation();
                 return false;

@@ -122,7 +122,7 @@ var _Navigator = (function () {
         },
         "l2p3": {
             pageId: "l2p3",
-            prevPageId: "l1p2",
+            prevPageId: "l2p2",
             nextPageId: "l3p1",
             dataurl: "l2p3.htm",
             datalevel: 2,
@@ -154,38 +154,12 @@ var _Navigator = (function () {
                 Id: "Q16",
                 dataurl: "l3p2/q16.htm"
             }],
+            callbackComplete: false,
+            callbackFunction: "EventManager.onNextDay();",
             hasTimeSlider: true,
             hasTradeSlider: true,
             hasAnimation: true,
-        },
-        "l3p3": {
-            pageId: "l3p3",
-            prevPageId: "l3p2",
-            nextPageId: "l3p4",
-            dataurl: "l3p3.htm",
-            datalevel: 3,
-            questions: [{
-                Id: "Q16",
-                dataurl: "l3p2/q16.htm"
-            }],
-            hasTimeSlider: true,
-            hasTradeSlider: true,
-            hasAnimation: true,
-        },
-        "l3p4": {
-            pageId: "l3p4",
-            prevPageId: "l3p3",
-            nextPageId: "l3p5",
-            dataurl: "l3p4.htm",
-            datalevel: 3,
-            questions: [{
-                Id: "Q16",
-                dataurl: "l3p2/q16.htm"
-            }],
-            hasTimeSlider: true,
-            hasTradeSlider: true,
-            hasAnimation: true,
-        },
+        },        
         "l3p5": {
             pageId: "l3p5",
             prevPageId: "l3p4",
@@ -254,9 +228,13 @@ var _Navigator = (function () {
                 $("#linkprevious").k_disable();
                 $("#linknext").k_enable();
             }
+            if(_currentPageObject.hasActivity !=undefined && _currentPageObject.hasActivity){
+                $("#linknext").k_disable();
+            }
             if (_currentPageObject.isLastPage != undefined && _currentPageObject.isLastPage) {
                 $("#linknext").k_disable();
             }
+
             _currentPageObject.isVisited = true;
 
             var pageUrl = _Settings.dataRoot + _currentPageObject.dataurl + _Caching.GetUrlExtension();;

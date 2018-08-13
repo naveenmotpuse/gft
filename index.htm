@@ -35,20 +35,20 @@
             <center>
                 <div id="header-content" class="mxwidth">
                     <div id="header-title">                        
-                        <ul role="menubar" aria-label="functions" id="appmenu" class="wrapper">
-                            <li role="menu" aria-haspopup="false" tabindex="1">
-                             <img src="scripts/external/menu/menu-icon.png" alt="">
-                                <ul role="menu">
-                                    <li role="menuitem">Intro</li>
-                                    <li role="menuitem">Level 1</li>
-                                    <li role="menuitem">Level 2</li>
-                                    <li role="menuitem">Level 3</li>
-                                    <li role="menuitem">Level 4</li>
-                                    <li role="menuitem">Summary</li>
-                                </ul>
-                            </li>
-                        </ul>
                         <h1 >Gains From Trade</h1>
+                        <ul role="menubar" aria-label="functions" id="appmenu" class="wrapper">
+                                <li role="menu" aria-haspopup="false" tabindex="1">
+                                 <img src="scripts/external/menu/menu-icon.png" alt="">
+                                    <ul role="menu">
+                                    <li role="menuitem"><a href="javascript:void(0)" class="menuitem" data-id="l1p1">Intro</a></li>
+                                    <li role="menuitem"><a href="javascript:void(0)" class="menuitem" data-id="l1p2">Level 1</a></li>
+                                    <li role="menuitem"><a href="javascript:void(0)" class="menuitem" data-id="l2p1">Level 2</a></li>
+                                    <li role="menuitem"><a href="javascript:void(0)" class="menuitem" data-id="l3p1">Level 3</a></li>
+                                    <li role="menuitem"><a href="javascript:void(0)" class="menuitem" data-id="l4p1">Level 4</a></li>
+                                    <li role="menuitem"><a href="javascript:void(0)" class="menuitem" data-id="summary">Summary</a></li>
+                                </ul>
+                                </li>
+                            </ul>
                     </div>
                     <div id="header-progress">
                         <div class="progress">
@@ -73,6 +73,11 @@
                                         <div class="pgBgItemFill" style="width:0%;" progress="0" ></div>
                                     </div>
                                 </div>
+								<div class="section pgBgItem" data-level="4">
+                                    <div class="filler " level="4">
+                                        <div class="pgBgItemFill" style="width:0%;" progress="0" ></div>
+                                    </div>
+                                </div>
                             </div>
                             <div class="scale">
                                 <div class="section ">
@@ -87,6 +92,9 @@
                                 <div class="section ">
                                     <div class="filler">L3</div>
                                 </div>
+								<div class="section ">
+                                    <div class="filler">L4</div>
+                                </div>
                             </div>
                         </div>
                         <div id="scorediv" class="scoreDiv wrapper" >Overall Score:&nbsp;
@@ -97,11 +105,11 @@
                         <div class="wrapper">
 							<button role="button" class="linksurplus-p" id="linksurplus">
                                 <span>Inventory</span>
-                                <img src="assets/images/down-chevron.png" alt="">
+                                <img src="assets/images/down-chevron.png" aria-expanded="false">
                             </button>
                             <button role="button" class="linkppf-p" id="linkppf" >
                                 <span>PPF</span>
-                                <img src="assets/images/down-chevron.png" alt="">
+                                <img src="assets/images/down-chevron.png" aria-expanded="false">
                             </button>                            
                         </div>
                     </div>

@@ -72,12 +72,12 @@
             $("#div_question").find("input[type='number']").val("");
             $(".questionband").find("input").k_enable();
             if (_currentQuestionObj.type == "graph") {
-                $("html, body").animate({
+                $("body").animate({
                     scrollTop: $("#div_question").find("input[type='number']").first().position().top - _Settings.topMargin
                 }, 1000);
                 $("#div_question").find("input[type='number']").first().focus();
             } else {
-                $("html, body").animate({
+                $("body").animate({
                     scrollTop: $("#div_question .question_img").position().top - _Settings.topMargin
                 }, 1000);
                 $("#div_question").find("input[type='number']").first().focus();
@@ -95,7 +95,7 @@
             $("#div_feedback").show();
             $("#div_feedback").load(fdbkUrl, function () {
                 _Question.SetFeedbackTop()
-                $("html, body").animate({
+                $("body").animate({
                     scrollTop: $(document).height()
                 }, 1000);
             });
@@ -105,7 +105,7 @@
             $("#div_feedback").show();
             $("#div_feedback").load(fdbkUrl, function () {
                 _Question.SetFeedbackTop()
-                $("html, body").animate({
+                $("body").animate({
                     scrollTop: $(document).height()
                 }, 1000);
             });
@@ -132,7 +132,7 @@
                         _boxGrp.addClass("correct");
                     }
                 } else if (_optD.type == "radio") {
-                    if (optD.answerId != optD.selectedId) {
+                    if (_optD.answerId != _optD.selectedId) {
                         $("#" + _optD.selectedId).addClass("incorrect");
                     } else {
                         $("#" + _optD.selectedId).addClass("correct");

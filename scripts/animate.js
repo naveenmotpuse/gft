@@ -110,7 +110,7 @@ var _Animation = (function () {
         });
     }
     var _SetWood = function (val, dur) {
-        
+
         var _dur = dur || 1000;
         if (val < 0) {
             val = 0;
@@ -128,7 +128,7 @@ var _Animation = (function () {
         });
         _setimgaccessibility();
     }
-    var _SetFish = function (val, dur) {        
+    var _SetFish = function (val, dur) {
         var _dur = dur || 1000;
         if (val < 0) {
             val = 0;
@@ -143,13 +143,11 @@ var _Animation = (function () {
                     $(this).text(round(now))
                 }
             })
-        });        
+        });
         _setimgaccessibility();
     }
-    var _SetFridayWood = function (val, dur) {
-    }
-    var _SetFridayFish = function (val, dur) {        
-    }
+    var _SetFridayWood = function (val, dur) {}
+    var _SetFridayFish = function (val, dur) {}
     var _setimgaccessibility = function () {
         if (AnimationPlace != undefined && AnimationPlace != "" && $('.woodcounter .count').length > 0 && $('.fishcounter .count').length > 0) {
             $(AnimationPlace).attr("alt", "wood " + $('.woodcounter .count').text() + " lbs, fish " + $('.fishcounter .count').text() + " cals")
@@ -260,8 +258,7 @@ var _Animation = (function () {
                 if (typeof callback == "function") {
                     _delay(".dummy", (_dur2), function () {
                         $(".castawaySprites").show();
-                        callback();
-                        //console.timeEnd("wood");
+                        callback();                        
                     });
                 }
             });
@@ -290,29 +287,38 @@ var _Animation = (function () {
                 $('.stickBarrelRaft2, .fishBarrelRaft2').hide();
                 $('.castawaySprites1').removeClass('castawaySprites1').addClass('castawaySprites');
                 $('.friday-raftSprites, .fridaySprites').show();
-            } else if (currPage.pageId == "l2p3") {
-                $("#btntradestartslider").k_disable();
+            } else if (currPage.hasTradeSlider!=undefined && currPage.hasTradeSlider) {  
+                if (currPage.pageId == "l2p3") {
+                    $("#btnstartslider").k_disable();
+                }                              
                 $('.fishBarrelRaft2').hide();
                 $('.castawaySprites1').removeClass('castawaySprites1').addClass('castawaySprites');
                 setTimeout(function () {
                     $('.castawaySprites').removeClass('castawaySprites').addClass('castawaySprites1');
-                    $("#btntradestartslider").k_enable();
+                    if (currPage.pageId == "l2p3") {                        
+                        $("#btnstartslider").k_enable();
+                    }
                 }, 2500)
-            } else if (currPage.pageId == "l3p2") {
-                $('.fishBarrelRaft2').hide();
-                $('.castawaySprites1').removeClass('castawaySprites1').addClass('castawaySprites');
-            }
+            } 
         },
         LadyComeWithFish: function () {
+            $('.stickBarrelRaft2').removeClass('stickBarrelRaft2').addClass('fishBarrelRaft2');
             $('.castawaySprites1').removeClass('castawaySprites1').addClass('castawaySprites');
             $('.friday-raftSprites2').removeClass('friday-raftSprites2').addClass('friday-raftSprites');
             $('.fishBarrelRaft2').show();
-            $('.castawaySprites').show();
             $('.fridaySprites2').removeClass('fridaySprites2').addClass('fridaySprites');
+            setTimeout(function(){
+                $('.castawaySprites').removeClass('castawaySprites').addClass('castawaySprites1');
+            },2500);
         },
         LadyGoWithWood: function () {
-            $('.fishBarrelRaft2').removeClass('fishBarrelRaft2').addClass('stickBarrelRaft2');
-            $('friday-raftSprites').removeClass('friday-raftSprites').addClass('friday-raftSprites2');
+            $(".fishBarrelRaft2").removeClass("fishBarrelRaft2").addClass("stickBarrelRaft2");            
+            $(".fridaySprites").removeClass("fridaySprites").addClass("fridaySprites2");
+            $('.castawaySprites1').removeClass('castawaySprites1').addClass('castawaySprites');
+            $(".friday-raftSprites").removeClass(".friday-raftSprites").addClass("friday-raftSprites2");
+            setTimeout(function(){
+                $('.castawaySprites').removeClass('castawaySprites').addClass('castawaySprites1');
+            },2500)
         }
     }
 })();
@@ -321,68 +327,76 @@ var EventManager = function () {
     return {
         onStart: function () {},
         onFind: function () {
-            $('html,body').animate({
+            $('body').animate({
                 scrollTop: $(".t_animation_c").position().top - _Settings.topMargin
-            }, 200,null, function(){
+            }, 200, null, function () {
                 var currPage = _Navigator.GetCurrentPage();
                 var fish = 0;
                 var wood = 0;
-                var animInterval =0;
-                if(currPage.hasTradeSlider!=undefined && currPage.hasTradeSlider) {
-                    $(".fishBarrelRaft2").removeClass("fishBarrelRaft2").addClass("stickBarrelRaft2");            
-                    $(".fridaySprites").removeClass("fridaySprites").addClass("fridaySprites2");
-                    $('.castawaySprites1').removeClass('castawaySprites1').addClass('castawaySprites');
-                    $(".friday-raftSprites").removeClass(".friday-raftSprites").addClass("friday-raftSprites2");
+                var animInterval = 0;
+                if (currPage.hasTradeSlider != undefined && currPage.hasTradeSlider) {
+                    debugger;
+                    _Animation.LadyGoWithWood();
                     var ts = _TradeSlider.GetTradeSettings();
                     var tr = _TradeSlider.GetTradeResult();
                     $(".t_animation_c .fishcounter .count").text(tr.consumptionfish)
                     $(".t_animation_c .woodcounter .count").text(tr.consumptionwood)
                     fish = tr.consumptionfish - AnimConfig.nightFishValueDeduction;
-                    wood = tr.consumptionwood - AnimConfig.nightWoodValueDeduction; 
-                    animInterval = 2500;                   
+                    wood = tr.consumptionwood - AnimConfig.nightWoodValueDeduction;
+                    animInterval = 2500;
                 }
                 else{
                     var potData = DataStorage.getPotData();
                     fish = potData.fish - AnimConfig.nightFishValueDeduction;
-                    wood = potData.wood - AnimConfig.nightWoodValueDeduction;  
-                    animInterval = 0;                  
+                    wood = potData.wood - AnimConfig.nightWoodValueDeduction;
+                    animInterval = 0;
                 }
                 $(".runtimeslider").hide();
                 $(".nighttimeslider").show();
                 $("#btnfindout").k_disable();
-                setTimeout(function(){                        
+                setTimeout(function () {
                     _Animation.night();
                     _Animation.SetFishCountValue(fish, 5000);
                     _Animation.SetWoodCountValue(wood, 5000);
-                    _Slider.nightSliderSchedule();                    
-                },animInterval)  
-            });   
-        },        
+                    _Slider.nightSliderSchedule();
+                }, animInterval)
+            });
+            
+        },
         OnTryAgain: function () {
-            _Animation.day();            
+            _Animation.day();
             DataStorage.retry();
             Table.hide();
             var fishhrs = 0;
             var woodhrs = 0;
             var fish = 0;
             var wood = 0;
-            var currPage = _Navigator.GetCurrentPage();                
-            if(currPage.hasTradeSlider!=undefined 
-                && currPage.hasTradeSlider ){
-                if( currPage.pageId == "l2p3") {
-                    $('.castawaySprites1').removeClass('castawaySprites1').addClass('castawaySprites');
-                    $('.friday-raftSprites2').removeClass('friday-raftSprites2').addClass('friday-raftSprites');
-                    $('.fridaySprites2').removeClass('fridaySprites2').addClass('fridaySprites');
-                    $('.stickBarrelRaft2').removeClass('stickBarrelRaft2').addClass('fishBarrelRaft2');
-                    $("#slider-arrow-night").css("left","0px");
+            var currPage = _Navigator.GetCurrentPage();
+            if (currPage.hasTradeSlider != undefined &&
+                currPage.hasTradeSlider) {
+                if (currPage.pageId == "l2p3") {
+                    _Animation.LadyComeWithFish();
+                    $("#slider-arrow-night").css("left", "0px");
                     $('.woodcounter .count').text(96)
                     $('.fishcounter .count').text(0)
+                } else {
+                    $("#collect-wood .wood-slider").val(woodhrs);
+                    $("#collect-fish .fish-slider").val(fishhrs);
+                    $("#w_val").text(woodhrs);
+                    $("#f_val").text(fishhrs);
+                    $(".colorful-slider1").css("width", (fishhrs * 10) + "%");
+                    $(".animate-slider1").css("width", (fishhrs * 10) + "%");
+                    $(".colorful-slider2").css("width", (woodhrs * 10) + "%");
+                    $(".animate-slider2").css("width", (woodhrs * 10) + "%");
+    
+                    $(".runtimeslider").hide();
+                    $(".startbtnpanel").show();
+                    $(".selecttimeslider").show();
+                    $(".questionband").hide();
+                    $(".nighttimeslider").hide();
+                    $(".trade_slider_wrapper").hide()
                 }
-                else{
-
-                }
-            }
-            else{
+            } else {
                 $("#collect-wood .wood-slider").val(woodhrs);
                 $("#collect-fish .fish-slider").val(fishhrs);
                 $("#w_val").text(woodhrs);
@@ -391,18 +405,18 @@ var EventManager = function () {
                 $(".animate-slider1").css("width", (fishhrs * 10) + "%");
                 $(".colorful-slider2").css("width", (woodhrs * 10) + "%");
                 $(".animate-slider2").css("width", (woodhrs * 10) + "%");
-                
+
                 $(".runtimeslider").hide();
                 $(".startbtnpanel").show();
                 $(".selecttimeslider").show();
                 $(".questionband").hide();
                 $(".nighttimeslider").hide();
-            }            
+            }
             _Question.UnloadFeedback();
             $("#btnfindout").k_enable();
             $("#day").text(DataStorage.getCurrentDay());
         },
-        onNextDay: function () {            
+        onNextDay: function () {
             DataStorage.updateDay();
             var currentDay = DataStorage.getCurrentDay();
             if ($(".removeonnextday").length > 0) {
@@ -440,7 +454,7 @@ var EventManager = function () {
             $(".pgfeedback").hide();
             $(".row.retrybuttonpanelfind").hide();
 
-            $('html,body').animate({
+            $('body').animate({
                 scrollTop: 0
             }, 200);
             $(".fishcounter .count").text(0);
@@ -452,42 +466,39 @@ var EventManager = function () {
                 $(".headinglevel2").focus();
             }, 100)
         },
-        onNightAnimComplete: function () {            
-            _Animation.day();  
-            var currPage = _Navigator.GetCurrentPage(); 
-            var isdie=false;
-            var diereason="";
-            var remdata ={};
-            if(currPage.hasTradeSlider!=undefined && currPage.hasTradeSlider){
+        onNightAnimComplete: function () {
+            _Animation.day();
+            var currPage = _Navigator.GetCurrentPage();
+            var isdie = false;
+            var diereason = "";
+            var remdata = {};
+            if (currPage.hasTradeSlider != undefined && currPage.hasTradeSlider) {
                 var ts = _TradeSlider.GetTradeSettings();
                 var tr = _TradeSlider.GetTradeResult();
-                var yftf = tr.consumptionfish/AnimConfig.nightFishValueDeduction;
-                var ywtf = tr.consumptionwood/AnimConfig.nightWoodValueDeduction; 
-                var fftf = tr.fridayconsumtionfish/AnimConfig.nightFishValueDeduction;
-                var fwtf = tr.fridayconsumptionwood/AnimConfig.nightWoodValueDeduction;
-                if(yftf<1 || ywtf<1){
-                    isdie=true;
+                var yftf = tr.consumptionfish / AnimConfig.nightFishValueDeduction;
+                var ywtf = tr.consumptionwood / AnimConfig.nightWoodValueDeduction;
+                var fftf = tr.fridayconsumtionfish / AnimConfig.nightFishValueDeduction;
+                var fwtf = tr.fridayconsumptionwood / AnimConfig.nightWoodValueDeduction;
+                if (yftf < 1 || ywtf < 1) {
+                    isdie = true;
                     diereason = "you_die";
-                }
-                else if(fftf<1 || fwtf<1){
-                    isdie=true;
+                } else if (fftf < 1 || fwtf < 1) {
+                    isdie = true;
                     diereason = "friday_die";
                 }
                 remdata.wood = tr.consumptionwood - AnimConfig.nightWoodValueDeduction;
                 remdata.fish = tr.consumptionfish - AnimConfig.nightFishValueDeduction;
                 remdata.fridaywood = tr.fridayconsumptionwood - AnimConfig.nightWoodValueDeduction;
                 remdata.fridayfish = tr.fridayconsumptionfish - AnimConfig.nightFishValueDeduction;
-            }
-            else{
+            } else {
                 var potData = DataStorage.getPotData();
-                var woodtimefraction = potData.wood/AnimConfig.nightWoodValueDeduction;
-                var fishtimefraction = potData.fish/AnimConfig.nightFishValueDeduction;
-                if(woodtimefraction<1 || fishtimefraction<1){
-                    isdie=true;
-                    if(woodtimefraction<fishtimefraction){
+                var woodtimefraction = potData.wood / AnimConfig.nightWoodValueDeduction;
+                var fishtimefraction = potData.fish / AnimConfig.nightFishValueDeduction;
+                if (woodtimefraction < 1 || fishtimefraction < 1) {
+                    isdie = true;
+                    if (woodtimefraction < fishtimefraction) {
                         diereason = "less_wood";
-                    }
-                    else{
+                    } else {
                         diereason = "less_fish";
                     }
                 }
@@ -498,38 +509,39 @@ var EventManager = function () {
                 Table.setWood(DataStorage.getProducedData().wood, remdata.wood);
             }
 
-            if(!isdie){
+            if (!isdie) {
                 _Question.Loadfeedback(0);
                 //this.UpdateFeedbackForDay();
                 var _currentQuestionObj = _Question.GetCurrentQuestion();
                 _currentQuestionObj.isAnswered = true;
                 _currentQuestionObj.points = parseFloat(_currentQuestionObj.totalPoints);
-                    
+
                 DataStorage.SetRemainingData(remdata);
-                DataStorage.SetTradeData();            
+                DataStorage.SetTradeData();
                 DataStorage.updateCollection();
 
                 $("#linknext").k_enable()
-            }
-            else if(diereason == "less_fish" || diereason == "you_die")
-            {
+            } else if (diereason == "less_fish" || diereason == "you_die") {
                 _Question.Loadfeedback(1);
-            }
-            else if (diereason == "less_wood" || diereason == "friday_die"){
+            } else if (diereason == "less_wood" || diereason == "friday_die") {
                 _Question.Loadfeedback(2);
-            }                        
+            }
         },
-        UpdateFeedbackForDay: function(){
-            var currentDay = DataStorage.getCurrentDay();                
+        UpdateFeedbackForDay: function () {
+            var currentDay = DataStorage.getCurrentDay();
             var dayval = ""
-            var days = {1: "st", 2: "nd", 3: "rd"}
+            var days = {
+                1: "st",
+                2: "nd",
+                3: "rd"
+            }
             if ((currentDay > 10 && currentDay < 14) || (currentDay % 10) == 0 || (currentDay % 10) > 3) {
                 dayval = currentDay + "th";
             } else {
                 dayval = currentDay + days[(currentDay % 10)]
             }
             $("#dayval").text(dayval);
-        },        
+        },
         ActivityPrevAnswer: function () {
             var pageId = _Navigator.GetCurrentPage().pageId;
             var datacoll = DataStorage.getCollection();

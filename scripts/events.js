@@ -100,28 +100,28 @@ $(document).on("click", ".ToolPropsRadio", function (event) {
 });
 
 $(document).on("click", "#btnstartslider", function (event) {
-    $('html,body').animate({
+    $('body').animate({
         scrollTop: $(".t_animation_c").position().top - _Settings.topMargin
-    }, 200);
-    $(".questionband").hide();
-    $('.castawaySprites1, .fridaycastawaySprites').hide();
-    _Slider.setDefaultValue();
-    _Slider.StartScheduler();
-});
-$(document).on("click", "#btntradestartslider", function (event) {
-    $('html,body').animate({
-        scrollTop: $(".t_animation_c").position().top - _Settings.topMargin
-    }, 200);
-    $('.friday-raftSprites').removeClass('friday-raftSprites').addClass('friday-raftSprites2');
-    $('.fridaySprites').removeClass('fridaySprites').addClass('fridaySprites2');
-    $('.castawaySprites1').removeClass('castawaySprites1').addClass('castawaySprites');
-    $(".runtimeslider").show();
-    $(".selecttimeslider").hide();
-    $(".startbtnpanel").hide();
-    setTimeout(function () {
-        $('.castawaySprites').removeClass('castawaySprites').addClass('castawaySprites1');
-        $('.castawaySprites1').hide();
+    }, 200);    
+    var currPage = _Navigator.GetCurrentPage(); 
+    if (currPage.hasTradeSlider != undefined && currPage.hasTradeSlider) {
+        $('.friday-raftSprites').removeClass('friday-raftSprites').addClass('friday-raftSprites2');
+        $('.fridaySprites').removeClass('fridaySprites').addClass('fridaySprites2');
+        $('.castawaySprites1').removeClass('castawaySprites1').addClass('castawaySprites');
+        $(".runtimeslider").show();
+        $(".selecttimeslider").hide();
+        $(".startbtnpanel").hide();
+        setTimeout(function () {
+            $('.castawaySprites').removeClass('castawaySprites').addClass('castawaySprites1');
+            $('.castawaySprites1').hide();
+            _Slider.setDefaultValue();
+            _Slider.StartScheduler();
+        }, 2000)
+    }
+    else{
+        $(".questionband").hide();
+        $('.castawaySprites1, .fridaycastawaySprites').hide();
         _Slider.setDefaultValue();
         _Slider.StartScheduler();
-    }, 2500)
+    }
 });
