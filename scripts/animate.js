@@ -258,7 +258,7 @@ var _Animation = (function () {
                 if (typeof callback == "function") {
                     _delay(".dummy", (_dur2), function () {
                         $(".castawaySprites").show();
-                        callback();                        
+                        callback();
                     });
                 }
             });
@@ -287,19 +287,23 @@ var _Animation = (function () {
                 $('.stickBarrelRaft2, .fishBarrelRaft2').hide();
                 $('.castawaySprites1').removeClass('castawaySprites1').addClass('castawaySprites');
                 $('.friday-raftSprites, .fridaySprites').show();
-            } else if (currPage.hasTradeSlider!=undefined && currPage.hasTradeSlider) {  
+            } else if (currPage.hasTradeSlider != undefined && currPage.hasTradeSlider) {
                 if (currPage.pageId == "l2p3") {
                     $("#btnstartslider").k_disable();
-                }                              
+                }
                 $('.fishBarrelRaft2').hide();
                 $('.castawaySprites1').removeClass('castawaySprites1').addClass('castawaySprites');
                 setTimeout(function () {
                     $('.castawaySprites').removeClass('castawaySprites').addClass('castawaySprites1');
-                    if (currPage.pageId == "l2p3") {                        
+                    if (currPage.pageId == "l2p3") {
                         $("#btnstartslider").k_enable();
                     }
                 }, 2500)
-            } 
+            } else if (currPage.pageId == 'l3p2') {
+                $('.fishBarrelRaft2').hide();
+            } else if (currPage.pageId == 'l4p1') {
+                $('.fishBarrelRaft2').hide();
+            }
         },
         LadyComeWithFish: function () {
             $('.stickBarrelRaft2').removeClass('stickBarrelRaft2').addClass('fishBarrelRaft2');
@@ -307,25 +311,52 @@ var _Animation = (function () {
             $('.friday-raftSprites2').removeClass('friday-raftSprites2').addClass('friday-raftSprites');
             $('.fishBarrelRaft2').show();
             $('.fridaySprites2').removeClass('fridaySprites2').addClass('fridaySprites');
-            setTimeout(function(){
+            setTimeout(function () {
                 $('.castawaySprites').removeClass('castawaySprites').addClass('castawaySprites1');
-            },2500);
+            }, 2500);
         },
         LadyGoWithWood: function () {
-            $(".fishBarrelRaft2").removeClass("fishBarrelRaft2").addClass("stickBarrelRaft2");            
+            $(".fishBarrelRaft2").removeClass("fishBarrelRaft2").addClass("stickBarrelRaft2");
             $(".fridaySprites").removeClass("fridaySprites").addClass("fridaySprites2");
             $('.castawaySprites1').removeClass('castawaySprites1').addClass('castawaySprites');
             $(".friday-raftSprites").removeClass(".friday-raftSprites").addClass("friday-raftSprites2");
-            setTimeout(function(){
+            setTimeout(function () {
                 $('.castawaySprites').removeClass('castawaySprites').addClass('castawaySprites1');
-            },2500)
+            }, 2500)
         }
     }
 })();
 
 var EventManager = function () {
     return {
-        onStart: function () {},
+        onStart: function () {
+            $('body').animate({
+                scrollTop: $(".t_animation_c").position().top - _Settings.topMargin
+            }, 200, function () {
+                var currPage = _Navigator.GetCurrentPage();
+                if (currPage.hasTradeSlider != undefined && currPage.hasTradeSlider) {
+                    $('.friday-raftSprites').removeClass('friday-raftSprites').addClass('friday-raftSprites2');
+                    $('.fridaySprites').removeClass('fridaySprites').addClass('fridaySprites2');
+                    $('.castawaySprites1').removeClass('castawaySprites1').addClass('castawaySprites');
+                    $(".runtimeslider").show();
+                    $(".selecttimeslider").hide();
+                    $(".startbtnpanel").hide();
+                    $("#onewoodfor-range").k_disable()
+                    $("#givewood-range").k_disable()
+                    setTimeout(function () {
+                        $('.castawaySprites').removeClass('castawaySprites').addClass('castawaySprites1');
+                        $('.castawaySprites1').hide();
+                        _Slider.setDefaultValue();
+                        _Slider.StartScheduler();
+                    }, 2000)
+                } else {
+                    $(".questionband").hide();
+                    $('.castawaySprites1, .fridaycastawaySprites').hide();
+                    _Slider.setDefaultValue();
+                    _Slider.StartScheduler();
+                }
+            });
+        },
         onFind: function () {
             $('body').animate({
                 scrollTop: $(".t_animation_c").position().top - _Settings.topMargin
@@ -335,7 +366,6 @@ var EventManager = function () {
                 var wood = 0;
                 var animInterval = 0;
                 if (currPage.hasTradeSlider != undefined && currPage.hasTradeSlider) {
-                    debugger;
                     _Animation.LadyGoWithWood();
                     var ts = _TradeSlider.GetTradeSettings();
                     var tr = _TradeSlider.GetTradeResult();
@@ -344,8 +374,7 @@ var EventManager = function () {
                     fish = tr.consumptionfish - AnimConfig.nightFishValueDeduction;
                     wood = tr.consumptionwood - AnimConfig.nightWoodValueDeduction;
                     animInterval = 2500;
-                }
-                else{
+                } else {
                     var potData = DataStorage.getPotData();
                     fish = potData.fish - AnimConfig.nightFishValueDeduction;
                     wood = potData.wood - AnimConfig.nightWoodValueDeduction;
@@ -353,6 +382,8 @@ var EventManager = function () {
                 }
                 $(".runtimeslider").hide();
                 $(".nighttimeslider").show();
+                $("#onewoodfor-range").k_disable();
+                $("#givewood-range").k_disable();
                 $("#btnfindout").k_disable();
                 setTimeout(function () {
                     _Animation.night();
@@ -361,7 +392,7 @@ var EventManager = function () {
                     _Slider.nightSliderSchedule();
                 }, animInterval)
             });
-            
+
         },
         OnTryAgain: function () {
             _Animation.day();
@@ -369,67 +400,46 @@ var EventManager = function () {
             Table.hide();
             var fishhrs = 0;
             var woodhrs = 0;
-            var fish = 0;
-            var wood = 0;
-            var currPage = _Navigator.GetCurrentPage();
-            if (currPage.hasTradeSlider != undefined &&
-                currPage.hasTradeSlider) {
-                if (currPage.pageId == "l2p3") {
-                    _Animation.LadyComeWithFish();
-                    $("#slider-arrow-night").css("left", "0px");
-                    $('.woodcounter .count').text(96)
-                    $('.fishcounter .count').text(0)
-                } else {
-                    $("#collect-wood .wood-slider").val(woodhrs);
-                    $("#collect-fish .fish-slider").val(fishhrs);
-                    $("#w_val").text(woodhrs);
-                    $("#f_val").text(fishhrs);
-                    $(".colorful-slider1").css("width", (fishhrs * 10) + "%");
-                    $(".animate-slider1").css("width", (fishhrs * 10) + "%");
-                    $(".colorful-slider2").css("width", (woodhrs * 10) + "%");
-                    $(".animate-slider2").css("width", (woodhrs * 10) + "%");
-    
-                    $(".runtimeslider").hide();
-                    $(".startbtnpanel").show();
-                    $(".selecttimeslider").show();
-                    $(".questionband").hide();
-                    $(".nighttimeslider").hide();
-                    $(".trade_slider_wrapper").hide()
-                }
-            } else {
-                $("#collect-wood .wood-slider").val(woodhrs);
-                $("#collect-fish .fish-slider").val(fishhrs);
-                $("#w_val").text(woodhrs);
-                $("#f_val").text(fishhrs);
-                $(".colorful-slider1").css("width", (fishhrs * 10) + "%");
-                $(".animate-slider1").css("width", (fishhrs * 10) + "%");
-                $(".colorful-slider2").css("width", (woodhrs * 10) + "%");
-                $(".animate-slider2").css("width", (woodhrs * 10) + "%");
-
-                $(".runtimeslider").hide();
-                $(".startbtnpanel").show();
-                $(".selecttimeslider").show();
-                $(".questionband").hide();
-                $(".nighttimeslider").hide();
-            }
+            $("#collect-wood .wood-slider").val(woodhrs);
+            $("#collect-fish .fish-slider").val(fishhrs);
+            $(".fishcounter .count").text(fishhrs);
+            $(".woodcounter .count").text(woodhrs);
+            $("#w_val").text(woodhrs);
+            $("#f_val").text(fishhrs);
+            $(".colorful-slider1").css("width", (fishhrs * 10) + "%");
+            $(".animate-slider1").css("width", (fishhrs * 10) + "%");
+            $(".colorful-slider2").css("width", (woodhrs * 10) + "%");
+            $(".animate-slider2").css("width", (woodhrs * 10) + "%");
+            $(".runtimeslider").hide();
+            $(".startbtnpanel").show();
+            $(".selecttimeslider").show();
+            $(".questionband").hide();
+            $(".nighttimeslider").hide();
+            $("#onewoodfor-range").k_enable();
+            $("#givewood-range").k_enable();
             _Question.UnloadFeedback();
             $("#btnfindout").k_enable();
-            $("#day").text(DataStorage.getCurrentDay());
+            $("#dayno").text(DataStorage.getCurrentDay());
+            var currPage = _Navigator.GetCurrentPage();
+            if (currPage.hasTradeSlider != undefined && currPage.hasTradeSlider) {
+                _Animation.LadyComeWithFish();
+                _Animation.MngAnimationEle();
+                if (currPage.pageId == "l2p3") {
+                    woodhrs = AnimConfig.dayTime
+                    $("#wood-range").val(AnimConfig.dayTime)
+                    $('.wood').find('#w_val').text(AnimConfig.dayTime);
+                    DataStorage.setWoodSliderVal(Number(AnimConfig.dayTime));
+                    _Slider.compare($("#wood-range"))
+                }
+                _TradeSlider.ResetTradeSlider();
+            }
         },
         onNextDay: function () {
+            $("#linknext").k_disable();
+            debugger;
             DataStorage.updateDay();
             var currentDay = DataStorage.getCurrentDay();
-            if ($(".removeonnextday").length > 0) {
-                $(".removeonnextday").remove();
-                $("li.c-tool").remove();
-                ValidationProps = {
-                    "wood": 0,
-                    "fish": 0,
-                    "tool": false
-                }
-                AnimConfig.toolTime = 0;
-            }
-            $("#day").text(currentDay);
+            $("#dayno").text(currentDay);
             _Animation.day();
             var fishhrs = 0;
             var woodhrs = 0;
@@ -441,55 +451,124 @@ var EventManager = function () {
             $(".animate-slider1").css("width", (fishhrs * 10) + "%");
             $(".colorful-slider2").css("width", (woodhrs * 10) + "%");
             $(".animate-slider2").css("width", (woodhrs * 10) + "%");
-            Table.hide();
-            TopLinkSlider.UpdateSurplusChartData(DataStorage.getSurplusChartData().fish, DataStorage.getSurplusChartData().wood);
-            $("#dayinstruction").html("You can also use the surplus tab to keep track of your inventory totals over time. Click the surplus tab to learn more.  You will proceed to the next level when your inventories reach 30 logs and 3000 calories.<br/><br/>Once again, decide how to spend your time and then click Start button to begin the day. You’re on your own now. Good luck! ");
+            //Table.hide();
+            //TopLinkSlider.UpdateSurplusChartData(DataStorage.getSurplusChartData().fish, DataStorage.getSurplusChartData().wood);
+
 
             $(".nighttimeslider").hide();
             $(".runtimeslider").hide();
-            $(".startdaytimeshedulerbtn").show();
             $(".selecttimeslider").show();
+            $('.startbtnpanel').show();
             $(".questionband").hide();
-            $(".findout").hide();
-            $(".pgfeedback").hide();
-            $(".row.retrybuttonpanelfind").hide();
+            $("#btnfindout").k_enable();
+            $("#onewoodfor-range").k_enable()
+            $("#givewood-range").k_enable()
+            _Question.UnloadFeedback();
+            _TradeSlider.ResetTradeSlider();
 
             $('body').animate({
-                scrollTop: 0
+                scrollTop: $(".t_animation_c").position().top - _Settings.topMargin
             }, 200);
-            $(".fishcounter .count").text(0);
-            $(".woodcounter .count").text(0);
 
-            var tableData = DataStorage.getTableData();
-            Table.surplus.setTableValue(tableData.todayWood, tableData.yesterdayWood, tableData.todayFish, tableData.yesterdayFish);
-            setTimeout(function () {
-                $(".headinglevel2").focus();
-            }, 100)
+
+            //var tableData = DataStorage.getTableData();
+            //Table.surplus.setTableValue(tableData.todayWood, tableData.yesterdayWood, tableData.todayFish, tableData.yesterdayFish);
+
+        },
+        onAnimComplete: function () {
+            debugger;
+            var pageobj = _Navigator.GetCurrentPage();
+            var fish = DataStorage.getPotData().fish;
+            var wood = DataStorage.getPotData().wood;
+            if (fish < 0) {
+                fish = 0;
+            }
+            if (wood < 0) {
+                wood = 0;
+            }
+            if (pageobj.hasTradeSlider != undefined && pageobj.hasTradeSlider) {
+                $('.castawaySprites1, .fridaycastawaySprites').show();
+                _Animation.LadyComeWithFish();
+                setTimeout(function () {
+                    $('.startbtnpanel').hide();
+                    $(".questionband").show();
+                    $(".questionband").removeClass("displaynone");
+                    $('.castawaySprites').removeClass('castawaySprites').addClass('castawaySprites1');
+                    $("#onewoodfor-range").k_enable()
+                    $("#givewood-range").k_enable()
+                    $('body').animate({
+                        scrollTop: document.body.scrollHeight
+                    }, 1000);
+                }, 2500)
+            } else {
+                Table.setfish(DataStorage.getProducedData().fish, fish);
+                Table.setWood(DataStorage.getProducedData().wood, wood);
+                Table.show();
+                $('.castawaySprites1, .fridaycastawaySprites').show();
+                $('.startbtnpanel').hide();
+                $(".questionband").show();
+                $(".questionband").removeClass("displaynone");
+                $('.castawaySprites').removeClass('castawaySprites').addClass('castawaySprites1');
+                $("#onewoodfor-range").k_enable()
+                $("#givewood-range").k_enable()
+                $('body').animate({
+                    scrollTop: document.body.scrollHeight
+                }, 1000);
+            }
         },
         onNightAnimComplete: function () {
             _Animation.day();
             var currPage = _Navigator.GetCurrentPage();
             var isdie = false;
             var diereason = "";
+            var diereason2 = "";
             var remdata = {};
             if (currPage.hasTradeSlider != undefined && currPage.hasTradeSlider) {
                 var ts = _TradeSlider.GetTradeSettings();
                 var tr = _TradeSlider.GetTradeResult();
+                //your wood time fraction
                 var yftf = tr.consumptionfish / AnimConfig.nightFishValueDeduction;
                 var ywtf = tr.consumptionwood / AnimConfig.nightWoodValueDeduction;
-                var fftf = tr.fridayconsumtionfish / AnimConfig.nightFishValueDeduction;
+                //friday wood time fraction
+                var fftf = tr.fridayconsumptionfish / AnimConfig.nightFishValueDeduction;
                 var fwtf = tr.fridayconsumptionwood / AnimConfig.nightWoodValueDeduction;
                 if (yftf < 1 || ywtf < 1) {
                     isdie = true;
                     diereason = "you_die";
+                    if (yftf < 1 && ywtf < 1) {
+                        diereason2 = "both";
+                    } else if (yftf < 1 && yftf < ywtf) {
+                        diereason2 = "fish";
+                    } else if (ywtf < 1 && ywtf < yftf) {
+                        diereason2 = "wood";
+                    }
                 } else if (fftf < 1 || fwtf < 1) {
                     isdie = true;
                     diereason = "friday_die";
+                    if (fftf < 1 && fwtf < 1) {
+                        diereason2 = "both";
+                    } else if (fftf < 1 && fftf < fwtf) {
+                        diereason2 = "fish";
+                    } else if (fwtf < 1 && fwtf < fftf) {
+                        diereason2 = "wood";
+                    }
                 }
                 remdata.wood = tr.consumptionwood - AnimConfig.nightWoodValueDeduction;
                 remdata.fish = tr.consumptionfish - AnimConfig.nightFishValueDeduction;
                 remdata.fridaywood = tr.fridayconsumptionwood - AnimConfig.nightWoodValueDeduction;
                 remdata.fridayfish = tr.fridayconsumptionfish - AnimConfig.nightFishValueDeduction;
+                if (remdata.wood < 0) {
+                    remdata.wood = 0;
+                }
+                if (remdata.fish < 0) {
+                    remdata.fish = 0;
+                }
+                if (remdata.fridaywood < 0) {
+                    remdata.fridaywood = 0;
+                }
+                if (remdata.fridayfish < 0) {
+                    remdata.fridayfish = 0;
+                }
             } else {
                 var potData = DataStorage.getPotData();
                 var woodtimefraction = potData.wood / AnimConfig.nightWoodValueDeduction;
@@ -504,30 +583,79 @@ var EventManager = function () {
                 }
                 remdata.wood = potData.wood - AnimConfig.nightWoodValueDeduction;
                 remdata.fish = potData.fish - AnimConfig.nightFishValueDeduction;
+                if (remdata.wood < 0) {
+                    remdata.wood = 0;
+                }
+                if (remdata.fish < 0) {
+                    remdata.fish = 0;
+                }
 
                 Table.setfish(DataStorage.getProducedData().fish, remdata.fish);
                 Table.setWood(DataStorage.getProducedData().wood, remdata.wood);
             }
 
             if (!isdie) {
-                _Question.Loadfeedback(0);
-                //this.UpdateFeedbackForDay();
                 var _currentQuestionObj = _Question.GetCurrentQuestion();
                 _currentQuestionObj.isAnswered = true;
                 _currentQuestionObj.points = parseFloat(_currentQuestionObj.totalPoints);
-
+                _TradeSlider.SetRemTradeData(remdata);
                 DataStorage.SetRemainingData(remdata);
-                DataStorage.SetTradeData();
-                DataStorage.updateCollection();
 
+                if (currPage.hasTradeSlider != undefined && currPage.hasTradeSlider) {
+                    DataStorage.SetTradeData();
+                    if (_TradeSlider.IsTargetComplete()) {
+                        if (currPage.customNext != undefined) {
+                            currPage.customNext.isComplete = true;
+                        }
+                        var target = _TradeSlider.GetTarget();
+                        if (target.goal == "shelter") {
+                            _Question.Loadfeedback(3);
+                        } else if (target.goal == "feast") {
+                            _Question.Loadfeedback(4);
+                        } else if (target.goal == "book") {
+                            _Question.Loadfeedback(5);
+                        } else if (target.goal == "wayoff") {
+                            _Question.Loadfeedback(3);
+                        } else if (target.goal == "betteroff") {
+                            _Question.Loadfeedback(1);
+                        }
+                    } else {
+                        _Question.Loadfeedback(0);
+                    }
+                } else {
+                    _Question.Loadfeedback(0);
+                }
+
+                DataStorage.updateCollection();
                 $("#linknext").k_enable()
             } else if (diereason == "less_fish" || diereason == "you_die") {
-                _Question.Loadfeedback(1);
+                if (currPage.pageId == "l4p5") {
+                    if (diereason2 == "wood") {
+                        _Question.Loadfeedback(2);
+                    } else if (diereason2 == "fish") {
+                        _Question.Loadfeedback(3);
+                    } else if (diereason2 == "both") {
+                        _Question.Loadfeedback(4);
+                    }
+                } else {
+                    _Question.Loadfeedback(1);
+                }
             } else if (diereason == "less_wood" || diereason == "friday_die") {
-                _Question.Loadfeedback(2);
+                if (currPage.pageId == "l4p5") {
+                    if (diereason2 == "wood") {
+                        _Question.Loadfeedback(5);
+                    } else if (diereason2 == "fish") {
+                        _Question.Loadfeedback(6);
+                    } else if (diereason2 == "both") {
+                        _Question.Loadfeedback(7);
+                    }
+                } else {
+                    _Question.Loadfeedback(2);
+                }
             }
         },
-        UpdateFeedbackForDay: function () {
+        UpdateDayInFeedback: function () {
+            debugger;
             var currentDay = DataStorage.getCurrentDay();
             var dayval = ""
             var days = {

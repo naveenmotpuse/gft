@@ -1,17 +1,17 @@
 <h2 class="pageheading">Level 3: Implementing Trade and Exploring the Gains from Trade</h2>
 <div class="intro-content marginLR">
     <div class="intro-p">
-        <p class="tooldesc" tool="shelter">
+        <p class="goaldesc" goal="shelter">
             You decide to build a shelter to protect you from the tropical rainstorms. This will require 90 logs in inventory. Trade
             with Friday until you can achieve an inventory of 90 logs. Remember that you must survive each night and Friday
             will only trade if he is made better off than he would have been on his own.
         </p>
-        <p class="tooldesc" tool="feast">
+        <p class="goaldesc" goal="feast">
             You decide to throw a feast for you and Friday. This will require 5000 calories of fish in inventory. Trade with Friday until
             you can achieve an inventory of 5000 calories of fish. Remember that you must survive each night and Friday will
             only trade if he is made better off than he would have been on his own.
         </p>
-        <p class="tooldesc" tool="book">
+        <p class="goaldesc" goal="book">
             While walking on the beach, you find that a copy of Daniel Defoe’s Robinson Crusoe has washed ashore. Having been working
             every day since you were stranded you would enjoy being able to take the time to read about someone else who
             was stranded. Reading the book will take ten hours. Produce enough without allocating all of your time so that
@@ -24,22 +24,23 @@
         </div>
         <div class="nighttimeslider nighttime_scheduler">
         </div>
-        <div class="startbtnpanel">
-            <center>
-                <input class="btnstartslider" type="button" id="btnstartslider" value="Start" />
-            </center>
-        </div>
-        <div class="daycount">Day <span id="day">1</span></div>
-    </div>
-    <div class="wrapperanimation">
-        <div class="intro-img posrel t_animation_c">
 
-        </div>       
+    </div>
+    <div class="animcontainer">
+        <div class="wrapperanimation">
+            <div class="intro-img posrel t_animation_c">
+
+            </div>
+        </div>
+        <div class="dayfigcaption">
+            <p align="center">Day
+                <span id="dayno">1</span>.</p>
+        </div>
     </div>
 </div>
 <div class='trade_slider_wrapper marginLR'>
 </div>
 <div id="div_question" class="questionband marginLR autowidth displaynone">
-    </div>
+</div>
 <div id="div_feedback" class="feedbackdiv">
 </div>

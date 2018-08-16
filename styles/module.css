@@ -26,6 +26,7 @@
 /*intro-content CSS End */
 
 /* Animation css start */
+.animcontainer{float: left;}
 .posrel{
     position: relative;
     margin-bottom: auto;
@@ -905,7 +906,8 @@ td[rowspan] {
 }
 .tradepanel .slider-wrapper p {margin-top: 0px;}
 .tot-range-wrapper div, .tot-range-wrapper input[type='range']  {float: left; width: 95%;}
-.daycount{}
+
+.dayfigcaption{}
 
 .summaryband{
     float: left;

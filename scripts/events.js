@@ -94,34 +94,12 @@ $(document).on("click", "#btnfindout", function (event) {
     if ($(this).k_IsDisabled()) return;
     EventManager.onFind();
 });
-$(document).on("click", ".ToolPropsRadio", function (event) {
-    var tool = $(this).val();
-    _TradeSlider.UpdateToolProps(tool);
+$(document).on("click", ".goalRadio", function (event) {
+    var goal = $(this).val();
+    _TradeSlider.UpdateTarget(goal);
 });
 
 $(document).on("click", "#btnstartslider", function (event) {
-    $('body').animate({
-        scrollTop: $(".t_animation_c").position().top - _Settings.topMargin
-    }, 200);    
-    var currPage = _Navigator.GetCurrentPage(); 
-    if (currPage.hasTradeSlider != undefined && currPage.hasTradeSlider) {
-        $('.friday-raftSprites').removeClass('friday-raftSprites').addClass('friday-raftSprites2');
-        $('.fridaySprites').removeClass('fridaySprites').addClass('fridaySprites2');
-        $('.castawaySprites1').removeClass('castawaySprites1').addClass('castawaySprites');
-        $(".runtimeslider").show();
-        $(".selecttimeslider").hide();
-        $(".startbtnpanel").hide();
-        setTimeout(function () {
-            $('.castawaySprites').removeClass('castawaySprites').addClass('castawaySprites1');
-            $('.castawaySprites1').hide();
-            _Slider.setDefaultValue();
-            _Slider.StartScheduler();
-        }, 2000)
-    }
-    else{
-        $(".questionband").hide();
-        $('.castawaySprites1, .fridaycastawaySprites').hide();
-        _Slider.setDefaultValue();
-        _Slider.StartScheduler();
-    }
+    if ($(this).k_IsDisabled()) return;
+    EventManager.onStart();    
 });

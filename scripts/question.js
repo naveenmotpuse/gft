@@ -95,6 +95,7 @@
             $("#div_feedback").show();
             $("#div_feedback").load(fdbkUrl, function () {
                 _Question.SetFeedbackTop()
+                _CustomQuestion.OnFeedbackLoad()
                 $("body").animate({
                     scrollTop: $(document).height()
                 }, 1000);

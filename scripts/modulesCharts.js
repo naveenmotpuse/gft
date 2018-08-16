@@ -62,7 +62,7 @@ var _ModuleCharts = (function () {
                         id: ser1,
                         name: ser1,
                         type: 'line',
-                        lineWidth: 1,
+                        lineWidth: 0,
                         data: _data,
                         color: ColorCodes.gray,
                         marker: {
@@ -225,9 +225,9 @@ var _ModuleCharts = (function () {
                     tickInterval: 1
                 }],
                 yAxis: [{ // Primary yAxis
-                    categories: [0, 10, 20, 30, 40, 50, 60, 70, 80],
+                    categories: [0, 10, 20, 30, 40, 50, 60, 70,80,90,100, 110],
                     min: 0,
-                    max: 80,
+                    max: 110,
                     gridLineWidth: 0,
                     tickInterval: 10,
                     labels: {
@@ -246,9 +246,9 @@ var _ModuleCharts = (function () {
                     opposite: true
 
                 }, { // Secondary yAxis
-                    categories: [0, 1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000],
+                    categories: [0, 1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000,10000,11000],
                     min: 0,
-                    max: 8000,
+                    max: 11000,
                     gridLineWidth: 1,
                     tickInterval: 1000,
                     title: {
@@ -295,33 +295,33 @@ var _ModuleCharts = (function () {
                         radius: 0,
                         symbol: "circle"
                     },
-                    data: [30, 30, 30, 30, 30]
+                    data: [90, 90, 90, 90, 90]
                 }, {
                     id: 'Fish',
                     name: 'Fish',
                     type: 'spline',
                     lineWidth: 2,
                     yAxis: 1,
-                    color: ColorCodes.fish,
+                    color: ColorCodes.user,
                     marker: {
                         enabled: true,
-                        radius: 10,
+                        radius: 7,
                         symbol: "circle",
                     },
-                    data: []
+                    data: [34]
                 }, {
                     id: 'Wood',
-                    name: 'Wood',
+                    name: "Wood",
                     type: 'spline',
                     lineWidth: 2,
-                    color: ColorCodes.wood,
+                    color: ColorCodes.friday,
                     dashStyle: "Dash",
                     marker: {
                         enabled: true,
                         radius: 5,
                         symbol: "circle"
                     },
-                    data: []
+                    data: [2000]
                 }]
             });
         },

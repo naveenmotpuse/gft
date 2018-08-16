@@ -77,15 +77,152 @@ var fridayPPF = [
     [44, 500],
     [48, 0]
 ]
+//senario
+var userPPFTable_ScenarioSeen_1 = [
+    [0, 0],
+    [8, 250],
+    [16, 500],
+    [24, 750],
+    [32, 1000],
+    [40, 1250],
+    [48, 1500],
+    [56, 1750],
+    [64, 2000],
+    [72, 2250],
+    [80, 2500],
+    [88, 2750],
+    [96, 3000]
+]
+var userPPF_ScenarioSeen_1 = [
+    [0, 3000],
+    [8, 2750],
+    [16, 2500],
+    [24, 2250],
+    [32, 2000],
+    [40, 1750],
+    [48, 1500],
+    [56, 1250],
+    [64, 1000],
+    [72, 750],
+    [80, 500],
+    [88, 250],
+    [96, 0]
+]
+var userPPFTable_ScenarioSeen_2 = [
+    [0, 0],
+    [4, 500],
+    [8, 1000],
+    [12, 1500],
+    [16, 2000],
+    [20, 2500],
+    [24, 3000],
+    [28, 3500],
+    [32, 4000],
+    [36, 4500],
+    [40, 5000],
+    [44, 5500],
+    [48, 6000]
+]
+var userPPF_ScenarioSeen_2 = [
+    [0, 6000],
+    [4, 5500],
+    [8, 5000],
+    [12, 4500],
+    [16, 4000],
+    [20, 3500],
+    [24, 3000],
+    [28, 2500],
+    [32, 2000],
+    [36, 1500],
+    [40, 1000],
+    [44, 500],
+    [48, 0]
+]
+
+var fridayPPFTable_ScenarioSeen_1 = [
+    [0, 0],
+    [4, 225],
+    [8, 450],
+    [12, 675],
+    [16, 900],
+    [20, 1125],
+    [24, 1350],
+    [28, 1575],
+    [32, 1800],
+    [36, 2025],
+    [40, 2250],
+    [44, 2475],
+    [48, 2700]
+]
+var fridayPPF_ScenarioSeen_1 = [
+    [0, 2700],
+    [4, 2475],
+    [8, 2250],
+    [12, 2025],
+    [16, 1800],
+    [20, 1575],
+    [24, 1350],
+    [28, 1125],
+    [32, 900],
+    [36, 675],
+    [40, 450],
+    [44, 225],
+    [48, 0]
+]
+var fridayPPFTable_ScenarioSeen_2 = [
+    [0, 0],
+    [3.5, 350],
+    [7, 700],
+    [10.5, 1050],
+    [14, 1400],
+    [17.5, 1750],
+    [21, 2100],
+    [24.5, 2450],
+    [28, 2800],
+    [31.5, 3150],
+    [35, 3500],
+    [38.5, 3850],
+    [42, 4200]
+]
+var fridayPPF_ScenarioSeen_2 = [
+    [0, 4200],
+    [3.5, 3850],
+    [7, 3500],
+    [10.5, 3150],
+    [14, 2800],
+    [17.5, 2450],
+    [21, 2100],
+    [24.5, 1750],
+    [28, 1400],
+    [31.5, 1050],
+    [35, 700],
+    [38.5, 350],
+    [42, 0]
+]
+
+
+var TimePPFTable = [
+    [0, 12],
+    [1, 11],
+    [2, 10],
+    [3, 9],
+    [4, 8],
+    [5, 7],
+    [6, 6],
+    [7, 5],
+    [8, 4],
+    [9, 3],
+    [10, 2],
+    [11, 1],
+    [12, 0]
+]
+
+
+
 
 var ValidationProps = {
     wood: 0,
     fish: 0
-}
-var ToolProps = {
-    tool: "notool", //"shelter","feast","book"
-    goal: 0, //90,5000,10,
-    unit: "", //"logs", "cals","hrs"
 }
 var AnimConfig = {
     duration: 400,
@@ -378,7 +515,7 @@ var _QData = {
         Qid: "Q15",
         type: "activity",
         tryCount: 0,
-        totalTry: 2,
+        totalTry: 0,
         totalPoints: 1,
         level: 1,
         options: [{
@@ -390,12 +527,125 @@ var _QData = {
         Qid: "Q16",
         type: "activity",
         tryCount: 0,
+        totalTry: 0,
+        totalPoints: 1,
+        level: 2,
+        options: [{
+            type: "activity"
+        }],
+        feedback: ["l3p2/q16c1.htm", "l3p2/q16ic1.htm", "l3p2/q16ic2.htm", "l3p2/q16c2.htm", "l3p2/q16c3.htm","l3p2/q16c4.htm"]
+    },
+    "Q17": {
+        Qid: "Q17",
+        type: "activity",
+        tryCount: 0,
         totalTry: 2,
         totalPoints: 1,
         level: 1,
         options: [{
             type: "activity"
         }],
-        feedback: ["l3p2/q16c1.htm", "l3p2/q16ic1.htm", "l3p2/q16ic2.htm"]
+        feedback: ["l3p3/q17c1.htm", "l3p3/q17ic1.htm", "l3p3/q17ic2.htm", "l3p3/q17c2.htm"]
+    },
+        "Q18": {
+        Qid: "Q18",
+        tryCount: 0,
+        totalTry: 2,
+        totalPoints: 1,
+        level: 2,
+        type: "graph",
+        graphData: [],
+        correctData: undefined,
+        options: [{
+            type: "graph"
+        }],
+        feedback: ["l4p2/q18c1.htm", "l4p2/q18ic1.htm", "l4p2/q18ic2.htm"]
+    },
+
+    "Q19": {
+        Qid: "Q19",
+        tryCount: 0,
+        totalTry: 2,
+        totalPoints: 1,
+        level: 2,
+        type: "graph",
+        graphData: [
+            
+        ],
+        correctData: undefined,
+        options: [{
+            type: "graph"
+        }],
+        feedback: ["l4p3/q19c1.htm", "l4p3/q19ic1.htm", "l4p3/q19ic2.htm"]
+    },
+    "Q20": {
+        Qid: "Q20",
+        type: "question",
+        tryCount: 0,
+        totalTry: 2,
+        totalPoints: 1,
+        level: 1,
+        options: [{
+            type: "input",
+            id: "inputcalfishlosty",
+            answerId: ""
+        },
+        {
+            type: "input",
+            id: "inputlogfirewoodgainy",
+            answerId: ""
+        },
+        {
+            type: "input",
+            id: "inputcalperlogy",
+            answerId: ""
+        },
+        {
+            type: "input",
+            id: "inputcalfishlostF",
+            answerId: ""
+        },
+        {
+            type: "input",
+            id: "inputlogfirewoodgainF",
+            answerId: ""
+        },
+        {
+            type: "input",
+            id: "inputcalperlogF",
+            answerId: ""
+        },
+        ],
+        feedback: ["l4p4/q20c1.htm", "ic1.htm", "l4p4/q20ic2.htm"]
+    },
+    "Q21": {
+        Qid: "Q21",
+        type: "question",
+        tryCount: 0,
+        totalTry: 2,
+        totalPoints: 1,
+        level: 1,
+        options: [
+            {
+            type: "radio",
+            id: "optionsL4",
+            group: "l4-q21"
+            }
+        ],
+        feedback: ["l4p4/q21c1.htm", "ic1.htm", "l4p4/q21ic2.htm"]
+    },
+    "Q22": {
+        Qid: "Q22",
+        type: "activity",
+        tryCount: 0,
+        totalTry: 2,
+        totalPoints: 1,
+        level: 1,
+        options: [{
+            type: "activity"
+        }],
+        feedback: ["l4p5/q22c1.htm","l4p5/q22c2.htm",
+                    "l4p5/q22yic1.htm", "l4p5/q22yic2.htm", "l4p5/q22yic3.htm",
+                    "l4p5/q22fic1.htm", "l4p5/q22fic2.htm", "l4p5/q22fic3.htm"]
     }
 }

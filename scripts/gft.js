@@ -1,15 +1,91 @@
+var _Scenario = (function () {
+    var scenarioIndex = -1;
+
+    var userScenario = [{
+        woodPerHr: 8,
+        fishPerHr: 250,
+        tableData: userPPFTable_ScenarioSeen_1,
+        ppfData: userPPF_ScenarioSeen_1
+    }, {
+        woodPerHr: 4,
+        fishPerHr: 500,
+        tableData: userPPFTable_ScenarioSeen_2,
+        ppfData: userPPF_ScenarioSeen_2
+    }]
+
+    var fridayScenario = [{
+        woodPerHr: 4,
+        fishPerHr: 225,
+        tableData: fridayPPFTable_ScenarioSeen_1,
+        ppfData: fridayPPF_ScenarioSeen_1
+    }, {
+        woodPerHr: 3.5,
+        fishPerHr: 350,
+        tableData: fridayPPFTable_ScenarioSeen_2,
+        ppfData: fridayPPF_ScenarioSeen_2
+    }]
+
+    var scenario_q20 = [
+        [250, 8, 31.25, 225, 4, 56.25],
+        [500, 4, 125, 350, 3.5, 100]
+    ];
+    var scenario_q21 = [
+        ["radio1"],
+        ["radio2"]
+    ]
+
+    return {
+        ShuffleScenario: function () {
+            if (scenarioIndex == -1) {
+                var indexarr = [1, 0];
+                indexarr = indexarr.sort(function () {
+                    return .5 - Math.random();
+                });
+                scenarioIndex = indexarr[0];
+            }
+        },
+        getScenarioIndex: function(){
+            return scenarioIndex;
+        },
+        getCurrentScenario: function () {
+            var pageobj = _Navigator.GetCurrentPage();
+            if (pageobj.isFriday == undefined || !pageobj.isFriday) {
+                return userScenario[scenarioIndex];
+            } else {
+                return fridayScenario[scenarioIndex];
+            }
+        },
+        updateQuestionData: function () {
+            debugger;
+            _QData.Q18.graphData[0] = userScenario[scenarioIndex].ppfData[0];
+            _QData.Q18.graphData[1] = userScenario[scenarioIndex].ppfData[userScenario[scenarioIndex].ppfData.length - 1];
+            _QData.Q18.correctData = userScenario[scenarioIndex].ppfData;
+
+            _QData.Q19.graphData[0] = fridayScenario[scenarioIndex].ppfData[0];
+            _QData.Q19.graphData[1] = fridayScenario[scenarioIndex].ppfData[fridayScenario[scenarioIndex].ppfData.length - 1];
+            _QData.Q19.correctData = fridayScenario[scenarioIndex].ppfData;
+            for (var i = 0; i < _QData.Q20.options.length; i++) {
+                _QData.Q20.options[i].answer = scenario_q20[scenarioIndex][i];
+            }
+            for (var i = 0; i < _QData.Q21.options.length; i++) {
+                _QData.Q21.options[i].answerId = scenario_q21[scenarioIndex][i];
+            }
+        }
+    }
+})();
+
 var _TopSlider = (function () {
     function toggleImage(_this, _type) {
         if ($(_this).find("img").length > 0) {
             if ($(_this).find("img").attr("src").indexOf("down-chevron.png") > 0) {
                 $(_this).find("img").attr("src", "assets/images/up-chevron.png")
-                $(_this).attr("aria-expanded", "true").attr("aria-current","true");
+                $(_this).attr("aria-expanded", "true").attr("aria-current", "true");
                 $('body').animate({
                     scrollTop: 0
                 }, 1000);
             } else {
                 $(_this).find("img").attr("src", "assets/images/down-chevron.png")
-                $(_this).attr("aria-expanded", "false").attr("aria-current","false");
+                $(_this).attr("aria-expanded", "false").attr("aria-current", "false");
             }
         }
         if (_type == "ppf") {
@@ -52,10 +128,10 @@ var _TopSlider = (function () {
         if ($(_this).find("img").length > 0) {
             if ($(_this).find("img").attr("src").indexOf("down-chevron.png") > 0) {
                 $(_this).find("img").attr("src", "assets/images/up-chevron.png");
-                $(_this).attr("aria-expanded", "true").attr("aria-current","true");
+                $(_this).attr("aria-expanded", "true").attr("aria-current", "true");
             } else {
                 $(_this).find("img").attr("src", "assets/images/down-chevron.png");
-                $(_this).attr("aria-expanded", "false").attr("aria-current","false");
+                $(_this).attr("aria-expanded", "false").attr("aria-current", "false");
             }
         }
     }
@@ -99,7 +175,6 @@ var _Template = (function () {
             var pageUrl = "templates/slider.htm" + _Caching.GetUrlExtension();
             $(".t_range-slider_c").load(pageUrl, function () {
                 _Slider.InitSelectTimeSlider();
-                _Template.OnTemplateLoad();
             });
         },
         LoadDaytimeScheduler: function () {
@@ -113,13 +188,9 @@ var _Template = (function () {
         LoadTradeSlider: function () {
             var pageUrl = "templates/tradeslider.htm" + _Caching.GetUrlExtension();
             $(".trade_slider_wrapper").load(pageUrl, function () {
+                _Slider.InitSelectTimeSlider();
                 _TradeSlider.InitSlider();
-                _Template.OnTemplateLoad();
-            });
-        },
-        OnTemplateLoad: function () {
-            var pageobj = _Navigator.GetCurrentPage();
-            if (pageobj.hasTradeSlider != undefined && pageobj.hasTradeSlider) {
+                var pageobj = _Navigator.GetCurrentPage();
                 if (pageobj.pageId == "l2p3") {
                     $("#wood-range").val(AnimConfig.dayTime)
                     $('.wood').find('#w_val').text(AnimConfig.dayTime);
@@ -128,17 +199,24 @@ var _Template = (function () {
                     $("#wood-range").k_disable()
                     $("#fish-range").k_disable()
                 }
+
                 $("#consumption-wood-range").k_disable()
-                $("#consumption-fish-range").k_disable()                
-            }
+                $("#consumption-fish-range").k_disable()
+
+            });
         }
     }
 })();
 
 var _CustomQuestion = (function () {
     return {
+        OnFeedbackLoad: function () {
+            var currPage = _Navigator.GetCurrentPage();
+            if (currPage.hasTradeSlider != undefined && currPage.hasTradeSlider) {
+                EventManager.UpdateDayInFeedback();
+            }
+        },
         OnCheckAnswer: function () {
-
             var _currentQuestionObj = _Question.GetCurrentQuestion();
             if (_currentQuestionObj.Id == "Q1") {
                 _ModuleCharts.AddPointToPPFChart("userppfser", [0, 3000])
@@ -181,6 +259,26 @@ var _CustomQuestion = (function () {
                 _ModuleCharts.DrawQuestionChart(qObj.graphData);
                 $(".graphbtncheckanswer").k_disable();
             }
+            if (qObj.Id == "Q18") {
+                $("#ScenarioWoodVal").html(_Scenario.getCurrentScenario().woodPerHr);
+                $("#ScenarioFischVal").html(_Scenario.getCurrentScenario().fishPerHr);
+                $("#q18TableBody").html(this.UpdateScenarioTable());
+
+            }
+            if (qObj.Id == "Q19") {
+                $("#ScenarioWoodVal").html(_Scenario.getCurrentScenario().woodPerHr);
+                $("#ScenarioFischVal").html(_Scenario.getCurrentScenario().fishPerHr);
+                $("#q19TableBody").html(this.UpdateScenarioTable());
+            }
+        },
+        UpdateScenarioTable: function () {
+            debugger;
+            var scenario = _Scenario.getCurrentScenario().ppfData;
+            var tbody = "";
+            for (var i = 0; i < TimePPFTable.length; i++) {
+                tbody = tbody + '<tr><td>' + TimePPFTable[i][0] + '</td><td>' + TimePPFTable[i][1] + '</td><td>' + scenario[i][0] + '</td><td>' + scenario[i][1] + '</td></tr>'
+            }
+            return tbody;
         },
         AddGraphPoints: function (wood, fish, valPoints) {
             if ($.trim(fish) != "" && $.trim(wood) != "") {
@@ -330,7 +428,8 @@ var _CustomQuestion = (function () {
             var chart = $('#questionchart').highcharts();
             chart.get('defaultSeries').setData(_currentQuestionObj.correctData)
             chart.get('defaultSeries').update({
-                color: ColorCodes.green
+                color: ColorCodes.green,
+                lineWidth: 1
             });
             var point1 = {}
             point1.x = _currentQuestionObj.graphData[0][0];
@@ -399,7 +498,10 @@ var _CustomPage = (function () {
             if (pageobj.pageId == "l2p2") {
                 _ModuleCharts.DrawL2P2QuestionChart();
             }
-
+            if (pageobj.pageId == "l4p1") {
+                _Scenario.ShuffleScenario();
+                _Scenario.updateQuestionData();
+            }            
             if (pageobj.hasTimeSlider != undefined && pageobj.hasTimeSlider) {
                 _Template.LoadRangeSlider();
                 _Template.LoadDaytimeScheduler();
@@ -409,29 +511,26 @@ var _CustomPage = (function () {
                 _Template.LoadAnimateArea();
             }
 
-            if (pageobj.isFriday != undefined && pageobj.isFriday) {
-                AnimConfig.isFriday = true;
-            } else {
-                AnimConfig.isFriday = false;
-            }
-
             if (pageobj.hasTradeSlider != undefined && pageobj.hasTradeSlider) {
                 _Template.LoadRangeSlider();
                 _Template.LoadDaytimeScheduler();
                 _Template.LoadNighttimeScheduler();
                 _Template.LoadTradeSlider();
 
-                var toolDetails = _TradeSlider.GetToolDetails();
-                if (toolDetails.tool != "notool") {
-                    $("p.tooldesc").hide();
-                    $("p.tooldesc[tool='" + toolDetails.tool + "']").show()
+                if (pageobj.pageId == "l3p3") {
+                    _TradeSlider.SetWayOffTarget();
                 }
-            }
+                var target = _TradeSlider.GetTarget();
+                if (target.goal != "notarget") {
+                    $("p.goaldesc").hide();
+                    $("p.goaldesc[goal='" + target.goal + "']").show()
+                }               
+            }  
             if (pageobj.hasActivity != undefined && pageobj.hasActivity) {
                 if (pageobj.isAnswered != undefined && pageobj.isAnswered) {
-                    $("#" + ToolProps.tool).attr('checked', 'checked');
+                    $("#" + target.goal).attr('checked', 'checked');
                 }
-            }
+            }          
         }
     };
 })();

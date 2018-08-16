@@ -3,7 +3,7 @@
 var _Navigator = (function () {
     var _currentPageId = "";
     var _currentPageObject = {};
-    var progressLevels = [1, 8, 7, 1];
+    var progressLevels = [1, 8, 8, 3, 6];
     var _NData = {
         "l1p1": {
             pageId: "l1p1",
@@ -154,35 +154,98 @@ var _Navigator = (function () {
                 Id: "Q16",
                 dataurl: "l3p2/q16.htm"
             }],
-            callbackComplete: false,
-            callbackFunction: "EventManager.onNextDay();",
+            customNext: {
+                isComplete: false,
+                jsFunction: "EventManager.onNextDay();",
+            },            
             hasTimeSlider: true,
             hasTradeSlider: true,
             hasAnimation: true,
         },        
-        "l3p5": {
-            pageId: "l3p5",
-            prevPageId: "l3p4",
-            nextPageId: "l3p6",
-            dataurl: "l3p5.htm",
+        "l3p3": {
+            pageId: "l3p3",
+            prevPageId: "l3p2",
+            nextPageId: "l4p1",
+            dataurl: "l3p3.htm",
             datalevel: 3,
             questions: [{
-                Id: "Q16",
-                dataurl: "l3p2/q16.htm"
+                Id: "Q17",
+                dataurl: "l3p3/q17.htm"
             }],
+            customNext: {
+                isComplete: false,
+                jsFunction: "EventManager.onNextDay();",
+            },            
             hasTimeSlider: true,
             hasTradeSlider: true,
             hasAnimation: true,
         },
         "l4p1": {
             pageId: "l4p1",
-            prevPageId: "l3p4",
+            prevPageId: "l3p3",
             nextPageId: "l4p2",
             dataurl: "l4p1.htm",
-            datalevel: 3,
+            datalevel: 4,
+            questions: [],
+            hasTimeSlider: false,
+            hasTradeSlider: false,
+            hasAnimation: true,
+        },
+                "l4p2": {
+            pageId: "l4p2",
+            prevPageId: "l4p1",
+            nextPageId: "l4p3",
+            dataurl: "l4p2.htm",
+            datalevel: 4,
             questions: [{
-                Id: "Q16",
-                dataurl: "l3p2/q16.htm"
+                Id: "Q18",
+                dataurl: "l4p2/q18.htm"
+            }],
+            
+        },
+        "l4p3": {
+            pageId: "l4p3",
+            prevPageId: "l4p2",
+            nextPageId: "l4p4",
+            dataurl: "l4p3.htm",
+            datalevel: 4,
+            isFriday:true,
+            questions: [{
+                Id: "Q19",
+                dataurl: "l4p3/q19.htm"
+            }],
+        },
+
+        "l4p4": {
+            pageId: "l4p4",
+            prevPageId: "l4p3",
+            nextPageId: "l4p5",
+            dataurl: "l4p4.htm",
+            datalevel: 4,
+            questions: [
+                {
+                    Id: "Q20", 
+                    dataurl: "l4p4/q20.htm"
+                },
+                {
+                    Id: "Q21",
+                    dataurl: "l4p4/q21.htm"
+                }
+            ],
+            hasTimeSlider: false,
+            hasTradeSlider: false,
+            hasAnimation: false,
+            hasScenario: true,
+        },
+        "l4p5": {
+            pageId: "l4p5",
+            prevPageId: "l4p4",
+            nextPageId: "summary",
+            dataurl: "l4p5.htm",
+            datalevel: 4,
+            questions: [{
+                Id: "Q22",
+                dataurl: "l4p5/q22.htm"
             }],
             hasTimeSlider: true,
             hasTradeSlider: true,
@@ -282,7 +345,11 @@ var _Navigator = (function () {
         },
         Next: function () {
             $("#linkprevious").k_enable();
-            if (_currentPageObject.questions.length > 0) {
+            if(_currentPageObject.customNext!=undefined && !_currentPageObject.customNext.isComplete){
+                var custFunction = new Function(_currentPageObject.customNext.jsFunction);
+                custFunction();
+            }
+            else if (_currentPageObject.questions.length > 0) {
                 var IsAllQCompleted = true;
                 for (var i = 0; i < _currentPageObject.questions.length; i++) {
                     if (_currentPageObject.questions[i].isAnswered == undefined || !_currentPageObject.questions[i].isAnswered || _currentPageObject.questions[i].isQuestionVisit == undefined || !_currentPageObject.questions[i].isQuestionVisit) {
