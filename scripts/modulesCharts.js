@@ -225,14 +225,13 @@ var _ModuleCharts = (function () {
                     tickInterval: 1
                 }],
                 yAxis: [{ // Primary yAxis
-                    categories: [0, 10, 20, 30, 40, 50, 60, 70,80,90,100, 110],
+                    categories: [0, 10, 20, 30, 40, 50, 60, 70],
                     min: 0,
                     max: 110,
                     gridLineWidth: 0,
                     tickInterval: 10,
                     labels: {
                         format: '{value}',
-
                         style: {
                             color: ColorCodes.wood
                         }
@@ -246,7 +245,7 @@ var _ModuleCharts = (function () {
                     opposite: true
 
                 }, { // Secondary yAxis
-                    categories: [0, 1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000,10000,11000],
+                    categories: [0, 1000, 2000, 3000, 4000, 5000, 6000, 7000],
                     min: 0,
                     max: 11000,
                     gridLineWidth: 1,
@@ -263,7 +262,6 @@ var _ModuleCharts = (function () {
                             color: ColorCodes.fish
                         }
                     }
-
                 }],
                 tooltip: {
                     formatter: function () {
@@ -308,7 +306,7 @@ var _ModuleCharts = (function () {
                         radius: 7,
                         symbol: "circle",
                     },
-                    data: [34]
+                    data: []
                 }, {
                     id: 'Wood',
                     name: "Wood",
@@ -321,9 +319,19 @@ var _ModuleCharts = (function () {
                         radius: 5,
                         symbol: "circle"
                     },
-                    data: [2000]
+                    data: []
                 }]
             });
+        },
+        UpdateSurplusChartData: function (_fishdata, _wooddata) {
+            var chart = $('#surpluschart_c').highcharts();
+            if (chart.get('Fish') != undefined && chart.get('Fish') != null) {
+                chart.get('Fish').setData(_fishdata)
+            }
+            if (chart.get('Wood') != undefined && chart.get('Wood') != null) {
+                chart.get('Wood').setData(_wooddata)
+            }
+            //chart.series[0].setData(_data)
         },
         DrawPPFChart: function () {
             Highcharts.chart('ppfchart_c', {
@@ -413,6 +421,27 @@ var _ModuleCharts = (function () {
             });
         },
         DrawTradeCharts: function () {
+            var localUserPPF;
+            var localfridayPPF;
+            var usermax = 4000;
+            var fridaymax = 7000;
+            var currPage = _Navigator.GetCurrentPage();
+            if (currPage.datalevel == 4) {
+                localUserPPF = _Scenario.getUserData();
+                localfridayPPF = _Scenario.getFridayData();
+                if(_Scenario.getScenarioIndex()==0){
+                    usermax = 4000;
+                    fridaymax = 4000;
+                }
+                else{
+                    usermax = 7000;
+                    fridaymax = 5000;
+                }
+            }
+            else{
+                localUserPPF = userPPF;
+                localfridayPPF = fridayPPF;
+            }
             Highcharts.chart('studenttradeGraph', {
                 title: {                    
                     text: ' '
@@ -444,6 +473,7 @@ var _ModuleCharts = (function () {
                         format: '{value}'
                     },
                     min: 0,
+                    max: usermax,
                     gridLineWidth: 1,
                     tickInterval: 1000,
                     plotLines: [{
@@ -464,7 +494,7 @@ var _ModuleCharts = (function () {
                     name: 'Your PPF',
                     type: 'spline',
                     lineWidth: 1,
-                    data: userPPF,
+                    data: localUserPPF,
                     color: ColorCodes.user,
                     marker: {
                         enabled: true,
@@ -504,6 +534,7 @@ var _ModuleCharts = (function () {
                         format: '{value}'
                     },
                     min: 0,
+                    max: fridaymax,
                     gridLineWidth: 1,
                     tickInterval: 1000,
                     plotLines: [{
@@ -524,7 +555,7 @@ var _ModuleCharts = (function () {
                     name: "Friday's PPF",
                     type: 'spline',
                     lineWidth: 1,
-                    data: fridayPPF,
+                    data: localfridayPPF,
                     color: ColorCodes.friday,
                     marker: {
                         enabled: true,

@@ -47,6 +47,18 @@ var _Scenario = (function () {
         getScenarioIndex: function(){
             return scenarioIndex;
         },
+        getUserTable: function(){
+            return userScenario[scenarioIndex].tableData;
+        },
+        getUserData: function(){
+            return userScenario[scenarioIndex].ppfData;
+        },
+        getFridayTable: function(){
+            return fridayScenario[scenarioIndex].tableData;
+        },
+        getFridayData: function(){
+            return fridayScenario[scenarioIndex].ppfData;
+        },
         getCurrentScenario: function () {
             var pageobj = _Navigator.GetCurrentPage();
             if (pageobj.isFriday == undefined || !pageobj.isFriday) {
@@ -55,8 +67,7 @@ var _Scenario = (function () {
                 return fridayScenario[scenarioIndex];
             }
         },
-        updateQuestionData: function () {
-            debugger;
+        updateQuestionData: function () {            
             _QData.Q18.graphData[0] = userScenario[scenarioIndex].ppfData[0];
             _QData.Q18.graphData[1] = userScenario[scenarioIndex].ppfData[userScenario[scenarioIndex].ppfData.length - 1];
             _QData.Q18.correctData = userScenario[scenarioIndex].ppfData;
@@ -92,7 +103,7 @@ var _TopSlider = (function () {
             hideOtherChart("surplus")
             $("#ppfchart").slideToggle("slow", function () {
                 if ($(this).is(":visible")) {
-                    console.log("ppf visible")
+                    //console.log("ppf visible")
                     setTimeout(function () {
                         $("#linkppf").focus();
                     }, 100);
@@ -106,7 +117,7 @@ var _TopSlider = (function () {
             hideOtherChart("ppf")
             $("#surpluschart").slideToggle("slow", function () {
                 if ($(this).is(":visible")) {
-                    console.log("surplus visible")
+                    //console.log("surplus visible")
                     setTimeout(function () {
                         $("#linksurplus").focus();
                     }, 100);
@@ -160,8 +171,15 @@ var _Template = (function () {
             var pageUrl = "templates/topslider.htm" + _Caching.GetUrlExtension();
             $(".top-slider").load(pageUrl, function () {
                 //onload callback
+                $(".imggraph").k_disable();
+                $(".imggraph").attr("aria-expanded","true");
+                $(".imggraph").attr("aria-current", "true");
+
+                $(".imgtable").k_enable();
+                $(".imgtable").attr("aria-expanded","false");        
+                $(".imgtable").attr("aria-current", "false");
                 _ModuleCharts.DrawSurplusChart();
-                _ModuleCharts.DrawPPFChart();
+                _ModuleCharts.DrawPPFChart();                
             });
         },
         LoadAnimateArea: function () {
@@ -272,7 +290,7 @@ var _CustomQuestion = (function () {
             }
         },
         UpdateScenarioTable: function () {
-            debugger;
+            
             var scenario = _Scenario.getCurrentScenario().ppfData;
             var tbody = "";
             for (var i = 0; i < TimePPFTable.length; i++) {
@@ -380,6 +398,7 @@ var _CustomQuestion = (function () {
                 _CustomQuestion.UpdateGraphSubmitStatus();
                 _CustomQuestion.OnCheckAnswer();
                 _Navigator.UpdateScore();
+                $("#linknext").k_enable();
             } else {
                 _currentQuestionObj.tryCount += 1;
                 var fNo = _currentQuestionObj.tryCount;
@@ -399,7 +418,7 @@ var _CustomQuestion = (function () {
                     _Navigator.UpdateScore();
                 }
             }
-            $("#linknext").k_enable();
+            
         },
         PrevGraphAnswer: function () {
             var point1 = {}
@@ -492,15 +511,22 @@ var _CustomQuestion = (function () {
 
 var _CustomPage = (function () {
     return {
-        OnPageLoad: function () {
-            debugger
+        OnPageLoad: function () {            
             var pageobj = _Navigator.GetCurrentPage();
             if (pageobj.pageId == "l2p2") {
                 _ModuleCharts.DrawL2P2QuestionChart();
-            }
-            if (pageobj.pageId == "l4p1") {
-                _Scenario.ShuffleScenario();
-                _Scenario.updateQuestionData();
+            }                      
+            if(pageobj.pageId=="summary")
+            {
+                //_Navigator.GetLevels();
+               var level1 = _Navigator.GetLevelScore(1);
+               var level2 = _Navigator.GetLevelScore(2);
+               var level3 = _Navigator.GetLevelScore(3);
+               var level4 = _Navigator.GetLevelScore(4);
+               $("#level1score").html(level1);
+               $("#level2score").html(level2);
+               $("#level3score").html(level3);
+               $("#level4score").html(level4);               
             }            
             if (pageobj.hasTimeSlider != undefined && pageobj.hasTimeSlider) {
                 _Template.LoadRangeSlider();
@@ -520,6 +546,7 @@ var _CustomPage = (function () {
                 if (pageobj.pageId == "l3p3") {
                     _TradeSlider.SetWayOffTarget();
                 }
+                debugger;
                 var target = _TradeSlider.GetTarget();
                 if (target.goal != "notarget") {
                     $("p.goaldesc").hide();

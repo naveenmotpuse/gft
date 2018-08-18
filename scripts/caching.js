@@ -10,7 +10,7 @@ var _Caching = (function () {
         },
         InitPageCaching: function () {
             var _htmlData = _Navigator.Get();
-            for (let i in _htmlData) {
+            for (var i in _htmlData) {
                 var pageUrl = _Settings.dataRoot + _htmlData[i].dataurl;
                 this.Cache(pageUrl);
                 if (_htmlData[i].questions.length > 0) {

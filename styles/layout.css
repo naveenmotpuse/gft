@@ -53,6 +53,8 @@ input[type='button'], button{
     min-width: 100px;
 }
 
+input[type="radio"]{max-height: 20px;}
+
 a:focus, input:focus, button:focus, textarea:focus, select:focus, a:active, input:active, button:active, textarea:active, select:active {
     outline: #ff8c00 solid 2px;
 }
@@ -106,14 +108,6 @@ a:focus, input:focus, button:focus, textarea:focus, select:focus, a:active, inpu
     color: #fff;
     margin-top: 0;
     padding-top: 10px;        
-}
-#header-title .menu-icon {
-    float: left;
-    color: #fff;
-    position: relative;
-    top: 18px;
-    left: 30px;
-    cursor: pointer;
 }
 #header-progress {
     background: #f1f1f1;
@@ -384,4 +378,17 @@ table.smallfont tr th, table.smallfont tr td {
     background: #005B3D;
 }
 .btnretry{margin-left: 10px;}
+
+table{
+    font-size: 20px;
+}
+table caption
+{
+    text-align: left;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+tbody, thead{
+    font-size: 16px;
+}
 

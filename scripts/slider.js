@@ -6,8 +6,7 @@ var DataStorage = DataStorage || function (ui) {
         _woodsLbs: 0,
         day: 1,
         remFish: 0,
-        remWood: 0,
-        tradeData: {}
+        remWood: 0
     };
 
     var _RetryDataCollection = [];
@@ -20,6 +19,17 @@ var DataStorage = DataStorage || function (ui) {
         },
         ResetDataMap: function (jsonObj) {
             _DataMap = $(true, {}, _DataMap, jsonObj);
+        },
+        ResetDataMap1: function () {
+            _DataMap = {
+                woodcollectingHr: 0,
+                fishcollectingHr: 0,
+                _fishCals: 0,
+                _woodsLbs: 0,
+                day: 1,
+                remFish: 0,
+                remWood: 0
+            };
         },
         retry: function () {
             var pageid = _Navigator.GetCurrentPage().pageId;
@@ -38,6 +48,36 @@ var DataStorage = DataStorage || function (ui) {
                     _DataCollection.splice(i, 1);
                 }
             }
+        },
+        getPageDate: function (_day) {
+            var pageid = _Navigator.GetCurrentPage().pageId;
+            var pageDataCollection = [];
+            var returnDataRow = undefined;
+            for (var i = 0; i < _DataCollection.length; i++) {
+                if (_DataCollection[i].pageId == pageid) {
+                    pageDataCollection.push(_DataCollection[i])
+                }
+            }
+            if (_day == "today") {
+                if (pageDataCollection.length > 0) {
+                    returnDataRow = $.extend(true, {}, pageDataCollection[pageDataCollection.length - 1])
+                }
+            } else if (_day == "yesterday") {
+                if (pageDataCollection.length > 1) {
+                    returnDataRow = $.extend(true, {}, pageDataCollection[pageDataCollection.length - 2])
+                }
+            }
+            return returnDataRow;
+        },
+        getActivityData: function () {
+            var pageid = _Navigator.GetCurrentPage().pageId;
+            var pageDataCollection = [];
+            for (var i = 0; i < _DataCollection.length; i++) {
+                if (_DataCollection[i].pageId == pageid) {
+                    pageDataCollection.push(_DataCollection[i])
+                }
+            }
+            return pageDataCollection;
         },
         getCurrentDay: function () {
             return _DataMap.day;
@@ -125,8 +165,10 @@ var DataStorage = DataStorage || function (ui) {
             return _DataCollection;
         },
         SetTradeData: function () {
-            _DataMap.tradeData.TS = $.extend(true, {}, _TradeSlider.GetTradeSettings());
-            _DataMap.tradeData.TR = $.extend(true, {}, _TradeSlider.GetTradeResult());
+            _DataMap.tradeData = {};
+            _DataMap.tradeData.TS = _TradeSlider.GetTradeSettingsClone();
+            _DataMap.tradeData.TR = _TradeSlider.GetTradeResultClone();
+            _DataMap.tradeData.Target = _TradeSlider.GetTargetClone();
         }
     }
 }();
@@ -211,13 +253,25 @@ var _Slider = (function () {
             var totalhrs = val1 + val2;
 
             if (currPage.isFriday) {
-                _ModuleCharts.ShowSliderPoint([
-                    [fridayPPFTable[val1][0], fridayPPFTable[val2][1]]
-                ]);
+                if (currPage.datalevel == 4) {
+                    _ModuleCharts.ShowSliderPoint([
+                        [_Scenario.getFridayTable()[val1][0], _Scenario.getFridayTable()[val2][1]]
+                    ]);
+                } else {
+                    _ModuleCharts.ShowSliderPoint([
+                        [fridayPPFTable[val1][0], fridayPPFTable[val2][1]]
+                    ]);
+                }
             } else {
-                _ModuleCharts.ShowSliderPoint([
-                    [userPPFTable[val1][0], userPPFTable[val2][1]]
-                ]);
+                if (currPage.datalevel == 4) {
+                    _ModuleCharts.ShowSliderPoint([
+                        [_Scenario.getUserTable()[val1][0], _Scenario.getUserTable()[val2][1]]
+                    ]);
+                } else {
+                    _ModuleCharts.ShowSliderPoint([
+                        [userPPFTable[val1][0], userPPFTable[val2][1]]
+                    ]);
+                }
             }
             _Slider.submitValidate();
 
@@ -340,18 +394,21 @@ var _TradeSlider = (function () {
             fish: 0,
             fridaywood: 0,
             fridayfish: 0,
-            idlehours:0
+            idlehours: 0
         },
     }
     var Target = {
-        tool: "shelter",
+        goal: "shelter",
         goallbs: 90,
-        goalcals:2000,
-        goalhours:undefined        
+        goalcals: 2000,
+        goalhours: undefined
     }
     return {
         InitSlider: function () {
             $("#onewoodfor-range").on("input", document, function (event) {
+                $("#onewoodfor-fish").text($(this).val())
+            });
+            $("#onewoodfor-range").on("change", document, function (event) {
                 event.preventDefault();
                 var onewoodfor = Number($(this).val());
                 TradeResults.onewoodfor = onewoodfor;
@@ -359,17 +416,20 @@ var _TradeSlider = (function () {
             });
 
             $("#givewood-range").on("input", document, function (event) {
+                $("#givewood-lbs").text($(this).val())
+            });
+            $("#givewood-range").on("change", document, function (event) {
                 event.preventDefault();
                 var givewood = Number($(this).val());
                 TradeResults.givewood = givewood;
                 _TradeSlider.SetTradeResult();
             });
-
             _ModuleCharts.DrawTradeCharts();
-            //Complete Reset
-            this.Reset();            
+            //Complete Reset   
+            this.Reset();
+            DataStorage.ResetDataMap1();
         },
-        Reset: function(){
+        Reset: function () {
             TradeResults = {
                 onewoodfor: 250,
                 givewood: 5,
@@ -383,7 +443,7 @@ var _TradeSlider = (function () {
                     fish: 0,
                     fridaywood: 0,
                     fridayfish: 0,
-                    idlehours:0
+                    idlehours: 0
                 },
             }
             //Default Initialisation of sliders.            
@@ -392,6 +452,7 @@ var _TradeSlider = (function () {
             TradeResults.onewoodfor = 250;
             TradeResults.givewood = 5;
             _TradeSlider.SetTradeResult();
+            this.UpdateInventoryTables();
         },
         ResetTradeSlider() {
             $("#onewoodfor-range").val(250);
@@ -401,15 +462,19 @@ var _TradeSlider = (function () {
             _TradeSlider.SetTradeResult();
         },
         UpdateTradeSettings: function () {
-            debugger;
-            TradeSettings.yourwoodlogs = userPPFTable[Number($("#wood-range").val())][0];
-            TradeSettings.yourfishcals = userPPFTable[Number($("#fish-range").val())][1];
+            var currPage = _Navigator.GetCurrentPage();
+            if (currPage.datalevel == 4) {
+                TradeSettings.yourwoodlogs = _Scenario.getUserTable()[Number($("#wood-range").val())][0];
+                TradeSettings.yourfishcals = _Scenario.getUserTable()[Number($("#fish-range").val())][1];
+            } else {
+                TradeSettings.yourwoodlogs = userPPFTable[Number($("#wood-range").val())][0];
+                TradeSettings.yourfishcals = userPPFTable[Number($("#fish-range").val())][1];
+            }
             TradeSettings.youridlehours = AnimConfig.dayTime - (Number($("#wood-range").val()) + Number($("#fish-range").val()));
-            
+
             this.SetTradeResult();
         },
         SetTradeResult: function () {
-            debugger;
             TradeResults.receivefish = TradeResults.givewood * TradeResults.onewoodfor;
             TradeResults.consumptionwood = (TradeSettings.yourwoodlogs + TradeResults.remData.wood) - TradeResults.givewood;
             TradeResults.consumptionfish = (TradeSettings.yourfishcals + TradeResults.remData.wood) + (TradeResults.givewood * TradeResults.onewoodfor);
@@ -419,19 +484,36 @@ var _TradeSlider = (function () {
             $("#consumption-wood-range").attr("max", (TradeSettings.yourwoodlogs + TradeResults.remData.wood));
             $(".consumption-wood.r_label").text((TradeSettings.yourwoodlogs + TradeResults.remData.wood));
             $(".givewood.r_label").text((TradeSettings.yourwoodlogs + TradeResults.remData.wood));
-
             $("#consumption-fish-range").attr("max", (TradeSettings.fridayfishCals + TradeResults.remData.fridayfish));
             $(".consumption-fish.r_label").text((TradeSettings.fridayfishCals + TradeResults.remData.fridayfish));
-            this.ShowTradeResult()
+            $("#onewoodfor-fish").text(TradeResults.onewoodfor);
+            $("#givewood-lbs").text(TradeResults.givewood);
+            $("#receivefish-cals").text(TradeResults.receivefish);
+            $("#consumption-wood").text(TradeResults.consumptionwood);
+            $("#consumption-fish").text(TradeResults.consumptionfish);
+            $("#consumption-wood-range").val(TradeResults.consumptionwood);
+            $("#consumption-fish-range").val(TradeResults.consumptionfish);
+            setTimeout(function () {
+                _TradeSlider.DisplayPointOnGraph();
+            }, 0);
         },
         GetTradeSettings: function () {
             return TradeSettings;
         },
+        GetTradeSettingsClone: function () {
+            return $.extend(true, {}, TradeSettings);
+        },
         GetTradeResult: function () {
             return TradeResults;
         },
+        GetTradeResultClone: function () {
+            return $.extend(true, {}, TradeResults);
+        },
         GetTarget: function () {
             return Target;
+        },
+        GetTargetClone: function () {
+            return $.extend(true, {}, Target);
         },
         SetRemTradeData: function (_remdata) {
             TradeResults.remData.wood = _remdata.wood;
@@ -440,18 +522,13 @@ var _TradeSlider = (function () {
             TradeResults.remData.fridayfish = _remdata.fridayfish;
             TradeResults.remData.idlehours += TradeSettings.youridlehours;
         },
-        ShowTradeResult: function () {
-            $("#onewoodfor-fish").text(TradeResults.onewoodfor);
-            $("#givewood-lbs").text(TradeResults.givewood);
-            $("#receivefish-cals").text(TradeResults.receivefish);
-            $("#consumption-wood").text(TradeResults.consumptionwood);
-            $("#consumption-fish").text(TradeResults.consumptionfish);
-            $("#consumption-wood-range").val(TradeResults.consumptionwood);
-            $("#consumption-fish-range").val(TradeResults.consumptionfish);
-            this.ShowSliderPoint("studenttradeGraph",[TradeResults.consumptionwood, TradeResults.consumptionfish]);
-            this.ShowSliderPoint("fridaytradeGraph",[TradeResults.fridayconsumptionwood, TradeResults.fridayconsumptionfish]);
+        DisplayPointOnGraph: function () {
+            this.ShowSliderPoint("studenttradeGraph", [TradeResults.consumptionwood, TradeResults.consumptionfish]);
+            this.ShowSliderPoint("fridaytradeGraph", [TradeResults.fridayconsumptionwood, TradeResults.fridayconsumptionfish]);
         },
-        ShowSliderPoint: function (_chartid, point2) {            
+        ShowSliderPoint: function (_chartid, point2) {
+            var x3 = 0;
+            var y3 = 0;
             var chart = $('#' + _chartid).highcharts();
             if (chart.get("sliderpointser") != undefined && chart.get("sliderpointser") != null) {
                 chart.get("sliderpointser").remove()
@@ -459,36 +536,45 @@ var _TradeSlider = (function () {
             if (chart.get("sliderpointser1") != undefined && chart.get("sliderpointser1") != null) {
                 chart.get("sliderpointser1").remove()
             }
-            var point1 = userPPF[userPPF.length-1]
-            if(_chartid == "fridaytradeGraph")
-            {
-                point1 = fridayPPF[0];
-            }     
-             var x1 = point1[0]; 
-             var x2 = point1[1]; 
-             var y1 = point2[0]; 
-             var y2 = point2[1]; 
-            // var Len = Math.sqrt((x2-x1)*(x2-x1) + (y2-y1)*(y2-y1))     
-            // var dx = (x2-x1) / Len;
-            // var dy = (y2-y1) / Len;
-            // var x3 = Math.ceil(x1 + 10  dx);
-            // var y3 = Math.ceil(y1 + 10  dy);
 
+            var point1 = userPPF[userPPF.length - 1]
+            var currPage = _Navigator.GetCurrentPage();
+            if (currPage.datalevel == 4) {
+                point1 = _Scenario.getUserData()[_Scenario.getUserData().length - 1];
+            }
+            if (_chartid == "fridaytradeGraph") {
+                point1 = fridayPPF[0]
+                if (currPage.datalevel == 4) {
+                    point1 = _Scenario.getFridayData()[0];
+                }
+            }
+
+            var x1 = point1[0];
+            var y1 = point1[1];
+            var x2 = point2[0];
+            var y2 = point2[1];
             var Slope = (y2 - y1) / (x2 - x1)
-            var Intercept = (x2) - (Slope * x1)
-            var z1 = 0 ;
-            var z2 = Slope * z1 + Intercept;
-            var point3=[z1,z2];
-            var _data = [point1,point2];            
+            var Intercept = (y2) - (Slope * x2)
+            if (_chartid == "fridaytradeGraph") {
+                y3 = 0;
+                x3 = (y3 - Intercept) / Slope;
+            } else {
+                x3 = 0;
+                y3 = (Slope * x3) + Intercept;
+
+            }
+
+            var point3 = [x3, y3];
+            var _data = [point1, point2, point3];
             if (_data != undefined) {
                 chart.addSeries({
                     id: "sliderpointser1",
                     name: "sliderpointser1",
-                    data: [point1,point2],
-                    type: 'spline', 
-                    dashStyle:"Longdash",
+                    data: _data,
+                    type: 'spline',
+                    dashStyle: "Longdash",
                     lineWidth: 1,
-                    color: ColorCodes.sliderPoint, 
+                    color: ColorCodes.sliderPoint,
                     showInLegend: false,
                     marker: {
                         fillOpacity: 0,
@@ -496,7 +582,7 @@ var _TradeSlider = (function () {
                         lineColor: ColorCodes.sliderPoint,
                         radius: 0,
                         symbol: "circle"
-                    },                    
+                    },
                     states: {
                         hover: {
                             lineWidthPlus: 0
@@ -507,9 +593,9 @@ var _TradeSlider = (function () {
                     id: "sliderpointser",
                     name: "sliderpointser",
                     data: [point2],
-                    type: 'spline',                    
+                    type: 'spline',
                     lineWidth: 1,
-                    color: ColorCodes.transparent, 
+                    color: ColorCodes.transparent,
                     showInLegend: false,
                     marker: {
                         fillOpacity: 0,
@@ -517,7 +603,7 @@ var _TradeSlider = (function () {
                         lineColor: ColorCodes.sliderPoint,
                         radius: 6,
                         symbol: "circle"
-                    },                    
+                    },
                     states: {
                         hover: {
                             lineWidthPlus: 0
@@ -525,69 +611,122 @@ var _TradeSlider = (function () {
                     }
                 });
             }
-        }, 
+        },
         UpdateTarget: function (_goal) {
             pageobj = _Navigator.GetCurrentPage();
-            pageobj.isAnswered = true;            
+            pageobj.isAnswered = true;
             if (_goal == "shelter") {
                 Target.goal = _goal;
                 Target.goallbs = 90;
-                Target.goalcals = 2000;                
+                Target.goalcals = 2000;
             } else if (_goal == "feast") {
                 Target.goal = _goal;
                 Target.goallbs = 90;
-                Target.goalcals = 5000;                 
+                Target.goalcals = 5000;
             } else if (_goal == "book") {
                 Target.goal = _goal;
                 Target.goallbs = 90;
-                Target.goalcals = 2000;  
-                Target.goalhours = 10;                
+                Target.goalcals = 2000;
+                Target.goalhours = 10;
             }
             $("#linknext").k_enable();
         },
-        SetWayOffTarget: function(){
+        SetWayOffTarget: function () {
             Target.goal = "wayoff";
             Target.goallbs = 64;
-            Target.goalcals = 4000;  
-            Target.fridaygoallbs = 32;  
+            Target.goalcals = 4000;
+            Target.fridaygoallbs = 32;
             Target.fridaygoalcals = 2000;
         },
-        SetBetterOffTarget: function(){
+        SetBetterOffTarget: function () {
             Target.goal = "betteroff";
-            if(_Scenario.getScenarioIndex()==0){
+            if (_Scenario.getScenarioIndex() == 0) {
                 Target.goallbs = 32;
-                Target.goalcals = 2000;  
-                Target.fridaygoallbs = 40;  
+                Target.goalcals = 2000;
+                Target.fridaygoallbs = 40;
                 Target.fridaygoalcals = 450;
-            }
-            else{
+            } else {
                 Target.goallbs = 32;
-                Target.goalcals = 2000;  
-                Target.fridaygoallbs = 7;  
+                Target.goalcals = 2000;
+                Target.fridaygoallbs = 7;
                 Target.fridaygoalcals = 3500;
             }
         },
         IsTargetComplete() {
-            var retobj ={}
-            var returnVal = false;            
-            if(TradeResults.remData.wood == Target.goallbs
-            && TradeResults.remData.fish == Target.goalcals) {
-                if(Target.goal == "book"){
-                    if(TradeResults.remData.idlehours == Target.goalhours){
-                        returnVal=true;
-                    }
-                }
-                else if(Target.goal == "wayoff" || Target.goal == "betteroff" ){
-                    if(TradeResults.remData.fridaywood == Target.fridaygoallbs
-                    && TradeResults.remData.fridayfish == Target.fridaygoalcals){
+            var returnVal = false;
+            if (TradeResults.remData.wood >= Target.goallbs &&
+                TradeResults.remData.fish >= Target.goalcals) {
+                if (Target.goal == "book") {
+                    if (TradeResults.remData.idlehours >= Target.goalhours) {
                         returnVal = true;
                     }
-                }                
-                else{
+                } else if (Target.goal == "wayoff" || Target.goal == "betteroff") {
+                    if (TradeResults.remData.fridaywood >= Target.fridaygoallbs &&
+                        TradeResults.remData.fridayfish >= Target.fridaygoalcals) {
+                        returnVal = true;
+                    }
+                } else {
                     returnVal = true;
                 }
             }
             return returnVal;
+        },
+        UpdateInventoryTables: function () {
+            var tDataMap = DataStorage.getPageDate("today");
+            var yDataMap = DataStorage.getPageDate("yesterday");
+            var resettbl = true;
+            if (tDataMap == undefined && yDataMap == undefined) {
+                resettbl = true;
+            } else if (tDataMap != undefined && tDataMap.tradeData.TR != undefined) {
+                resettbl = false;
+                $("td#woodstartofdaytoday").text(tDataMap.tradeData.TR.remData.wood);
+                $("td#fishstartofdaytoday").text(tDataMap.tradeData.TR.remData.fish);
+                //Friday
+                $("td#fridaywoodstartofdaytoday").text(tDataMap.tradeData.TR.remData.fridaywood);
+                $("td#fridayfishstartofdaytoday").text(tDataMap.tradeData.TR.remData.fridayfish);
+                if (yDataMap != undefined && yDataMap.tradeData.TR != undefined) {
+                    $("td#woodstartofdayyesterday").text(yDataMap.tradeData.TR.remData.wood);
+                    $("td#fishstartofdayyesterday").text(yDataMap.tradeData.TR.remData.fish);
+                    $("td#wooddifference").text(Math.abs(tDataMap.tradeData.TR.remData.wood - yDataMap.tradeData.TR.remData.wood));
+                    $("td#fishdifference").text(Math.abs(tDataMap.tradeData.TR.remData.fish - yDataMap.tradeData.TR.remData.fish));
+                    //Friday
+                    $("td#fridaywoodstartofdayyesterday").text(yDataMap.tradeData.TR.remData.fridaywood);
+                    $("td#fridayfishstartofdayyesterday").text(yDataMap.tradeData.TR.remData.fridayfish);
+                    $("td#fridaywooddifference").text(Math.abs(tDataMap.tradeData.TR.remData.fridaywood - yDataMap.tradeData.TR.remData.fridaywood));
+                    $("td#fridayfishdifference").text(Math.abs(tDataMap.tradeData.TR.remData.fridayfish - yDataMap.tradeData.TR.remData.fridayfish));
+                }
+            } else {
+                resettbl = true;
+            }
+            if (resettbl) {
+                $("td#woodstartofdaytoday").text(0);
+                $("td#fishstartofdaytoday").text(0);
+                //Friday
+                $("td#fridaywoodstartofdaytoday").text(0);
+                $("td#fridayfishstartofdaytoday").text(0);
+                $("td#woodstartofdayyesterday").text(0);
+                $("td#fishstartofdayyesterday").text(0);
+                $("td#wooddifference").text(0);
+                $("td#fishdifference").text(0);
+                //Friday
+                $("td#fridaywoodstartofdayyesterday").text(0);
+                $("td#fridayfishstartofdayyesterday").text(0);
+                $("td#fridaywooddifference").text(0);
+                $("td#fridayfishdifference").text(0);
+            }
+
+            var activityData = DataStorage.getActivityData();
+            var woodColletion = [];
+            var fishCollection = [];
+            for (var i in activityData) {
+                var data = activityData[i];
+                if (data.tradeData.TR != undefined) {
+                    woodColletion.push([data.day, data.tradeData.TR.remData.wood]);
+                    fishCollection.push([data.day, data.tradeData.TR.remData.fish]);
+                }
+            }
+
+            _ModuleCharts.UpdateSurplusChartData(fishCollection, woodColletion)
         }
     }
 })();

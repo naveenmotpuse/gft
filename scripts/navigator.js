@@ -318,7 +318,6 @@ var _Navigator = (function () {
         },
         LoadDefaultQuestion: function () {
             if (_currentPageObject.questions.length > 0) {
-
                 _questionId = 0;
                 _currentPageObject.questions[0].isQuestionVisit = true;
                 for (var i = 0; i < _currentPageObject.questions.length; i++) {
@@ -376,7 +375,7 @@ var _Navigator = (function () {
 
             for (var p = 0; p < progressLevels.length; p++) {
                 var visitpage = 0;
-                for (let i in _NData) {
+                for (var i in _NData) {
                     if (p == _NData[i].datalevel) {
                         if (_NData[i].questions.length > 0) {
                             for (var j = 0; j < _NData[i].questions.length; j++) {
@@ -416,7 +415,7 @@ var _Navigator = (function () {
         GetTotalScore: function () {
             var ObtainPoint = 0;
             var totalPoints = 0;
-            for (let i in _NData) {
+            for (var i in _NData) {
                 if (_NData[i].questions.length > 0) {
                     for (var j = 0; j < _NData[i].questions.length; j++) {
                         totalPoints = totalPoints + _QData[_NData[i].questions[j].Id].totalPoints;
@@ -433,6 +432,29 @@ var _Navigator = (function () {
             var percScore = this.GetTotalScore()
             $("#scoreInnrDiv").html(percScore + "%");
         },
+        GetLevelScore: function (Data_Level) {
+            var ObtainPoint = 0;
+            var totalPoints = 0;
+            //var levelScrore = [];
+            for (var i in _NData) {
+                if (_NData[i].questions.length > 0) {
+                    for (var j = 0; j < _NData[i].questions.length; j++) {
+                        totalPoints = totalPoints + _QData[_NData[i].questions[j].Id].totalPoints;
+                        if (_NData[i].questions[j].isAnswered != undefined && _NData[i].questions[j].isAnswered) {
+                            
+                            if (_NData[i].datalevel==Data_Level)
+                            {
+                                ObtainPoint = ObtainPoint + (_NData[i].questions[j].points);
+                            }
+                            
+                        }
+                    }
+                }
+            }
+            var score = (ObtainPoint / totalPoints) * 100;
+            return score.toFixed(0);
+        },
+        
     };
 })();
 

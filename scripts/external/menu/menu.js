@@ -13,8 +13,7 @@ $(function(){
     };
     var currentIndex, subIndex;
     
-    var gotoIndex = function(idx) {
-          debugger;
+    var gotoIndex = function(idx) {          
         if (idx == appsMenuItems.length) {
             idx = 0;
         } else if (idx < 0) {
@@ -24,8 +23,7 @@ $(function(){
         currentIndex = idx;
     };
     
-    var gotoSubIndex = function (menu, idx) {
-    debugger;
+    var gotoSubIndex = function (menu, idx) {    
         var items = menu.querySelectorAll('li');
         if (idx == items.length) {
             idx = 0;

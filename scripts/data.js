@@ -490,7 +490,7 @@ var _QData = {
             {
                 type: "input",
                 id: "inputlogpercalyF",
-                answer: "0.006",
+                answer: "0.008",
                 answerId: ""
             },
         ],

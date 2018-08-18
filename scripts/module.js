@@ -11,8 +11,7 @@
   });
 
 
-$(document).ready(function () {
-    
+$(document).ready(function () {    
     _Template.LoadTopSlider();
     _Navigator.Start();    
     $("h1:first").focus();
@@ -22,4 +21,6 @@ $(document).ready(function () {
         _Caching.InitAssetsCaching();
         _Caching.InitPageCaching();
     }
+    _Scenario.ShuffleScenario();
+    _Scenario.updateQuestionData();    
 });

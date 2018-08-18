@@ -5,18 +5,24 @@
 }
 #appmenu li {
     white-space: nowrap;
-    display: block;
-    margin: 15px 0px;
-    padding: 5px;    
+    display: block;    
+    padding: 3px 5px;
 }
-#appmenu > li {
+
+#appmenu .menu-icon {
 	float: left;
 	background-color: #045C42;
 	text-align: center;
 	position:relative;
 	cursor: pointer;
-    color:#000;    
+    color:#000;   
+    white-space: nowrap;
+    display: block;
+    margin-top: 15px;
+    padding: 5px 8px;
+    padding-bottom: 18px;    
 }
+
 #appmenu :hover,
 #appmenu :focus {
 	text-decoration: none;
@@ -37,20 +43,21 @@
 #appmenu > li > ul {
     display: none;
     position: absolute;
-    left: -1px;
-    right: 0;
-    top: 100%;
-    padding: 0;
+    left: -2px;    
+    top: 100%;    
     margin: 0;
     width: 200%;
     text-align: left;
-	border:1px solid #045C42;
+	border:2px solid #045C42;
     border-top: 0px;
     background-color: #ffffff;
-    padding: 0px 25px 0px 5px;
+    padding: 0px 5px 0px 5px;
+    min-width: 260px;
+    max-height: 300px;
 }
 #appmenu li ul li {
     margin: 0px 0px;
+    border-bottom: 1px solid rgb(236, 240, 246);
 }
 #appmenu > li[aria-expanded="true"] > ul {
 	display:block;

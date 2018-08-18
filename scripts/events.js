@@ -1,27 +1,27 @@
 $(document).on("click", "#ppfchart .imggraph", function (event) {
     var _this = $(this);
-    $("#ppfcharttable_c").hide(function () {
-        $(".imgtable").css({
-            "opacity": "1.1"
-        });
+    $("#ppfcharttable_c").hide(function () {        
+        $(".imgtable").k_enable();
+        $(".imgtable").attr("aria-expanded","false");
+        $(".imgtable").attr("aria-current", "false")
     });
     $("#ppfchart_c").show(function () {
-        _this.css({
-            "opacity": "0.4"
-        });
+        _this.k_disable();
+        _this.attr("aria-expanded","true");        
+        _this.attr("aria-current", "true")
     });
 });
 $(document).on("click", "#ppfchart .imgtable", function (event) {
     var _this = $(this);
     $("#ppfcharttable_c").show(function () {
-        _this.css({
-            "opacity": "0.4"
-        });
+        _this.k_disable();
+        _this.attr("aria-expanded","true");        
+        _this.attr("aria-current", "true")
     });
     $("#ppfchart_c").hide(function () {
-        $(".imggraph").css({
-            "opacity": "1.1"
-        });
+        $(".imggraph").k_enable();
+        $(".imggraph").attr("aria-expanded","false");
+        $(".imggraph").attr("aria-current", "false")
     });
 });
 
