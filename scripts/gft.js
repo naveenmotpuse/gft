@@ -76,8 +76,8 @@ var _Scenario = (function () {
             return fridayScenario[scenarioIndex].ppfData;
         },
         getCurrentScenario: function () {
-            var pageobj = _Navigator.GetCurrentPage();
-            if (pageobj.isFriday == undefined || !pageobj.isFriday) {
+            var currPage = _Navigator.GetCurrentPage();
+            if (currPage.isFriday == undefined || !currPage.isFriday) {
                 return userScenario[scenarioIndex];
             } else {
                 return fridayScenario[scenarioIndex];
@@ -225,8 +225,8 @@ var _Template = (function () {
             $(".trade_slider_wrapper").load(pageUrl, function () {
                 _Slider.InitSelectTimeSlider();
                 _TradeSlider.InitSlider();
-                var pageobj = _Navigator.GetCurrentPage();
-                if (pageobj.pageId == "l2p3") {
+                var currPage = _Navigator.GetCurrentPage();
+                if (currPage.pageId == "l2p3") {
                     $("#wood-range").val(AnimConfig.dayTime)
                     $('.wood').find('#w_val').text(AnimConfig.dayTime);
                     DataStorage.setWoodSliderVal(Number(AnimConfig.dayTime));
@@ -234,7 +234,7 @@ var _Template = (function () {
                     $("#wood-range").k_disable()
                     $("#fish-range").k_disable()
                 }
-                if (pageobj.pageId == "l4p5") {
+                if (currPage.pageId == "l4p5") {
                     if(_Scenario.getScenarioIndex() == 1){
                         $(".Scenario0").hide();
                         $(".Scenario1").show();                        
@@ -542,15 +542,15 @@ var _CustomQuestion = (function () {
 var _CustomPage = (function () {
     return {
         OnPageLoad: function () {            
-            var pageobj = _Navigator.GetCurrentPage();
-            if (pageobj.datalevel == 2) {
+            var currPage = _Navigator.GetCurrentPage();
+            if (currPage.datalevel == 2) {
                 _ModuleCharts.DrawL2QuestionIntroChart();
             } 
-            if (pageobj.datalevel == 4) {
+            if (currPage.datalevel == 4) {
                 _ModuleCharts.DrawL4QuestionIntroChart();
             }    
                               
-            if(pageobj.pageId=="summary")
+            if(currPage.pageId=="summary")
             {
                 //_Navigator.GetLevels();
                var level1 = _Navigator.GetLevelScore(1);
@@ -562,22 +562,22 @@ var _CustomPage = (function () {
                $("#level3score").html(level3);
                $("#level4score").html(level4);               
             }            
-            if (pageobj.hasTimeSlider != undefined && pageobj.hasTimeSlider) {
+            if (currPage.hasTimeSlider != undefined && currPage.hasTimeSlider) {
                 _Template.LoadRangeSlider();
                 _Template.LoadDaytimeScheduler();
                 _Template.LoadNighttimeScheduler();
             }
-            if (pageobj.hasAnimation != undefined && pageobj.hasAnimation) {
+            if (currPage.hasAnimation != undefined && currPage.hasAnimation) {
                 _Template.LoadAnimateArea();
             }
 
-            if (pageobj.hasTradeSlider != undefined && pageobj.hasTradeSlider) {
+            if (currPage.hasTradeSlider != undefined && currPage.hasTradeSlider) {
                 _Template.LoadRangeSlider();
                 _Template.LoadDaytimeScheduler();
                 _Template.LoadNighttimeScheduler();
                 _Template.LoadTradeSlider();
 
-                if (pageobj.pageId == "l3p3") {
+                if (currPage.pageId == "l3p3") {
                     _TradeSlider.SetWayOffTarget();
                 }                
                 var target = _TradeSlider.GetTarget();
@@ -586,8 +586,8 @@ var _CustomPage = (function () {
                     $("p.goaldesc[goal='" + target.goal + "']").show()
                 }               
             }  
-            if (pageobj.hasActivity != undefined && pageobj.hasActivity) {
-                if (pageobj.isAnswered != undefined && pageobj.isAnswered) {
+            if (currPage.hasActivity != undefined && currPage.hasActivity) {
+                if (currPage.isAnswered != undefined && currPage.isAnswered) {
                     $("#" + target.goal).attr('checked', 'checked');
                 }
             }          

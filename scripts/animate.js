@@ -25,7 +25,7 @@ var _Animation = (function () {
         //var _potData = DataStorage.getPotData()
         var _potData = DataStorage.getLastDayPotData()
         var _stickpot = $(div).addClass("stickBarrelRaft");
-        var _stickpottext = $(div).attr('aria-live', 'polite').addClass("woodcounter OpenSansFont12px").append("Wood : <span class='count'>" + round(_potData.wood) + "</span> lbs");
+        var _stickpottext = $(div).attr('aria-live', 'polite').addClass("woodcounter OpenSansFont12px").append("Wood : <span class='count'>" + round(_potData.wood) + "</span> logs");
         var _fishpot = $(div).addClass("fishBarrelRaft");
         var _fishpottext = $(div).attr('aria-live', 'polite').addClass("fishcounter OpenSansFont12px").append("Fish : <span class='count'>" + round(_potData.fish) + "</span> cals");
         var _sticksbrush = $(div).addClass("brush");
@@ -150,7 +150,7 @@ var _Animation = (function () {
     var _SetFridayFish = function (val, dur) {}
     var _setimgaccessibility = function () {
         if (AnimationPlace != undefined && AnimationPlace != "" && $('.woodcounter .count').length > 0 && $('.fishcounter .count').length > 0) {
-            $(AnimationPlace).attr("alt", "wood " + $('.woodcounter .count').text() + " lbs, fish " + $('.fishcounter .count').text() + " cals")
+            $(AnimationPlace).attr("alt", "wood " + $('.woodcounter .count').text() + " logs, fish " + $('.fishcounter .count').text() + " cals")
         }
     }
     var _Night = function () {
@@ -291,6 +291,11 @@ var _Animation = (function () {
                 if (currPage.pageId == "l2p3") {
                     $("#btnstartslider").k_disable();
                 }
+                else if(currPage.pageId == 'l4p5'){
+                    $('.friday-raftSprites2').removeClass('friday-raftSprites2').addClass('friday-raftSprites');
+                    $('.friday-raftSprites').removeClass('friday-raftSprites2');
+                    $('.fridaySprites2').removeClass('fridaySprites2').addClass('fridaySprites');
+                }
                 $('.fishBarrelRaft2').hide();
                 $('.castawaySprites1').removeClass('castawaySprites1').addClass('castawaySprites');
                 setTimeout(function () {
@@ -315,6 +320,26 @@ var _Animation = (function () {
         },
         LadyGoWithWood: function () {
             $(".fishBarrelRaft2").removeClass("fishBarrelRaft2").addClass("stickBarrelRaft2");
+            $(".fridaySprites").removeClass("fridaySprites").addClass("fridaySprites2");
+            $('.castawaySprites1').removeClass('castawaySprites1').addClass('castawaySprites');
+            $(".friday-raftSprites").removeClass(".friday-raftSprites").addClass("friday-raftSprites2");
+            setTimeout(function () {
+                $('.castawaySprites').removeClass('castawaySprites').addClass('castawaySprites1');
+            }, 2500)
+        },
+        LadyComeWithWood: function () {
+            $('.fishBarrelRaft3').removeClass('fishBarrelRaft3').addClass('stickBarrelRaft3');
+            $('.fishBarrelRaft2').removeClass('fishBarrelRaft2').addClass('stickBarrelRaft3');
+            $('.castawaySprites1').removeClass('castawaySprites1').addClass('castawaySprites');
+            $('.friday-raftSprites2').removeClass('friday-raftSprites2').addClass('friday-raftSprites');
+            $('.stickBarrelRaft3').show();
+            $('.fridaySprites2').removeClass('fridaySprites2').addClass('fridaySprites');
+            setTimeout(function () {
+                $('.castawaySprites').removeClass('castawaySprites').addClass('castawaySprites1');
+            }, 2500);
+        },
+        LadyGoWithFish: function () {
+            $(".stickBarrelRaft3").removeClass("stickBarrelRaft3").addClass("fishBarrelRaft3");
             $(".fridaySprites").removeClass("fridaySprites").addClass("fridaySprites2");
             $('.castawaySprites1').removeClass('castawaySprites1').addClass('castawaySprites');
             $(".friday-raftSprites").removeClass(".friday-raftSprites").addClass("friday-raftSprites2");
@@ -364,7 +389,13 @@ var EventManager = function () {
                 var wood = 0;
                 var animInterval = 0;
                 if (currPage.hasTradeSlider != undefined && currPage.hasTradeSlider) {
-                    _Animation.LadyGoWithWood();
+                    var sceanIndex = _Scenario.getScenarioIndex();
+                    if(currPage.datalevel == 4 && sceanIndex == 1){
+                        _Animation.LadyGoWithFish();
+                    }
+                    else{
+                        _Animation.LadyGoWithWood();
+                    }
                     var ts = _TradeSlider.GetTradeSettings();
                     var tr = _TradeSlider.GetTradeResult();
                     $(".t_animation_c .fishcounter .count").text(tr.consumptionfish)
@@ -384,6 +415,7 @@ var EventManager = function () {
                 $("#givewood-range").k_disable();
                 $("#btnfindout").k_disable();
                 setTimeout(function () {
+                    $('.fishBarrelRaft3').hide();
                     _Animation.night();
                     _Animation.SetFishCountValue(fish, 5000);
                     _Animation.SetWoodCountValue(wood, 5000);
@@ -422,7 +454,7 @@ var EventManager = function () {
             //NM: Need to check this call.
             _Slider.InitSelectTimeSlider();
             if (currPage.hasTradeSlider != undefined && currPage.hasTradeSlider) {
-                _Animation.LadyComeWithFish();
+                //_Animation.LadyComeWithFish();
                 _Animation.MngAnimationEle();
                 if (currPage.pageId == "l2p3") {
                     woodhrs = AnimConfig.dayTime
@@ -480,7 +512,7 @@ var EventManager = function () {
 
         },
         onAnimComplete: function () {            
-            var pageobj = _Navigator.GetCurrentPage();
+            var currPage = _Navigator.GetCurrentPage();
             var fish = DataStorage.getPotData().fish;
             var wood = DataStorage.getPotData().wood;
             if (fish < 0) {
@@ -489,9 +521,15 @@ var EventManager = function () {
             if (wood < 0) {
                 wood = 0;
             }
-            if (pageobj.hasTradeSlider != undefined && pageobj.hasTradeSlider) {
+            if (currPage.hasTradeSlider != undefined && currPage.hasTradeSlider) {
                 $('.castawaySprites1, .fridaycastawaySprites').show();
-                _Animation.LadyComeWithFish();
+                var sceanindex = _Scenario.getScenarioIndex();
+                if(currPage.datalevel == 4 && sceanindex == 1){
+                    _Animation.LadyComeWithWood();
+                }
+                else{
+                    _Animation.LadyComeWithFish();
+                }
                 setTimeout(function () {
                     $('.startbtnpanel').hide();
                     $(".questionband").show();

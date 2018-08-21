@@ -366,7 +366,7 @@ var _ModuleCharts = (function () {
                         }
                     },
                     title: {
-                        text: 'Wood (lbs)',
+                        text: 'Wood (logs)',
                         style: {
                             color: ColorCodes.wood
                         }
@@ -403,7 +403,7 @@ var _ModuleCharts = (function () {
                                 if (myPoint.series.name == "Fish") {
                                     s += myPoint.y + ' (cals)';
                                 } else {
-                                    s += myPoint.y + ' (lbs)';
+                                    s += myPoint.y + ' (logs)';
                                 }
                             }
                         }

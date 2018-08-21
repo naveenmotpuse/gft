@@ -420,7 +420,7 @@ var _TradeSlider = (function () {
             });
 
             $("#givewood-range").on("input", document, function (event) {
-                $("#givewood-lbs").text($(this).val())
+                $("#givewood-logs").text($(this).val())
             });
             $("#givewood-range").on("change", document, function (event) {
                 event.preventDefault();
@@ -454,6 +454,7 @@ var _TradeSlider = (function () {
             var isDefault = true;
 
             if (currPage.datalevel == 4) {
+                this.SetBetterOffTarget();
                 if (_Scenario.getScenarioIndex() == 1) {
                     usermaxfishcollection = _Scenario.getUserTable()[12][1];
                     fridaymaxwoodcollection = _Scenario.getFridayTable()[12][0];
@@ -592,7 +593,7 @@ var _TradeSlider = (function () {
                 $(".givewood.r_label").text((TradeSettings.yourwoodlogs + TradeResults.remData.wood));
                 $("#consumption-fish-range").attr("max", (TradeSettings.fridayfishCals + TradeResults.remData.fridayfish));
                 $(".consumption-fish.r_label").text((TradeSettings.fridayfishCals + TradeResults.remData.fridayfish));
-                $("#givewood-lbs").text(TradeResults.givewood);
+                $("#givewood-logs").text(TradeResults.givewood);
                 $("#receivefish-cals").text(TradeResults.receivefish);
             }
             $("#consumption-wood").text(TradeResults.consumptionwood);
@@ -721,8 +722,8 @@ var _TradeSlider = (function () {
             }
         },
         UpdateTarget: function (_goal) {
-            pageobj = _Navigator.GetCurrentPage();
-            pageobj.isAnswered = true;
+            currPage = _Navigator.GetCurrentPage();
+            currPage.isAnswered = true;
             if (_goal == "shelter") {
                 Target.goal = _goal;
                 Target.goallbs = 90;

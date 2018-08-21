@@ -106,9 +106,8 @@
     .t_animation_c {
          margin: 0 auto;
     }
-    .wrapperanimation {
-         width: 100%;
-         display: flex;
+    .wrapperanimation,.animcontainer{
+         width: 100%;         
     }
     #ppfchart_c{
         width: 90%;
@@ -302,6 +301,7 @@
         50% { top: 166px; left: -20px; background-position: 0px }  
         100% {top: 141px; left: 20px;  background-position: -794px }
     }
+    h1 {font-size: 22px;}
 }
 
 

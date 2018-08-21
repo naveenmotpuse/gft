@@ -99,6 +99,10 @@ $(document).on("click", ".goalRadio", function (event) {
     _TradeSlider.UpdateTarget(goal);
 });
 
+$(document).on("change", ".goalRadio", function (event) {
+    var goal = $(this).attr('id');
+    _Question.ToggleGoalAnswer(goal);
+});
 $(document).on("click", "#btnstartslider", function (event) {
     if ($(this).k_IsDisabled()) return;
     EventManager.onStart();    

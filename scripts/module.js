@@ -22,5 +22,8 @@ $(document).ready(function () {
         _Caching.InitPageCaching();
     }
     _Scenario.ShuffleScenario();
-    _Scenario.updateQuestionData();    
+    _Scenario.updateQuestionData();
+    if ((/Firefox[\/\s](\d+\.\d+)/.test(navigator.userAgent))) {
+        $('head').append('<link rel="stylesheet" href="styles/firefox.css" type="text/css" />');
+    }     
 });

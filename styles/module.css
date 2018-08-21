@@ -1,39 +1,52 @@
-﻿.disabled{
+﻿.disabled {
     cursor: not-allowed;
     opacity: 0.5;
     pointer-events: none;
 }
-.enabled{
+
+.enabled {
     cursor: pointer;
     opacity: 1;
 }
+
 /*intro-content CSS Start */
-.intro-content{
-    float:left;
+
+.intro-content {
+    float: left;
     padding-bottom: 20px;
 }
-  .intro-content .intro-p{
+
+.intro-content .intro-p {
     margin-right: 20px;
     width: 48%;
     float: left;
-    
-  }
-  .intro-content .intro-p p{
+}
+
+.intro-content .intro-p p {
     margin-top: 0px;
-  }
- 
- 
+}
+
 /*intro-content CSS End */
 
 /* Animation css start */
-.animcontainer{float: left;}
-.posrel{
+
+.animcontainer {
+    float: left;
+}
+
+.posrel {
     position: relative;
     margin-bottom: auto;
     float: left;
     overflow: hidden;
-    }
-    .wrapperanimation{display: flex;float: left;width:418px}
+}
+
+.wrapperanimation {
+    display: flex;
+    float: left;
+    width: 418px
+}
+
 .firePit2 {
     position: absolute;
     top: 5%;
@@ -44,6 +57,7 @@
     background-size: 100% 100%;
     z-index: 2;
 }
+
 .pondFish {
     position: absolute;
     top: 70%;
@@ -53,6 +67,7 @@
     background: url(../assets/images/pondFish.png) left center;
     background-size: 100% 100%;
 }
+
 .firePit {
     position: absolute;
     top: 5%;
@@ -62,6 +77,7 @@
     background: url(../assets/images/firePit1.png) left center;
     background-size: 100% 100%;
 }
+
 .brush {
     position: absolute;
     top: 59%;
@@ -71,6 +87,7 @@
     background: url(../assets/images/brush.png) left center;
     background-size: 100% 100%;
 }
+
 .fishcounter {
     position: absolute;
     top: 38%;
@@ -82,7 +99,10 @@
     font-size: 12px;
     font-weight: bold;
 }
-.fishcounter span{font-size: 12px;}
+
+.fishcounter span {
+    font-size: 12px;
+}
 
 .fishBarrelRaft {
     position: absolute;
@@ -93,6 +113,7 @@
     background: url(../assets/images/barrelfish.png) left center;
     background-size: 100% 100%;
 }
+
 .woodcounter {
     position: absolute;
     float: left;
@@ -104,7 +125,10 @@
     font-size: 12px;
     font-weight: bold;
 }
-.woodcounter span {font-size: 12px;}
+
+.woodcounter span {
+    font-size: 12px;
+}
 
 .stickBarrelRaft {
     position: absolute;
@@ -115,8 +139,10 @@
     background: url(../assets/images/barrelSticks.png) left center;
     background-size: 100% 100%;
 }
+
 /* Start 24-07-2018 */
-.fishing1Sprites{
+
+.fishing1Sprites {
     position: absolute;
     top: 50%;
     left: 20%;
@@ -125,12 +151,16 @@
     z-index: 1;
     background: url(../assets/images/fishing1Sprites.png) left center;
     background-size: 800% 100%;
-    animation: fishing .8s steps(8) infinite; 
+    animation: fishing .8s steps(8) infinite;
 }
+
 @keyframes fishing {
-    100% {  background-position: -520px; }
+    100% {
+        background-position: -520px;
+    }
 }
-.fridayfishing1Sprites{
+
+.fridayfishing1Sprites {
     position: absolute;
     top: 50%;
     left: 20%;
@@ -141,36 +171,48 @@
     background-size: 800% 100%;
     animation: fridayfishing .8s steps(8) infinite;
 }
+
 @keyframes fridayfishing {
-    100%{  background-position: -520px; }
+    100% {
+        background-position: -520px;
+    }
 }
-.gatheringSprites { 
-     position: absolute;
-     top: 42%;
-     left: 54%;
-     width: 65px; 
-     height: 95px;
-     background: url(../assets/images/gatheringSprites.png) left center;
-     background-size: 700% 100%;
-     animation: gatheringWood .6s steps(7) infinite;
-}
- @keyframes gatheringWood {
-         100% { background-position: -455px;}
-}
-.fridaygatheringSprites { 
+
+.gatheringSprites {
     position: absolute;
     top: 42%;
     left: 54%;
-    width: 65px; 
+    width: 65px;
+    height: 95px;
+    background: url(../assets/images/gatheringSprites.png) left center;
+    background-size: 700% 100%;
+    animation: gatheringWood .6s steps(7) infinite;
+}
+
+@keyframes gatheringWood {
+    100% {
+        background-position: -455px;
+    }
+}
+
+.fridaygatheringSprites {
+    position: absolute;
+    top: 42%;
+    left: 54%;
+    width: 65px;
     height: 95px;
     background: url(../assets/images/fridaygatheringSprites.png) left center;
     background-size: 700% 100%;
     animation: fridaygatheringWood .6s steps(7) infinite;
 }
+
 @keyframes fridaygatheringWood {
-        100% { background-position: -455px;}
+    100% {
+        background-position: -455px;
+    }
 }
-.castawaySprites{
+
+.castawaySprites {
     position: absolute;
     top: 37%;
     left: 30%;
@@ -183,18 +225,38 @@
     background-position: 0px;
     animation: play5 2s steps(1);
 }
+
 @keyframes play5 {
-	0% { background-position: 0px}
-    12.5% {  background-position: -42px;}
-    25% {  background-position: -84px;}
-    37.5% {  background-position: -126px;}
-    50% {  background-position: -84px;}
-    62.5% {  background-position: -126px;}
-    75% {  background-position: -84px;}
-    87.5% {  background-position: -126px;}
-    100% {  background-position: 0px;}
+    0% {
+        background-position: 0px
+    }
+    12.5% {
+        background-position: -42px;
+    }
+    25% {
+        background-position: -84px;
+    }
+    37.5% {
+        background-position: -126px;
+    }
+    50% {
+        background-position: -84px;
+    }
+    62.5% {
+        background-position: -126px;
+    }
+    75% {
+        background-position: -84px;
+    }
+    87.5% {
+        background-position: -126px;
+    }
+    100% {
+        background-position: 0px;
+    }
 }
-.castawaySprites1{
+
+.castawaySprites1 {
     position: absolute;
     top: 37%;
     left: 30%;
@@ -206,113 +268,163 @@
     background-size: 400%;
     background-position: 0px;
 }
-.overlay{
-     position: absolute;
-     z-index: 9;
-     height: 100%;
-     top: 0;
-     width:100%;
- } 
-.nightTime{
-    background-color: rgba(0,0,0,0.6);
-    animation: night 3s; -webkit-animation: night 3s;
-} 
-.dayTime{
-    background-color:rgba(0,0,0,0);
-    animation:day 3s;-webkit-animation:day 3s;
-} 
-@keyframes night{
-    0%{background-color:rgba(0,0,0,0)}
-    100%{background-color:rgba(0,0,0,0.6)}
-} 
-@-webkit-keyframes night{
-    0%{background-color:rgba(0,0,0,0)}
-    100%{background-color:rgba(0,0,0,0.6)}
-} 
-@keyframes day{
-    0%{background-color:rgba(0,0,0,0.6)}
-    100%{background-color:rgba(0,0,0,0)}
-} 
-@-webkit-keyframes day{
-    0%{background-color:rgba(0,0,0,.6)}
-    100%{background-color:rgba(0,0,0,0)}
+
+.overlay {
+    position: absolute;
+    z-index: 9;
+    height: 100%;
+    top: 0;
+    width: 100%;
 }
 
-.firePit2{
-      position:absolute;
-      top: 5%; 
-      left: 22%;
-      width: 60px;
-      height: 128px;
-      background: url(../assets/images/firePitGlow2.png) left center;
-      background-size: 100% 100%;    
-      z-index: 2 
+.nightTime {
+    background-color: rgba(0, 0, 0, 0.6);
+    animation: night 3s;
+    -webkit-animation: night 3s;
+}
+
+.dayTime {
+    background-color: rgba(0, 0, 0, 0);
+    animation: day 3s;
+    -webkit-animation: day 3s;
+}
+
+@keyframes night {
+    0% {
+        background-color: rgba(0, 0, 0, 0)
     }
-.flameHiSprites{
-    position:absolute;
+    100% {
+        background-color: rgba(0, 0, 0, 0.6)
+    }
+}
+
+@-webkit-keyframes night {
+    0% {
+        background-color: rgba(0, 0, 0, 0)
+    }
+    100% {
+        background-color: rgba(0, 0, 0, 0.6)
+    }
+}
+
+@keyframes day {
+    0% {
+        background-color: rgba(0, 0, 0, 0.6)
+    }
+    100% {
+        background-color: rgba(0, 0, 0, 0)
+    }
+}
+
+@-webkit-keyframes day {
+    0% {
+        background-color: rgba(0, 0, 0, .6)
+    }
+    100% {
+        background-color: rgba(0, 0, 0, 0)
+    }
+}
+
+.firePit2 {
+    position: absolute;
+    top: 5%;
+    left: 22%;
+    width: 60px;
+    height: 128px;
+    background: url(../assets/images/firePitGlow2.png) left center;
+    background-size: 100% 100%;
+    z-index: 2
+}
+
+.flameHiSprites {
+    position: absolute;
     z-index: 3;
     top: -4%;
     left: 22%;
     width: 60px;
     height: 152px;
-   background:url(../assets/images/flameHiSprites.png) left center;
-   background-size: 500% 100%;
-   animation:flamelow .8s steps(5) infinite
-} 
-@keyframes flamelow{
-    100%{background-position:-300px}
+    background: url(../assets/images/flameHiSprites.png) left center;
+    background-size: 500% 100%;
+    animation: flamelow .8s steps(5) infinite
 }
-.flamelow{
-    display:inline-block;
-    background:url(../assets/images/lowFlame.png) no-repeat;
-    overflow:hidden;
-    text-indent:-9999px;
-    text-align:left;
-    position:absolute;
+
+@keyframes flamelow {
+    100% {
+        background-position: -300px
+    }
+}
+
+.flamelow {
+    display: inline-block;
+    background: url(../assets/images/lowFlame.png) no-repeat;
+    overflow: hidden;
+    text-indent: -9999px;
+    text-align: left;
+    position: absolute;
     z-index: 3;
-    top:-19%;
+    top: -19%;
     left: 17%;
     width: 100px;
     height: 200px;
     background-size: 200% 300%;
-    animation:flame .4s steps(1) infinite 
-} 
-@keyframes flame{
-    0%{background-position:0 0}
-    25%{background-position:-100px 0}
-    50%{background-position:0 -200px}
-    75%{background-position:-100px -200px}
-    100%{background-position:0 -400px}
+    animation: flame .4s steps(1) infinite
 }
 
-.fishingNet{
-    position:absolute;
-     top:50%; 
-     left:10%; 
-     z-index:2;
-     width:100px;
-     height:130px;
-     background:url(../assets/images/fishingNetSprites.png) left center;
-     background-size:1000% 100%;
-     animation:fishingNet 1s steps(10) infinite
+@keyframes flame {
+    0% {
+        background-position: 0 0
     }
-    @keyframes fishingNet{
-        100%{background-position: -1000px}
+    25% {
+        background-position: -100px 0
     }
-.chopping{
-    position:absolute;
-    top: 42%;
-    left: 52%; 
-    z-index: 2;
-    width:65px;
-    height:95px;
-    background:url(../assets/images/choppingSprites.png) left center;
-    background-size: 700% 100%;
-    animation:chopping 1s steps(7) infinite
-} @keyframes chopping{
-    100%{background-position:-455px}
+    50% {
+        background-position: 0 -200px
+    }
+    75% {
+        background-position: -100px -200px
+    }
+    100% {
+        background-position: 0 -400px
+    }
 }
-.fridaycastawaySprites{
+
+.fishingNet {
+    position: absolute;
+    top: 50%;
+    left: 10%;
+    z-index: 2;
+    width: 100px;
+    height: 130px;
+    background: url(../assets/images/fishingNetSprites.png) left center;
+    background-size: 1000% 100%;
+    animation: fishingNet 1s steps(10) infinite
+}
+
+@keyframes fishingNet {
+    100% {
+        background-position: -1000px
+    }
+}
+
+.chopping {
+    position: absolute;
+    top: 42%;
+    left: 52%;
+    z-index: 2;
+    width: 65px;
+    height: 95px;
+    background: url(../assets/images/choppingSprites.png) left center;
+    background-size: 700% 100%;
+    animation: chopping 1s steps(7) infinite
+}
+
+@keyframes chopping {
+    100% {
+        background-position: -455px
+    }
+}
+
+.fridaycastawaySprites {
     position: absolute;
     top: 35%;
     left: 28%;
@@ -324,7 +436,9 @@
     background-size: 400%;
     background-position: 0px;
 }
+
 /*lady css start */
+
 .fridaySprites {
     position: absolute;
     left: 39px;
@@ -338,10 +452,23 @@
     background-position: -796px;
     animation: lady 2.5s steps(11);
 }
+
 @keyframes lady {
-    0% { top: 221px; left: -70px; background-position: -0px } 
-    50% { top: 204.5px; left: -11px; background-position: 0px }  
-    100% {top: 180px; left: 39px;  background-position: -794px }
+    0% {
+        top: 221px;
+        left: -70px;
+        background-position: -0px
+    }
+    50% {
+        top: 204.5px;
+        left: -11px;
+        background-position: 0px
+    }
+    100% {
+        top: 180px;
+        left: 39px;
+        background-position: -794px
+    }
 }
 
 .fridaySprites2 {
@@ -357,13 +484,27 @@
     background-position: -796px;
     animation: lady2 2.5s steps(11);
 }
+
 @keyframes lady2 {
-    0% { top: 180px; left: 39px;  background-position: -794px; } 
-    50% { top: 204.5px; left: -11px; background-position: 0px } 
-    100% { top: 292px; left: -74px; background-position: -0px; }
+    0% {
+        top: 180px;
+        left: 39px;
+        background-position: -794px;
+    }
+    50% {
+        top: 204.5px;
+        left: -11px;
+        background-position: 0px
+    }
+    100% {
+        top: 292px;
+        left: -74px;
+        background-position: -0px;
+    }
 }
 
 /* Raft Animation Css start */
+
 .friday-raftSprites {
     position: absolute;
     left: 41px;
@@ -377,11 +518,18 @@
 }
 
 @keyframes raft {
-  0% {top:291px; left: -72px;}
-  100% { top:235px; left: 41px; }
+    0% {
+        top: 291px;
+        left: -72px;
+    }
+    100% {
+        top: 235px;
+        left: 41px;
+    }
 }
 
 /* Raft and lady Bye Animation*/
+
 .friday-raftSprites2 {
     position: absolute;
     left: -72px;
@@ -393,12 +541,19 @@
     background-size: 400%;
     animation: raft2 2.5s steps(22);
 }
+
 @keyframes raft2 {
-  0% { top:235px; left: 41px;}
-  100% { top:291px; left: -72px;}
+    0% {
+        top: 235px;
+        left: 41px;
+    }
+    100% {
+        top: 291px;
+        left: -72px;
+    }
 }
 
-/* Raft, lady come with fish barrel*/
+/*comeing fish barrel*/
 .fishBarrelRaft2 {
     position: absolute;
     left: 100px;
@@ -408,13 +563,29 @@
     width: 30px;
     background: url(../assets/images/fishBarrelRaft.png) no-repeat 0 0%;
     background-size: 100%;
-    animation: barrel2 2.5s steps(22);
+    animation: fbarrel2 2.5s steps(22);
 }
-@keyframes barrel2 {
+@keyframes fbarrel2 {
     0% {top:290px; left: -11px;}
     100% { top:235px; left: 100px; }
 }
-/* Raft, lady go with stick barrel*/
+/*going fish barrel*/
+.fishBarrelRaft3 {
+    position: absolute;
+    left: 100px;
+    right: 0;
+    top: 235px;
+    bottom: 0;
+    width: 30px;
+    background: url(../assets/images/fishBarrelRaft.png) no-repeat 0 0%;
+    background-size: 100%;
+    animation: fbarrel3 2.5s steps(22);
+}
+@keyframes fbarrel3 {
+    0% { top:235px; left: 100px;}
+    100% { top:290px; left: -11px; }
+}
+/*going stick barrel*/
 .stickBarrelRaft2 {
     position: absolute;
     left: -11px;
@@ -424,76 +595,110 @@
     width: 30px;
     background: url(../assets/images/stickBarrelRaft.png) no-repeat 0 0%;
     background-size: 100%;
-    animation: barrel3 2.5s steps(22);
+    animation: sbarrel2 2.5s steps(22);
 }
-@keyframes barrel3 {
+@keyframes sbarrel2 {
     0% { top:235px; left: 100px;}
     100% { top:290px; left: -11px; }
 }
+/*Comeing Stick Barrel*/
+.stickBarrelRaft3 {
+    position: absolute;
+    left: 100px;
+    right: 0;
+    top: 235px;
+    bottom: 0;
+    width: 30px;
+    background: url(../assets/images/stickBarrelRaft.png) no-repeat 0 0%;
+    background-size: 100%;
+    animation: sbarrel3 2.5s steps(22);
+}
+@keyframes sbarrel3 {
+    0% {top:290px; left: -11px;}
+    100% { top:235px; left: 100px; }
+}
+
+
 */
 /* End  24-07-2018 */
 
-/* Animation css end */ 
+/* Animation css end */
 
 /* Slider Css Start */
-.selecttimeslider{
+
+.selecttimeslider {
     width: 100%;
     margin-bottom: 10px;
     clear: both;
     float: left;
 }
-.fish, .wood {
-    position: relative;    
+
+.fish,
+.wood {
+    position: relative;
 }
 
-#collect-fish, #collect-wood {
+#collect-fish,
+#collect-wood {
     width: 95%;
     height: 11px;
     position: relative;
     margin-top: 10px;
     margin-bottom: 28px;
 }
-#collect-fish, #collect-wood, #graph-div, .fish, .wood {
+
+#collect-fish,
+#collect-wood,
+#graph-div,
+.fish,
+.wood {
     border-radius: 7px;
 }
- #collect-wood .wood-slider {
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        -o-appearance: none;
-        -ms-appearance: none;
-        appearance: none;
-        width: 100%;
-        height: 11px;
-        background: #A3610A;        
-        border-radius: 5px;
-    }
- #collect-fish .fish-slider {
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        -o-appearance: none;
-        -ms-appearance: none;
-        appearance: none;
-        width: 100%;
-        height: 11px;
-        background: #9D0B0E;        
-        border-radius: 5px;
-    }
+
+#collect-wood .wood-slider {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -o-appearance: none;
+    -ms-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 11px;
+    background: #A3610A;
+    border-radius: 5px;
+}
+
+#collect-fish .fish-slider {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -o-appearance: none;
+    -ms-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 11px;
+    background: #9D0B0E;
+    border-radius: 5px;
+}
+
 #graph-div {
     height: 11px;
     border-radius: 7px;
-    background: #A39F9A;    
-    display:flex;
+    background: #A39F9A;
+    display: flex;
 }
-#graph-div, #graph-icon {
+
+#graph-div,
+#graph-icon {
     width: 95%;
     position: relative;
     text-align: center;
 }
+
 #graph-range {
     width: 100%;
     float: left;
     margin-bottom: 10px;
 }
+
 #collect-wood .wood-slider::-webkit-slider-thumb {
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -523,11 +728,14 @@
 #collect-wood .wood-slider::-moz-range-thumb {
     background: #4CAF50;
 }
-#collect-wood .wood-slider::-moz-range-thumb,#collect-fish .fish-slider::-moz-range-thumb  {
+
+#collect-wood .wood-slider::-moz-range-thumb,
+#collect-fish .fish-slider::-moz-range-thumb {
     width: 25px;
     height: 25px;
     cursor: pointer;
 }
+
 #collect-fish .fish-slider::-moz-range-thumb {
     background: #9D0B0E;
 }
@@ -541,14 +749,20 @@
     float: left;
     width: 100%;
 }
+
 #graph-icon>ul>li {
-    display: inline-flex;    
+    display: inline-flex;
     margin-right: 10px;
 }
+
 #graph-icon>#graph-list>.c-wood>span>.w-color {
     background: #A3610A;
 }
-#graph-icon>#graph-list>.c-fish>span>.f-color, #graph-icon>#graph-list>.c-idle>span>.i-color, #graph-icon>#graph-list>.c-wood>span>.w-color, #graph-icon>#graph-list>.c-tool>span>.t-color {
+
+#graph-icon>#graph-list>.c-fish>span>.f-color,
+#graph-icon>#graph-list>.c-idle>span>.i-color,
+#graph-icon>#graph-list>.c-wood>span>.w-color,
+#graph-icon>#graph-list>.c-tool>span>.t-color {
     height: 10px;
     width: 5px;
     border-radius: 5px;
@@ -563,48 +777,55 @@
 #graph-icon>#graph-list>.c-idle>span>.i-color {
     background: #A39F9A;
 }
-.nighttimeslider{
+
+.nighttimeslider {
     border-radius: 7px;
     width: 100%;
     height: 11px;
     display: none;
 }
-.h_left, .h_right {
-    position: relative;    
+
+.h_left,
+.h_right {
+    position: relative;
     float: left;
 }
+
 .h_right {
     float: right;
 }
 
+.colorful-slider1 {
+    background: #A3610A;
+    width: 0%;
+    float: left;
+    border-radius: 5px;
+}
 
-   .colorful-slider1{
-    background:#A3610A;
-    width:0%;
-    float:left;
-    border-radius:5px;
-  }
-  .colorful-slider2{
-    background:#9D0B0E;
-    width:0%;
-    float:left;
-    border-radius:5px;
-  }
+.colorful-slider2 {
+    background: #9D0B0E;
+    width: 0%;
+    float: left;
+    border-radius: 5px;
+}
 
-  /* runtimeslider start */
-  .selecttimeslider #graph-range .h_right{
-    right:22px
-  }
+/* runtimeslider start */
 
-  .runtimeslider {
+.selecttimeslider #graph-range .h_right {
+    right: 22px
+}
+
+.runtimeslider {
     width: 100%;
     margin-bottom: 50px;
     padding: 0px;
     display: none;
 }
+
 .ds-heading {
-    margin-bottom: 15px !important;    
+    margin-bottom: 15px !important;
 }
+
 #animation-slider {
     width: 94%;
     height: 11px;
@@ -613,127 +834,171 @@
     border-radius: 7px;
     background: #A39F9A;
 }
-#slider-arrow-day, #slider-arrow-night {
+
+#slider-arrow-day,
+#slider-arrow-night {
     left: 0px;
     position: absolute;
     bottom: 12px;
 }
-.animate-slider1, .animate-slider2, .animate-slider3 {
+
+.animate-slider1,
+.animate-slider2,
+.animate-slider3 {
     float: left;
     width: 0%;
     height: 11px;
     border-radius: 3px;
 }
+
 .animate-slider1 {
     background-color: #A3610A;
 }
+
 .animate-slider2 {
     background-color: #9D0B0E;
 }
-#animate-slider-range > .h_left {    
+
+#animate-slider-range>.h_left {
     position: relative;
     float: left;
     margin-top: 10px;
 }
-#animate-slider-range > .h_right {    
+
+#animate-slider-range>.h_right {
     position: relative;
     float: right;
     margin-top: 10px;
 }
 
-.runtimeslider #animate-slider-range > .h_left { 
-    margin-top:0px;
+.runtimeslider #animate-slider-range>.h_left {
+    margin-top: 0px;
 }
-   
- .runtimeslider #animate-slider-range > .h_right {
-       margin-top: 0px;
-       right: 20px;
-   }
-  /* runtimeslider end */
-  /*Nigh Time Slider css */
-  .nighttimeslider {
+
+.runtimeslider #animate-slider-range>.h_right {
+    margin-top: 0px;
+    right: 20px;
+}
+
+/* runtimeslider end */
+
+/*Nigh Time Slider css */
+
+.nighttimeslider {
     width: 100%;
     margin-bottom: 50px;
     padding: 0px;
     display: none;
 }
+
 .ds-heading {
-    margin-bottom: 15px !important;    
+    margin-bottom: 15px !important;
 }
+
 #animation-night-slider {
     width: 94%;
-     height: 11px;
-     position: relative;
-     margin-top: 14px;
-     border-radius: 7px;
-     background: #A39F9A;
- }
- .nighttimeslider .animate-slider-range > .right{
+    height: 11px;
+    position: relative;
+    margin-top: 14px;
+    border-radius: 7px;
+    background: #A39F9A;
+}
+
+.nighttimeslider .animate-slider-range>.right {
     right: 22px;
- } 
-.nighttimeslider #animate-slider-range > .h_left {
+}
+
+.nighttimeslider #animate-slider-range>.h_left {
     margin-top: 0px;
 }
-.nighttimeslider #animate-slider-range > .h_right{
+
+.nighttimeslider #animate-slider-range>.h_right {
     margin-top: 0px;
-    right:27px;
+    right: 27px;
 }
 
 /* Slider Css End */
 
-
 /*Question Css*/
+
 .questionband {
-    float: left;     
-}
-.questionband input[type='text'], .questionband input[type='number']{
-    text-align: center;
-    width: 100px;  
+    float: left;
 }
 
-.checkAnswer, .retrybuttonpanel ,.findoutbtnpanel, .startbtnpanel{
+.questionband input[type='text'],
+.questionband input[type='number'] {
+    text-align: center;
+    width: 100px;
+}
+
+.checkAnswer,
+.retrybuttonpanel,
+.findoutbtnpanel,
+.startbtnpanel {
     float: left;
-    width: 100%;    
+    width: 100%;
     padding: 20px 0px;
 }
-.previous, .next {
+
+.previous,
+.next {
     padding-bottom: 15px;
 }
-.question_img{
+
+.question_img {
     float: left;
-    width: 60px;    
+    width: 60px;
 }
-.question_txt{
+
+.question_txt {
     margin-left: 60px;
 }
 
-.spanfish{
-    margin-left:20px;
+.spanfish {
+    margin-left: 20px;
 }
 
-.feedbackdiv{    
-    padding: 5px 0px; 
+.feedbackdiv {
+    padding: 5px 0px;
     float: left;
     width: 100%;
     display: none;
 }
-.feedbackdiv, .retrybuttonpanel{
-    background-color: aliceblue;      
+
+.feedbackdiv,
+.retrybuttonpanel {
+    background-color: aliceblue;
 }
-#addpointbtn,.addpointbtn{
-    margin-left:10px;
+
+#addpointbtn,
+.addpointbtn {
+    margin-left: 10px;
     margin-right: 10px;
 }
 
-fieldset label[for]{
-    -webkit-display:inline-flex;
-    -moz-display:inline-flex;
-    -o-display:inline-flex;
-    display:inline-flex;
+fieldset label[for] {
+    -webkit-display: inline-flex;
+    -moz-display: inline-flex;
+    -o-display: inline-flex;
+    display: inline-flex;
 }
+fieldset p {
+    margin-left: 20px;
+}
+.hideContent{
+    display:none;
+}
+.showContent{
+    display:inline-block;
+}
+.boldStyle{
+    font-weight:bold;
+}
+
 /*Question Css End*/
 
 /* Table Css Start */
+
 /*
 .tsatable{
     margin:0 auto;
@@ -747,21 +1012,27 @@ fieldset label[for]{
 .q3table table{
     border-top: hidden;
 }*/
+
 /* Table Css End */
 
 /* Question Input Table Css Start */
-.mathband {    
-    display: table;    
+
+.mathband {
+    display: table;
 }
+
 .va-m {
     vertical-align: middle;
 }
+
 .d-tcell {
     display: table-cell;
 }
-.mathband table tr td {    
+
+.mathband table tr td {
     border: 0px;
 }
+
 .visuallyhidden {
     border: 0;
     clip: rect(0 0 0 0);
@@ -772,60 +1043,76 @@ fieldset label[for]{
     position: absolute;
     width: 1px;
 }
+
 input {
     text-align: center;
-    font-size: 16px;    
+    font-size: 16px;
 }
+
 .hline {
     width: 80px;
     background-color: #000;
     height: 2px;
     margin: 5px 0PX;
 }
-.QuestioncustomTable{
+
+.QuestioncustomTable {
     border-collapse: collapse;
     border: 0px;
 }
+
 td[rowspan] {
     min-width: 0px;
 }
+
 .mathband .rightpadd {
     padding-right: 10px;
 }
+
 .mathband .leftpadd {
     padding-left: 10px;
 }
-.mathband .math1{
+
+.mathband .math1 {
     display: table;
 }
+
 /* Question Input Table Css End */
+
 .noborder td {
     border: none;
 }
+
 /*student and friday slider css start*/
-.tradepanel{
+
+.tradepanel {
     float: left;
     width: 50%;
 }
-.trade_slider_wrapper .graphwrapper, .trade_slider_wrapper .slider-wrapper{
+
+.trade_slider_wrapper .graphwrapper,
+.trade_slider_wrapper .slider-wrapper {
     float: left;
     width: 100%;
 }
-.tot-range-wrapper{
+
+.tot-range-wrapper {
     width: 100%;
     height: 11px;
     position: relative;
     margin-top: 10px;
     margin-bottom: 28px;
 }
-#student-tot{
+
+#student-tot {
     width: 95%;
     height: 11px;
     position: relative;
     margin-top: 10px;
     margin-bottom: 28px;
 }
-.tot-slider{
+
+.tot-slider {
     -webkit-appearance: none;
     -moz-appearance: none;
     -o-appearance: none;
@@ -836,7 +1123,8 @@ td[rowspan] {
     background: #575694;
     border-radius: 5px;
 }
-.tot-slider::-webkit-slider-thumb{
+
+.tot-slider::-webkit-slider-thumb {
     -webkit-appearance: none;
     -moz-appearance: none;
     -o-appearance: none;
@@ -848,6 +1136,7 @@ td[rowspan] {
     cursor: pointer;
     border-radius: 5px;
 }
+
 .consumption-wood-range {
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -856,9 +1145,10 @@ td[rowspan] {
     appearance: none;
     width: 100%;
     height: 11px;
-    background: #A3610A;        
+    background: #A3610A;
     border-radius: 5px;
 }
+
 .consumption-fish-range {
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -867,9 +1157,10 @@ td[rowspan] {
     appearance: none;
     width: 100%;
     height: 11px;
-    background: #9D0B0E;        
+    background: #9D0B0E;
     border-radius: 5px;
 }
+
 .consumption-wood-range::-webkit-slider-thumb {
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -882,7 +1173,6 @@ td[rowspan] {
     cursor: pointer;
     border-radius: 5px;
 }
-
 .consumption-fish-range::-webkit-slider-thumb {
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -895,34 +1185,39 @@ td[rowspan] {
     cursor: pointer;
     border-radius: 5px;
 }
-.l_label{
-    float: left;   
-    padding-left: 5px; 
-    margin-top: 10px;
-}
-.r_label{
-    float: right;    
-    margin-top: 10px;
-}
-.tradepanel .slider-wrapper p {margin-top: 0px;}
-.tot-range-wrapper div, .tot-range-wrapper input[type='range']  {float: left; width: 95%;}
-
-.dayfigcaption{}
-
-.summaryband{
+.l_label {
     float: left;
-    width: 100%;    
-    padding: 20px 0px;
-    
+    padding-left: 5px;
+    margin-top: 10px;
 }
-.summary_img{
+
+.r_label {
+    float: right;
+    margin-top: 10px;
+}
+
+.tradepanel .slider-wrapper p {
+    margin-top: 0px;
+}
+
+.tot-range-wrapper div,
+.tot-range-wrapper input[type='range'] {
+    float: left;
+    width: 95%;
+}
+.correct{
+    color: #01662C;
+    font-weight: bold;
+}
+.summaryband {
+    float: left;
+    width: 100%;
+    padding: 20px 0px;
+}
+.summary_img {
     float: left;
     width: 60px;
 }
-.summary_text{
+.summary_text {
     margin-left: 60px;
 }
-
-
-
-

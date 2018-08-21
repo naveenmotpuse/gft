@@ -68,20 +68,24 @@
         Retry: function () {
             this.UnloadFeedback()
             $(".btncheckanswer").k_enable();
-            $("#div_question").find("input[type='text']").val("");
-            $("#div_question").find("input[type='number']").val("");
-            $(".questionband").find("input").k_enable();
+            $("#div_question").find("input[type='text'].incorrect").val("").k_enable();
+            $("#div_question").find("input[type='number'].incorrect").val("").k_enable();
+            $(".questionband").find("input[type='radio']").k_enable();
+            $(".questionband").find("input[type='radio']").prop('checked', false);
             if (_currentQuestionObj.type == "graph") {
+                $("#div_question").find("input.inlineinput").k_enable();
                 $("body").animate({
-                    scrollTop: $("#div_question").find("input[type='number']").first().position().top - _Settings.topMargin
+                    scrollTop: $("#div_question").find("input[type='number']:first").position().top - _Settings.topMargin
                 }, 1000);
-                $("#div_question").find("input[type='number']").first().focus();
+                $("#div_question").find("input.inlineinput:first").focus();
             } else {
                 $("body").animate({
                     scrollTop: $("#div_question .question_img").position().top - _Settings.topMargin
                 }, 1000);
-                $("#div_question").find("input[type='number']").first().focus();
+                $("#div_question").find("input[type='number'].incorrect:first").focus();
             }
+
+            $(".incorrect").removeClass("incorrect");
         },
         UnloadFeedback: function () {
             //$("#div_feedback").empty().hide();
@@ -187,7 +191,7 @@
                         _optD.points = optPoints;
                         _optD.isCorrect = true;
                         _qPoints += optPoints;
-                        _boxGrp.addClass("correct");
+                        _boxGrp.addClass("correct");                        
                     }
                 } else if (_optD.type == "radio") {
                     var _boxGrp = $("input:radio[name='" + _optD.group + "']");
@@ -208,7 +212,7 @@
                         _optD.points = optPoints;
                         _optD.isCorrect = true;
                         _qPoints += optPoints
-                        $("#" + _optD.selectedId).addClass("correct");
+                        $("#" + _optD.selectedId).addClass("correct");                        
                     }
                 } else if (_optD.type == "input") {
                     var inputval = $("#" + _optD.id).val();
@@ -266,6 +270,29 @@
                 }
             }
         },
+        ToggleGoalAnswer:function(goal){
+            if(goal == "shelter"){
+                 $("p#shelter").addClass("showContent");
+                 $("label[for='shelter']").addClass("boldStyle");
+            }else{
+                $("p#shelter").removeClass("showContent");
+                $("label[for='shelter']").removeClass("boldStyle");
+            } 
+            if(goal == "feast"){
+                $("p#feast").addClass("showContent");
+                $("label[for='feast']").addClass("boldStyle");              
+           }else{
+               $("p#feast").removeClass("showContent");
+               $("label[for='feast']").removeClass("boldStyle");
+           }
+             if(goal == "book"){
+                 $("p#book").addClass("showContent");
+                 $("label[for='book']").addClass("boldStyle");      
+            }else{
+                $("p#book").removeClass("showContent");
+                $("label[for='book']").removeClass("boldStyle");
+            } 
+        },
         GetCurrentQuestion: function () {
             return _currentQuestionObj;
         },
@@ -279,7 +306,6 @@
             for (var i = 0; i < _currentQuestionObj.options.length; i++) {
                 var _optD = _currentQuestionObj.options[i];
                 if (_optD.type == "select") {
-
                     if (_optD.isCorrect) {
                         $("#" + _optD.id).css({
                             'color': ColorCodes.green,
