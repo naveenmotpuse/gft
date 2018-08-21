@@ -247,6 +247,11 @@ var _Navigator = (function () {
                 Id: "Q22",
                 dataurl: "l4p5/q22.htm"
             }],
+            /*
+            customNext: {
+                isComplete: false,
+                jsFunction: "EventManager.onNextDay();",
+            }, */  
             hasTimeSlider: true,
             hasTradeSlider: true,
             hasAnimation: true,
@@ -305,7 +310,7 @@ var _Navigator = (function () {
                 $(".main-content").load(pageUrl, function () {
                     OnPageLoad();
                     $("h1").focus();
-                });
+                });                
             } else {
                 $(".main-content").fadeTo(250, 0.25, function () {
                     $(".main-content").load(pageUrl, function () {
@@ -395,14 +400,17 @@ var _Navigator = (function () {
             return progData;
         },
         UpdateProgressBar: function () {
+            var arialabel = "Introduction progress 0%, Level 1 progress 1%, Level 2 progress 2%, Level 3 progress 3%, Level 4 progress 4%";
             var progData = this.GetProgressData();
             for (var i = 0; i < progData.length; i++) {
                 var lprog_pecent = (progData[i] / progressLevels[i] * 100).toFixed(2);
                 $(".pgBgItem[data-level='" + i + "']").find(".pgBgItemFill").css("width", lprog_pecent + "%");
+                arialabel = arialabel.replace(i+ "%",  lprog_pecent + "%")
                 if (lprog_pecent == 100) {
                     $(".pgBgItem[data-level='" + i + "']").addClass("pgBgItemComplete")
                 }
             }
+            $(".progress .background").attr("aria-label",arialabel);
         },
         GetCurrentPage: function () {
             return _currentPageObject;

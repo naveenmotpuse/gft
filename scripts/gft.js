@@ -4,11 +4,15 @@ var _Scenario = (function () {
     var userScenario = [{
         woodPerHr: 8,
         fishPerHr: 250,
+        woodPerDay: 32,
+        fishPerDay: 2000,
         tableData: userPPFTable_ScenarioSeen_1,
         ppfData: userPPF_ScenarioSeen_1
     }, {
         woodPerHr: 4,
         fishPerHr: 500,
+        woodPerDay: 32,
+        fishPerDay: 2000,
         tableData: userPPFTable_ScenarioSeen_2,
         ppfData: userPPF_ScenarioSeen_2
     }]
@@ -16,11 +20,15 @@ var _Scenario = (function () {
     var fridayScenario = [{
         woodPerHr: 4,
         fishPerHr: 225,
+        woodPerDay: 40,
+        fishPerDay: 450,
         tableData: fridayPPFTable_ScenarioSeen_1,
         ppfData: fridayPPF_ScenarioSeen_1
     }, {
         woodPerHr: 3.5,
         fishPerHr: 350,
+        woodPerDay: 7,
+        fishPerDay: 3500,
         tableData: fridayPPFTable_ScenarioSeen_2,
         ppfData: fridayPPF_ScenarioSeen_2
     }]
@@ -33,9 +41,17 @@ var _Scenario = (function () {
         ["radio1"],
         ["radio2"]
     ]
+    var calories_q21 = [
+        [31.25, 56.25],
+        [125, 100]
+    ]
 
     return {
-        ShuffleScenario: function () {
+        ShuffleScenario: function () {            
+            var qs_sceanarioIndex = $.url('?si');
+            if(qs_sceanarioIndex!=undefined){
+                scenarioIndex = qs_sceanarioIndex;
+            }
             if (scenarioIndex == -1) {
                 var indexarr = [1, 0];
                 indexarr = indexarr.sort(function () {
@@ -80,6 +96,7 @@ var _Scenario = (function () {
             }
             for (var i = 0; i < _QData.Q21.options.length; i++) {
                 _QData.Q21.options[i].answerId = scenario_q21[scenarioIndex][i];
+                _QData.Q21.calories = calories_q21[scenarioIndex];
             }
         }
     }
@@ -217,7 +234,12 @@ var _Template = (function () {
                     $("#wood-range").k_disable()
                     $("#fish-range").k_disable()
                 }
-
+                if (pageobj.pageId == "l4p5") {
+                    if(_Scenario.getScenarioIndex() == 1){
+                        $(".Scenario0").hide();
+                        $(".Scenario1").show();                        
+                    }
+                }
                 $("#consumption-wood-range").k_disable()
                 $("#consumption-fish-range").k_disable()
 
@@ -278,15 +300,23 @@ var _CustomQuestion = (function () {
                 $(".graphbtncheckanswer").k_disable();
             }
             if (qObj.Id == "Q18") {
-                $("#ScenarioWoodVal").html(_Scenario.getCurrentScenario().woodPerHr);
-                $("#ScenarioFischVal").html(_Scenario.getCurrentScenario().fishPerHr);
+                $("#woodPerHr").html(_Scenario.getCurrentScenario().woodPerHr);
+                $("#fishPerHr").html(_Scenario.getCurrentScenario().fishPerHr);
+                $("#woodPerDay").html(_Scenario.getCurrentScenario().woodPerDay);
+                $("#fishPerDay").html(_Scenario.getCurrentScenario().fishPerDay);
                 $("#q18TableBody").html(this.UpdateScenarioTable());
 
             }
             if (qObj.Id == "Q19") {
-                $("#ScenarioWoodVal").html(_Scenario.getCurrentScenario().woodPerHr);
-                $("#ScenarioFischVal").html(_Scenario.getCurrentScenario().fishPerHr);
+                $("#woodPerHr").html(_Scenario.getCurrentScenario().woodPerHr);
+                $("#fishPerHr").html(_Scenario.getCurrentScenario().fishPerHr);
+                $("#woodPerDay").html(_Scenario.getCurrentScenario().woodPerDay);
+                $("#fishPerDay").html(_Scenario.getCurrentScenario().fishPerDay);
                 $("#q19TableBody").html(this.UpdateScenarioTable());
+            }
+            if (qObj.Id == "Q21") {
+                $("#youcalories").html(qObj.calories[0]);
+                $("#fridaycalories").html(qObj.calories[1]);
             }
         },
         UpdateScenarioTable: function () {
@@ -513,9 +543,13 @@ var _CustomPage = (function () {
     return {
         OnPageLoad: function () {            
             var pageobj = _Navigator.GetCurrentPage();
-            if (pageobj.pageId == "l2p2") {
-                _ModuleCharts.DrawL2P2QuestionChart();
-            }                      
+            if (pageobj.datalevel == 2) {
+                _ModuleCharts.DrawL2QuestionIntroChart();
+            } 
+            if (pageobj.datalevel == 4) {
+                _ModuleCharts.DrawL4QuestionIntroChart();
+            }    
+                              
             if(pageobj.pageId=="summary")
             {
                 //_Navigator.GetLevels();
@@ -545,8 +579,7 @@ var _CustomPage = (function () {
 
                 if (pageobj.pageId == "l3p3") {
                     _TradeSlider.SetWayOffTarget();
-                }
-                debugger;
+                }                
                 var target = _TradeSlider.GetTarget();
                 if (target.goal != "notarget") {
                     $("p.goaldesc").hide();

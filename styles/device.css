@@ -132,7 +132,22 @@
         margin:0 auto;
     }
 }
-
+@media  screen and (max-width : 543px) {
+    .rTableCell1{
+        width: 100%;
+    }
+}
+@media  screen and (max-width : 400px) {
+    .rTableCell2{
+        width: 9%;
+    }
+    .rTableCell3{
+        width: 80%;
+    }
+    .rTableCell1{
+        padding-bottom:10px;
+    }
+}
 @media  screen and (max-width : 500px) {
     #header-progress .progress {
         float:left;

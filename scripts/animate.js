@@ -419,6 +419,8 @@ var EventManager = function () {
             $("#btnfindout").k_enable();
             $("#dayno").text(DataStorage.getCurrentDay());
             var currPage = _Navigator.GetCurrentPage();
+            //NM: Need to check this call.
+            _Slider.InitSelectTimeSlider();
             if (currPage.hasTradeSlider != undefined && currPage.hasTradeSlider) {
                 _Animation.LadyComeWithFish();
                 _Animation.MngAnimationEle();
@@ -531,8 +533,8 @@ var EventManager = function () {
                 var yftf = tr.consumptionfish / AnimConfig.nightFishValueDeduction;
                 var ywtf = tr.consumptionwood / AnimConfig.nightWoodValueDeduction;
                 //friday wood time fraction
-                var fftf = tr.fridayconsumptionfish / AnimConfig.nightFishValueDeduction;
-                var fwtf = tr.fridayconsumptionwood / AnimConfig.nightWoodValueDeduction;
+                var fftf = tr.fridayconsumptionfish / AnimConfig.nightFishValueDeductionfriday;
+                var fwtf = tr.fridayconsumptionwood / AnimConfig.nightWoodValueDeductionfriday;
                 if (yftf < 1 || ywtf < 1) {
                     isdie = true;
                     diereason = "you_die";
@@ -556,8 +558,8 @@ var EventManager = function () {
                 }
                 remdata.wood = tr.consumptionwood - AnimConfig.nightWoodValueDeduction;
                 remdata.fish = tr.consumptionfish - AnimConfig.nightFishValueDeduction;
-                remdata.fridaywood = tr.fridayconsumptionwood - AnimConfig.nightWoodValueDeduction;
-                remdata.fridayfish = tr.fridayconsumptionfish - AnimConfig.nightFishValueDeduction;
+                remdata.fridaywood = tr.fridayconsumptionwood - AnimConfig.nightWoodValueDeductionfriday;
+                remdata.fridayfish = tr.fridayconsumptionfish - AnimConfig.nightFishValueDeductionfriday;
                 if (remdata.wood < 0) {
                     remdata.wood = 0;
                 }
@@ -631,8 +633,10 @@ var EventManager = function () {
                 }
 
                 DataStorage.updateCollection();
+                _Navigator.UpdateScore();
                 $("#linknext").k_enable()
-            } else if (diereason == "less_fish" || diereason == "you_die") {
+            } 
+            else if (diereason == "less_fish" || diereason == "you_die") {
                 if (currPage.pageId == "l4p5") {
                     if (diereason2 == "wood") {
                         _Question.Loadfeedback(2);

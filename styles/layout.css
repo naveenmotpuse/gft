@@ -62,6 +62,10 @@ a:focus, input:focus, button:focus, textarea:focus, select:focus, a:active, inpu
     outline: #ff8c00 solid 2px;
 }
 
+.progress .background:focus, .progress .background:active{
+    outline: #ff8c00 solid 2px;
+}
+
 .mxwidth{
     max-width: 940px;
 }
@@ -391,4 +395,43 @@ table caption
 tbody, thead{
     font-size: 16px;
 }
+.rTable { display: table; }
+.rTable {
+	 display: table;
+	 width: 100%;
+}				
+				.rTable {
+					  display: block;
+					  width: 100%;
+				}
+				.rTableHeading, .rTableBody, .rTableFoot, .rTableRow{
+					  clear: both;
+					width: 100%;
+				}
+				.rTableCell1{
+					width: 29%;
+					margin-top: 3%;
+				}
+				.rTableCell2{
+					width: 2%;
+					margin-top: 24px;
+				}
+				.rTableCell4{
+					margin-top: 24px;
+				}
+				
+				.rTableCell, .rTableHead {
+					  float: left;
+					  overflow: hidden;
+					  padding: 0px 0.5%;
+					  
+				}
+				.rTable:after {
+					  visibility: hidden;
+					  display: block;
+					  font-size: 0;
+					  content: " ";
+					  clear: both;
+					  height: 0;
+				}
 

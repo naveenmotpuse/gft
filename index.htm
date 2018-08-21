@@ -1,4 +1,5 @@
 ﻿<html lang="en">
+
 <head>
     <title>Gains From Trade</title>
     <meta charset="UTF-8">
@@ -7,110 +8,123 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="styles/font.css" rel="stylesheet" />
-    <link href="scripts/external/menu/menu.css" rel="stylesheet"/>
+    <link href="scripts/external/menu/menu.css" rel="stylesheet" />
     <link href="styles/layout.css" rel="stylesheet" />
     <link href="styles/module.css" rel="stylesheet" />
     <link href="styles/device.css" rel="stylesheet" />
 
-    <script src="scripts/external/jquery-2.1.4.min.js"></script>  
+    <script src="scripts/external/jquery-2.1.4.min.js"></script>
     <script src="scripts/external/highcharts.js"></script>
-    <script src="scripts/external/menu/menu.js"></script>    
+    <script src="scripts/external/menu/menu.js"></script>
     <script src="scripts/data.js"></script>
-    <script src="scripts/caching.js"></script>      
+    <script src="scripts/caching.js"></script>
     <script src="scripts/navigator.js"></script>
     <script src="scripts/question.js"></script>
     <script src="scripts/modulesCharts.js"></script>
-    <script src="scripts/gft.js"></script>      
+    <script src="scripts/gft.js"></script>
     <script src="scripts/module.js"></script>
     <script src="scripts/slider.js"></script>
     <script src="scripts/animate.js"></script>
     <script src="scripts/events.js"></script>
-    
+
     <script src="scripts/external/cooker.js"></script>
     <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=MML_HTMLorMML"></script>
 </head>
+
 <body>
     <div id="wrapper" class="mxwidth">
         <header role="banner">
             <center>
                 <div id="header-content" class="mxwidth">
-                    <div id="header-title">                        
-                        <h1 >Gains From Trade</h1>
+                    <div id="header-title">
+                        <h1 tabindex="1">Gains From Trade</h1>
                         <ul role="menubar" aria-label="functions" id="appmenu" class="wrapper">
-                                <li class="menu-icon" role="menu" aria-haspopup="false" tabindex="1">
-                                 <img src="scripts/external/menu/menu-icon.png" alt="">
-                                    <ul role="menu">
-                                    <li role="menuitem"><a href="javascript:void(0)" class="menuitem" data-id="l1p1">Introduction</a></li>
-                                    <li role="menuitem"><a href="javascript:void(0)" class="menuitem" data-id="l1p2">Level 1</a></li>
-                                    <li role="menuitem"><a href="javascript:void(0)" class="menuitem" data-id="l2p1">Level 2</a></li>
-                                    <li role="menuitem"><a href="javascript:void(0)" class="menuitem" data-id="l3p1">Level 3</a></li>
-                                    <li role="menuitem"><a href="javascript:void(0)" class="menuitem" data-id="l4p1">Level 4</a></li>
-                                    <li role="menuitem"><a href="javascript:void(0)" class="menuitem" data-id="summary">Summary</a></li>
+                            <li class="menu-icon" role="menu" aria-haspopup="true" tabindex="1">
+                                <img src="scripts/external/menu/menu-icon.png" alt="">
+                                <ul role="menu">
+                                    <li role="menuitem">
+                                        <a href="javascript:void(0)" class="menuitem" data-id="l1p1">Introduction</a>
+                                    </li>
+                                    <li role="menuitem">
+                                        <a href="javascript:void(0)" class="menuitem" data-id="l1p2">Level 1</a>
+                                    </li>
+                                    <li role="menuitem">
+                                        <a href="javascript:void(0)" class="menuitem" data-id="l2p1">Level 2</a>
+                                    </li>
+                                    <li role="menuitem">
+                                        <a href="javascript:void(0)" class="menuitem" data-id="l3p1">Level 3</a>
+                                    </li>
+                                    <li role="menuitem">
+                                        <a href="javascript:void(0)" class="menuitem" data-id="l4p1">Level 4</a>
+                                    </li>
+                                    <li role="menuitem">
+                                        <a href="javascript:void(0)" class="menuitem" data-id="summary">Summary</a>
+                                    </li>
                                 </ul>
-                                </li>
-                            </ul>
+                            </li>
+                        </ul>
                     </div>
                     <div id="header-progress">
                         <div class="progress">
-                            <div class="background" >
-                                <div class="section pgBgItem" data-level="0">
-                                    <div class="filler ">
-                                        <div class="pgBgItemFill" style="width:0%;" progress="0" ></div>
+                            <div class="background" tabindex="1" aria-label="Introduction progress 0%, Level 1 progress 0%, Level 2 progress 0%, Level 3 progress 0%, Level 4 progress 0%">
+                                <div class="section pgBgItem" data-level="0" aria-hidden="true">
+                                    <div class="filler " aria-hidden="true">
+                                        <div class="pgBgItemFill" style="width:0%;" progress="0" aria-hidden="true"></div>
                                     </div>
                                 </div>
-                                <div class="section pgBgItem" data-level="1">
-                                    <div class="filler " level="1" >
-                                        <div class="pgBgItemFill" style="width:0%;" progress="0" ></div>
+                                <div class="section pgBgItem" data-level="1" aria-hidden="true">
+                                    <div class="filler " level="1" aria-hidden="true">
+                                        <div class="pgBgItemFill" style="width:0%;" progress="0" aria-hidden="true"></div>
                                     </div>
                                 </div>
-                                <div class="section pgBgItem" data-level="2">
-                                    <div class="filler " level="2" >
-                                        <div class="pgBgItemFill" style="width:0%;" progress="0" ></div>
+                                <div class="section pgBgItem" data-level="2" aria-hidden="true">
+                                    <div class="filler " level="2" aria-hidden="true">
+                                        <div class="pgBgItemFill" style="width:0%;" progress="0" aria-hidden="true"></div>
                                     </div>
                                 </div>
-                                <div class="section pgBgItem" data-level="3">
-                                    <div class="filler " level="3">
-                                        <div class="pgBgItemFill" style="width:0%;" progress="0" ></div>
+                                <div class="section pgBgItem" data-level="3" aria-hidden="true">
+                                    <div class="filler " level="3" aria-hidden="true">
+                                        <div class="pgBgItemFill" style="width:0%;" progress="0" aria-hidden="true"></div>
                                     </div>
                                 </div>
-								<div class="section pgBgItem" data-level="4">
-                                    <div class="filler " level="4">
-                                        <div class="pgBgItemFill" style="width:0%;" progress="0" ></div>
+                                <div class="section pgBgItem" data-level="4" aria-hidden="true">
+                                    <div class="filler " level="4" aria-hidden="true">
+                                        <div class="pgBgItemFill" style="width:0%;" progress="0" aria-hidden="true"></div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="scale">
-                                <div class="section ">
-                                    <div class="filler">Intro</div>
+                            <div class="scale" aria-hidden="true">
+                                <div class="section " aria-hidden="true">
+                                    <div class="filler" aria-hidden="true">Intro</div>
                                 </div>
-                                <div class="section ">
-                                    <div class="filler">L1</div>
+                                <div class="section " aria-hidden="true">
+                                    <div class="filler" aria-hidden="true">L1</div>
                                 </div>
-                                <div class="section ">
-                                    <div class="filler">L2</div>
+                                <div class="section " aria-hidden="true">
+                                    <div class="filler" aria-hidden="true">L2</div>
                                 </div>
-                                <div class="section ">
-                                    <div class="filler">L3</div>
+                                <div class="section " aria-hidden="true">
+                                    <div class="filler" aria-hidden="true">L3</div>
                                 </div>
-								<div class="section ">
-                                    <div class="filler">L4</div>
+                                <div class="section " aria-hidden="true">
+                                    <div class="filler" aria-hidden="true">L4</div>
                                 </div>
                             </div>
                         </div>
-                        <div id="scorediv" class="scoreDiv wrapper" >Overall Score:&nbsp;
+                        <div id="scorediv" class="scoreDiv wrapper">Overall Score:&nbsp;
                             <div id="scoreInnrDiv">0%</div>
                         </div>
                     </div>
                     <div id="header-btn-container">
                         <div class="wrapper">
-							<button role="button" class="linksurplus-p" id="linksurplus">
+                            <button role="button" class="linksurplus-p" id="linksurplus" aria-current="false" aria-expanded="false">
                                 <span>Inventory</span>
-                                <img src="assets/images/down-chevron.png" aria-expanded="false">
+                                <img src="assets/images/down-chevron.png" aria-hidden="false" alt="">
                             </button>
-                            <button role="button" class="linkppf-p" id="linkppf" >
+                            <button role="button" class="linkppf-p" id="linkppf" aria-current="false" aria-expanded="false">
                                 <span>PPF</span>
-                                <img src="assets/images/down-chevron.png" aria-expanded="false">
-                            </button>                            
+                                <img src="assets/images/down-chevron.png" aria-hidden="false" alt="">
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -126,14 +140,14 @@
                     <div id="footer-navigation">
                         <div class="previous">
                             <a id="linkprevious" href="#">
-                                <img class="prevImg" src="assets/images/back-button-v2.png">
+                                <img class="prevImg" src="assets/images/back-button-v2.png" aria-hidden="true" alt="">
                                 <span>Previous</span>
                             </a>
                         </div>
                         <div class="next">
                             <a id="linknext" href="#">
                                 <span>Next</span>
-                                <img class="nextImg" src="assets/images/next-button-v2.png">
+                                <img class="nextImg" src="assets/images/next-button-v2.png" aria-hidden="true" alt="">
                             </a>
                         </div>
                     </div>

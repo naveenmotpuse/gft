@@ -20,8 +20,14 @@ var _ModuleCharts = (function () {
                             x: tooltipX,
                             y: tooltipY
                         };
+                    },
+                    snap:0
+                },  
+                plotOptions: {
+                    series:{
+                        stickyTracking:false
                     }
-                },
+                },              
                 xAxis: {
                     title: {
                         text: 'Firewood (logs)'
@@ -96,8 +102,9 @@ var _ModuleCharts = (function () {
                 ]
             });
         },
-        DrawL2P2QuestionChart: function () {
-            Highcharts.chart('l2p2graph', {
+        DrawL2QuestionIntroChart: function () {
+            if($("#questionIntro").length<=0) return;
+            Highcharts.chart('questionIntro', {
                 title: {
                     //   text: 'Production Possibilities Frontier'
                     text: ' '
@@ -105,6 +112,12 @@ var _ModuleCharts = (function () {
                 tooltip: {
                     formatter: function () {
                         return this.x + ' logs, ' + this.y + ' Cals';
+                    },
+                    snap:0
+                },
+                plotOptions: {
+                    series:{
+                        stickyTracking:false
                     }
                 },
                 xAxis: {
@@ -201,6 +214,122 @@ var _ModuleCharts = (function () {
                             }
                         }
                     }
+                ]
+            });
+
+        },
+        DrawL4QuestionIntroChart: function () {
+            if($("#questionIntro").length<=0) return;
+            Highcharts.chart('questionIntro', {
+                title: {
+                    //   text: 'Production Possibilities Frontier'
+                    text: ' '
+                },
+                tooltip: {
+                    formatter: function () {
+                        return this.x + ' logs, ' + this.y + ' Cals';
+                    },
+                    snap:0
+                },
+                plotOptions: {
+                    series:{
+                        stickyTracking:false
+                    }
+                },
+                xAxis: {
+                    title: {
+                        text: 'Firewood (logs)'
+                    },
+                    min: 0,
+                    max: 120,
+                    gridLineWidth: 1,
+                    tickInterval: 10,
+                    plotLines: [{
+                        value: 0,
+                        width: 1,
+                        color: ColorCodes.gray
+                    }]
+                },
+                yAxis: {
+                    title: {
+                        text: 'Fish (Cals)'
+                    },
+                    labels: {
+                        format: '{value}'
+                    },
+                    min: 0,
+                    gridLineWidth: 1,
+                    tickInterval: 1000,
+                    plotLines: [{
+                        value: 0,
+                        width: 1,
+                        color: ColorCodes.gray
+                    }]
+                },
+                legend: {
+                    enabled: true,
+                    align: 'center',
+                },
+                exporting: {
+                    enabled: false
+                },
+                series: [{
+                        id: 'userppfser',
+                        name: 'Your PPF',
+                        type: 'spline',
+                        lineWidth: 1,
+                        data: _Scenario.getUserData(),
+                        color: ColorCodes.user,
+                        marker: {
+                            enabled: true,
+                            radius: 5,
+                            symbol: "circle"
+                        },
+                        states: {
+                            hover: {
+                                lineWidthPlus: 0
+                            }
+                        }
+                    },
+                    {
+                        id: 'fridayppfser',
+                        name: "Friday's PPF",
+                        type: 'spline',
+                        lineWidth: 1,
+                        data: _Scenario.getFridayData(),
+                        color: ColorCodes.friday,
+                        marker: {
+                            enabled: true,
+                            radius: 5,
+                            symbol: "circle"
+                        },
+                        states: {
+                            hover: {
+                                lineWidthPlus: 0
+                            }
+                        }
+                    }/*,
+                    {
+                        id: 'bothppfppoint',
+                        name: "Both Student and Friday's Production Point",
+                        type: 'spline',
+                        lineWidth: 0,
+                        data: [
+                            [32, 2000]
+                        ],
+                        color: ColorCodes.transparent,
+                        marker: {
+                            fillOpacity: 0,
+                            lineWidth: 2,
+                            lineColor: ColorCodes.both,
+                            radius: 10,
+                        },
+                        states: {
+                            hover: {
+                                lineWidthPlus: 0
+                            }
+                        }
+                    }*/
                 ]
             });
 
@@ -342,6 +471,12 @@ var _ModuleCharts = (function () {
                 tooltip: {
                     formatter: function () {
                         return this.x + ' logs, ' + this.y + ' Cals';
+                    },
+                    snap:0
+                },
+                plotOptions: {
+                    series:{
+                        stickyTracking:false
                     }
                 },
                 xAxis: {
@@ -449,6 +584,12 @@ var _ModuleCharts = (function () {
                 tooltip: {
                     formatter: function () {
                         return this.x + ' logs, ' + this.y + ' Cals';
+                    },
+                    snap:0
+                },
+                plotOptions: {
+                    series:{
+                        stickyTracking:false
                     }
                 },
                 xAxis: {
@@ -473,7 +614,7 @@ var _ModuleCharts = (function () {
                         format: '{value}'
                     },
                     min: 0,
-                    max: usermax,
+                    //max: usermax,
                     gridLineWidth: 1,
                     tickInterval: 1000,
                     plotLines: [{
@@ -510,6 +651,12 @@ var _ModuleCharts = (function () {
                 tooltip: {
                     formatter: function () {
                         return this.x + ' logs, ' + this.y + ' Cals';
+                    },
+                    snap:0
+                },
+                plotOptions: {
+                    series:{
+                        stickyTracking:false
                     }
                 },
                 xAxis: {
@@ -534,7 +681,7 @@ var _ModuleCharts = (function () {
                         format: '{value}'
                     },
                     min: 0,
-                    max: fridaymax,
+                    //max: fridaymax,
                     gridLineWidth: 1,
                     tickInterval: 1000,
                     plotLines: [{

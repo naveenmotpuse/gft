@@ -330,6 +330,8 @@ var _Slider = (function () {
                 _Slider.compare($(this));
             });
 
+            DataStorage.ResetDataMap1();
+
             _Slider.submitValidate();
             $(".selecttimeslider .h_right").html(AnimConfig.dayTime + " hr");
         },
@@ -384,7 +386,9 @@ var _TradeSlider = (function () {
     var TradeResults = {
         onewoodfor: 250,
         givewood: 5,
+        givefish: 0,
         receivefish: 1250,
+        receivewood: 0,
         consumptionwood: (96 - 5),
         consumptionfish: 1250,
         fridayconsumptionfish: (6000 - 1250),
@@ -424,19 +428,57 @@ var _TradeSlider = (function () {
                 TradeResults.givewood = givewood;
                 _TradeSlider.SetTradeResult();
             });
+
+            $("#givefish-range").on("input", document, function (event) {
+                $("#givefish-cals").text($(this).val())
+            });
+            $("#givefish-range").on("change", document, function (event) {
+                event.preventDefault();
+                var givefish = Number($(this).val());
+                TradeResults.givefish = givefish;
+                _TradeSlider.SetTradeResult();
+            });
+
             _ModuleCharts.DrawTradeCharts();
             //Complete Reset   
             this.Reset();
-            DataStorage.ResetDataMap1();
         },
         Reset: function () {
+            
+            var currPage = _Navigator.GetCurrentPage();
+            var usermaxwoodcollection = 0;
+            var usermaxfishcollection = 0;
+            var fridaymaxwoodcollection = 0;
+            var fridaymaxfishcollection = 0;
+
+            var isDefault = true;
+
+            if (currPage.datalevel == 4) {
+                if (_Scenario.getScenarioIndex() == 1) {
+                    usermaxfishcollection = _Scenario.getUserTable()[12][1];
+                    fridaymaxwoodcollection = _Scenario.getFridayTable()[12][0];
+                    AnimConfig.nightWoodValueDeductionfriday = 7;
+                    AnimConfig.nightFishValueDeductionfriday = 3500;
+                    isDefault = false;
+                } else {
+                    usermaxwoodcollection = _Scenario.getUserTable()[12][0];
+                    fridaymaxfishcollection = _Scenario.getFridayTable()[12][1];
+                    AnimConfig.nightWoodValueDeductionfriday = 40;
+                    AnimConfig.nightFishValueDeductionfriday = 450;
+                }
+            } else {
+                usermaxwoodcollection = userPPFTable[12][0];
+                fridaymaxfishcollection = fridayPPFTable[12][1];
+            }
             TradeResults = {
                 onewoodfor: 250,
                 givewood: 5,
+                givefish: 0,
                 receivefish: 1250,
-                consumptionwood: (96 - 5),
+                receivewood: 0,
+                consumptionwood: (usermaxwoodcollection - 5),
                 consumptionfish: 1250,
-                fridayconsumptionfish: (6000 - 1250),
+                fridayconsumptionfish: (fridaymaxfishcollection - 1250),
                 fridayconsumptionwood: 5,
                 remData: {
                     wood: 0,
@@ -446,11 +488,47 @@ var _TradeSlider = (function () {
                     idlehours: 0
                 },
             }
-            //Default Initialisation of sliders.            
-            $("#onewoodfor-range").val(250);
-            $("#givewood-range").val(5);
-            TradeResults.onewoodfor = 250;
-            TradeResults.givewood = 5;
+
+            TradeSettings = {
+                yourwoodlogs: usermaxwoodcollection,
+                yourfishcals: usermaxfishcollection,
+                fridaywoodlogs: fridaymaxwoodcollection,
+                fridayfishCals: fridaymaxfishcollection,
+                youridlehours: 0
+            }
+
+            if (!isDefault) {
+                TradeResults.givefish=1250;
+                TradeResults.receivewood =5;
+                TradeResults.givewood = 0;
+                TradeResults.receivefish = 0;
+                TradeResults.consumptionwood =  5;
+                TradeResults.consumptionfish= (usermaxfishcollection - 1250);
+                TradeResults.fridayconsumptionfish = 1250;
+                TradeResults.fridayconsumptionwood = (fridaymaxwoodcollection-5);  
+                $("#consumption-wood-range").attr("max", fridaymaxwoodcollection);
+                $(".consumption-wood.r_label").text(fridaymaxwoodcollection);
+                $("#givefish-range").attr("max", usermaxfishcollection);
+                $(".givefish.r_label").text(usermaxfishcollection);
+                $("#consumption-fish-range").attr("max", usermaxfishcollection);
+                $(".consumption-fish.r_label").text(usermaxfishcollection);
+
+                //Default Initialisation of sliders.            
+                $("#onewoodfor-range").val(250);
+                $("#givefish-range").val(1250);                         
+            } 
+            else{
+                $("#consumption-wood-range").attr("max", usermaxwoodcollection);
+                $(".consumption-wood.r_label").text(usermaxwoodcollection);
+                $("#givewood-range").attr("max", usermaxwoodcollection);
+                $(".givewood.r_label").text(usermaxwoodcollection);
+                $("#consumption-fish-range").attr("max", fridaymaxfishcollection);
+                $(".consumption-fish.r_label").text(fridaymaxfishcollection);
+
+                //Default Initialisation of sliders.            
+                $("#onewoodfor-range").val(250);
+                $("#givewood-range").val(5);                   
+            }            
             _TradeSlider.SetTradeResult();
             this.UpdateInventoryTables();
         },
@@ -464,35 +542,64 @@ var _TradeSlider = (function () {
         UpdateTradeSettings: function () {
             var currPage = _Navigator.GetCurrentPage();
             if (currPage.datalevel == 4) {
-                TradeSettings.yourwoodlogs = _Scenario.getUserTable()[Number($("#wood-range").val())][0];
-                TradeSettings.yourfishcals = _Scenario.getUserTable()[Number($("#fish-range").val())][1];
+                if (_Scenario.getScenarioIndex() == 1) {
+                    TradeSettings.yourwoodlogs = _Scenario.getUserTable()[Number($("#wood-range").val())][0];
+                    TradeSettings.yourfishcals = _Scenario.getUserTable()[Number($("#fish-range").val())][1];
+                    TradeSettings.fridaywoodlogs = _Scenario.getFridayTable()[12][0]
+                    TradeSettings.fridayfishCals = _Scenario.getFridayTable()[0][1];
+
+                } else {
+                    TradeSettings.yourwoodlogs = _Scenario.getUserTable()[Number($("#wood-range").val())][0];
+                    TradeSettings.yourfishcals = _Scenario.getUserTable()[Number($("#fish-range").val())][1];
+                    TradeSettings.fridaywoodlogs = _Scenario.getFridayTable()[0][0]
+                    TradeSettings.fridayfishCals = _Scenario.getFridayTable()[12][1];
+                }
             } else {
                 TradeSettings.yourwoodlogs = userPPFTable[Number($("#wood-range").val())][0];
                 TradeSettings.yourfishcals = userPPFTable[Number($("#fish-range").val())][1];
+                TradeSettings.fridaywoodlogs = fridayPPFTable[0][0]
+                TradeSettings.fridayfishCals = fridayPPFTable[12][1];
             }
             TradeSettings.youridlehours = AnimConfig.dayTime - (Number($("#wood-range").val()) + Number($("#fish-range").val()));
 
             this.SetTradeResult();
         },
         SetTradeResult: function () {
+            debugger;
             TradeResults.receivefish = TradeResults.givewood * TradeResults.onewoodfor;
-            TradeResults.consumptionwood = (TradeSettings.yourwoodlogs + TradeResults.remData.wood) - TradeResults.givewood;
-            TradeResults.consumptionfish = (TradeSettings.yourfishcals + TradeResults.remData.wood) + (TradeResults.givewood * TradeResults.onewoodfor);
-            TradeResults.fridayconsumptionwood = (TradeSettings.fridaywoodlogs + TradeResults.remData.fridaywood) + TradeResults.givewood;
-            TradeResults.fridayconsumptionfish = (TradeSettings.fridayfishCals + TradeResults.remData.fridayfish) - (TradeResults.givewood * TradeResults.onewoodfor);
-            $("#givewood-range").attr("max", (TradeSettings.yourwoodlogs + TradeResults.remData.wood));
-            $("#consumption-wood-range").attr("max", (TradeSettings.yourwoodlogs + TradeResults.remData.wood));
-            $(".consumption-wood.r_label").text((TradeSettings.yourwoodlogs + TradeResults.remData.wood));
-            $(".givewood.r_label").text((TradeSettings.yourwoodlogs + TradeResults.remData.wood));
-            $("#consumption-fish-range").attr("max", (TradeSettings.fridayfishCals + TradeResults.remData.fridayfish));
-            $(".consumption-fish.r_label").text((TradeSettings.fridayfishCals + TradeResults.remData.fridayfish));
+            TradeResults.receivewood = Number((TradeResults.givefish / TradeResults.onewoodfor).toFixed(1));
+            TradeResults.consumptionwood = ((TradeSettings.yourwoodlogs + TradeResults.remData.wood) - TradeResults.givewood) + TradeResults.receivewood;
+            TradeResults.consumptionfish = ((TradeSettings.yourfishcals + TradeResults.remData.fish) + TradeResults.receivefish) - TradeResults.givefish;
+
+            TradeResults.fridayconsumptionwood = ((TradeSettings.fridaywoodlogs + TradeResults.remData.fridaywood) + TradeResults.givewood) - TradeResults.receivewood;
+            TradeResults.fridayconsumptionfish = ((TradeSettings.fridayfishCals + TradeResults.remData.fridayfish) - TradeResults.receivefish) + TradeResults.givefish;
+
             $("#onewoodfor-fish").text(TradeResults.onewoodfor);
-            $("#givewood-lbs").text(TradeResults.givewood);
-            $("#receivefish-cals").text(TradeResults.receivefish);
+            var currPage = _Navigator.GetCurrentPage();
+            if (currPage.datalevel == 4 && _Scenario.getScenarioIndex() == 1) {
+                $("#givefish-range").attr("max", (TradeSettings.yourfishcals + TradeResults.remData.fish));
+                $("#consumption-wood-range").attr("max", (TradeSettings.fridaywoodlogs + TradeResults.remData.fridaywood));
+                $(".consumption-wood.r_label").text((TradeSettings.fridaywoodlogs + TradeResults.remData.fridaywood));
+                $(".givefish.r_label").text((TradeSettings.yourfishcals + TradeResults.remData.fish));
+                $("#consumption-fish-range").attr("max", (TradeSettings.yourfishcals + TradeResults.remData.fish));
+                $(".consumption-fish.r_label").text((TradeSettings.yourfishcals + TradeResults.remData.fish));
+                $("#givefish-cals").text(TradeResults.givefish);
+                $("#receivewood-logs").text(TradeResults.receivewood);
+            } else {
+                $("#givewood-range").attr("max", (TradeSettings.yourwoodlogs + TradeResults.remData.wood));
+                $("#consumption-wood-range").attr("max", (TradeSettings.yourwoodlogs + TradeResults.remData.wood));
+                $(".consumption-wood.r_label").text((TradeSettings.yourwoodlogs + TradeResults.remData.wood));
+                $(".givewood.r_label").text((TradeSettings.yourwoodlogs + TradeResults.remData.wood));
+                $("#consumption-fish-range").attr("max", (TradeSettings.fridayfishCals + TradeResults.remData.fridayfish));
+                $(".consumption-fish.r_label").text((TradeSettings.fridayfishCals + TradeResults.remData.fridayfish));
+                $("#givewood-lbs").text(TradeResults.givewood);
+                $("#receivefish-cals").text(TradeResults.receivefish);
+            }
             $("#consumption-wood").text(TradeResults.consumptionwood);
             $("#consumption-fish").text(TradeResults.consumptionfish);
             $("#consumption-wood-range").val(TradeResults.consumptionwood);
             $("#consumption-fish-range").val(TradeResults.consumptionfish);
+
             setTimeout(function () {
                 _TradeSlider.DisplayPointOnGraph();
             }, 0);
@@ -548,7 +655,7 @@ var _TradeSlider = (function () {
                     point1 = _Scenario.getFridayData()[0];
                 }
             }
-
+            /*
             var x1 = point1[0];
             var y1 = point1[1];
             var x2 = point2[0];
@@ -563,9 +670,10 @@ var _TradeSlider = (function () {
                 y3 = (Slope * x3) + Intercept;
 
             }
-
             var point3 = [x3, y3];
             var _data = [point1, point2, point3];
+            */
+            var _data = [point1, point2];
             if (_data != undefined) {
                 chart.addSeries({
                     id: "sliderpointser1",
@@ -654,17 +762,21 @@ var _TradeSlider = (function () {
         },
         IsTargetComplete() {
             var returnVal = false;
-            if (TradeResults.remData.wood >= Target.goallbs &&
+            if (Target.goal == "betteroff") {
+                returnVal = true;
+            } else if (TradeResults.remData.wood >= Target.goallbs &&
                 TradeResults.remData.fish >= Target.goalcals) {
                 if (Target.goal == "book") {
                     if (TradeResults.remData.idlehours >= Target.goalhours) {
                         returnVal = true;
                     }
-                } else if (Target.goal == "wayoff" || Target.goal == "betteroff") {
-                    if (TradeResults.remData.fridaywood >= Target.fridaygoallbs &&
-                        TradeResults.remData.fridayfish >= Target.fridaygoalcals) {
-                        returnVal = true;
+                    /*
+                    } else if (Target.goal == "wayoff" || Target.goal == "betteroff") {
+                        if (TradeResults.remData.fridaywood >= Target.fridaygoallbs &&
+                            TradeResults.remData.fridayfish >= Target.fridaygoalcals) {                        
+                        }
                     }
+                    */
                 } else {
                     returnVal = true;
                 }

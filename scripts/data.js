@@ -230,6 +230,8 @@ var AnimConfig = {
     dayTime: 12,    
     nightWoodValueDeduction: 32,
     nightFishValueDeduction: 2000,
+    nightWoodValueDeductionfriday: 32,
+    nightFishValueDeductionfriday: 2000,
     AnimType: "default",
     toolTime: 0,
     woodPerHr: 8,

@@ -18,7 +18,7 @@
             <p role="text" aria-live="polite only">1 Wood (lbs.) for:
                 <span id="onewoodfor-fish">250</span> fish (cals.)</p>
             <div class="tot-range-wrapper">
-                <input type="range" min="0" step="10" max="1000" value="0" class="tot-slider" id="onewoodfor-range">
+                <input type="range" min="0" step="1" max="1000" value="0" class="tot-slider" id="onewoodfor-range">
                 <div>
                     <span class="l_label">0</span>
                     <span class="r_label">1000</span>
@@ -28,19 +28,36 @@
                 <strong>Trade</strong>
             </p>
             <p>How much do we trade?</p>
-            <p role="text" aria-live="polite only">Give wood (lbs.):
-                <span id="givewood-lbs">5</span>
-            </p>
-            <div class="tot-range-wrapper">
-                <input type="range" min="0" step="1" max="96" value="0" class="tot-slider" id="givewood-range">
-                <div>
-                    <span class="l_label">0</span>
-                    <span class="givewood r_label">96</span>
+            <div class="Scenario0">
+                <p role="text" aria-live="polite only">Give wood (lbs.):
+                    <span id="givewood-lbs">5</span>
+                </p>
+                <div class="tot-range-wrapper">
+                    <input type="range" min="0" step="1" max="96" value="0" class="tot-slider" id="givewood-range">
+                    <div>
+                        <span class="l_label">0</span>
+                        <span class="givewood r_label">96</span>
+                    </div>
                 </div>
+                <p role="text" aria-live="polite only">Receive fish (cals.):
+                    <span id="receivefish-cals">1250</span>
+                </p>
             </div>
-            <p role="text" aria-live="polite only">Receive fish (cals.):
-                <span id="receivefish-cals">1250</span>
-            </p>
+            <div class="Scenario1" style="display: none">
+                <p role="text" aria-live="polite only">Give fish (cals.):
+                    <span id="givefish-cals">1250</span>
+                </p>
+                <div class="tot-range-wrapper">
+                    <input type="range" min="0" step="1" max="6000" value="0" class="tot-slider" id="givefish-range">
+                    <div>
+                        <span class="l_label">0</span>
+                        <span class="givefish r_label">6000</span>
+                    </div>
+                </div>
+                <p role="text" aria-live="polite only">Receive wood (lbs.):
+                    <span id="receivewood-logs">5</span>
+                </p>
+            </div>
         </div>
     </div>
 </div>
@@ -64,17 +81,17 @@
             <p role="text" aria-live="polite only">Collect Fish:
                 <span id="consumption-fish">1250</span> cals.</p>
             <div class="tot-range-wrapper">
-                <input type="range" min="0" step="10" max="6000" value="0" class="consumption-fish-range" id="consumption-fish-range">
+                <input type="range" min="0" step="1" max="6000" value="0" class="consumption-fish-range" id="consumption-fish-range">
                 <div>
                     <span class="l_label">0</span>
                     <span class="consumption-fish r_label">6000</span>
                 </div>
             </div>
         </div>
-    </div> 
+    </div>
     <div class="startbtnpanel">
-            <center>
-                <input class="btnstartslider" type="button" id="btnstartslider" value="Start" />
-            </center>
-        </div>   
+        <center>
+            <input class="btnstartslider" type="button" id="btnstartslider" value="Start" />
+        </center>
+    </div>
 </div>
