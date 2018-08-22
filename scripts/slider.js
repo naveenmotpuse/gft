@@ -774,7 +774,7 @@ var _TradeSlider = (function () {
                 Target.fridaygoalcals = 3500;
             }
         },
-        IsTargetComplete() {
+        IsTargetComplete: function() {
             var returnVal = false;
             if (Target.goal == "betteroff") {
                 returnVal = true;
