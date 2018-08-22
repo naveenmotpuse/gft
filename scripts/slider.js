@@ -21,15 +21,12 @@ var DataStorage = DataStorage || function (ui) {
             _DataMap = $(true, {}, _DataMap, jsonObj);
         },
         ResetDataMap1: function () {
-            _DataMap = {
-                woodcollectingHr: 0,
-                fishcollectingHr: 0,
-                _fishCals: 0,
-                _woodsLbs: 0,
-                day: 1,
-                remFish: 0,
-                remWood: 0
-            };
+            _DataMap.woodcollectingHr = 0;
+            _DataMap.fishcollectingHr = 0;
+            _DataMap._fishCals = 0;
+            _DataMap._woodsLbs = 0;
+            _DataMap.remFish = 0;
+            _DataMap.remWood = 0;
         },
         retry: function () {
             var pageid = _Navigator.GetCurrentPage().pageId;
@@ -154,6 +151,9 @@ var DataStorage = DataStorage || function (ui) {
         },
         updateDay: function () {
             _DataMap.day += 1;
+        },
+        resetDay: function(){
+            _DataMap.day = 1;
         },
         updateCollection: function (isComplete) {
             var copy = $.extend({}, _DataMap);
@@ -440,19 +440,17 @@ var _TradeSlider = (function () {
             });
 
             _ModuleCharts.DrawTradeCharts();
-            //Complete Reset   
+            //Complete Reset  
+            DataStorage.resetDay();
             this.Reset();
         },
         Reset: function () {
-            
             var currPage = _Navigator.GetCurrentPage();
             var usermaxwoodcollection = 0;
             var usermaxfishcollection = 0;
             var fridaymaxwoodcollection = 0;
             var fridaymaxfishcollection = 0;
-
             var isDefault = true;
-
             if (currPage.datalevel == 4) {
                 this.SetBetterOffTarget();
                 if (_Scenario.getScenarioIndex() == 1) {
@@ -499,14 +497,14 @@ var _TradeSlider = (function () {
             }
 
             if (!isDefault) {
-                TradeResults.givefish=1250;
-                TradeResults.receivewood =5;
+                TradeResults.givefish = 1250;
+                TradeResults.receivewood = 5;
                 TradeResults.givewood = 0;
                 TradeResults.receivefish = 0;
-                TradeResults.consumptionwood =  5;
-                TradeResults.consumptionfish= (usermaxfishcollection - 1250);
+                TradeResults.consumptionwood = 5;
+                TradeResults.consumptionfish = (usermaxfishcollection - 1250);
                 TradeResults.fridayconsumptionfish = 1250;
-                TradeResults.fridayconsumptionwood = (fridaymaxwoodcollection-5);  
+                TradeResults.fridayconsumptionwood = (fridaymaxwoodcollection - 5);
                 $("#consumption-wood-range").attr("max", fridaymaxwoodcollection);
                 $(".consumption-wood.r_label").text(fridaymaxwoodcollection);
                 $("#givefish-range").attr("max", usermaxfishcollection);
@@ -516,9 +514,8 @@ var _TradeSlider = (function () {
 
                 //Default Initialisation of sliders.            
                 $("#onewoodfor-range").val(250);
-                $("#givefish-range").val(1250);                         
-            } 
-            else{
+                $("#givefish-range").val(1250);
+            } else {
                 $("#consumption-wood-range").attr("max", usermaxwoodcollection);
                 $(".consumption-wood.r_label").text(usermaxwoodcollection);
                 $("#givewood-range").attr("max", usermaxwoodcollection);
@@ -528,17 +525,34 @@ var _TradeSlider = (function () {
 
                 //Default Initialisation of sliders.            
                 $("#onewoodfor-range").val(250);
-                $("#givewood-range").val(5);                   
-            }            
+                $("#givewood-range").val(5);
+            }
             _TradeSlider.SetTradeResult();
             this.UpdateInventoryTables();
         },
-        ResetTradeSlider() {
+        ResetTradeSlider: function () {
+            //called in onTryAgain, onNextDay.
+            this.ResetTimeSlider();
             $("#onewoodfor-range").val(250);
             $("#givewood-range").val(5);
             TradeResults.onewoodfor = 250;
             TradeResults.givewood = 5;
             _TradeSlider.SetTradeResult();
+        },
+        ResetTimeSlider: function () {
+            //Called in _Template.LoadTradeSlider, ResetTradeSlider
+            var currPage = _Navigator.GetCurrentPage();
+            if (currPage.datalevel == 4 && _Scenario.getScenarioIndex() == 1) {
+                $("#fish-range").val(AnimConfig.dayTime)
+                $('.fish').find('#f_val').text(AnimConfig.dayTime);
+                DataStorage.setFishSliderVal(Number(AnimConfig.dayTime));
+                _Slider.compare($("#fish-range"))
+            } else {
+                $("#wood-range").val(AnimConfig.dayTime)
+                $('.wood').find('#w_val').text(AnimConfig.dayTime);
+                DataStorage.setWoodSliderVal(Number(AnimConfig.dayTime));
+                _Slider.compare($("#wood-range"))
+            }
         },
         UpdateTradeSettings: function () {
             var currPage = _Navigator.GetCurrentPage();
@@ -565,8 +579,7 @@ var _TradeSlider = (function () {
 
             this.SetTradeResult();
         },
-        SetTradeResult: function () {
-            debugger;
+        SetTradeResult: function () {            
             TradeResults.receivefish = TradeResults.givewood * TradeResults.onewoodfor;
             TradeResults.receivewood = Number((TradeResults.givefish / TradeResults.onewoodfor).toFixed(1));
             TradeResults.consumptionwood = ((TradeSettings.yourwoodlogs + TradeResults.remData.wood) - TradeResults.givewood) + TradeResults.receivewood;

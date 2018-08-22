@@ -425,8 +425,7 @@ var EventManager = function () {
 
         },
         OnTryAgain: function () {
-            _Animation.day();
-            //DataStorage.retry();
+            _Animation.day();            
             Table.hide();
             var fishhrs = 0;
             var woodhrs = 0;
@@ -453,16 +452,8 @@ var EventManager = function () {
             var currPage = _Navigator.GetCurrentPage();
             //NM: Need to check this call.
             _Slider.InitSelectTimeSlider();
-            if (currPage.hasTradeSlider != undefined && currPage.hasTradeSlider) {
-                //_Animation.LadyComeWithFish();
-                _Animation.MngAnimationEle();
-                if (currPage.pageId == "l2p3") {
-                    woodhrs = AnimConfig.dayTime
-                    $("#wood-range").val(AnimConfig.dayTime)
-                    $('.wood').find('#w_val').text(AnimConfig.dayTime);
-                    DataStorage.setWoodSliderVal(Number(AnimConfig.dayTime));
-                    _Slider.compare($("#wood-range"))
-                }
+            if (currPage.hasTradeSlider != undefined && currPage.hasTradeSlider) {                
+                _Animation.MngAnimationEle();               
                 _TradeSlider.ResetTradeSlider();
             }
         },
@@ -499,17 +490,11 @@ var EventManager = function () {
             $("#btnfindout").k_enable();
             $("#onewoodfor-range").k_enable()
             $("#givewood-range").k_enable()
-            _Question.UnloadFeedback();
+            _Question.UnloadFeedback();            
             _TradeSlider.ResetTradeSlider();
-
             $('body').animate({
                 scrollTop: $(".t_animation_c").position().top - _Settings.topMargin
             }, 200);
-
-
-            //var tableData = DataStorage.getTableData();
-            //Table.surplus.setTableValue(tableData.todayWood, tableData.yesterdayWood, tableData.todayFish, tableData.yesterdayFish);
-
         },
         onAnimComplete: function () {            
             var currPage = _Navigator.GetCurrentPage();

@@ -1,0 +1,137 @@
+#collect-wood .wood-slider {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -o-appearance: none;
+    -ms-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 11px;
+    background: #A3610A; 
+    border-radius: 5px;
+}
+
+#collect-fish .fish-slider {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -o-appearance: none;
+    -ms-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 11px;
+    background: #9D0B0E;
+    border-radius: 5px;
+}
+
+
+
+.tot-range-wrapper {
+    width: 100%;
+    height: 11px;
+    position: relative;
+    margin-top: 10px;
+    margin-bottom: 28px;
+}
+
+
+#collect-wood .wood-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -o-appearance: none;
+    -ms-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 30px;
+    background: #A3610A;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+#collect-fish .fish-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -o-appearance: none;
+    -ms-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 30px;
+    background: #9D0B0E;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+
+
+.tot-slider {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -o-appearance: none;
+    -ms-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 11px;
+    background: #575694;
+    border-radius: 5px;
+}
+
+.tot-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -o-appearance: none;
+    -ms-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 30px;
+    background: #575694;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.consumption-wood-range {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -o-appearance: none;
+    -ms-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 11px;
+    background: #A3610A;
+    border-radius: 5px;
+}
+
+.consumption-fish-range {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -o-appearance: none;
+    -ms-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 11px;
+    background: #9D0B0E;
+    border-radius: 5px;
+}
+
+.consumption-wood-range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -o-appearance: none;
+    -ms-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 30px;
+    background: #A3610A;
+    cursor: pointer;
+    border-radius: 5px;
+}
+.consumption-fish-range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -o-appearance: none;
+    -ms-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 30px;
+    background: #9D0B0E;
+    cursor: pointer;
+    border-radius: 5px;
+}
+

@@ -47,9 +47,9 @@ var _Scenario = (function () {
     ]
 
     return {
-        ShuffleScenario: function () {            
+        ShuffleScenario: function () {
             var qs_sceanarioIndex = $.url('?si');
-            if(qs_sceanarioIndex!=undefined){
+            if (qs_sceanarioIndex != undefined) {
                 scenarioIndex = qs_sceanarioIndex;
             }
             if (scenarioIndex == -1) {
@@ -60,19 +60,19 @@ var _Scenario = (function () {
                 scenarioIndex = indexarr[0];
             }
         },
-        getScenarioIndex: function(){
+        getScenarioIndex: function () {
             return scenarioIndex;
         },
-        getUserTable: function(){
+        getUserTable: function () {
             return userScenario[scenarioIndex].tableData;
         },
-        getUserData: function(){
+        getUserData: function () {
             return userScenario[scenarioIndex].ppfData;
         },
-        getFridayTable: function(){
+        getFridayTable: function () {
             return fridayScenario[scenarioIndex].tableData;
         },
-        getFridayData: function(){
+        getFridayData: function () {
             return fridayScenario[scenarioIndex].ppfData;
         },
         getCurrentScenario: function () {
@@ -83,7 +83,7 @@ var _Scenario = (function () {
                 return fridayScenario[scenarioIndex];
             }
         },
-        updateQuestionData: function () {            
+        updateQuestionData: function () {
             _QData.Q18.graphData[0] = userScenario[scenarioIndex].ppfData[0];
             _QData.Q18.graphData[1] = userScenario[scenarioIndex].ppfData[userScenario[scenarioIndex].ppfData.length - 1];
             _QData.Q18.correctData = userScenario[scenarioIndex].ppfData;
@@ -189,14 +189,14 @@ var _Template = (function () {
             $(".top-slider").load(pageUrl, function () {
                 //onload callback
                 $(".imggraph").k_disable();
-                $(".imggraph").attr("aria-expanded","true");
+                $(".imggraph").attr("aria-expanded", "true");
                 $(".imggraph").attr("aria-current", "true");
 
                 $(".imgtable").k_enable();
-                $(".imgtable").attr("aria-expanded","false");        
+                $(".imgtable").attr("aria-expanded", "false");
                 $(".imgtable").attr("aria-current", "false");
                 _ModuleCharts.DrawSurplusChart();
-                _ModuleCharts.DrawPPFChart();                
+                _ModuleCharts.DrawPPFChart();
             });
         },
         LoadAnimateArea: function () {
@@ -226,18 +226,25 @@ var _Template = (function () {
                 _Slider.InitSelectTimeSlider();
                 _TradeSlider.InitSlider();
                 var currPage = _Navigator.GetCurrentPage();
+                _TradeSlider.ResetTimeSlider();
+
                 if (currPage.pageId == "l2p3") {
-                    $("#wood-range").val(AnimConfig.dayTime)
-                    $('.wood').find('#w_val').text(AnimConfig.dayTime);
-                    DataStorage.setWoodSliderVal(Number(AnimConfig.dayTime));
-                    _Slider.compare($("#wood-range"))
                     $("#wood-range").k_disable()
                     $("#fish-range").k_disable()
                 }
+                if (currPage.pageId == "l3p2") {
+                    var target = _TradeSlider.GetTarget();
+                    if (target.goal == "book") {
+                        $("li.c-idle span span").text("Reading");
+                    }
+                }
                 if (currPage.pageId == "l4p5") {
-                    if(_Scenario.getScenarioIndex() == 1){
+                    if (_Scenario.getScenarioIndex() == 1) {
                         $(".Scenario0").hide();
-                        $(".Scenario1").show();                        
+                        $(".Scenario1").show();
+                    } else {
+                        $(".Scenario0").show();
+                        $(".Scenario1").hide();
                     }
                 }
                 $("#consumption-wood-range").k_disable()
@@ -250,6 +257,15 @@ var _Template = (function () {
 
 var _CustomQuestion = (function () {
     return {
+        ToggleGoalAnswer: function (goal) {
+            $("p.goaldescp").slideUp();
+            $("label.labelgoal").removeClass("boldStyle");
+            $("p.goaldescp[goal='" + goal + "']").slideDown();
+            $("label.labelgoal[for='" + goal + "']").addClass("boldStyle");
+            var currPage = _Navigator.GetCurrentPage();
+            currPage.isAnswered = true;
+            currPage.IsComplete = true;
+        },
         OnFeedbackLoad: function () {
             var currPage = _Navigator.GetCurrentPage();
             if (currPage.hasTradeSlider != undefined && currPage.hasTradeSlider) {
@@ -320,7 +336,7 @@ var _CustomQuestion = (function () {
             }
         },
         UpdateScenarioTable: function () {
-            
+
             var scenario = _Scenario.getCurrentScenario().ppfData;
             var tbody = "";
             for (var i = 0; i < TimePPFTable.length; i++) {
@@ -338,11 +354,11 @@ var _CustomQuestion = (function () {
                     var series = chart.get("new_series");
                     //NM: Need to show feedback when user add same point twice.
                     //Point will not get added if the same point is added.			
-                    for (var i = 0; i < series.data.length; i++) {
+                    /*for (var i = 0; i < series.data.length; i++) {
                         if ((series.data[i]['x'] == wood) && (series.data[i]['y'] == fish)) {
                             return;
                         }
-                    }
+                    }*/
                     if (series.data.length < valPoints) {
                         series.addPoint([Number(wood), Number(fish)]);
                         //point grap
@@ -448,7 +464,7 @@ var _CustomQuestion = (function () {
                     _Navigator.UpdateScore();
                 }
             }
-            
+
         },
         PrevGraphAnswer: function () {
             var point1 = {}
@@ -541,27 +557,32 @@ var _CustomQuestion = (function () {
 
 var _CustomPage = (function () {
     return {
-        OnPageLoad: function () {            
+        OnPageLoad: function () {
             var currPage = _Navigator.GetCurrentPage();
             if (currPage.datalevel == 2) {
                 _ModuleCharts.DrawL2QuestionIntroChart();
-            } 
+            }
             if (currPage.datalevel == 4) {
                 _ModuleCharts.DrawL4QuestionIntroChart();
-            }    
-                              
-            if(currPage.pageId=="summary")
-            {
-                //_Navigator.GetLevels();
-               var level1 = _Navigator.GetLevelScore(1);
-               var level2 = _Navigator.GetLevelScore(2);
-               var level3 = _Navigator.GetLevelScore(3);
-               var level4 = _Navigator.GetLevelScore(4);
-               $("#level1score").html(level1);
-               $("#level2score").html(level2);
-               $("#level3score").html(level3);
-               $("#level4score").html(level4);               
-            }            
+            }
+            if (currPage.pageId == "summary") {                
+                for(var i=1;i<=4;i++){
+                    var levelscore = _Navigator.GetLevelScore(i);
+                    $("#level" + i + "score").html(levelscore.toFixed(0));
+                    if(Number(levelscore)>=80){
+                        $("#imglevel" + i).attr("src", "assets/images/stars_3.png")
+                        $("#imglevel" + i).attr("alt", "Level " + i + " : 3 star").attr("aria-label","Level " + i + " : 3 star")
+                    }
+                    else if(Number(levelscore)>= 50 && Number(levelscore) < 80){
+                        $("#imglevel" + i).attr("src", "assets/images/stars_2.png")
+                        $("#imglevel" + i).attr("alt", "Level " + i + " : 2 star").attr("aria-label","Level " + i + " : 2 star")
+                    }
+                    else{
+                        $("#imglevel" + i).attr("src", "assets/images/stars_1.png")
+                        $("#imglevel" + i).attr("alt", "Level " + i + " : 1 star").attr("aria-label","Level " + i + " : 1 star")
+                    }
+                }                
+            }
             if (currPage.hasTimeSlider != undefined && currPage.hasTimeSlider) {
                 _Template.LoadRangeSlider();
                 _Template.LoadDaytimeScheduler();
@@ -570,7 +591,7 @@ var _CustomPage = (function () {
             if (currPage.hasAnimation != undefined && currPage.hasAnimation) {
                 _Template.LoadAnimateArea();
             }
-
+            var target = _TradeSlider.GetTarget();
             if (currPage.hasTradeSlider != undefined && currPage.hasTradeSlider) {
                 _Template.LoadRangeSlider();
                 _Template.LoadDaytimeScheduler();
@@ -579,18 +600,22 @@ var _CustomPage = (function () {
 
                 if (currPage.pageId == "l3p3") {
                     _TradeSlider.SetWayOffTarget();
-                }                
-                var target = _TradeSlider.GetTarget();
-                if (target.goal != "notarget") {
-                    $("p.goaldesc").hide();
-                    $("p.goaldesc[goal='" + target.goal + "']").show()
-                }               
-            }  
-            if (currPage.hasActivity != undefined && currPage.hasActivity) {
-                if (currPage.isAnswered != undefined && currPage.isAnswered) {
-                    $("#" + target.goal).attr('checked', 'checked');
+                } 
+                if (currPage.pageId == "l3p2") {
+                    if (target.goal != "notarget") {
+                        $("p.goaldesc").hide();
+                        $("p.goaldesc[goal='" + target.goal + "']").show()
+                    }
                 }
-            }          
+            }
+            if (currPage.hasActivity != undefined && currPage.hasActivity) {
+                if (currPage.IsComplete != undefined && currPage.IsComplete) {
+                    $("#" + target.goal).attr('checked', 'checked');
+                    _CustomQuestion.ToggleGoalAnswer(target.goal);
+                    $("input.goalRadio").k_disable();
+                    $("#next")
+                }
+            }
         }
     };
 })();

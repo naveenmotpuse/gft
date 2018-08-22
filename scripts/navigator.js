@@ -44,7 +44,7 @@ var _Navigator = (function () {
                 dataurl: "l1p3/q4.htm"
             }],
             hasTimeSlider: true,
-            hasAnimation: true            
+            hasAnimation: true
         },
         "l1p4": {
             pageId: "l1p4",
@@ -157,11 +157,11 @@ var _Navigator = (function () {
             customNext: {
                 isComplete: false,
                 jsFunction: "EventManager.onNextDay();",
-            },            
+            },
             hasTimeSlider: true,
             hasTradeSlider: true,
             hasAnimation: true,
-        },        
+        },
         "l3p3": {
             pageId: "l3p3",
             prevPageId: "l3p2",
@@ -175,7 +175,7 @@ var _Navigator = (function () {
             customNext: {
                 isComplete: false,
                 jsFunction: "EventManager.onNextDay();",
-            },            
+            },
             hasTimeSlider: true,
             hasTradeSlider: true,
             hasAnimation: true,
@@ -191,7 +191,7 @@ var _Navigator = (function () {
             hasTradeSlider: false,
             hasAnimation: true,
         },
-                "l4p2": {
+        "l4p2": {
             pageId: "l4p2",
             prevPageId: "l4p1",
             nextPageId: "l4p3",
@@ -201,7 +201,7 @@ var _Navigator = (function () {
                 Id: "Q18",
                 dataurl: "l4p2/q18.htm"
             }],
-            
+
         },
         "l4p3": {
             pageId: "l4p3",
@@ -209,7 +209,7 @@ var _Navigator = (function () {
             nextPageId: "l4p4",
             dataurl: "l4p3.htm",
             datalevel: 4,
-            isFriday:true,
+            isFriday: true,
             questions: [{
                 Id: "Q19",
                 dataurl: "l4p3/q19.htm"
@@ -222,9 +222,8 @@ var _Navigator = (function () {
             nextPageId: "l4p5",
             dataurl: "l4p4.htm",
             datalevel: 4,
-            questions: [
-                {
-                    Id: "Q20", 
+            questions: [{
+                    Id: "Q20",
                     dataurl: "l4p4/q20.htm"
                 },
                 {
@@ -251,7 +250,7 @@ var _Navigator = (function () {
             customNext: {
                 isComplete: false,
                 jsFunction: "EventManager.onNextDay();",
-            }, */  
+            }, */
             hasTimeSlider: true,
             hasTradeSlider: true,
             hasAnimation: true,
@@ -296,13 +295,15 @@ var _Navigator = (function () {
                 $("#linkprevious").k_disable();
                 $("#linknext").k_enable();
             }
-            if(_currentPageObject.hasActivity !=undefined && _currentPageObject.hasActivity){
+            if (_currentPageObject.hasActivity != undefined && _currentPageObject.hasActivity &&
+                (_currentPageObject.IsComplete == undefined || !_currentPageObject.IsComplete)) {
                 $("#linknext").k_disable();
+            } else {
+                $("#linknext").k_enable();
             }
             if (_currentPageObject.isLastPage != undefined && _currentPageObject.isLastPage) {
                 $("#linknext").k_disable();
             }
-
             _currentPageObject.isVisited = true;
 
             var pageUrl = _Settings.dataRoot + _currentPageObject.dataurl + _Caching.GetUrlExtension();;
@@ -310,7 +311,7 @@ var _Navigator = (function () {
                 $(".main-content").load(pageUrl, function () {
                     OnPageLoad();
                     $("h1").focus();
-                });                
+                });
             } else {
                 $(".main-content").fadeTo(250, 0.25, function () {
                     $(".main-content").load(pageUrl, function () {
@@ -349,11 +350,10 @@ var _Navigator = (function () {
         },
         Next: function () {
             $("#linkprevious").k_enable();
-            if(_currentPageObject.customNext!=undefined && !_currentPageObject.customNext.isComplete){
+            if (_currentPageObject.customNext != undefined && !_currentPageObject.customNext.isComplete) {
                 var custFunction = new Function(_currentPageObject.customNext.jsFunction);
                 custFunction();
-            }
-            else if (_currentPageObject.questions.length > 0) {
+            } else if (_currentPageObject.questions.length > 0) {
                 var IsAllQCompleted = true;
                 for (var i = 0; i < _currentPageObject.questions.length; i++) {
                     if (_currentPageObject.questions[i].isAnswered == undefined || !_currentPageObject.questions[i].isAnswered || _currentPageObject.questions[i].isQuestionVisit == undefined || !_currentPageObject.questions[i].isQuestionVisit) {
@@ -405,12 +405,12 @@ var _Navigator = (function () {
             for (var i = 0; i < progData.length; i++) {
                 var lprog_pecent = (progData[i] / progressLevels[i] * 100).toFixed(2);
                 $(".pgBgItem[data-level='" + i + "']").find(".pgBgItemFill").css("width", lprog_pecent + "%");
-                arialabel = arialabel.replace(i+ "%",  lprog_pecent + "%")
+                arialabel = arialabel.replace(i + "%", lprog_pecent + "%")
                 if (lprog_pecent == 100) {
                     $(".pgBgItem[data-level='" + i + "']").addClass("pgBgItemComplete")
                 }
             }
-            $(".progress .background").attr("aria-label",arialabel);
+            $(".progress .background").attr("aria-label", arialabel);
         },
         GetCurrentPage: function () {
             return _currentPageObject;
@@ -447,22 +447,19 @@ var _Navigator = (function () {
             for (var i in _NData) {
                 if (_NData[i].questions.length > 0) {
                     for (var j = 0; j < _NData[i].questions.length; j++) {
-                        totalPoints = totalPoints + _QData[_NData[i].questions[j].Id].totalPoints;
-                        if (_NData[i].questions[j].isAnswered != undefined && _NData[i].questions[j].isAnswered) {
-                            
-                            if (_NData[i].datalevel==Data_Level)
-                            {
+                        if (_NData[i].datalevel == Data_Level) {
+                            totalPoints = totalPoints + _QData[_NData[i].questions[j].Id].totalPoints;
+                            if (_NData[i].questions[j].isAnswered != undefined && _NData[i].questions[j].isAnswered) {
                                 ObtainPoint = ObtainPoint + (_NData[i].questions[j].points);
                             }
-                            
                         }
                     }
                 }
             }
             var score = (ObtainPoint / totalPoints) * 100;
-            return score.toFixed(0);
+            return score
         },
-        
+
     };
 })();
 

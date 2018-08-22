@@ -269,30 +269,7 @@
                     _Navigator.UpdateScore();
                 }
             }
-        },
-        ToggleGoalAnswer:function(goal){
-            if(goal == "shelter"){
-                 $("p#shelter").addClass("showContent");
-                 $("label[for='shelter']").addClass("boldStyle");
-            }else{
-                $("p#shelter").removeClass("showContent");
-                $("label[for='shelter']").removeClass("boldStyle");
-            } 
-            if(goal == "feast"){
-                $("p#feast").addClass("showContent");
-                $("label[for='feast']").addClass("boldStyle");              
-           }else{
-               $("p#feast").removeClass("showContent");
-               $("label[for='feast']").removeClass("boldStyle");
-           }
-             if(goal == "book"){
-                 $("p#book").addClass("showContent");
-                 $("label[for='book']").addClass("boldStyle");      
-            }else{
-                $("p#book").removeClass("showContent");
-                $("label[for='book']").removeClass("boldStyle");
-            } 
-        },
+        },        
         GetCurrentQuestion: function () {
             return _currentQuestionObj;
         },

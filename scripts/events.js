@@ -82,7 +82,6 @@ $(document).on("click", ".graphbtncheckanswer", function (event) {
     _CustomQuestion.CheckGraphAnswer(2);
 });
 $(document).on("click", ".graphbtnretry", function (event) {
-
     if ($(this).k_IsDisabled()) return;
     _CustomQuestion.GraphRetry();
 });
@@ -94,14 +93,10 @@ $(document).on("click", "#btnfindout", function (event) {
     if ($(this).k_IsDisabled()) return;
     EventManager.onFind();
 });
-$(document).on("click", ".goalRadio", function (event) {
-    var goal = $(this).val();
-    _TradeSlider.UpdateTarget(goal);
-});
-
 $(document).on("change", ".goalRadio", function (event) {
     var goal = $(this).attr('id');
-    _Question.ToggleGoalAnswer(goal);
+    _TradeSlider.UpdateTarget(goal);
+    _CustomQuestion.ToggleGoalAnswer(goal);
 });
 $(document).on("click", "#btnstartslider", function (event) {
     if ($(this).k_IsDisabled()) return;
