@@ -291,6 +291,9 @@ var _Navigator = (function () {
             _currentPageId = pageId;
             this.UpdateProgressBar();
             _currentPageObject = _NData[_currentPageId]
+            //NM: Enable Menu Item
+            $("a.menuitem[data-id='" + _currentPageId +  "']").closest("li").css("display","block");
+            //
             if (_currentPageObject.isStartPage != undefined && _currentPageObject.isStartPage) {
                 $("#linkprevious").k_disable();
                 $("#linknext").k_enable();

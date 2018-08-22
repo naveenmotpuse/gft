@@ -290,8 +290,7 @@ var _Animation = (function () {
             } else if (currPage.hasTradeSlider != undefined && currPage.hasTradeSlider) {
                 if (currPage.pageId == "l2p3") {
                     $("#btnstartslider").k_disable();
-                }
-                else if(currPage.pageId == 'l4p5'){
+                } else if (currPage.pageId == 'l4p5') {
                     $('.friday-raftSprites2').removeClass('friday-raftSprites2').addClass('friday-raftSprites');
                     $('.friday-raftSprites').removeClass('friday-raftSprites2');
                     $('.fridaySprites2').removeClass('fridaySprites2').addClass('fridaySprites');
@@ -304,7 +303,7 @@ var _Animation = (function () {
                         $("#btnstartslider").k_enable();
                     }
                 }, 2500)
-            } else if (currPage.pageId == 'l3p2'||currPage.pageId == 'l3p1'||currPage.pageId == 'l4p1') {
+            } else if (currPage.pageId == 'l3p2' || currPage.pageId == 'l3p1' || currPage.pageId == 'l4p1') {
                 $('.fishBarrelRaft2').hide();
             }
         },
@@ -390,10 +389,9 @@ var EventManager = function () {
                 var animInterval = 0;
                 if (currPage.hasTradeSlider != undefined && currPage.hasTradeSlider) {
                     var sceanIndex = _Scenario.getScenarioIndex();
-                    if(currPage.datalevel == 4 && sceanIndex == 1){
+                    if (currPage.datalevel == 4 && sceanIndex == 1) {
                         _Animation.LadyGoWithFish();
-                    }
-                    else{
+                    } else {
                         _Animation.LadyGoWithWood();
                     }
                     var ts = _TradeSlider.GetTradeSettings();
@@ -425,7 +423,7 @@ var EventManager = function () {
 
         },
         OnTryAgain: function () {
-            _Animation.day();            
+            _Animation.day();
             Table.hide();
             var fishhrs = 0;
             var woodhrs = 0;
@@ -452,8 +450,8 @@ var EventManager = function () {
             var currPage = _Navigator.GetCurrentPage();
             //NM: Need to check this call.
             _Slider.InitSelectTimeSlider();
-            if (currPage.hasTradeSlider != undefined && currPage.hasTradeSlider) {                
-                _Animation.MngAnimationEle();               
+            if (currPage.hasTradeSlider != undefined && currPage.hasTradeSlider) {
+                _Animation.MngAnimationEle();
                 _TradeSlider.ResetTradeSlider();
             }
         },
@@ -463,7 +461,7 @@ var EventManager = function () {
             $('.fridaySprites2').removeClass('fridaySprites2').addClass('fridaySprites');
             $('.friday-raftSprites2').removeClass('friday-raftSprites2').addClass('friday-raftSprites');
             $("#linknext").k_disable();
-            _TradeSlider.UpdateInventoryTables();            
+            _TradeSlider.UpdateInventoryTables();
             DataStorage.updateDay();
             var currentDay = DataStorage.getCurrentDay();
             $("#dayno").text(currentDay);
@@ -490,13 +488,13 @@ var EventManager = function () {
             $("#btnfindout").k_enable();
             $("#onewoodfor-range").k_enable()
             $("#givewood-range").k_enable()
-            _Question.UnloadFeedback();            
+            _Question.UnloadFeedback();
             _TradeSlider.ResetTradeSlider();
             $('body').animate({
                 scrollTop: $(".t_animation_c").position().top - _Settings.topMargin
             }, 200);
         },
-        onAnimComplete: function () {            
+        onAnimComplete: function () {
             var currPage = _Navigator.GetCurrentPage();
             var fish = DataStorage.getPotData().fish;
             var wood = DataStorage.getPotData().wood;
@@ -509,10 +507,9 @@ var EventManager = function () {
             if (currPage.hasTradeSlider != undefined && currPage.hasTradeSlider) {
                 $('.castawaySprites1, .fridaycastawaySprites').show();
                 var sceanindex = _Scenario.getScenarioIndex();
-                if(currPage.datalevel == 4 && sceanindex == 1){
+                if (currPage.datalevel == 4 && sceanindex == 1) {
                     _Animation.LadyComeWithWood();
-                }
-                else{
+                } else {
                     _Animation.LadyComeWithFish();
                 }
                 setTimeout(function () {
@@ -543,6 +540,7 @@ var EventManager = function () {
             }
         },
         onNightAnimComplete: function () {
+            debugger;
             _Animation.day();
             var currPage = _Navigator.GetCurrentPage();
             var isdie = false;
@@ -622,16 +620,19 @@ var EventManager = function () {
 
             if (!isdie) {
                 var _currentQuestionObj = _Question.GetCurrentQuestion();
-                _currentQuestionObj.isAnswered = true;
-                _currentQuestionObj.points = parseFloat(_currentQuestionObj.totalPoints);
                 _TradeSlider.SetRemTradeData(remdata);
                 DataStorage.SetRemainingData(remdata);
-
                 if (currPage.hasTradeSlider != undefined && currPage.hasTradeSlider) {
                     DataStorage.SetTradeData();
-                    if (_TradeSlider.IsTargetComplete()) {                        
+                    if (_TradeSlider.IsTargetComplete()) {
+                        _currentQuestionObj.isAnswered = true;
+                        _currentQuestionObj.points = parseFloat(_currentQuestionObj.totalPoints);
+                        currPage.IsComplete = true;
                         var target = _TradeSlider.GetTarget();
-                        if (target.goal == "shelter") {
+                        if (target.goal == "notarget") {
+                            _Question.Loadfeedback(0);
+                        }
+                        else if (target.goal == "shelter") {
                             _Question.Loadfeedback(3);
                         } else if (target.goal == "feast") {
                             _Question.Loadfeedback(4);
@@ -647,19 +648,26 @@ var EventManager = function () {
                         }
 
                         $('.friday-raftSprites').removeClass('friday-raftSprites').addClass('friday-raftSprites2');
-                        
+
                     } else {
+                        if (currPage.pageId == "l2p3") {
+                            _currentQuestionObj.isAnswered = true;
+                            _currentQuestionObj.points = parseFloat(_currentQuestionObj.totalPoints);
+                            currPage.IsComplete = true;
+                        }
                         _Question.Loadfeedback(0);
                     }
                 } else {
+                    _currentQuestionObj.isAnswered = true;
+                    _currentQuestionObj.points = parseFloat(_currentQuestionObj.totalPoints);
+                    currPage.IsComplete = true;
                     _Question.Loadfeedback(0);
                 }
 
                 DataStorage.updateCollection();
                 _Navigator.UpdateScore();
                 $("#linknext").k_enable()
-            } 
-            else if (diereason == "less_fish" || diereason == "you_die") {
+            } else if (diereason == "less_fish" || diereason == "you_die") {
                 if (currPage.pageId == "l4p5") {
                     if (diereason2 == "wood") {
                         _Question.Loadfeedback(2);
@@ -686,7 +694,6 @@ var EventManager = function () {
             }
         },
         UpdateDayInFeedback: function () {
-            
             var currentDay = DataStorage.getCurrentDay();
             var dayval = ""
             var days = {
@@ -702,16 +709,48 @@ var EventManager = function () {
             $("#dayval").text(dayval);
         },
         ActivityPrevAnswer: function () {
-            var pageId = _Navigator.GetCurrentPage().pageId;
-            var datacoll = DataStorage.getCollection();
-            for (var i = 0; i < datacoll.length; i++) {
-                if (datacoll[i].pageId == pageId) {
-                    Table.setWood(datacoll[i]._woodsLbs, 0);
-                    Table.setfish(datacoll[i]._fishCals, 0);
-                    break;
+            var currPage = _Navigator.GetCurrentPage();
+            //var datacoll = DataStorage.getCollection();
+            var activityDatacoll = DataStorage.getActivityData();
+            var activityData = activityDatacoll[activityDatacoll.length - 1];
+
+            if (currPage.hasTradeSlider != undefined && currPage.hasTradeSlider) {
+                if (currPage.pageId == "l2p3") {
+                    _Question.Loadfeedback(0);
+                } else {
+                    var target = activityData.tradeData.Target;
+                    if (target.goal == "shelter") {
+                        _Question.Loadfeedback(3);
+                    } else if (target.goal == "feast") {
+                        _Question.Loadfeedback(4);
+                    } else if (target.goal == "book") {
+                        _Question.Loadfeedback(5);
+                    } else if (target.goal == "wayoff") {
+                        _Question.Loadfeedback(3);
+                    } else if (target.goal == "betteroff") {
+                        _Question.Loadfeedback(1);
+                    }
+                    if (currPage.pageId == "l3p2") {
+                        if (target.goal != "notarget") {
+                            $("p.goaldesc").hide();
+                            $("p.goaldesc[goal='" + target.goal + "']").show()
+                        }
+                    }
                 }
+
+                $("#onewoodfor-range").val(activityData.tradeData.TR.onewoodfor)
+                $("#givewood-range").val(activityData.tradeData.TR.givewood)
+                $("#onewoodfor-range").k_disable();
+                $("#givewood-range").k_disable();
+            } else {
+                if (activityData.pageId == currPage.pageId) {
+                    Table.setWood(activityData._woodsLbs, 0);
+                    Table.setfish(activityData._fishCals, 0);
+                }
+                _Question.Loadfeedback(0);
             }
-            _Question.Loadfeedback(0);
+
+            $("#btnfindout").k_disable();
 
             $(".selecttimeslider").hide();
             $(".startbtnpanel").hide();

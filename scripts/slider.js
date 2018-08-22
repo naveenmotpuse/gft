@@ -402,9 +402,9 @@ var _TradeSlider = (function () {
         },
     }
     var Target = {
-        goal: "shelter",
-        goallbs: 90,
-        goalcals: 2000,
+        goal: "notarget",
+        goallbs: 0,
+        goalcals: 0,
         goalhours: undefined
     }
     return {

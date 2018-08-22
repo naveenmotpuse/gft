@@ -53,9 +53,9 @@ var _Scenario = (function () {
                 scenarioIndex = qs_sceanarioIndex;
             }
             if (scenarioIndex == -1) {
-                var indexarr = [1, 0];
+                var indexarr = [1, 0, 0, 1, 1, 0, 1, 0 , 1, 0];
                 indexarr = indexarr.sort(function () {
-                    return .5 - Math.random();
+                    return 0.5 - Math.random();
                 });
                 scenarioIndex = indexarr[0];
             }

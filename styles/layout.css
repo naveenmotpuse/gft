@@ -227,13 +227,20 @@ select:active {
 #header-progress .scoreDiv {
     display: flex;
     justify-content: flex-end;
+    font-size:14px;
     font-weight: bold;
+    color: #666;
     float: right;
     position: absolute;
-    bottom: 55px;
-    color: gray;
+    bottom: 55px;    
     margin-right: 25px;
     right: 0px;
+}
+
+#header-progress .scoreDiv .scoreInnrDiv {
+    font-size:14px;
+    font-weight: bold;
+    color: #666;
 }
 
 #header-btn-container {
