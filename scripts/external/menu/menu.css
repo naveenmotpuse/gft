@@ -54,6 +54,7 @@
     padding: 0px 5px 0px 5px;
     min-width: 260px;
     max-height: 300px;
+    z-index: 1;
 }
 #appmenu li ul li {
     margin: 0px 0px;

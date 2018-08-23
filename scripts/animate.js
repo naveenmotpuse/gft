@@ -629,10 +629,9 @@ var EventManager = function () {
                         _currentQuestionObj.points = parseFloat(_currentQuestionObj.totalPoints);
                         currPage.IsComplete = true;
                         var target = _TradeSlider.GetTarget();
-                        if (target.goal == "notarget") {
+                        if (target.goal == "survive") {
                             _Question.Loadfeedback(0);
-                        }
-                        else if (target.goal == "shelter") {
+                        } else if (target.goal == "shelter") {
                             _Question.Loadfeedback(3);
                         } else if (target.goal == "feast") {
                             _Question.Loadfeedback(4);
@@ -646,15 +645,8 @@ var EventManager = function () {
                         if (currPage.customNext != undefined) {
                             currPage.customNext.isComplete = true;
                         }
-
                         $('.friday-raftSprites').removeClass('friday-raftSprites').addClass('friday-raftSprites2');
-
-                    } else {
-                        if (currPage.pageId == "l2p3") {
-                            _currentQuestionObj.isAnswered = true;
-                            _currentQuestionObj.points = parseFloat(_currentQuestionObj.totalPoints);
-                            currPage.IsComplete = true;
-                        }
+                    } else {                        
                         _Question.Loadfeedback(0);
                     }
                 } else {
@@ -707,62 +699,7 @@ var EventManager = function () {
                 dayval = currentDay + days[(currentDay % 10)]
             }
             $("#dayval").text(dayval);
-        },
-        ActivityPrevAnswer: function () {
-            var currPage = _Navigator.GetCurrentPage();
-            //var datacoll = DataStorage.getCollection();
-            var activityDatacoll = DataStorage.getActivityData();
-            var activityData = activityDatacoll[activityDatacoll.length - 1];
-
-            if (currPage.hasTradeSlider != undefined && currPage.hasTradeSlider) {
-                if (currPage.pageId == "l2p3") {
-                    _Question.Loadfeedback(0);
-                } else {
-                    var target = activityData.tradeData.Target;
-                    if (target.goal == "shelter") {
-                        _Question.Loadfeedback(3);
-                    } else if (target.goal == "feast") {
-                        _Question.Loadfeedback(4);
-                    } else if (target.goal == "book") {
-                        _Question.Loadfeedback(5);
-                    } else if (target.goal == "wayoff") {
-                        _Question.Loadfeedback(3);
-                    } else if (target.goal == "betteroff") {
-                        _Question.Loadfeedback(1);
-                    }
-                    if (currPage.pageId == "l3p2") {
-                        if (target.goal != "notarget") {
-                            $("p.goaldesc").hide();
-                            $("p.goaldesc[goal='" + target.goal + "']").show()
-                        }
-                    }
-                }
-
-                $("#onewoodfor-range").val(activityData.tradeData.TR.onewoodfor)
-                $("#givewood-range").val(activityData.tradeData.TR.givewood)
-                $("#onewoodfor-range").k_disable();
-                $("#givewood-range").k_disable();
-            } else {
-                if (activityData.pageId == currPage.pageId) {
-                    Table.setWood(activityData._woodsLbs, 0);
-                    Table.setfish(activityData._fishCals, 0);
-                }
-                _Question.Loadfeedback(0);
-            }
-
-            $("#btnfindout").k_disable();
-
-            $(".selecttimeslider").hide();
-            $(".startbtnpanel").hide();
-            $(".runtimeslider").hide();
-            $(".nighttimeslider").show();
-            $(".slider-arrow-night").css({
-                "right": "0px"
-            });
-            $("#div_question").removeClass("displaynone").show();
-            $(".findout").k_disable();
-            $("#linknext").k_enable();
-        }
+        }        
     }
 }();
 var Table = function () {

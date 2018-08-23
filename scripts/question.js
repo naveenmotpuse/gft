@@ -6,6 +6,7 @@
         _Question.SetAriaProps();
         _CustomQuestion.OnQuestionLoad();
         if (_currentQuestionObj.isAnswered) {
+            debugger;
             _Question.PrevAnswer();
         }
     }
@@ -123,51 +124,50 @@
                 $("#div_feedback").css("margin-top", (pdiff + 35) + "px");
             }
         },
-        PrevAnswer: function () {
-            var totalOptions = _currentQuestionObj.options.length;
-            $(".btncheckanswer").k_disable();
-            $(".questionband").find("input").k_disable()
-            for (var i = 0; i < totalOptions; i++) {
-                var _optD = _currentQuestionObj.options[i];
-                if (_optD.type == "select") {
-                    _boxGrp.val(_optD.selectedAnswer)
-                    if (_optD.answer != _optD.selectedAnswer) {
-                        _boxGrp.addClass("incorrect");
-                    } else {
-                        _boxGrp.addClass("correct");
-                    }
-                } else if (_optD.type == "radio") {
-                    if (_optD.answerId != _optD.selectedId) {
-                        $("#" + _optD.selectedId).addClass("incorrect");
-                    } else {
-                        $("#" + _optD.selectedId).addClass("correct");
-                    }
-                    $("#" + _optD.selectedId).attr('checked', 'checked');
-                } else if (_optD.type == "input") {
+        PrevAnswer: function () {            
+            if (_currentQuestionObj.type == "question") {
+                var totalOptions = _currentQuestionObj.options.length;
+                $(".btncheckanswer").k_disable();
+                $(".questionband").find("input").k_disable()
+                for (var i = 0; i < totalOptions; i++) {
+                    var _optD = _currentQuestionObj.options[i];
+                    if (_optD.type == "select") {
+                        _boxGrp.val(_optD.selectedAnswer)
+                        if (_optD.answer != _optD.selectedAnswer) {
+                            _boxGrp.addClass("incorrect");
+                        } else {
+                            _boxGrp.addClass("correct");
+                        }
+                    } else if (_optD.type == "radio") {
+                        if (_optD.answerId != _optD.selectedId) {
+                            $("#" + _optD.selectedId).addClass("incorrect");
+                        } else {
+                            $("#" + _optD.selectedId).addClass("correct");
+                        }
+                        $("#" + _optD.selectedId).attr('checked', 'checked');
+                    } else if (_optD.type == "input") {
 
-                    var inputval = _optD.selectedAnswer;
-                    $("#" + _optD.id).val(_optD.selectedAnswer);
-                    if (_optD.answer != _optD.selectedAnswer) {
-                        $("#" + _optD.id).addClass("incorrect");
-                    } else {
-                        $("#" + _optD.id).addClass("correct")
+                        var inputval = _optD.selectedAnswer;
+                        $("#" + _optD.id).val(_optD.selectedAnswer);
+                        if (_optD.answer != _optD.selectedAnswer) {
+                            $("#" + _optD.id).addClass("incorrect");
+                        } else {
+                            $("#" + _optD.id).addClass("correct")
+                        }
                     }
-                } else if (_optD.type == "graph") {
-                    //NM: Need to separate Custom Question from standard question.
-                    _CustomQuestion.PrevGraphAnswer();
-                } else if (_optD.type == "activity") {
-                    EventManager.ActivityPrevAnswer();
-                }
+                }                     
+                this.Loadfeedback(_currentQuestionObj.feedbackIndex);
+                this.SetQuestionStatus();
+            } else {
+                _CustomQuestion.PrevAnswer();
             }
-            //Show Correct Feedback            
-            this.Loadfeedback(_currentQuestionObj.fNo);
-            this.SetQuestionStatus();
         },
         CheckAnswer: function () {
             var isWorsen = false;
             var _qPoints = 0.0;
             var isAllCorrect = true;
             var totalOptions = _currentQuestionObj.options.length;
+            var feedbackIndex = 0;
 
             $(".btncheckanswer").k_disable();
             $(".questionband").find("input").k_disable()
@@ -191,7 +191,7 @@
                         _optD.points = optPoints;
                         _optD.isCorrect = true;
                         _qPoints += optPoints;
-                        _boxGrp.addClass("correct");                        
+                        _boxGrp.addClass("correct");
                     }
                 } else if (_optD.type == "radio") {
                     var _boxGrp = $("input:radio[name='" + _optD.group + "']");
@@ -212,7 +212,7 @@
                         _optD.points = optPoints;
                         _optD.isCorrect = true;
                         _qPoints += optPoints
-                        $("#" + _optD.selectedId).addClass("correct");                        
+                        $("#" + _optD.selectedId).addClass("correct");
                     }
                 } else if (_optD.type == "input") {
                     var inputval = $("#" + _optD.id).val();
@@ -239,11 +239,11 @@
             }
             if (isAllCorrect) {
                 //Show Correct Feedback
-                var fNo = 0;
-                this.Loadfeedback(fNo);
+                feedbackIndex = 0;
+                this.Loadfeedback(feedbackIndex);
                 _currentQuestionObj.points = _qPoints;
                 _currentQuestionObj.isAnswered = true;
-                _currentQuestionObj.fNo = fNo;
+                _currentQuestionObj.feedbackIndex = feedbackIndex;
                 $("#linknext").k_enable();
                 this.SetQuestionStatus();
                 //Need to think on generic logic.
@@ -252,16 +252,16 @@
                 _Navigator.UpdateScore();
             } else {
                 _currentQuestionObj.tryCount += 1;
-                var fNo = _currentQuestionObj.tryCount;
+                feedbackIndex = _currentQuestionObj.tryCount;
                 if (_currentQuestionObj.tryCount < _currentQuestionObj.totalTry) {
                     //Show tryCount incorrect feedback
-                    this.Loadfeedback(fNo);
+                    this.Loadfeedback(feedbackIndex);
                 } else {
                     //Show final incorrect feedback
-                    this.Loadfeedback(fNo);
+                    this.Loadfeedback(feedbackIndex);
                     _currentQuestionObj.points = _qPoints;
                     _currentQuestionObj.isAnswered = true;
-                    _currentQuestionObj.fNo = fNo;
+                    _currentQuestionObj.feedbackIndex = feedbackIndex;
                     $("#linknext").k_enable();
                     this.SetQuestionStatus();
                     //Need to think on generic logic.
@@ -269,7 +269,7 @@
                     _Navigator.UpdateScore();
                 }
             }
-        },        
+        },
         GetCurrentQuestion: function () {
             return _currentQuestionObj;
         },

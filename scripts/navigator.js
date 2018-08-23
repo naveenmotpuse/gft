@@ -4,6 +4,8 @@ var _Navigator = (function () {
     var _currentPageId = "";
     var _currentPageObject = {};
     var progressLevels = [1, 8, 8, 3, 6];
+    var _AttemptNData = {};
+    var _TempNData = {};
     var _NData = {
         "l1p1": {
             pageId: "l1p1",
@@ -130,6 +132,10 @@ var _Navigator = (function () {
                 Id: "Q15",
                 dataurl: "l2p3/q15.htm"
             }],
+            customNext: {
+                isComplete: false,
+                jsFunction: "EventManager.onNextDay();",
+            },
             hasTimeSlider: true,
             hasTradeSlider: true,
             hasAnimation: true,
@@ -245,19 +251,18 @@ var _Navigator = (function () {
             questions: [{
                 Id: "Q22",
                 dataurl: "l4p5/q22.htm"
-            }],
-            /*
+            }],            
             customNext: {
                 isComplete: false,
                 jsFunction: "EventManager.onNextDay();",
-            }, */
+            },
             hasTimeSlider: true,
             hasTradeSlider: true,
             hasAnimation: true,
         },
         "summary": {
             pageId: "summary",
-            prevPageId: "l4p1",
+            prevPageId: "l4p5",
             nextPageId: "",
             dataurl: "summary.htm",
             datalevel: 5,
@@ -462,7 +467,44 @@ var _Navigator = (function () {
             var score = (ObtainPoint / totalPoints) * 100;
             return score
         },
+        UpdateDefaultNData: function () {
+            //NM: The call to this function should be only once in document.ready first call.
+            //Used to save default navigator data.
+            _TempNData = $.extend(true, {}, _NData);
+        },
+        GetAttemptNData: function () {
+            return _AttemptNData;
+        },
+        ReAttempt: function () {
+            _AttemptNData = $.extend(true, {}, _NData);
+            _NData = $.extend(true, {}, _TempNData);
 
+            _Navigator.UpdateProgressBar();
+            _Navigator.UpdateScore();
+            DataStorage.ModuleRetry();
+            _Navigator.Start();
+
+            var progData = this.GetProgressData();
+            for (var i = 0; i < progData.length; i++) {
+                $(".pgBgItem[data-level='" + i + "']").removeClass("pgBgItemComplete");
+            }
+        },
+        ReAttemptLevel: function (datalevel) {
+            var pageId = "";
+            for (var i in _NData) {
+                if (_NData[i].datalevel == datalevel) {
+                    _NData[i] = $.extend(true, {}, tempNdata[i]);
+                    if (pageId == "") {
+                        pageId = _NData[i].pageId;
+                    }
+                }
+            }
+            _Navigator.LoadPage(pageId);
+            _Navigator.UpdateScore();
+            DataStorage.ModuleRetry();
+            _Navigator.UpdateProgressBar();
+            $(".pgBgItem[data-level='" + datalevel + "']").removeClass("pgBgItemComplete");
+        },
     };
 })();
 

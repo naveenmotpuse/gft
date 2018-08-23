@@ -12,6 +12,10 @@
 
 
 $(document).ready(function () {
+    
+    //always first in ready. should be called only once.
+    _Navigator.UpdateDefaultNData();
+
     _Template.LoadTopSlider();
     _Navigator.Start();
     $("h1:first").focus();

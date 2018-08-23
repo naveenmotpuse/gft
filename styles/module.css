@@ -1084,3 +1084,15 @@ td[rowspan] {
 .summary_text {
     margin-left: 60px;
 }
+.levelbtnretry{
+    padding: 5px 5px;
+    border-radius: 15px;
+    min-width: 28px;
+    margin-left: 5px;
+}
+.exambtnretrydiv{
+    text-align: right;
+}
+.exambtnsubmindiv{
+    text-align: center;
+}

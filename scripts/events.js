@@ -96,9 +96,18 @@ $(document).on("click", "#btnfindout", function (event) {
 $(document).on("change", ".goalRadio", function (event) {
     var goal = $(this).attr('id');
     _TradeSlider.UpdateTarget(goal);
-    _CustomQuestion.ToggleGoalAnswer(goal);
+    _TradeSlider.ToggleGoal(goal);
 });
 $(document).on("click", "#btnstartslider", function (event) {
     if ($(this).k_IsDisabled()) return;
     EventManager.onStart();    
+});
+
+$(document).on("click", ".exambtnretry", function (event) {
+    if ($(this).k_IsDisabled()) return;
+    _Navigator.ReAttempt();
+});
+$(document).on("click", ".levelbtnretry", function (event) {
+    var datalevel = $(this).attr("data-level");
+    _Navigator.ReAttemptLevel(datalevel);
 });

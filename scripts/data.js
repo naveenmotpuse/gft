@@ -227,7 +227,7 @@ var ValidationProps = {
 var AnimConfig = {
     duration: 400,
     totalTime: 24,
-    dayTime: 12,    
+    dayTime: 12,
     nightWoodValueDeduction: 32,
     nightFishValueDeduction: 2000,
     nightWoodValueDeductionfriday: 32,
@@ -251,10 +251,10 @@ var _Settings = {
 var _QData = {
     "Q1": {
         Qid: "Q1",
+        type: "question",
         tryCount: 0,
         totalTry: 2,
-        totalPoints: 1,
-        type: "question",
+        totalPoints: 1,        
         options: [{
             type: "input",
             id: "inputCal",
@@ -301,7 +301,7 @@ var _QData = {
         options: [{
             type: "activity"
         }],
-        feedback: ["l1p3/q4c1.htm", "l1p3/q4ic1.htm", "l1p3/q4ic2.htm"],        
+        feedback: ["l1p3/q4c1.htm", "l1p3/q4ic1.htm", "l1p3/q4ic2.htm"],
     },
     "Q5": {
         Qid: "Q5",
@@ -334,11 +334,11 @@ var _QData = {
     },
     "Q7": {
         Qid: "Q7",
+        type: "graph",
         tryCount: 0,
         totalTry: 2,
         totalPoints: 1,
         level: 1,
-        type: "graph",
         graphData: [
             [0, 6000],
             [48, 0]
@@ -353,7 +353,7 @@ var _QData = {
         Qid: "Q8",
         type: "activity",
         tryCount: "",
-        totalPoints: 1,        
+        totalPoints: 1,
         options: [{
             type: "activity"
         }],
@@ -535,7 +535,7 @@ var _QData = {
         options: [{
             type: "activity"
         }],
-        feedback: ["l3p2/q16c1.htm", "l3p2/q16ic1.htm", "l3p2/q16ic2.htm", "l3p2/q16c2.htm", "l3p2/q16c3.htm","l3p2/q16c4.htm"]
+        feedback: ["l3p2/q16c1.htm", "l3p2/q16ic1.htm", "l3p2/q16ic2.htm", "l3p2/q16c2.htm", "l3p2/q16c3.htm", "l3p2/q16c4.htm"]
     },
     "Q17": {
         Qid: "Q17",
@@ -549,13 +549,13 @@ var _QData = {
         }],
         feedback: ["l3p3/q17c1.htm", "l3p3/q17ic1.htm", "l3p3/q17ic2.htm", "l3p3/q17c2.htm"]
     },
-        "Q18": {
+    "Q18": {
         Qid: "Q18",
+        type: "graph",
         tryCount: 0,
         totalTry: 2,
         totalPoints: 1,
         level: 2,
-        type: "graph",
         graphData: [],
         correctData: undefined,
         options: [{
@@ -566,13 +566,12 @@ var _QData = {
 
     "Q19": {
         Qid: "Q19",
+        type: "graph",
         tryCount: 0,
         totalTry: 2,
         totalPoints: 1,
-        level: 2,
-        type: "graph",
+        level: 2,        
         graphData: [
-            
         ],
         correctData: undefined,
         options: [{
@@ -588,35 +587,35 @@ var _QData = {
         totalPoints: 1,
         level: 1,
         options: [{
-            type: "input",
-            id: "inputcalfishlosty",
-            answerId: ""
-        },
-        {
-            type: "input",
-            id: "inputlogfirewoodgainy",
-            answerId: ""
-        },
-        {
-            type: "input",
-            id: "inputcalperlogy",
-            answerId: ""
-        },
-        {
-            type: "input",
-            id: "inputcalfishlostF",
-            answerId: ""
-        },
-        {
-            type: "input",
-            id: "inputlogfirewoodgainF",
-            answerId: ""
-        },
-        {
-            type: "input",
-            id: "inputcalperlogF",
-            answerId: ""
-        },
+                type: "input",
+                id: "inputcalfishlosty",
+                answerId: ""
+            },
+            {
+                type: "input",
+                id: "inputlogfirewoodgainy",
+                answerId: ""
+            },
+            {
+                type: "input",
+                id: "inputcalperlogy",
+                answerId: ""
+            },
+            {
+                type: "input",
+                id: "inputcalfishlostF",
+                answerId: ""
+            },
+            {
+                type: "input",
+                id: "inputlogfirewoodgainF",
+                answerId: ""
+            },
+            {
+                type: "input",
+                id: "inputcalperlogF",
+                answerId: ""
+            },
         ],
         feedback: ["l4p4/q20c1.htm", "ic1.htm", "l4p4/q20ic2.htm"]
     },
@@ -627,13 +626,11 @@ var _QData = {
         totalTry: 2,
         totalPoints: 1,
         level: 1,
-        options: [
-            {
+        options: [{
             type: "radio",
             id: "optionsL4",
             group: "l4-q21"
-            }
-        ],
+        }],
         feedback: ["l4p4/q21c1.htm", "ic1.htm", "l4p4/q21ic2.htm"]
     },
     "Q22": {
@@ -646,8 +643,9 @@ var _QData = {
         options: [{
             type: "activity"
         }],
-        feedback: ["l4p5/q22c1.htm","l4p5/q22c2.htm",
-                    "l4p5/q22yic1.htm", "l4p5/q22yic2.htm", "l4p5/q22yic3.htm",
-                    "l4p5/q22fic1.htm", "l4p5/q22fic2.htm", "l4p5/q22fic3.htm"]
+        feedback: ["l4p5/q22c1.htm", "l4p5/q22c2.htm",
+            "l4p5/q22yic1.htm", "l4p5/q22yic2.htm", "l4p5/q22yic3.htm",
+            "l4p5/q22fic1.htm", "l4p5/q22fic2.htm", "l4p5/q22fic3.htm"
+        ]
     }
 }

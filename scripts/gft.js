@@ -53,7 +53,7 @@ var _Scenario = (function () {
                 scenarioIndex = qs_sceanarioIndex;
             }
             if (scenarioIndex == -1) {
-                var indexarr = [1, 0, 0, 1, 1, 0, 1, 0 , 1, 0];
+                var indexarr = [1, 0, 0, 1, 1, 0, 1, 0, 1, 0];
                 indexarr = indexarr.sort(function () {
                     return 0.5 - Math.random();
                 });
@@ -182,7 +182,6 @@ var _TopSlider = (function () {
 })();
 
 var _Template = (function () {
-
     return {
         LoadTopSlider: function () {
             var pageUrl = "templates/topslider.htm" + _Caching.GetUrlExtension();
@@ -223,11 +222,14 @@ var _Template = (function () {
         LoadTradeSlider: function () {
             var pageUrl = "templates/tradeslider.htm" + _Caching.GetUrlExtension();
             $(".trade_slider_wrapper").load(pageUrl, function () {
-                _Slider.InitSelectTimeSlider();
-                _TradeSlider.InitSlider();
                 var currPage = _Navigator.GetCurrentPage();
-                _TradeSlider.ResetTimeSlider();
-
+                debugger;
+                if(currPage.IsComplete==undefined || !currPage.IsComplete){
+                    _Slider.InitSelectTimeSlider();
+                }
+                _TradeSlider.InitSlider();                
+                _TradeSlider.ResetTimeSlider();                
+                
                 if (currPage.pageId == "l2p3") {
                     $("#wood-range").k_disable()
                     $("#fish-range").k_disable()
@@ -257,14 +259,13 @@ var _Template = (function () {
 
 var _CustomQuestion = (function () {
     return {
-        ToggleGoalAnswer: function (goal) {
-            $("p.goaldescp").slideUp();
-            $("label.labelgoal").removeClass("boldStyle");
-            $("p.goaldescp[goal='" + goal + "']").slideDown();
-            $("label.labelgoal[for='" + goal + "']").addClass("boldStyle");
-            var currPage = _Navigator.GetCurrentPage();
-            currPage.isAnswered = true;
-            currPage.IsComplete = true;
+        PrevAnswer: function () {
+            var _currentQuestionObj = _Question.GetCurrentQuestion();
+            if (_currentQuestionObj.type == "graph") {
+                this.GraphPrevAnswer();
+            } else if (_currentQuestionObj.type == "activity") {
+                this.ActivityPrevAnswer();
+            }
         },
         OnFeedbackLoad: function () {
             var currPage = _Navigator.GetCurrentPage();
@@ -401,6 +402,7 @@ var _CustomQuestion = (function () {
                 return true;
         },
         CheckGraphAnswer: function (valPoints) {
+            var feedbackIndex = 0;
             $(".graphbtncheckanswer").k_disable();
             var point1 = {}
             var _currentQuestionObj = _Question.GetCurrentQuestion();
@@ -435,11 +437,11 @@ var _CustomQuestion = (function () {
 
             if (allliesonline) {
                 //Show Correct Feedback
-                fNo = 0;
-                _Question.Loadfeedback(fNo);
+                 feedbackIndex = 0;
+                _Question.Loadfeedback(feedbackIndex);
                 _currentQuestionObj.points = crrcount / valPoints;
                 _currentQuestionObj.isAnswered = true;
-                _currentQuestionObj.fNo = fNo;
+                _currentQuestionObj.feedbackIndex = feedbackIndex;
                 //Need to think on generic logic.
                 _CustomQuestion.UpdateGraphSubmitStatus();
                 _CustomQuestion.OnCheckAnswer();
@@ -447,16 +449,16 @@ var _CustomQuestion = (function () {
                 $("#linknext").k_enable();
             } else {
                 _currentQuestionObj.tryCount += 1;
-                var fNo = _currentQuestionObj.tryCount;
+                feedbackIndex = _currentQuestionObj.tryCount;
                 //Incorrect Feedback
                 if (_currentQuestionObj.tryCount < _currentQuestionObj.totalTry) {
-                    //Show tryCount incorrect feedback
-                    _Question.Loadfeedback(fNo);
+                    //Show tryCount incorrect feedback                    
+                    _Question.Loadfeedback(feedbackIndex);
                 } else {
-                    _Question.Loadfeedback(fNo);
+                    _Question.Loadfeedback(feedbackIndex);
                     _currentQuestionObj.points = crrcount / valPoints;
                     _currentQuestionObj.isAnswered = true;
-                    _currentQuestionObj.fNo = fNo;
+                    _currentQuestionObj.feedbackIndex = feedbackIndex;
                     $("#linknext").k_enable();
                     _CustomQuestion.UpdateGraphSubmitStatus();
                     //Need to think on generic logic.
@@ -466,7 +468,7 @@ var _CustomQuestion = (function () {
             }
 
         },
-        PrevGraphAnswer: function () {
+        GraphPrevAnswer: function () {
             var point1 = {}
             var _currentQuestionObj = _Question.GetCurrentQuestion();
             point1.x = _currentQuestionObj.graphData[0][0];
@@ -484,9 +486,84 @@ var _CustomQuestion = (function () {
 
             this.AddGraphPoints(selectedAnswer_point1.x, selectedAnswer_point1.y, 2);
             this.AddGraphPoints(selectedAnswer_point2.x, selectedAnswer_point2.y, 2);
-            _Question.Loadfeedback(_currentQuestionObj.fNo);
+            _Question.Loadfeedback(_currentQuestionObj.feedbackIndex);
             _CustomQuestion.UpdateGraphSubmitStatus();
+            $(".graphbtncheckanswer").k_disable();
             $("#linknext").k_enable();
+        },
+        ActivityPrevAnswer: function () {
+            console.log("ActivityPrevAnswer start");
+            var currPage = _Navigator.GetCurrentPage();
+            //var datacoll = DataStorage.getCollection();
+            var activityDatacoll = DataStorage.getActivityData();
+            var activityData = activityDatacoll[activityDatacoll.length - 1];
+
+            if (currPage.hasTradeSlider != undefined && currPage.hasTradeSlider) {
+                var target = activityData.tradeData.Target;
+                if (target.goal == "survive") {
+                    _Question.Loadfeedback(0);
+                } else if (target.goal == "shelter") {
+                    _Question.Loadfeedback(3);
+                } else if (target.goal == "feast") {
+                    _Question.Loadfeedback(4);
+                } else if (target.goal == "book") {
+                    _Question.Loadfeedback(5);
+                } else if (target.goal == "wayoff") {
+                    _Question.Loadfeedback(3);
+                } else if (target.goal == "betteroff") {
+                    _Question.Loadfeedback(1);
+                }
+                if (currPage.pageId == "l3p2") {
+                    if (target.goal != "survive") {
+                        $("p.goaldesc").hide();
+                        $("p.goaldesc[goal='" + target.goal + "']").show()
+                    }
+                }
+                $("#dayno").text(activityData.day);
+                $(".fishcounter .count").text(activityData.remFish);
+                $(".woodcounter .count").text(activityData.remWood);
+                $("#onewoodfor-range").val(activityData.tradeData.TR.onewoodfor)
+                $("#onewoodfor-fish").text(activityData.tradeData.TR.onewoodfor)
+                $("#givewood-range").attr("max", activityData.tradeData.TR.consumptionwood + activityData.tradeData.TR.givewood)
+                $("#givewood-range").val(activityData.tradeData.TR.givewood)
+                $("#givewood-logs").text(activityData.tradeData.TR.givewood)
+                $("#receivefish-cals").text(activityData.tradeData.TR.receivefish)
+                
+                $("#consumption-wood").text(activityData.tradeData.TR.consumptionwood)
+                $(".consumption-wood.r_label").text(activityData.tradeData.TR.consumptionwood + activityData.tradeData.TR.givewood)
+                $("#consumption-wood-range").attr("max", activityData.tradeData.TR.consumptionwood + activityData.tradeData.TR.givewood)
+                $("#consumption-wood-range").val(activityData.tradeData.TR.consumptionwood)
+                $("#consumption-fish").text(activityData.tradeData.TR.consumptionfish)
+                $("#consumption-fish-range").attr("max", activityData.tradeData.TR.fridayconsumptionfish + activityData.tradeData.TR.receivefish)
+                $("#consumption-fish-range").val(activityData.tradeData.TR.consumptionfish)                
+                $(".consumption-fish.r_label").text(activityData.tradeData.TR.fridayconsumptionfish + activityData.tradeData.TR.receivefish)
+                
+                _TradeSlider.ShowSliderPoint("studenttradeGraph", [activityData.tradeData.TR.consumptionwood, activityData.tradeData.TR.consumptionfish]);
+                _TradeSlider.ShowSliderPoint("fridaytradeGraph", [activityData.tradeData.TR.fridayconsumptionwood, activityData.tradeData.TR.fridayconsumptionfish]);
+                //_TradeSlider.SetTradeResult();
+                $("#onewoodfor-range").k_disable();
+                $("#givewood-range").k_disable();
+            } else {
+                if (activityData.pageId == currPage.pageId) {
+                    Table.setWood(activityData._woodsLbs, 0);
+                    Table.setfish(activityData._fishCals, 0);
+                }
+                _Question.Loadfeedback(0);
+            }
+
+            $("#btnfindout").k_disable();
+            $(".selecttimeslider").hide();
+            $(".startbtnpanel").hide();
+            $(".runtimeslider").hide();
+            $(".nighttimeslider").show();
+            $("#slider-arrow-night").css({
+                "left": "96%"
+            });
+            $("#div_question").removeClass("displaynone").show();
+            $(".findout").k_disable();
+            $("#linknext").k_enable();
+
+            console.log("ActivityPrevAnswer end");
         },
         UpdateGraphSubmitStatus: function () {
             var _currentQuestionObj = _Question.GetCurrentQuestion();
@@ -565,23 +642,21 @@ var _CustomPage = (function () {
             if (currPage.datalevel == 4) {
                 _ModuleCharts.DrawL4QuestionIntroChart();
             }
-            if (currPage.pageId == "summary") {                
-                for(var i=1;i<=4;i++){
+            if (currPage.pageId == "summary") {
+                for (var i = 1; i <= 4; i++) {
                     var levelscore = _Navigator.GetLevelScore(i);
                     $("#level" + i + "score").html(levelscore.toFixed(0));
-                    if(Number(levelscore)>=80){
+                    if (Number(levelscore) >= 80) {
                         $("#imglevel" + i).attr("src", "assets/images/stars_3.png")
-                        $("#imglevel" + i).attr("alt", "Level " + i + " : 3 star").attr("aria-label","Level " + i + " : 3 star")
-                    }
-                    else if(Number(levelscore)>= 50 && Number(levelscore) < 80){
+                        $("#imglevel" + i).attr("alt", "Level " + i + " : 3 star").attr("aria-label", "Level " + i + " : 3 star")
+                    } else if (Number(levelscore) >= 50 && Number(levelscore) < 80) {
                         $("#imglevel" + i).attr("src", "assets/images/stars_2.png")
-                        $("#imglevel" + i).attr("alt", "Level " + i + " : 2 star").attr("aria-label","Level " + i + " : 2 star")
-                    }
-                    else{
+                        $("#imglevel" + i).attr("alt", "Level " + i + " : 2 star").attr("aria-label", "Level " + i + " : 2 star")
+                    } else {
                         $("#imglevel" + i).attr("src", "assets/images/stars_1.png")
-                        $("#imglevel" + i).attr("alt", "Level " + i + " : 1 star").attr("aria-label","Level " + i + " : 1 star")
+                        $("#imglevel" + i).attr("alt", "Level " + i + " : 1 star").attr("aria-label", "Level " + i + " : 1 star")
                     }
-                }                
+                }
             }
             if (currPage.hasTimeSlider != undefined && currPage.hasTimeSlider) {
                 _Template.LoadRangeSlider();
@@ -598,11 +673,15 @@ var _CustomPage = (function () {
                 _Template.LoadNighttimeScheduler();
                 _Template.LoadTradeSlider();
 
-                if (currPage.pageId == "l3p3") {
+                if (currPage.pageId == "l2p3") {
+                    _TradeSlider.SetSurviveTarget();
+                } else if (currPage.pageId == "l3p3") {
                     _TradeSlider.SetWayOffTarget();
-                } 
+                } else if (currPage.datalevel == 4 && currPage.pageId == "l4p5") {
+                    this.SetBetterOffTarget();
+                }
                 if (currPage.pageId == "l3p2") {
-                    if (target.goal != "notarget") {
+                    if (target.goal != "survive") {
                         $("p.goaldesc").hide();
                         $("p.goaldesc[goal='" + target.goal + "']").show()
                     }
@@ -610,8 +689,8 @@ var _CustomPage = (function () {
             }
             if (currPage.hasActivity != undefined && currPage.hasActivity) {
                 if (currPage.IsComplete != undefined && currPage.IsComplete) {
-                    $("#" + target.goal).attr('checked', 'checked');
-                    _CustomQuestion.ToggleGoalAnswer(target.goal);
+                    $("#" + currPage.goal).attr('checked', 'checked');
+                    _TradeSlider.ToggleGoal(currPage.goal);
                     $("input.goalRadio").k_disable();
                     $("#next")
                 }
