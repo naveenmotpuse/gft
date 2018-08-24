@@ -376,23 +376,31 @@ var _Slider = (function () {
 })();
 
 var _TradeSlider = (function () {
+    var defaulValues = {
+        onewoodfor :150,
+        givewood:5,
+        receivefish:750,
+        givewoodmax:50,
+        cunsumtionwoodmax:96,
+        consumtionfishmax:6000
+    }
     var TradeSettings = {
-        yourwoodlogs: 96,
+        yourwoodlogs: defaulValues.cunsumtionwoodmax,
         yourfishcals: 0,
         fridaywoodlogs: 0,
-        fridayfishCals: 6000,
+        fridayfishCals: defaulValues.consumtionfishmax,
         youridlehours: 0
     }
     var TradeResults = {
-        onewoodfor: 250,
-        givewood: 5,
+        onewoodfor: defaulValues.onewoodfor,
+        givewood: defaulValues.givewood,
         givefish: 0,
-        receivefish: 1250,
+        receivefish: defaulValues.receivefish,
         receivewood: 0,
-        consumptionwood: (96 - 5),
-        consumptionfish: 1250,
-        fridayconsumptionfish: (6000 - 1250),
-        fridayconsumptionwood: 5,
+        consumptionwood: (defaulValues.cunsumtionwoodmax - defaulValues.givewood),
+        consumptionfish: defaulValues.receivefish,
+        fridayconsumptionfish: (defaulValues.consumtionfishmax - defaulValues.receivefish),
+        fridayconsumptionwood: defaulValues.givewood,
         remData: {
             wood: 0,
             fish: 0,
@@ -410,7 +418,11 @@ var _TradeSlider = (function () {
     return {
         InitSlider: function () {
             $("#onewoodfor-range").off("input").on("input", document, function (event) {
+                event.preventDefault();
                 $("#onewoodfor-fish").text($(this).val())
+                var onewoodfor = Number($(this).val());
+                TradeResults.onewoodfor = onewoodfor;
+                _TradeSlider.SetTradeResult();
             });
             $("#onewoodfor-range").off("change").on("change", document, function (event) {
                 event.preventDefault();
@@ -420,7 +432,11 @@ var _TradeSlider = (function () {
             });
 
             $("#givewood-range").off("input").on("input", document, function (event) {
+                event.preventDefault();
                 $("#givewood-logs").text($(this).val())
+                var givewood = Number($(this).val());
+                TradeResults.givewood = givewood;
+                _TradeSlider.SetTradeResult();
             });
             $("#givewood-range").off("change").on("change", document, function (event) {
                 event.preventDefault();
@@ -430,7 +446,11 @@ var _TradeSlider = (function () {
             });
 
             $("#givefish-range").off("input").on("input", document, function (event) {
+                event.preventDefault();
                 $("#givefish-cals").text($(this).val())
+                var givefish = Number($(this).val());
+                TradeResults.givefish = givefish;
+                _TradeSlider.SetTradeResult();
             });
             $("#givefish-range").off("change").on("change", document, function (event) {
                 event.preventDefault();
@@ -471,15 +491,15 @@ var _TradeSlider = (function () {
             }
             
             TradeResults = {
-                onewoodfor: 250,
-                givewood: 5,
+                onewoodfor: defaulValues.onewoodfor,
+                givewood: defaulValues.givewood,
                 givefish: 0,
-                receivefish: 1250,
+                receivefish: defaulValues.receivefish,
                 receivewood: 0,
-                consumptionwood: (usermaxwoodcollection - 5),
-                consumptionfish: 1250,
-                fridayconsumptionfish: (fridaymaxfishcollection - 1250),
-                fridayconsumptionwood: 5,
+                consumptionwood: (usermaxwoodcollection - defaulValues.givewood),
+                consumptionfish: defaulValues.receivefish,
+                fridayconsumptionfish: (fridaymaxfishcollection - defaulValues.receivefish),
+                fridayconsumptionwood: defaulValues.givewood,
                 remData: {
                     wood: 0,
                     fish: 0,
@@ -498,14 +518,14 @@ var _TradeSlider = (function () {
             }
 
             if (!isDefault) {
-                TradeResults.givefish = 1250;
-                TradeResults.receivewood = 5;
+                TradeResults.givefish = defaulValues.receivefish;
+                TradeResults.receivewood = defaulValues.givewood;
                 TradeResults.givewood = 0;
                 TradeResults.receivefish = 0;
-                TradeResults.consumptionwood = 5;
-                TradeResults.consumptionfish = (usermaxfishcollection - 1250);
-                TradeResults.fridayconsumptionfish = 1250;
-                TradeResults.fridayconsumptionwood = (fridaymaxwoodcollection - 5);
+                TradeResults.consumptionwood = defaulValues.givewood;
+                TradeResults.consumptionfish = (usermaxfishcollection - defaulValues.receivefish);
+                TradeResults.fridayconsumptionfish = defaulValues.receivefish;
+                TradeResults.fridayconsumptionwood = (fridaymaxwoodcollection - defaulValues.givewood);
                 $("#consumption-wood-range").attr("max", fridaymaxwoodcollection);
                 $(".consumption-wood.r_label").text(fridaymaxwoodcollection);
                 $("#givefish-range").attr("max", usermaxfishcollection);
@@ -514,19 +534,21 @@ var _TradeSlider = (function () {
                 $(".consumption-fish.r_label").text(usermaxfishcollection);
 
                 //Default Initialisation of sliders.            
-                $("#onewoodfor-range").val(250);
-                $("#givefish-range").val(1250);
+                $("#onewoodfor-range").val(defaulValues.onewoodfor);
+                $("#givefish-range").val(defaulValues.receivefish);
             } else {
                 $("#consumption-wood-range").attr("max", usermaxwoodcollection);
                 $(".consumption-wood.r_label").text(usermaxwoodcollection);
-                $("#givewood-range").attr("max", usermaxwoodcollection);
-                $(".givewood.r_label").text(usermaxwoodcollection);
+                //$("#givewood-range").attr("max", usermaxwoodcollection);
+                //$(".givewood.r_label").text(usermaxwoodcollection);
+                $("#givewood-range").attr("max", defaulValues.givewoodmax);
+                $(".givewood.r_label").text(defaulValues.givewoodmax);
                 $("#consumption-fish-range").attr("max", fridaymaxfishcollection);
                 $(".consumption-fish.r_label").text(fridaymaxfishcollection);
 
                 //Default Initialisation of sliders.            
-                $("#onewoodfor-range").val(250);
-                $("#givewood-range").val(5);
+                $("#onewoodfor-range").val(defaulValues.onewoodfor);
+                $("#givewood-range").val(defaulValues.givewood);
             }
             _TradeSlider.SetTradeResult();
             this.UpdateInventoryTables();
@@ -534,10 +556,10 @@ var _TradeSlider = (function () {
         ResetTradeSlider: function () {
             //called in onTryAgain, onNextDay.
             this.ResetTimeSlider();
-            $("#onewoodfor-range").val(250);
-            $("#givewood-range").val(5);
-            TradeResults.onewoodfor = 250;
-            TradeResults.givewood = 5;
+            $("#onewoodfor-range").val(defaulValues.onewoodfor);
+            $("#givewood-range").val(defaulValues.givewood);
+            TradeResults.onewoodfor = defaulValues.onewoodfor;
+            TradeResults.givewood = defaulValues.givewood;
             _TradeSlider.SetTradeResult();
         },
         ResetTimeSlider: function () {
@@ -602,10 +624,12 @@ var _TradeSlider = (function () {
                 $("#givefish-cals").text(TradeResults.givefish);
                 $("#receivewood-logs").text(TradeResults.receivewood);
             } else {
-                $("#givewood-range").attr("max", (TradeSettings.yourwoodlogs + TradeResults.remData.wood));
+                //$("#givewood-range").attr("max", (TradeSettings.yourwoodlogs + TradeResults.remData.wood));
+                //$(".givewood.r_label").text((TradeSettings.yourwoodlogs + TradeResults.remData.wood));
+                $("#givewood-range").attr("max", defaulValues.givewoodmax);
+                $(".givewood.r_label").text(defaulValues.givewoodmax);
                 $("#consumption-wood-range").attr("max", (TradeSettings.yourwoodlogs + TradeResults.remData.wood));
-                $(".consumption-wood.r_label").text((TradeSettings.yourwoodlogs + TradeResults.remData.wood));
-                $(".givewood.r_label").text((TradeSettings.yourwoodlogs + TradeResults.remData.wood));
+                $(".consumption-wood.r_label").text((TradeSettings.yourwoodlogs + TradeResults.remData.wood));                
                 $("#consumption-fish-range").attr("max", (TradeSettings.fridayfishCals + TradeResults.remData.fridayfish));
                 $(".consumption-fish.r_label").text((TradeSettings.fridayfishCals + TradeResults.remData.fridayfish));
                 $("#givewood-logs").text(TradeResults.givewood);
@@ -668,8 +692,7 @@ var _TradeSlider = (function () {
                 if (currPage.datalevel == 4) {
                     point1 = _Scenario.getFridayData()[0];
                 }
-            }
-            /*
+            }            
             var x1 = point1[0];
             var y1 = point1[1];
             var x2 = point2[0];
@@ -685,9 +708,8 @@ var _TradeSlider = (function () {
 
             }
             var point3 = [x3, y3];
-            var _data = [point1, point2, point3];
-            */
-            var _data = [point1, point2];
+            var _data = [point1, point2, point3];            
+            //var _data = [point1, point2];
             if (_data != undefined) {
                 chart.addSeries({
                     id: "sliderpointser1",
@@ -698,6 +720,7 @@ var _TradeSlider = (function () {
                     lineWidth: 1,
                     color: ColorCodes.sliderPoint,
                     showInLegend: false,
+                    enableMouseTracking: false,
                     marker: {
                         fillOpacity: 0,
                         lineWidth: 0,

@@ -44,6 +44,7 @@
     background: #A3610A;
     cursor: pointer;
     border-radius: 5px;
+    z-index: 999;
 }
 
 #collect-fish .fish-slider::-webkit-slider-thumb {
@@ -56,10 +57,8 @@
     height: 30px;
     background: #9D0B0E;
     cursor: pointer;
-    border-radius: 5px;
+    border-radius: 5px;    
 }
-
-
 
 .tot-slider {
     -webkit-appearance: none;
@@ -134,4 +133,16 @@
     cursor: pointer;
     border-radius: 5px;
 }
+
+
+#collect-fish .fish-slider:focus::-webkit-slider-thumb,
+#collect-fish .fish-slider:active::-webkit-slider-thumb,
+#collect-wood .wood-slider:focus::-webkit-slider-thumb,
+#collect-wood .wood-slider:active::-webkit-slider-thumb,
+.tot-slider:focus::-webkit-slider-thumb,
+.tot-slider:active::-webkit-slider-thumb{
+    outline: #ff8c00 solid 2px;
+    border-radius: 0px;
+}
+
 

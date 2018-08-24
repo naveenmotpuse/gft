@@ -678,7 +678,7 @@ var _CustomPage = (function () {
                 } else if (currPage.pageId == "l3p3") {
                     _TradeSlider.SetWayOffTarget();
                 } else if (currPage.datalevel == 4 && currPage.pageId == "l4p5") {
-                    this.SetBetterOffTarget();
+                    _TradeSlider.SetBetterOffTarget();
                 }
                 if (currPage.pageId == "l3p2") {
                     if (target.goal != "survive") {

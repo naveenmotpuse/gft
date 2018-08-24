@@ -493,7 +493,7 @@ var _Navigator = (function () {
             var pageId = "";
             for (var i in _NData) {
                 if (_NData[i].datalevel == datalevel) {
-                    _NData[i] = $.extend(true, {}, tempNdata[i]);
+                    _NData[i] = $.extend(true, {}, _TempNData[i]);
                     if (pageId == "") {
                         pageId = _NData[i].pageId;
                     }

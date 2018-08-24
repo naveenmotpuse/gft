@@ -6,7 +6,7 @@ var _ModuleCharts = (function () {
             var ser2 = "new_series";
             Highcharts.chart(_chartc_id, {
                 title: {
-                    text: 'Production Possibilities Frontier'
+                    text: ' '
                 },
                 tooltip: {
                     formatter: function () {
@@ -558,18 +558,18 @@ var _ModuleCharts = (function () {
         DrawTradeCharts: function () {
             var localUserPPF;
             var localfridayPPF;
-            var usermax = 4000;
-            var fridaymax = 7000;
+            var usermax = 5000;
+            var fridaymax = 8000;
             var currPage = _Navigator.GetCurrentPage();
             if (currPage.datalevel == 4) {
                 localUserPPF = _Scenario.getUserData();
                 localfridayPPF = _Scenario.getFridayData();
                 if(_Scenario.getScenarioIndex()==0){
-                    usermax = 4000;
-                    fridaymax = 4000;
+                    usermax = 5000;
+                    fridaymax = 5000;
                 }
                 else{
-                    usermax = 7000;
+                    usermax = 8000;
                     fridaymax = 5000;
                 }
             }
@@ -614,7 +614,7 @@ var _ModuleCharts = (function () {
                         format: '{value}'
                     },
                     min: 0,
-                    //max: usermax,
+                    max: usermax,
                     gridLineWidth: 1,
                     tickInterval: 1000,
                     plotLines: [{
@@ -681,7 +681,7 @@ var _ModuleCharts = (function () {
                         format: '{value}'
                     },
                     min: 0,
-                    //max: fridaymax,
+                    max: fridaymax,
                     gridLineWidth: 1,
                     tickInterval: 1000,
                     plotLines: [{
