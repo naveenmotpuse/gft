@@ -33,7 +33,7 @@
                 $("#div_question").load(pageUrl, function () {
                     $(this).hide().fadeIn("slow", function () {
                         OnQuestionLoad(qObj);
-                        $("#div_question").focus();
+                        $(".progress .background").focus();
                     })
                 });
             }
@@ -92,12 +92,14 @@
             //$("#div_feedback").empty().hide();
             $("#div_feedback").fadeOut("slow", function () {
                 $("#div_feedback").empty();
+                $("#div_feedback").attr("aria-hidden","true")
+
             })
             $("#div_feedback").css("margin-top", "0px");
         },
         Loadfeedback: function (fId) {
             var fdbkUrl = _Settings.dataRoot + _currentQuestionObj.feedback[fId] + _Caching.GetUrlExtension();
-            $("#div_feedback").show();
+            $("#div_feedback").k_show();
             $("#div_feedback").load(fdbkUrl, function () {
                 _Question.SetFeedbackTop()
                 _CustomQuestion.OnFeedbackLoad()
@@ -108,7 +110,7 @@
         },
         LoadAlertFeedback: function () {
             var fdbkUrl = _Settings.dataRoot + "alert.htm" + _Caching.GetUrlExtension();
-            $("#div_feedback").show();
+            $("#div_feedback").k_show();
             $("#div_feedback").load(fdbkUrl, function () {
                 _Question.SetFeedbackTop()
                 $("body").animate({

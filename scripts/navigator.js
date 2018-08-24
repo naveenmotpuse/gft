@@ -286,7 +286,7 @@ var _Navigator = (function () {
             if (Dataurl == "" || Dataurl == undefined) {
                 this.LoadPage("l1p1");
             } else {
-                this.LoadPage(Dataurl);
+                this.LoadPage(Dataurl);                
             }
         },
         LoadPage: function (pageId, jsonObj) {
@@ -325,7 +325,7 @@ var _Navigator = (function () {
                     $(".main-content").load(pageUrl, function () {
                         $(this).fadeTo(600, 1)
                         OnPageLoad();
-                        $("h2.pageheading").focus();
+                        $(".progress .background").focus();
                     });
                 })
             }

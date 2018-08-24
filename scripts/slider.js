@@ -177,9 +177,9 @@ var _Slider = (function () {
     var ep_slider;
     return {
         StartScheduler: function () {
-            $(".runtimeslider").show();
-            $(".selecttimeslider").hide();
-            $(".startbtnpanel").hide();
+            $(".runtimeslider").k_show();
+            $(".selecttimeslider").k_hide();
+            $(".startbtnpanel").k_hide();
             var potDataAsperSlider = DataStorage.getPotData();
             var calculatedData = {
                 "wood": potDataAsperSlider.wood,
@@ -697,11 +697,19 @@ var _TradeSlider = (function () {
             var y1 = point1[1];
             var x2 = point2[0];
             var y2 = point2[1];
-            var Slope = (y2 - y1) / (x2 - x1)
+            var Slope = 0;
+            if((x2 - x1)!=0){
+                Slope = (y2 - y1) / (x2 - x1)
+            }
             var Intercept = (y2) - (Slope * x2)
             if (_chartid == "fridaytradeGraph") {
                 y3 = 0;
-                x3 = (y3 - Intercept) / Slope;
+                if(Slope!=0){
+                    x3 = (y3 - Intercept) / Slope;
+                }
+                else{
+                    x3=0;
+                }
             } else {
                 x3 = 0;
                 y3 = (Slope * x3) + Intercept;

@@ -147,11 +147,11 @@ var _TopSlider = (function () {
         if (_type == "ppf") {
             if ($("#ppfchart:visible").length <= 0) return;
             _this = $("#linkppf")
-            $("#ppfchart").hide();
+            $("#ppfchart").k_hide();
         } else {
             if ($("#surpluschart:visible").length <= 0) return;
             _this = $("#linksurplus")
-            $("#surpluschart").hide();
+            $("#surpluschart").k_hide();
         }
         if ($(_this).find("img").length > 0) {
             if ($(_this).find("img").attr("src").indexOf("down-chevron.png") > 0) {
@@ -242,11 +242,11 @@ var _Template = (function () {
                 }
                 if (currPage.pageId == "l4p5") {
                     if (_Scenario.getScenarioIndex() == 1) {
-                        $(".Scenario0").hide();
-                        $(".Scenario1").show();
+                        $(".Scenario0").k_hide();
+                        $(".Scenario1").k_show();
                     } else {
-                        $(".Scenario0").show();
-                        $(".Scenario1").hide();
+                        $(".Scenario0").k_show();
+                        $(".Scenario1").k_hide();
                     }
                 }
                 $("#consumption-wood-range").k_disable()
@@ -292,7 +292,7 @@ var _CustomQuestion = (function () {
                     $(".userppftable tbody tr:nth-child(" + (i + 1) + ") td:nth-child(4)").text(point[1])
                 }
             } else if (_currentQuestionObj.Id == "Q5") {
-                $(".fridayppftable").closest(".tablewrapper").show();
+                $(".fridayppftable").closest(".tablewrapper").k_show();
                 _ModuleCharts.AddPointToPPFChart("fridayppfser", [0, 6000])
                 $(".fridayppftable tbody tr:nth-child(1) td:nth-child(3)").text(0)
                 $(".fridayppftable tbody tr:nth-child(1) td:nth-child(4)").text(6000)
@@ -515,8 +515,8 @@ var _CustomQuestion = (function () {
                 }
                 if (currPage.pageId == "l3p2") {
                     if (target.goal != "survive") {
-                        $("p.goaldesc").hide();
-                        $("p.goaldesc[goal='" + target.goal + "']").show()
+                        $("p.goaldesc").k_hide();
+                        $("p.goaldesc[goal='" + target.goal + "']").k_show()
                     }
                 }
                 $("#dayno").text(activityData.day);
@@ -552,14 +552,14 @@ var _CustomQuestion = (function () {
             }
 
             $("#btnfindout").k_disable();
-            $(".selecttimeslider").hide();
-            $(".startbtnpanel").hide();
-            $(".runtimeslider").hide();
-            $(".nighttimeslider").show();
+            $(".selecttimeslider").k_hide();
+            $(".startbtnpanel").k_hide();
+            $(".runtimeslider").k_hide();
+            $(".nighttimeslider").k_show();
             $("#slider-arrow-night").css({
                 "left": "96%"
             });
-            $("#div_question").removeClass("displaynone").show();
+            $("#div_question").removeClass("displaynone").k_show();
             $(".findout").k_disable();
             $("#linknext").k_enable();
 
@@ -682,8 +682,8 @@ var _CustomPage = (function () {
                 }
                 if (currPage.pageId == "l3p2") {
                     if (target.goal != "survive") {
-                        $("p.goaldesc").hide();
-                        $("p.goaldesc[goal='" + target.goal + "']").show()
+                        $("p.goaldesc").k_hide();
+                        $("p.goaldesc[goal='" + target.goal + "']").k_show()
                     }
                 }
             }

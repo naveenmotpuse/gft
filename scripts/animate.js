@@ -15,7 +15,7 @@ var _Animation = (function () {
     };
 
     var _delay = function (_ele, _dur, callback) {
-        $(_ele).show().delay(_dur).queue(function (nxt) {
+        $(_ele).k_show().delay(_dur).queue(function (nxt) {
             $(this).dequeue();
             callback();
         });
@@ -30,7 +30,7 @@ var _Animation = (function () {
         var _fishpottext = $(div).attr('aria-live', 'polite').addClass("fishcounter OpenSansFont12px").append("Fish : <span class='count'>" + round(_potData.fish) + "</span> cals");
         var _sticksbrush = $(div).addClass("brush");
         var _firepot = $(div).addClass("firePit");
-        var _pondFish = $(div).addClass("pondFish").hide();
+        var _pondFish = $(div).addClass("pondFish").k_hide();
         var _casteway = $(div).addClass("castawaySprites");
 
         var _dummy = $(getDiv()).addClass("dummy");
@@ -46,7 +46,7 @@ var _Animation = (function () {
         $(_pondFish).insertAfter(AnimationPlace);
         // night 
         var _overlay = $(div).addClass("overlay");
-        var _firePit2 = $(div).addClass("firePit2").hide();
+        var _firePit2 = $(div).addClass("firePit2").k_hide();
 
         $(_firePit2).insertAfter(AnimationPlace);
         $(_overlay).insertAfter(AnimationPlace);
@@ -55,14 +55,14 @@ var _Animation = (function () {
     var _gatheringWood = function (_dur, data) {
         var div = getDiv();
         if (_Navigator.GetCurrentPage().isFriday) {
-            var _gatheringwood = $(div).addClass("fridaygatheringSprites").hide();
+            var _gatheringwood = $(div).addClass("fridaygatheringSprites").k_hide();
             $(_gatheringwood).insertAfter(AnimationPlace);
             _SetWood(data, _dur);
             _delay(".fridaygatheringSprites", _dur, function () {
                 $(".fridaygatheringSprites").remove();
             })
         } else {
-            var _gatheringwood = $(div).addClass("gatheringSprites").hide();
+            var _gatheringwood = $(div).addClass("gatheringSprites").k_hide();
             $(_gatheringwood).insertAfter(AnimationPlace);
             _SetWood(data, _dur);
             _delay(".gatheringSprites", _dur, function () {
@@ -72,7 +72,7 @@ var _Animation = (function () {
     }
     var _chopping = function (_dur, data) {
         var div = getDiv();
-        var _gatheringwood = $(div).addClass("chopping").hide();
+        var _gatheringwood = $(div).addClass("chopping").k_hide();
         $(_gatheringwood).insertAfter(AnimationPlace);
         _SetWood(data, _dur);
         _delay(".chopping", _dur, function () {
@@ -82,31 +82,31 @@ var _Animation = (function () {
     var _fishing = function (_dur, data) {
         var div = getDiv();
         if (_Navigator.GetCurrentPage().isFriday) {
-            var _gatheringwood = $(div).addClass("fridayfishing1Sprites").hide();
+            var _gatheringwood = $(div).addClass("fridayfishing1Sprites").k_hide();
             $(_gatheringwood).insertAfter(AnimationPlace);
             _SetFish(data, _dur);
             _delay(".fridayfishing1Sprites,.pondFish", _dur, function () {
                 $(".fridayfishing1Sprites").remove();
-                $(".pondFish").hide();
+                $(".pondFish").k_hide();
             });
         } else {
-            var _gatheringwood = $(div).addClass("fishing1Sprites").hide();
+            var _gatheringwood = $(div).addClass("fishing1Sprites").k_hide();
             $(_gatheringwood).insertAfter(AnimationPlace);
             _SetFish(data, _dur);
             _delay(".fishing1Sprites,.pondFish", _dur, function () {
                 $(".fishing1Sprites").remove();
-                $(".pondFish").hide();
+                $(".pondFish").k_hide();
             });
         }
     }
     var _fishingNet = function (_dur, data) {
         var div = getDiv();
-        var _gatheringwood = $(div).addClass("fishingNet").hide();
+        var _gatheringwood = $(div).addClass("fishingNet").k_hide();
         $(_gatheringwood).insertAfter(AnimationPlace);
         _SetFish(data, _dur);
         _delay(".fishingNet,.pondFish", _dur, function () {
             $(".fishingNet").remove();
-            $(".pondFish").hide();
+            $(".pondFish").k_hide();
         });
     }
     var _SetWood = function (val, dur) {
@@ -155,20 +155,20 @@ var _Animation = (function () {
     }
     var _Night = function () {
         var div = getDiv();
-        var _flameHiSprites = $(div).addClass("flameHiSprites").hide();
-        var _flameLoSprites = $(div).addClass("flamelow").hide();
+        var _flameHiSprites = $(div).addClass("flameHiSprites").k_hide();
+        var _flameLoSprites = $(div).addClass("flamelow").k_hide();
 
         $(_flameLoSprites).insertAfter(AnimationPlace);
         $(_flameHiSprites).insertAfter(AnimationPlace);
 
-        $(".flamelow").show();
+        $(".flamelow").k_show();
         _delay(".flamelow", 500, function () {
-            $(".flamelow").hide();
+            $(".flamelow").k_hide();
 
-            $(".firePit2").show();
+            $(".firePit2").k_show();
             _delay(".flameHiSprites", 500, function () {
                 $(".overlay").removeClass("dayTime").addClass("nightTime");
-                $(".flameHiSprites").show();
+                $(".flameHiSprites").k_show();
                 $(".firePit2").css("backgroundImage", "url(" + _Settings.dataRoot + "'firePitGlow3.png')");
             })
         });
@@ -177,11 +177,11 @@ var _Animation = (function () {
         //_Day();
     }
     var _Day = function () {
-        $(".flameHiSprites").hide();
+        $(".flameHiSprites").k_hide();
         _delay(".flamelow", 500, function () {
             $(".flamelow").remove();
             $(".firePit2").css("backgroundImage", "url(" + _Settings.dataRoot + "'firePitGlow2.png')");
-            $(".firePit2").hide();
+            $(".firePit2").k_hide();
             $(".overlay").removeClass("nightTime").addClass("dayTime");
         });
     }
@@ -200,7 +200,7 @@ var _Animation = (function () {
         },
         collectWoodnfish: function (_dur1, _dur2, potData, callback) {
 
-            $(".castawaySprites").hide();
+            $(".castawaySprites").k_hide();
             //console.time("wood");
             $(".woodcounter").addClass("activecounter")
             _gatheringWood(_dur1, potData.wood);
@@ -214,7 +214,7 @@ var _Animation = (function () {
                 //console.timeEnd("wood");
                 if (typeof callback == "function") {
                     _delay(".dummy", (_dur2), function () {
-                        $(".castawaySprites").show();
+                        $(".castawaySprites").k_show();
                         callback();
                         //console.timeEnd("wood");
                     });
@@ -222,7 +222,7 @@ var _Animation = (function () {
             });
         },
         choppingNfishing: function (_dur1, _dur2, potData, callback) {
-            $(".castawaySprites").hide();
+            $(".castawaySprites").k_hide();
             //console.time("wood");
             $(".woodcounter").addClass("activecounter")
             _chopping(_dur1, potData.wood);
@@ -236,7 +236,7 @@ var _Animation = (function () {
                 //console.timeEnd("wood");
                 if (typeof callback == "function") {
                     _delay(".dummy", (_dur2), function () {
-                        $(".castawaySprites").show();
+                        $(".castawaySprites").k_show();
                         callback();
                         //console.timeEnd("wood");
                     });
@@ -244,7 +244,7 @@ var _Animation = (function () {
             });
         },
         collectWoodNfishingNet: function (_dur1, _dur2, potData, callback) {
-            $(".castawaySprites").hide();
+            $(".castawaySprites").k_hide();
             //console.time("wood");
             $(".woodcounter").addClass("activecounter")
             _gatheringWood(_dur1, potData.wood);
@@ -257,7 +257,7 @@ var _Animation = (function () {
                 });
                 if (typeof callback == "function") {
                     _delay(".dummy", (_dur2), function () {
-                        $(".castawaySprites").show();
+                        $(".castawaySprites").k_show();
                         callback();
                     });
                 }
@@ -279,14 +279,14 @@ var _Animation = (function () {
         MngAnimationEle: function () {
             var currPage = _Navigator.GetCurrentPage();
             if (currPage.pageId == 'l1p1' || currPage.pageId == 'l1p2' || currPage.pageId == 'l1p3') {
-                $('.friday-raftSprites, .fridaySprites, .stickBarrelRaft2, .fishBarrelRaft2').hide();
+                $('.friday-raftSprites, .fridaySprites, .stickBarrelRaft2, .fishBarrelRaft2').k_hide();
             } else if (currPage.pageId == 'l1p4' || currPage.pageId == 'l1p5') {
-                $('.friday-raftSprites, .fridaySprites, .stickBarrelRaft2, .fishBarrelRaft2').hide();
+                $('.friday-raftSprites, .fridaySprites, .stickBarrelRaft2, .fishBarrelRaft2').k_hide();
                 $('.castawaySprites1').removeClass('castawaySprites1').addClass('fridaycastawaySprites');
             } else if (currPage.pageId == "l2p1") {
-                $('.stickBarrelRaft2, .fishBarrelRaft2').hide();
+                $('.stickBarrelRaft2, .fishBarrelRaft2').k_hide();
                 $('.castawaySprites1').removeClass('castawaySprites1').addClass('castawaySprites');
-                $('.friday-raftSprites, .fridaySprites').show();
+                $('.friday-raftSprites, .fridaySprites').k_show();
             } else if (currPage.hasTradeSlider != undefined && currPage.hasTradeSlider) {
                 if (currPage.pageId == "l2p3") {
                     $("#btnstartslider").k_disable();
@@ -295,7 +295,7 @@ var _Animation = (function () {
                     $('.friday-raftSprites').removeClass('friday-raftSprites2');
                     $('.fridaySprites2').removeClass('fridaySprites2').addClass('fridaySprites');
                 }
-                $('.fishBarrelRaft2').hide();
+                $('.fishBarrelRaft2').k_hide();
                 $('.castawaySprites1').removeClass('castawaySprites1').addClass('castawaySprites');
                 setTimeout(function () {
                     $('.castawaySprites').removeClass('castawaySprites').addClass('castawaySprites1');
@@ -304,14 +304,14 @@ var _Animation = (function () {
                     }
                 }, 2500)
             } else if (currPage.pageId == 'l3p2' || currPage.pageId == 'l3p1' || currPage.pageId == 'l4p1') {
-                $('.fishBarrelRaft2').hide();
+                $('.fishBarrelRaft2').k_hide();
             }
         },
         LadyComeWithFish: function () {
             $('.stickBarrelRaft2').removeClass('stickBarrelRaft2').addClass('fishBarrelRaft2');
             $('.castawaySprites1').removeClass('castawaySprites1').addClass('castawaySprites');
             $('.friday-raftSprites2').removeClass('friday-raftSprites2').addClass('friday-raftSprites');
-            $('.fishBarrelRaft2').show();
+            $('.fishBarrelRaft2').k_show();
             $('.fridaySprites2').removeClass('fridaySprites2').addClass('fridaySprites');
             setTimeout(function () {
                 $('.castawaySprites').removeClass('castawaySprites').addClass('castawaySprites1');
@@ -331,7 +331,7 @@ var _Animation = (function () {
             $('.fishBarrelRaft2').removeClass('fishBarrelRaft2').addClass('stickBarrelRaft3');
             $('.castawaySprites1').removeClass('castawaySprites1').addClass('castawaySprites');
             $('.friday-raftSprites2').removeClass('friday-raftSprites2').addClass('friday-raftSprites');
-            $('.stickBarrelRaft3').show();
+            $('.stickBarrelRaft3').k_show();
             $('.fridaySprites2').removeClass('fridaySprites2').addClass('fridaySprites');
             setTimeout(function () {
                 $('.castawaySprites').removeClass('castawaySprites').addClass('castawaySprites1');
@@ -360,20 +360,20 @@ var EventManager = function () {
                     $('.friday-raftSprites').removeClass('friday-raftSprites').addClass('friday-raftSprites2');
                     $('.fridaySprites').removeClass('fridaySprites').addClass('fridaySprites2');
                     $('.castawaySprites1').removeClass('castawaySprites1').addClass('castawaySprites');
-                    $(".runtimeslider").show();
-                    $(".selecttimeslider").hide();
-                    $(".startbtnpanel").hide();
+                    $(".runtimeslider").k_show();
+                    $(".selecttimeslider").k_hide();
+                    $(".startbtnpanel").k_hide();
                     $("#onewoodfor-range").k_disable()
                     $("#givewood-range").k_disable()
                     setTimeout(function () {
                         $('.castawaySprites').removeClass('castawaySprites').addClass('castawaySprites1');
-                        $('.castawaySprites1').hide();
+                        $('.castawaySprites1').k_hide();
                         _Slider.setDefaultValue();
                         _Slider.StartScheduler();
                     }, 2000)
                 } else {
-                    $(".questionband").hide();
-                    $('.castawaySprites1, .fridaycastawaySprites').hide();
+                    $(".questionband").k_hide();
+                    $('.castawaySprites1, .fridaycastawaySprites').k_hide();
                     _Slider.setDefaultValue();
                     _Slider.StartScheduler();
                 }
@@ -407,13 +407,13 @@ var EventManager = function () {
                     wood = potData.wood - AnimConfig.nightWoodValueDeduction;
                     animInterval = 0;
                 }
-                $(".runtimeslider").hide();
-                $(".nighttimeslider").show();
+                $(".runtimeslider").k_hide();
+                $(".nighttimeslider").k_show();
                 $("#onewoodfor-range").k_disable();
                 $("#givewood-range").k_disable();
                 $("#btnfindout").k_disable();
                 setTimeout(function () {
-                    $('.fishBarrelRaft3').hide();
+                    $('.fishBarrelRaft3').k_hide();
                     _Animation.night();
                     _Animation.SetFishCountValue(fish, 5000);
                     _Animation.SetWoodCountValue(wood, 5000);
@@ -437,11 +437,11 @@ var EventManager = function () {
             $(".animate-slider1").css("width", (fishhrs * 10) + "%");
             $(".colorful-slider2").css("width", (woodhrs * 10) + "%");
             $(".animate-slider2").css("width", (woodhrs * 10) + "%");
-            $(".runtimeslider").hide();
-            $(".startbtnpanel").show();
-            $(".selecttimeslider").show();
-            $(".questionband").hide();
-            $(".nighttimeslider").hide();
+            $(".runtimeslider").k_hide();
+            $(".startbtnpanel").k_show();
+            $(".selecttimeslider").k_show();
+            $(".questionband").k_hide();
+            $(".nighttimeslider").k_hide();
             $("#onewoodfor-range").k_enable();
             $("#givewood-range").k_enable();
             _Question.UnloadFeedback();
@@ -456,7 +456,7 @@ var EventManager = function () {
             }
         },
         onNextDay: function () {
-            $('.stickBarrelRaft2, .fishBarrelRaft2').hide();
+            $('.stickBarrelRaft2, .fishBarrelRaft2').k_hide();
             $('.castawaySprites1').removeClass('castawaySprites1').addClass('castawaySprites');
             $('.fridaySprites2').removeClass('fridaySprites2').addClass('fridaySprites');
             $('.friday-raftSprites2').removeClass('friday-raftSprites2').addClass('friday-raftSprites');
@@ -480,11 +480,11 @@ var EventManager = function () {
             //TopLinkSlider.UpdateSurplusChartData(DataStorage.getSurplusChartData().fish, DataStorage.getSurplusChartData().wood);
 
 
-            $(".nighttimeslider").hide();
-            $(".runtimeslider").hide();
-            $(".selecttimeslider").show();
-            $('.startbtnpanel').show();
-            $(".questionband").hide();
+            $(".nighttimeslider").k_hide();
+            $(".runtimeslider").k_hide();
+            $(".selecttimeslider").k_show();
+            $('.startbtnpanel').k_show();
+            $(".questionband").k_hide();
             $("#btnfindout").k_enable();
             $("#onewoodfor-range").k_enable()
             $("#givewood-range").k_enable()
@@ -505,7 +505,7 @@ var EventManager = function () {
                 wood = 0;
             }
             if (currPage.hasTradeSlider != undefined && currPage.hasTradeSlider) {
-                $('.castawaySprites1, .fridaycastawaySprites').show();
+                $('.castawaySprites1, .fridaycastawaySprites').k_show();
                 var sceanindex = _Scenario.getScenarioIndex();
                 if (currPage.datalevel == 4 && sceanindex == 1) {
                     _Animation.LadyComeWithWood();
@@ -513,8 +513,8 @@ var EventManager = function () {
                     _Animation.LadyComeWithFish();
                 }
                 setTimeout(function () {
-                    $('.startbtnpanel').hide();
-                    $(".questionband").show();
+                    $('.startbtnpanel').k_hide();
+                    $(".questionband").k_show();
                     $(".questionband").removeClass("displaynone");
                     $('.castawaySprites').removeClass('castawaySprites').addClass('castawaySprites1');
                     //$("#onewoodfor-range").k_enable()
@@ -527,9 +527,9 @@ var EventManager = function () {
                 Table.setfish(DataStorage.getProducedData().fish, fish);
                 Table.setWood(DataStorage.getProducedData().wood, wood);
                 Table.show();
-                $('.castawaySprites1, .fridaycastawaySprites').show();
-                $('.startbtnpanel').hide();
-                $(".questionband").show();
+                $('.castawaySprites1, .fridaycastawaySprites').k_show();
+                $('.startbtnpanel').k_hide();
+                $(".questionband").k_show();
                 $(".questionband").removeClass("displaynone");
                 $('.castawaySprites').removeClass('castawaySprites').addClass('castawaySprites1');
                 //$("#onewoodfor-range").k_enable()
@@ -711,10 +711,10 @@ var Table = function () {
     }
     return {
         show: function () {
-            $(".tableInventory").show();
+            $(".tableInventory").k_show();
         },
         hide: function () {
-            $(".tableInventory").hide();
+            $(".tableInventory").k_hide();
         },
         setFishAtStart: function (lastRemaining) {
             $(".sodfish").text(round(lastRemaining));

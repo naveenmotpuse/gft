@@ -88,7 +88,7 @@ input:active,
 button:active,
 textarea:active,
 select:active {
-    outline: #ff8c00 solid 2px;
+    outline: #ff8c00 solid 2px;    
 }
 input[type='range']:focus,
 input[type='range']:active{
@@ -102,13 +102,14 @@ input[type='range']:active{
 
 .progress .background:focus,
 .progress .background:active {
-    outline: #ff8c00 solid 2px;
+    outline: #ff8c00 solid 2px;    
 }
 
 *[tabindex]:focus,
 *[tabindex]:active{
     outline: #ff8c00 solid 2px;
 }
+
 
 .mxwidth {
     max-width: 940px;
@@ -375,8 +376,7 @@ input[type='range']:active{
     background: #184469;
     margin: 5px 10px;
     padding: 4px 10px;
-    color: #FFF;
-    border-radius: 5px;
+    color: #FFF;    
     cursor: pointer;
     border-style: none;
     width: 90px;
@@ -572,3 +572,5 @@ thead {
     height: 0;
 }
 .rTableRow{padding-top:10px}
+
+

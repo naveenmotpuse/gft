@@ -10,6 +10,15 @@
     }
 });
 
+jQuery.fn.extend({
+    k_hide: function () {
+        return this.attr("aria-hidden", "true").hide();
+    },
+    k_show: function () {
+        return this.attr("aria-hidden", "false").show();
+    }
+});
+
 
 $(document).ready(function () {
     
