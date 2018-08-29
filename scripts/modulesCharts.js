@@ -6,7 +6,7 @@ var _ModuleCharts = (function () {
             var ser2 = "new_series";
             Highcharts.chart(_chartc_id, {
                 title: {
-                    text: 'Production Possibility Frontier'
+                    text: ''
                 },
                 tooltip: {
                     formatter: function () {

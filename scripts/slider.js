@@ -603,14 +603,15 @@ var _TradeSlider = (function () {
             this.SetTradeResult();
         },
         SetTradeResult: function () {  
-            console.log("SetTradeResult")          
+            console.log("SetTradeResult")        
             TradeResults.receivefish = TradeResults.givewood * TradeResults.onewoodfor;
             TradeResults.receivewood = Number((TradeResults.givefish / TradeResults.onewoodfor).toFixed(1));
-            TradeResults.consumptionwood = ((TradeSettings.yourwoodlogs + TradeResults.remData.wood) - TradeResults.givewood) + TradeResults.receivewood;
-            TradeResults.consumptionfish = ((TradeSettings.yourfishcals + TradeResults.remData.fish) + TradeResults.receivefish) - TradeResults.givefish;
+            //AT: add toFixed   
+            TradeResults.consumptionwood = Number((((TradeSettings.yourwoodlogs + TradeResults.remData.wood) - TradeResults.givewood) + TradeResults.receivewood).toFixed(1));
+            TradeResults.consumptionfish = Number((((TradeSettings.yourfishcals + TradeResults.remData.fish) + TradeResults.receivefish) - TradeResults.givefish).toFixed(1));
 
-            TradeResults.fridayconsumptionwood = ((TradeSettings.fridaywoodlogs + TradeResults.remData.fridaywood) + TradeResults.givewood) - TradeResults.receivewood;
-            TradeResults.fridayconsumptionfish = ((TradeSettings.fridayfishCals + TradeResults.remData.fridayfish) - TradeResults.receivefish) + TradeResults.givefish;
+            TradeResults.fridayconsumptionwood = Number((((TradeSettings.fridaywoodlogs + TradeResults.remData.fridaywood) + TradeResults.givewood) - TradeResults.receivewood).toFixed(1));
+            TradeResults.fridayconsumptionfish = Number((((TradeSettings.fridayfishCals + TradeResults.remData.fridayfish) - TradeResults.receivefish) + TradeResults.givefish).toFixed(1));
 
             $("#onewoodfor-fish").text(TradeResults.onewoodfor);
             var currPage = _Navigator.GetCurrentPage();

@@ -213,23 +213,23 @@ var _Template = (function () {
         },
         LoadDaytimeScheduler: function () {
             var pageUrl = "templates/daytimescheduler.htm" + _Caching.GetUrlExtension();
-            $(".daytime_scheduler").load(pageUrl, function () {});
+            $(".daytime_scheduler").load(pageUrl, function () { });
         },
         LoadNighttimeScheduler: function () {
             var pageUrl = "templates/nighttimescheduler.htm" + _Caching.GetUrlExtension();
-            $(".nighttime_scheduler").load(pageUrl, function () {});
+            $(".nighttime_scheduler").load(pageUrl, function () { });
         },
         LoadTradeSlider: function () {
             var pageUrl = "templates/tradeslider.htm" + _Caching.GetUrlExtension();
             $(".trade_slider_wrapper").load(pageUrl, function () {
                 var currPage = _Navigator.GetCurrentPage();
                 debugger;
-                if(currPage.IsComplete==undefined || !currPage.IsComplete){
+                if (currPage.IsComplete == undefined || !currPage.IsComplete) {
                     _Slider.InitSelectTimeSlider();
                 }
-                _TradeSlider.InitSlider();                
-                _TradeSlider.ResetTimeSlider();                
-                
+                _TradeSlider.InitSlider();
+                _TradeSlider.ResetTimeSlider();
+
                 if (currPage.pageId == "l2p3") {
                     $("#wood-range").k_disable()
                     $("#fish-range").k_disable()
@@ -437,7 +437,7 @@ var _CustomQuestion = (function () {
 
             if (allliesonline) {
                 //Show Correct Feedback
-                 feedbackIndex = 0;
+                feedbackIndex = 0;
                 _Question.Loadfeedback(feedbackIndex);
                 _currentQuestionObj.points = crrcount / valPoints;
                 _currentQuestionObj.isAnswered = true;
@@ -456,6 +456,42 @@ var _CustomQuestion = (function () {
                     _Question.Loadfeedback(feedbackIndex);
                 } else {
                     _Question.Loadfeedback(feedbackIndex);
+                    debugger;
+                    //best score
+                    var pageId = _Navigator.GetCurrentPage().pageId;
+                    var Qid = _currentQuestionObj.Qid; 
+                    var attemptCurrentQuestionData = _Navigator.GetQuestionAttemptData(pageId, Qid);
+                    if (attemptCurrentQuestionData != undefined) {
+                        var attemptPoint1 = attemptCurrentQuestionData.selectedAnswer[0];
+                        var attemptPoint2 = attemptCurrentQuestionData.selectedAnswer[1];
+                        var newSerDataIndex = 2;
+                        for (var i = 0; i < attemptCurrentQuestionData.selectedAnswer.length; i++) {
+                            if (newSerData[i][0] != attemptCurrentQuestionData.selectedAnswer[i][0] && newSerData[i][1] != attemptCurrentQuestionData.selectedAnswer[i][1]) {
+                                newSerData[newSerDataIndex] = [attemptCurrentQuestionData.selectedAnswer[i][0],attemptCurrentQuestionData.selectedAnswer[i][1]];
+                                newSerDataIndex++;
+                            }
+                        }
+
+                        var crrcount = 0;
+                        var countval = 0;
+                        for (var i = 0; i < newSerData.length; i++) {
+                            var currPoint = {
+                                x: newSerData[i][0],
+                                y: newSerData[i][1]
+                            };
+                            var isonline = this.IsPointOnLine(currPoint, point1, point2)
+                            if (!isonline) {
+                                allliesonline = false;
+                            } else {
+                                  crrcount++;
+                                    _currentQuestionObj.selectedAnswer[countval] = [newSerData[i][0], newSerData[i][1]];
+                                    countval++;
+                                
+                            }
+                        }
+
+                    }
+
                     _currentQuestionObj.points = crrcount / valPoints;
                     _currentQuestionObj.isAnswered = true;
                     _currentQuestionObj.feedbackIndex = feedbackIndex;
@@ -528,16 +564,16 @@ var _CustomQuestion = (function () {
                 $("#givewood-range").val(activityData.tradeData.TR.givewood)
                 $("#givewood-logs").text(activityData.tradeData.TR.givewood)
                 $("#receivefish-cals").text(activityData.tradeData.TR.receivefish)
-                
+
                 $("#consumption-wood").text(activityData.tradeData.TR.consumptionwood)
                 $(".consumption-wood.r_label").text(activityData.tradeData.TR.consumptionwood + activityData.tradeData.TR.givewood)
                 $("#consumption-wood-range").attr("max", activityData.tradeData.TR.consumptionwood + activityData.tradeData.TR.givewood)
                 $("#consumption-wood-range").val(activityData.tradeData.TR.consumptionwood)
                 $("#consumption-fish").text(activityData.tradeData.TR.consumptionfish)
                 $("#consumption-fish-range").attr("max", activityData.tradeData.TR.fridayconsumptionfish + activityData.tradeData.TR.receivefish)
-                $("#consumption-fish-range").val(activityData.tradeData.TR.consumptionfish)                
-                $(".consumption-fish.r_label").text(activityData.tradeData.TR.fridayconsumptionfish + activityData.tradeData.TR.receivefish)
-                
+                $("#consumption-fish-range").val(activityData.tradeData.TR.consumptionfish)
+                $(".consumption-fish.r_label").text(activityData.tradeData.TR.fridayconsumptionfish + activityData.tradeData.TR.receivefish);
+
                 _TradeSlider.ShowSliderPoint("studenttradeGraph", [activityData.tradeData.TR.consumptionwood, activityData.tradeData.TR.consumptionfish]);
                 _TradeSlider.ShowSliderPoint("fridaytradeGraph", [activityData.tradeData.TR.fridayconsumptionwood, activityData.tradeData.TR.fridayconsumptionfish]);
                 //_TradeSlider.SetTradeResult();
@@ -581,7 +617,7 @@ var _CustomQuestion = (function () {
             point2.y = _currentQuestionObj.graphData[1][1];
 
 
-            var newSerData = chart.get('new_series').options.data;
+            var newSerData = _currentQuestionObj.selectedAnswer;//chart.get('new_series').options.data;
             var refArray = [];
             for (var i = 0; i < newSerData.length; i++) {
                 var currPoint = {
@@ -590,6 +626,7 @@ var _CustomQuestion = (function () {
                 };
                 var isonline = this.IsPointOnLine(currPoint, point1, point2)
                 if (!isonline) {
+                    debugger;
                     chart.get('new_series').data[i].graphic.attr({
                         fill: ColorCodes.red
                     });

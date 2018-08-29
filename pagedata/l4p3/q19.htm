@@ -1,126 +1,131 @@
-<div class="Q18">
-        <div class="question_img">
-            <img class="" src="assets/images/question.png" aria-hidden="true" alt=""/>
-        </div>
-        <div class="question_txt">
-            <p>
-                <span>
-                        Friday is worse at both tasks.  With each hour, he can only gather <span id="woodPerHr" ></span> logs per hour or catch <span id="fishPerHr" ></span>  calories of fish per hour.  To survive, he needs <span id="woodPerDay" ></span> logs and <span id="fishPerDay" ></span> calories of fish.  Drawing his production possibility frontier.
-                        
-        
-                </span>
-            </p>
-            <p class="q19table">
-                    <table>
-                            <caption>Your Production Possibility Frontier</caption>
-                            <thead>
-                                <tr>
-                                    <th colspan="2">Time Allocation</th>
-                                    <th colspan="2">Production</th>
-                                </tr>
-                                <tr>
-                                    <th>Gather Firewood</th>
-                                    <th>Fishing</th>
-                                    <th>Firewood (logs)</th>
-                                    <th>Fish (cals)</th>
-                                </tr>
-                            </thead>
-                            <tbody  id="q19TableBody">
-                                <tr>
-                                    <td>0</td>
-                                    <td>12</td>
-                                    <td>0</td>
-                                    <td>3000</td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>11</td>
-                                    <td>8</td>
-                                    <td>2750</td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>10</td>
-                                    <td>16</td>
-                                    <td>2500</td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>9</td>
-                                    <td>24</td>
-                                    <td>2250</td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td>8</td>
-                                    <td>32</td>
-                                    <td>2000</td>
-                                </tr>
-                                <tr>
-                                    <td>5</td>
-                                    <td>7</td>
-                                    <td>40</td>
-                                    <td>1750</td>
-                                </tr>
-                                <tr>
-                                    <td>6</td>
-                                    <td>6</td>
-                                    <td>48</td>
-                                    <td>1500</td>
-                                </tr>
-                                <tr>
-                                    <td>7</td>
-                                    <td>5</td>
-                                    <td>56</td>
-                                    <td>1250</td>
-                                </tr>
-                                <tr>
-                                    <td>8</td>
-                                    <td>4</td>
-                                    <td>64</td>
-                                    <td>1000</td>
-                                </tr>
-                                <tr>
-                                    <td>9</td>
-                                    <td>3</td>
-                                    <td>72</td>
-                                    <td>750</td>
-                                </tr>
-                                <tr>
-                                    <td>10</td>
-                                    <td>2</td>
-                                    <td>80</td>
-                                    <td>500</td>
-                                </tr>
-                                <tr>
-                                    <td>11</td>
-                                    <td>1</td>
-                                    <td>88</td>
-                                    <td>250</td>
-                                </tr>
-                                <tr>
-                                    <td>12</td>
-                                    <td>0</td>
-                                    <td>96</td>
-                                    <td>0</td>
-                                </tr>
-                            </tbody>
-                        </table>
-            </p>
-            
-            <p>
-                To plot a point on the graph, enter the values
-            </p>
-            <p>
-                <span class="spanwood">Wood (logs.)</span>
-                <input type="number" class="inlineinput" id="woodlogtools" step="any"/>
-                <span class="spanfish">Fish (cals)</span>
-                <input type="number" class="inlineinput" id="fishlogtools" step="any"/>
-                <input class="addbtn" id="addpointbtn" type="button" value="Add">
-                <input Class="graphbtncheckanswer" type="button" value="Check Answer" />
-            </p>
-        </div>
-        <div id="questionchart" class="questionchart">
-    
-        </div>
+<div class="Q18" id="question">
+    <div class="question_img">
+        <img class="" src="assets/images/question.png" aria-hidden="true" alt="" />
     </div>
+    <div class="question_txt">
+        <p>
+            <span>
+                Friday is worse at both tasks. With each hour, he can only gather <span id="woodPerHr"></span> logs per hour
+                or catch <span id="fishPerHr"></span> calories of fish per hour. To survive, he needs <span id="woodPerDay"></span>
+                logs and <span id="fishPerDay"></span> calories of fish. Drawing his production possibility frontier.
+
+
+            </span>
+        </p>
+        <p class="q19table">
+            <table>
+                <caption>Your Production Possibility Frontier</caption>
+                <thead>
+                    <tr>
+                        <th colspan="2">Time Allocation</th>
+                        <th colspan="2">Production</th>
+                    </tr>
+                    <tr>
+                        <th>Gather Firewood</th>
+                        <th>Fishing</th>
+                        <th>Firewood (logs)</th>
+                        <th>Fish (cals)</th>
+                    </tr>
+                </thead>
+                <tbody id="q19TableBody">
+                    <tr>
+                        <td>0</td>
+                        <td>12</td>
+                        <td>0</td>
+                        <td>3000</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>11</td>
+                        <td>8</td>
+                        <td>2750</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>10</td>
+                        <td>16</td>
+                        <td>2500</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>9</td>
+                        <td>24</td>
+                        <td>2250</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>8</td>
+                        <td>32</td>
+                        <td>2000</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>7</td>
+                        <td>40</td>
+                        <td>1750</td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>6</td>
+                        <td>48</td>
+                        <td>1500</td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>5</td>
+                        <td>56</td>
+                        <td>1250</td>
+                    </tr>
+                    <tr>
+                        <td>8</td>
+                        <td>4</td>
+                        <td>64</td>
+                        <td>1000</td>
+                    </tr>
+                    <tr>
+                        <td>9</td>
+                        <td>3</td>
+                        <td>72</td>
+                        <td>750</td>
+                    </tr>
+                    <tr>
+                        <td>10</td>
+                        <td>2</td>
+                        <td>80</td>
+                        <td>500</td>
+                    </tr>
+                    <tr>
+                        <td>11</td>
+                        <td>1</td>
+                        <td>88</td>
+                        <td>250</td>
+                    </tr>
+                    <tr>
+                        <td>12</td>
+                        <td>0</td>
+                        <td>96</td>
+                        <td>0</td>
+                    </tr>
+                </tbody>
+            </table>
+        </p>
+
+        <p>
+            To plot a point on the graph, enter the values
+        </p>
+        <p>
+            <span class="spanwood">Wood (logs.)</span>
+            <input type="number" class="inlineinput" id="woodlogtools" step="any" />
+            <span class="spanfish">Fish (cals)</span>
+            <input type="number" class="inlineinput" id="fishlogtools" step="any" />
+            <input class="addbtn" id="addpointbtn" type="button" value="Add">
+            <input Class="graphbtncheckanswer" type="button" value="Check Answer" />
+        </p>
+    </div>
+    <div class="graphtitlediv">
+        <span class="graphtitle">Production Possibility Frontier</span>
+    </div>
+    <div id="questionchart" class="questionchart">
+
+    </div>
+</div>

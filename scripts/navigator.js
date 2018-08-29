@@ -97,29 +97,29 @@ var _Navigator = (function () {
             dataurl: "l2p2.htm",
             datalevel: 2,
             questions: [{
-                    Id: "Q9",
-                    dataurl: "l2p2/q9.htm"
-                },
-                {
-                    Id: "Q10",
-                    dataurl: "l2p2/q10.htm"
-                },
-                {
-                    Id: "Q11",
-                    dataurl: "l2p2/q11.htm"
-                },
-                {
-                    Id: "Q12",
-                    dataurl: "l2p2/q12.htm"
-                },
-                {
-                    Id: "Q13",
-                    dataurl: "l2p2/q13.htm"
-                },
-                {
-                    Id: "Q14",
-                    dataurl: "l2p2/q14.htm"
-                }
+                Id: "Q9",
+                dataurl: "l2p2/q9.htm"
+            },
+            {
+                Id: "Q10",
+                dataurl: "l2p2/q10.htm"
+            },
+            {
+                Id: "Q11",
+                dataurl: "l2p2/q11.htm"
+            },
+            {
+                Id: "Q12",
+                dataurl: "l2p2/q12.htm"
+            },
+            {
+                Id: "Q13",
+                dataurl: "l2p2/q13.htm"
+            },
+            {
+                Id: "Q14",
+                dataurl: "l2p2/q14.htm"
+            }
             ]
         },
         "l2p3": {
@@ -229,13 +229,13 @@ var _Navigator = (function () {
             dataurl: "l4p4.htm",
             datalevel: 4,
             questions: [{
-                    Id: "Q20",
-                    dataurl: "l4p4/q20.htm"
-                },
-                {
-                    Id: "Q21",
-                    dataurl: "l4p4/q21.htm"
-                }
+                Id: "Q20",
+                dataurl: "l4p4/q20.htm"
+            },
+            {
+                Id: "Q21",
+                dataurl: "l4p4/q21.htm"
+            }
             ],
             hasTimeSlider: false,
             hasTradeSlider: false,
@@ -251,7 +251,7 @@ var _Navigator = (function () {
             questions: [{
                 Id: "Q22",
                 dataurl: "l4p5/q22.htm"
-            }],            
+            }],
             customNext: {
                 isComplete: false,
                 jsFunction: "EventManager.onNextDay();",
@@ -276,6 +276,7 @@ var _Navigator = (function () {
         _TopSlider.OnLoad();
         _CustomPage.OnPageLoad();
         _Navigator.LoadDefaultQuestion();
+
     }
     return {
         Get: function () {
@@ -286,8 +287,24 @@ var _Navigator = (function () {
             if (Dataurl == "" || Dataurl == undefined) {
                 this.LoadPage("l1p1");
             } else {
-                this.LoadPage(Dataurl);                
+                this.LoadPage(Dataurl);
             }
+            /*
+            var BookmarkData = this.GetBookmarkData();
+            if (BookmarkData.pageId == "" || BookmarkData.pageId == undefined) {
+                this.LoadPage("l1p1");
+            } else {
+                this.LoadPage(BookmarkData.pageId);                
+            }*/ 
+        },
+        SetBookmarkData: function () {
+
+        },
+        GetBookmarkData: function () {
+            var bookmarkData = [];
+            bookmarkData.pageId = "l1p2";
+            bookmarkData.Qid = "";
+            return bookmarkData;
         },
         LoadPage: function (pageId, jsonObj) {
             if (jsonObj == undefined) {
@@ -295,9 +312,9 @@ var _Navigator = (function () {
             }
             _currentPageId = pageId;
             this.UpdateProgressBar();
-            _currentPageObject = _NData[_currentPageId]
+            _currentPageObject = _NData[_currentPageId];
             //NM: Enable Menu Item
-            $("a.menuitem[data-id='" + _currentPageId +  "']").closest("li").css("display","block");
+            $("a.menuitem[data-id='" + _currentPageId + "']").closest("li").css("display", "block");
             //
             if (_currentPageObject.isStartPage != undefined && _currentPageObject.isStartPage) {
                 $("#linkprevious").k_disable();
@@ -313,19 +330,20 @@ var _Navigator = (function () {
                 $("#linknext").k_disable();
             }
             _currentPageObject.isVisited = true;
-
+debugger;
             var pageUrl = _Settings.dataRoot + _currentPageObject.dataurl + _Caching.GetUrlExtension();;
             if (_currentPageObject.isStartPage) {
                 $(".main-content").load(pageUrl, function () {
                     OnPageLoad();
                     $("h1").focus();
+                    setReader("pagetitle");
                 });
             } else {
                 $(".main-content").fadeTo(250, 0.25, function () {
                     $(".main-content").load(pageUrl, function () {
                         $(this).fadeTo(600, 1)
                         OnPageLoad();
-                        $(".progress .background").focus();
+                        setReader("pageheading"); 
                     });
                 })
             }
@@ -344,6 +362,7 @@ var _Navigator = (function () {
                     disableEffect: true
                 });
             }
+
         },
         Prev: function () {
             if (_currentPageObject.questions.length > 0) {
@@ -357,6 +376,7 @@ var _Navigator = (function () {
             }
         },
         Next: function () {
+            debugger;
             $("#linkprevious").k_enable();
             if (_currentPageObject.customNext != undefined && !_currentPageObject.customNext.isComplete) {
                 var custFunction = new Function(_currentPageObject.customNext.jsFunction);
@@ -475,6 +495,24 @@ var _Navigator = (function () {
         GetAttemptNData: function () {
             return _AttemptNData;
         },
+        GetQuestionAttemptData: function (pageId, Qid) {
+            if (!this.isEmpty(_AttemptNData)) {
+                for (var i = 0; i < _AttemptNData[pageId].questions.length; i++) {
+                    if (_AttemptNData[pageId].questions.Qid = Qid) {
+                        return _AttemptNData[pageId].questions[i];
+                    }
+                }
+            }
+
+        },
+        isEmpty: function (obj) {
+            for (var prop in obj) {
+                if (obj.hasOwnProperty(prop))
+                    return false;
+            }
+
+            return JSON.stringify(obj) === JSON.stringify({});
+        },
         ReAttempt: function () {
             _AttemptNData = $.extend(true, {}, _NData);
             _NData = $.extend(true, {}, _TempNData);
@@ -493,6 +531,7 @@ var _Navigator = (function () {
             var pageId = "";
             for (var i in _NData) {
                 if (_NData[i].datalevel == datalevel) {
+                    _AttemptNData[i] = $.extend(true, {}, _NData[i]);
                     _NData[i] = $.extend(true, {}, _TempNData[i]);
                     if (pageId == "") {
                         pageId = _NData[i].pageId;
@@ -516,3 +555,7 @@ $(document).on("click", "#linknext", function (event) {
     if ($(this).k_IsDisabled()) return;
     _Navigator.Next();
 });
+function setReader(idToStartReading) {
+    $('#hiddenAnchor').attr("href", "#" + idToStartReading);
+    $('#hiddenAnchor')[0].click();
+}

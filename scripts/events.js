@@ -107,7 +107,10 @@ $(document).on("click", ".exambtnretry", function (event) {
     if ($(this).k_IsDisabled()) return;
     _Navigator.ReAttempt();
 });
+var datalevel = $(this).attr("data-level");
 $(document).on("click", ".levelbtnretry", function (event) {
-    var datalevel = $(this).attr("data-level");
     _Navigator.ReAttemptLevel(datalevel);
+});
+$(document).on("click", ".bookmark", function (event) {
+    _Navigator.Start();
 });

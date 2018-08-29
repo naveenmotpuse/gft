@@ -16,9 +16,15 @@
                 jsonObj = {};
             }
             var currPage = _Navigator.GetCurrentPage();
+            var firstQuestion = "";
+            debugger;
             for (var i = 0; i < currPage.questions.length; i++) {
                 currPage.questions[i].isCurrent = false;
                 // currPage.questions[i].isAnswered = true;
+                if (i == 0) {
+                    firstQuestion = currPage.questions[i].Id;
+                }
+
             }
             qObj = $.extend(qObj, _QData[qObj.Id]);
             _currentQuestionObj = qObj;
@@ -28,12 +34,25 @@
             if (jsonObj.disableEffect != undefined && jsonObj.disableEffect) {
                 $("#div_question").load(pageUrl, function () {
                     OnQuestionLoad(qObj);
+                    if (firstQuestion == _currentQuestionObj.Qid) {
+                        setReader("pageheading");
+                    }
+                    else {
+                        setReader("question");
+                    }
+
                 });
             } else {
                 $("#div_question").load(pageUrl, function () {
                     $(this).hide().fadeIn("slow", function () {
                         OnQuestionLoad(qObj);
                         $(".progress .background").focus();
+                        if (firstQuestion == _currentQuestionObj.Qid) {
+                            setReader("pageheading");
+                        }
+                        else {
+                            setReader("question");
+                        }
                     })
                 });
             }
@@ -42,6 +61,7 @@
             } else {
                 $("#linknext").k_enable();
             }
+
         },
         Next: function () {
             var currPage = _Navigator.GetCurrentPage();
@@ -54,6 +74,8 @@
                     break;
                 }
             }
+
+
         },
         Prev: function () {
             var currPage = _Navigator.GetCurrentPage();
@@ -92,7 +114,7 @@
             //$("#div_feedback").empty().hide();
             $("#div_feedback").fadeOut("slow", function () {
                 $("#div_feedback").empty();
-                $("#div_feedback").attr("aria-hidden","true")
+                $("#div_feedback").attr("aria-hidden", "true")
 
             })
             $("#div_feedback").css("margin-top", "0px");
@@ -126,7 +148,7 @@
                 $("#div_feedback").css("margin-top", (pdiff + 35) + "px");
             }
         },
-        PrevAnswer: function () {            
+        PrevAnswer: function () {
             if (_currentQuestionObj.type == "question") {
                 var totalOptions = _currentQuestionObj.options.length;
                 $(".btncheckanswer").k_disable();
@@ -157,7 +179,7 @@
                             $("#" + _optD.id).addClass("correct")
                         }
                     }
-                }                     
+                }
                 this.Loadfeedback(_currentQuestionObj.feedbackIndex);
                 this.SetQuestionStatus();
             } else {
@@ -171,10 +193,20 @@
             var totalOptions = _currentQuestionObj.options.length;
             var feedbackIndex = 0;
 
+            //best score
+            var pageId = _Navigator.GetCurrentPage().pageId;
+            var Qid = _currentQuestionObj.Qid;
+            var attemptCurrentQuestionData = _Navigator.GetQuestionAttemptData(pageId, Qid);
+
             $(".btncheckanswer").k_disable();
             $(".questionband").find("input").k_disable()
             for (var i = 0; i < totalOptions; i++) {
                 var _optD = _currentQuestionObj.options[i];
+
+                var attemptCurrentQuestionData_Options = undefined;
+                if (attemptCurrentQuestionData != undefined) {
+                    attemptCurrentQuestionData_Options = attemptCurrentQuestionData.options[i];
+                }
                 if (_optD.type == "select") {
                     var _boxGrp = $("select#" + _optD.id);
                     if (_boxGrp.val() == "") {
@@ -209,6 +241,14 @@
                         _optD.points = 0.0;
                         _optD.isCorrect = false;
                         $("#" + _optD.selectedId).addClass("incorrect");
+                        if (attemptCurrentQuestionData_Options != undefined && attemptCurrentQuestionData_Options.isCorrect) {
+                            _optD.selectedAnswer = attemptCurrentQuestionData_Options.selectedAnswer;
+                            _optD.selectedId = attemptCurrentQuestionData_Options.selectedId;
+                            var optPoints = parseFloat(_currentQuestionObj.totalPoints) / parseFloat(totalOptions)
+                            _optD.points = optPoints;
+                            _optD.isCorrect = true;
+                            _qPoints += optPoints;
+                        }
                     } else {
                         var optPoints = parseFloat(_currentQuestionObj.totalPoints) / parseFloat(totalOptions)
                         _optD.points = optPoints;
@@ -220,7 +260,7 @@
                     var inputval = $("#" + _optD.id).val();
                     var _boxGrp = $("#" + _optD.id);
                     if (inputval == "") {
-                        //Show alert message
+                        //Show alert message 
                         this.LoadAlertFeedback();
                         return;
                     }
@@ -230,6 +270,13 @@
                         _optD.points = 0.0;
                         _optD.isCorrect = false;
                         $("#" + _optD.id).addClass("incorrect");
+                        if (attemptCurrentQuestionData_Options != undefined && attemptCurrentQuestionData_Options.isCorrect) {
+                            _optD.selectedAnswer = attemptCurrentQuestionData_Options.selectedAnswer;
+                            var optPoints = parseFloat(_currentQuestionObj.totalPoints) / parseFloat(totalOptions)
+                            _optD.points = optPoints;
+                            _optD.isCorrect = true;
+                            _qPoints += optPoints;
+                        }
                     } else {
                         var optPoints = parseFloat(_currentQuestionObj.totalPoints) / parseFloat(totalOptions)
                         _optD.points = optPoints;
@@ -275,11 +322,11 @@
         GetCurrentQuestion: function () {
             return _currentQuestionObj;
         },
-        PositionOptionElements: function () {},
+        PositionOptionElements: function () { },
         SetAriaProps: function () {
 
         },
-        lastdummyfunct: function () {},
+        lastdummyfunct: function () { },
         SetQuestionStatus: function () {
 
             for (var i = 0; i < _currentQuestionObj.options.length; i++) {
