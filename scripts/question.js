@@ -63,16 +63,20 @@
         SetOptionPosition: function () {
             var widthincr = 0;
             var leftincr = 0;
-            var topincr = -18;
-
+            var topincr = 0;
             debugger;
-            if ($("input[type='number']").length > 0) {
-                for (var i = 0; i < $("input[type='number']").length; i++) {
-                    var id = $("input[type='number']").eq(i).attr("id");
+            var elmarray = $("input[type='number']");
+            if (elmarray.length > 0) {
+                for (var i = 0; i <elmarray.length; i++) {
+                    var id = $(elmarray[i]).attr("id");
+                    $( "#" + id).clone().appendTo( ".question_txt" );
+                    $("#" + id).replaceWith("<span id='" + id + "span'></span>");
+                    //
                     var d_width = $("#" + id).outerWidth();
                     $("#" + id + "span").css({
                         width: d_width + widthincr,
-                        display: "inline-block"
+                        display: "inline-block",
+                        height:"18px"
                     })
                     var d_pos = $("#" + id + "span").position();
                     $("#" + id).css({
@@ -81,7 +85,8 @@
                         top: d_pos.top + topincr
                     }).k_show();
                 }
-            }            
+            }  
+                      
         },
         Next: function () {
             var currPage = _Navigator.GetCurrentPage();
