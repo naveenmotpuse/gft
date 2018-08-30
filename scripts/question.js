@@ -1,7 +1,7 @@
 ﻿var _Question = (function () {
     var _currentQuestionObj = {}
 
-    function OnQuestionLoad(qObj) {        
+    function OnQuestionLoad(qObj) {
         _CustomQuestion.OnQuestionLoad();
         if (_currentQuestionObj.isAnswered) {
             _Question.PrevAnswer();
@@ -64,33 +64,23 @@
             var widthincr = 0;
             var leftincr = 0;
             var topincr = -18;
-            
+
             debugger;
-            if ($("#inputLalspan").length > 0) {
-                var d_width = $("#inputLal").outerWidth();
-                $("#inputLalspan").css({
-                    width: d_width + widthincr,
-                    display: "inline-block"
-                })
-                var d_pos = $("#inputLalspan").position();
-                $("#inputLal").css({
-                    position: "absolute",
-                    left: d_pos.left + leftincr,
-                    top: d_pos.top + topincr
-                }).k_show();
-            }
-            if ($("#inputCalspan").length > 0) {                
-                var d_width = $("#inputCal").outerWidth();
-                $("#inputCalspan").css({
-                    width: d_width + widthincr,
-                    display: "inline-block"
-                })
-                var d_pos = $("#inputCalspan").position();
-                 $("#inputCal").css({
-                    position: "absolute",
-                    left: d_pos.left + leftincr,
-                    top: d_pos.top+topincr
-                }).k_show();
+            if ($("input[type='number']").length > 0) {
+                for (var i = 0; i < $("input[type='number']").length; i++) {
+                    var id = $("input[type='number']").eq(i).attr("id");
+                    var d_width = $("#" + id).outerWidth();
+                    $("#" + id + "span").css({
+                        width: d_width + widthincr,
+                        display: "inline-block"
+                    })
+                    var d_pos = $("#" + id + "span").position();
+                    $("#" + id).css({
+                        position: "absolute",
+                        left: d_pos.left + leftincr,
+                        top: d_pos.top + topincr
+                    }).k_show();
+                }
             }            
         },
         Next: function () {
@@ -209,7 +199,7 @@
                     }
                 }
                 this.Loadfeedback(_currentQuestionObj.feedbackIndex);
-                this.SetQuestionStatus();                
+                this.SetQuestionStatus();
             } else {
                 _CustomQuestion.PrevAnswer();
             }
@@ -341,7 +331,7 @@
                     _currentQuestionObj.isAnswered = true;
                     _currentQuestionObj.feedbackIndex = feedbackIndex;
                     $("#linknext").k_enable();
-                    this.SetQuestionStatus();                    
+                    this.SetQuestionStatus();
                     //Need to think on generic logic.
                     //Module specific
                     _CustomQuestion.ActionAfterCheckAnswer();
