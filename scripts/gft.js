@@ -273,7 +273,7 @@ var _CustomQuestion = (function () {
                 EventManager.UpdateDayInFeedback();
             }
         },
-        OnCheckAnswer: function () {
+        ActionAfterCheckAnswer: function () {
             var _currentQuestionObj = _Question.GetCurrentQuestion();
             if (_currentQuestionObj.Id == "Q1") {
                 _ModuleCharts.AddPointToPPFChart("userppfser", [0, 3000])
@@ -444,7 +444,7 @@ var _CustomQuestion = (function () {
                 _currentQuestionObj.feedbackIndex = feedbackIndex;
                 //Need to think on generic logic.
                 _CustomQuestion.UpdateGraphSubmitStatus();
-                _CustomQuestion.OnCheckAnswer();
+                _CustomQuestion.ActionAfterCheckAnswer();
                 _Navigator.UpdateScore();
                 $("#linknext").k_enable();
             } else {
@@ -498,7 +498,7 @@ var _CustomQuestion = (function () {
                     $("#linknext").k_enable();
                     _CustomQuestion.UpdateGraphSubmitStatus();
                     //Need to think on generic logic.
-                    _CustomQuestion.OnCheckAnswer();
+                    _CustomQuestion.ActionAfterCheckAnswer();
                     _Navigator.UpdateScore();
                 }
             }

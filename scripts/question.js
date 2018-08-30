@@ -1,14 +1,13 @@
 ﻿var _Question = (function () {
     var _currentQuestionObj = {}
 
-    function OnQuestionLoad(qObj) {
-        _Question.PositionOptionElements();
-        _Question.SetAriaProps();
+    function OnQuestionLoad(qObj) {        
         _CustomQuestion.OnQuestionLoad();
         if (_currentQuestionObj.isAnswered) {
-            debugger;
             _Question.PrevAnswer();
         }
+        debugger;
+        _Question.SetOptionPosition();
     }
     return {
         Load: function (qObj, jsonObj) {
@@ -17,7 +16,6 @@
             }
             var currPage = _Navigator.GetCurrentPage();
             var firstQuestion = "";
-            debugger;
             for (var i = 0; i < currPage.questions.length; i++) {
                 currPage.questions[i].isCurrent = false;
                 // currPage.questions[i].isAnswered = true;
@@ -61,7 +59,39 @@
             } else {
                 $("#linknext").k_enable();
             }
-
+        },
+        SetOptionPosition: function () {
+            var widthincr = 0;
+            var leftincr = 0;
+            var topincr = -18;
+            
+            debugger;
+            if ($("#inputLalspan").length > 0) {
+                var d_width = $("#inputLal").outerWidth();
+                $("#inputLalspan").css({
+                    width: d_width + widthincr,
+                    display: "inline-block"
+                })
+                var d_pos = $("#inputLalspan").position();
+                $("#inputLal").css({
+                    position: "absolute",
+                    left: d_pos.left + leftincr,
+                    top: d_pos.top + topincr
+                }).k_show();
+            }
+            if ($("#inputCalspan").length > 0) {                
+                var d_width = $("#inputCal").outerWidth();
+                $("#inputCalspan").css({
+                    width: d_width + widthincr,
+                    display: "inline-block"
+                })
+                var d_pos = $("#inputCalspan").position();
+                 $("#inputCal").css({
+                    position: "absolute",
+                    left: d_pos.left + leftincr,
+                    top: d_pos.top+topincr
+                }).k_show();
+            }            
         },
         Next: function () {
             var currPage = _Navigator.GetCurrentPage();
@@ -74,8 +104,6 @@
                     break;
                 }
             }
-
-
         },
         Prev: function () {
             var currPage = _Navigator.GetCurrentPage();
@@ -181,7 +209,7 @@
                     }
                 }
                 this.Loadfeedback(_currentQuestionObj.feedbackIndex);
-                this.SetQuestionStatus();
+                this.SetQuestionStatus();                
             } else {
                 _CustomQuestion.PrevAnswer();
             }
@@ -296,7 +324,8 @@
                 $("#linknext").k_enable();
                 this.SetQuestionStatus();
                 //Need to think on generic logic.
-                _CustomQuestion.OnCheckAnswer();
+                //Module specific.
+                _CustomQuestion.ActionAfterCheckAnswer();
 
                 _Navigator.UpdateScore();
             } else {
@@ -312,9 +341,10 @@
                     _currentQuestionObj.isAnswered = true;
                     _currentQuestionObj.feedbackIndex = feedbackIndex;
                     $("#linknext").k_enable();
-                    this.SetQuestionStatus();
+                    this.SetQuestionStatus();                    
                     //Need to think on generic logic.
-                    _CustomQuestion.OnCheckAnswer();
+                    //Module specific
+                    _CustomQuestion.ActionAfterCheckAnswer();
                     _Navigator.UpdateScore();
                 }
             }
@@ -373,10 +403,12 @@
                             'color': ColorCodes.red,
                             'font-weight': 'bold'
                         })
-                        $("#" + _optD.id).after('<i class="fa fa-times" style="padding:3px;color:' + ColorCodes.red + '"></i><span aria-hidden="true" style="color:' + ColorCodes.green + ';font-weight:bold;font-size:16px;"> ' + _optD.answer + '</span> ');
+                        $("#" + _optD.id + "span").after('<label class="incurrect_label"><i class="fa fa-times" style="padding:3px;color:' + ColorCodes.red + '"></i><span aria-hidden="true" style="color:' + ColorCodes.green + ';font-weight:bold;font-size:16px;"> ' + _optD.answer + '</span> </label>');
                     }
                 }
             }
+
+            this.SetOptionPosition();
         }
     };
 })();

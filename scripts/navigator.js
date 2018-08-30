@@ -276,7 +276,6 @@ var _Navigator = (function () {
         _TopSlider.OnLoad();
         _CustomPage.OnPageLoad();
         _Navigator.LoadDefaultQuestion();
-
     }
     return {
         Get: function () {
@@ -330,7 +329,7 @@ var _Navigator = (function () {
                 $("#linknext").k_disable();
             }
             _currentPageObject.isVisited = true;
-debugger;
+
             var pageUrl = _Settings.dataRoot + _currentPageObject.dataurl + _Caching.GetUrlExtension();;
             if (_currentPageObject.isStartPage) {
                 $(".main-content").load(pageUrl, function () {
@@ -363,7 +362,7 @@ debugger;
                 });
             }
 
-        },
+        },        
         Prev: function () {
             if (_currentPageObject.questions.length > 0) {
                 if (_currentPageObject.questions[0].isCurrent) {
@@ -376,7 +375,6 @@ debugger;
             }
         },
         Next: function () {
-            debugger;
             $("#linkprevious").k_enable();
             if (_currentPageObject.customNext != undefined && !_currentPageObject.customNext.isComplete) {
                 var custFunction = new Function(_currentPageObject.customNext.jsFunction);
