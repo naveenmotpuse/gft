@@ -586,5 +586,9 @@ table caption {
     height: 0;
 }
 .rTableRow{padding-top:10px}
+.retrytext{
+    width:130px;
+    float: left;
+}
 
 
