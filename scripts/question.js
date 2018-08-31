@@ -6,7 +6,7 @@
         if (_currentQuestionObj.isAnswered) {
             _Question.PrevAnswer();
         }
-        debugger;
+        _Question.SetOptionClone();
         _Question.SetOptionPosition();
     }
     return {
@@ -58,6 +58,20 @@
                 $("#linknext").k_disable();
             } else {
                 $("#linknext").k_enable();
+            }
+        },
+        SetOptionClone: function () {
+            var widthincr = 0;
+            var leftincr = 0;
+            var topincr = 0;
+            debugger;
+            var elmarray = $("input[type='number']");
+            if (elmarray.length > 0) {
+                for (var i = 0; i <elmarray.length; i++) {
+                    var id = $(elmarray[i]).attr("id");
+                    $( "#" + id).clone().appendTo( ".question_txt" );
+                    $("#" + id).replaceWith("<span id='" + id + "span'></span>");
+                }
             }
         },
         SetOptionPosition: function () {
@@ -410,11 +424,14 @@
                     }
                 }
             }
-
+            this.SetOptionClone();
             this.SetOptionPosition();
         }
     };
 })();
+$( window ).resize(function() {
+    _Question.SetOptionPosition();
+  });
 
 
 $(document).on("click", ".btncheckanswer", function (event) {
