@@ -76,7 +76,8 @@
                     $("#" + id + "span").css({
                         width: d_width + widthincr,
                         display: "inline-block",
-                        height:"18px"
+                        height:"18px",
+                        padding:"3px 0"
                     })
                     var d_pos = $("#" + id + "span").position();
                     $("#" + id).css({
@@ -84,6 +85,13 @@
                         left: d_pos.left + leftincr,
                         top: d_pos.top + topincr
                     }).k_show();
+                    if (_currentQuestionObj.type == "graph"){
+                        $("#actionbtndiv").css({
+                            position: "absolute",
+                            left: d_pos.left + leftincr,
+                            top: d_pos.top + topincr + 110
+                        });
+                    }
                 }
             }  
                       
@@ -115,7 +123,7 @@
             this.UnloadFeedback()
             $(".btncheckanswer").k_enable();
             $("#div_question").find("input[type='text'].incorrect").val("").k_enable();
-            $("#div_question").find("input[type='number'].incorrect").val("").k_enable();
+            $("#div_question").find("input[type='number']").val("").k_enable();
             $(".questionband").find("input[type='radio']").k_enable();
             $(".questionband").find("input[type='radio']").prop('checked', false);
             if (_currentQuestionObj.type == "graph") {
