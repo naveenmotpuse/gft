@@ -130,6 +130,7 @@
         width:75%;
         margin:0 auto;
     }
+    .pointdiv, .actionbtndiv{width: 100%;}
 }
 @media  screen and (max-width : 543px) {
     .rTableCell1{
