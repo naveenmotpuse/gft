@@ -248,6 +248,7 @@ input[type='range']:active{
     bottom: 55px;    
     margin-right: 25px;
     right: 0px;
+    bottom:37%;
 }
 
 #scoreInnrDiv {
@@ -265,6 +266,15 @@ input[type='range']:active{
     float: right;
     widows: auto;
 }
+
+#header-btn-container .wrapper .inventory_btn{
+    display: inline-flex;
+}
+
+#header-btn-container .wrapper .ppf_btn{
+    float: right;
+}
+
 
 #header-btn-container .linkppf-p,
 #header-btn-container .linksurplus-p {
