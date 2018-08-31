@@ -61,10 +61,6 @@
             }
         },
         SetOptionClone: function () {
-            var widthincr = 0;
-            var leftincr = 0;
-            var topincr = 0;
-            debugger;
             var elmarray = $("input[type='number']");
             if (elmarray.length > 0) {
                 for (var i = 0; i <elmarray.length; i++) {
@@ -78,14 +74,10 @@
             var widthincr = 0;
             var leftincr = 0;
             var topincr = 0;
-            debugger;
             var elmarray = $("input[type='number']");
             if (elmarray.length > 0) {
                 for (var i = 0; i <elmarray.length; i++) {
                     var id = $(elmarray[i]).attr("id");
-                    $( "#" + id).clone().appendTo( ".question_txt" );
-                    $("#" + id).replaceWith("<span id='" + id + "span'></span>");
-                    //
                     var d_width = $("#" + id).outerWidth();
                     $("#" + id + "span").css({
                         width: d_width + widthincr,
