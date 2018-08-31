@@ -120,7 +120,7 @@
             this.UnloadFeedback()
             $(".btncheckanswer").k_enable();
             $("#div_question").find("input[type='text'].incorrect").val("").k_enable();
-            $("#div_question").find("input[type='number'].incorrect").val("").k_enable();
+            $("#div_question").find("input[type='number']").val("").k_enable();
             $(".questionband").find("input[type='radio']").k_enable();
             $(".questionband").find("input[type='radio']").prop('checked', false);
             if (_currentQuestionObj.type == "graph") {

@@ -29,6 +29,10 @@ h3 {
     margin: 5px 0px;
 }
 
+h3.graphtitle{
+    text-align: center;
+}
+
 h4 {
     font-size: 16px;
 }
