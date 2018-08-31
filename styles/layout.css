@@ -25,8 +25,12 @@ h2 {
 }
 
 h3 {
-    font-size: 18px;
-    margin: 5px 0px;
+    font-size: 20px;
+    margin: 15px 0px;
+}
+
+h3.graphtitle{
+    text-align: center;
 }
 
 h3.graphtitle{
@@ -34,7 +38,7 @@ h3.graphtitle{
 }
 
 h4 {
-    font-size: 16px;
+    font-size: 18px;
 }
 
 h2.pageheading {
@@ -510,18 +514,14 @@ table.smallfont tr td {
 }
 
 table {
-    font-size: 20px;
+    font-size: 16px;
 }
 
 table caption {
     text-align: left;
     margin-bottom: 15px;
     font-weight: bold;
-}
-
-tbody,
-thead {
-    font-size: 16px;
+    font-size: 20px;
 }
 
 .rTable {

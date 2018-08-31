@@ -1,7 +1,7 @@
 ﻿var _Question = (function () {
     var _currentQuestionObj = {}
 
-    function OnQuestionLoad(qObj) {        
+    function OnQuestionLoad(qObj) {
         _CustomQuestion.OnQuestionLoad();
         if (_currentQuestionObj.isAnswered) {
             _Question.PrevAnswer();
@@ -63,35 +63,38 @@
         SetOptionPosition: function () {
             var widthincr = 0;
             var leftincr = 0;
-            var topincr = -18;
-            
+            var topincr = 0;
             debugger;
-            if ($("#inputLalspan").length > 0) {
-                var d_width = $("#inputLal").outerWidth();
-                $("#inputLalspan").css({
-                    width: d_width + widthincr,
-                    display: "inline-block"
-                })
-                var d_pos = $("#inputLalspan").position();
-                $("#inputLal").css({
-                    position: "absolute",
-                    left: d_pos.left + leftincr,
-                    top: d_pos.top + topincr
-                }).k_show();
-            }
-            if ($("#inputCalspan").length > 0) {                
-                var d_width = $("#inputCal").outerWidth();
-                $("#inputCalspan").css({
-                    width: d_width + widthincr,
-                    display: "inline-block"
-                })
-                var d_pos = $("#inputCalspan").position();
-                 $("#inputCal").css({
-                    position: "absolute",
-                    left: d_pos.left + leftincr,
-                    top: d_pos.top+topincr
-                }).k_show();
-            }            
+            var elmarray = $("input[type='number']");
+            if (elmarray.length > 0) {
+                for (var i = 0; i <elmarray.length; i++) {
+                    var id = $(elmarray[i]).attr("id");
+                    $( "#" + id).clone().appendTo( ".question_txt" );
+                    $("#" + id).replaceWith("<span id='" + id + "span'></span>");
+                    //
+                    var d_width = $("#" + id).outerWidth();
+                    $("#" + id + "span").css({
+                        width: d_width + widthincr,
+                        display: "inline-block",
+                        height:"18px",
+                        padding:"3px 0"
+                    })
+                    var d_pos = $("#" + id + "span").position();
+                    $("#" + id).css({
+                        position: "absolute",
+                        left: d_pos.left + leftincr,
+                        top: d_pos.top + topincr
+                    }).k_show();
+                    if (_currentQuestionObj.type == "graph"){
+                        $("#actionbtndiv").css({
+                            position: "absolute",
+                            left: d_pos.left + leftincr,
+                            top: d_pos.top + topincr + 110
+                        });
+                    }
+                }
+            }  
+                      
         },
         Next: function () {
             var currPage = _Navigator.GetCurrentPage();
@@ -120,7 +123,7 @@
             this.UnloadFeedback()
             $(".btncheckanswer").k_enable();
             $("#div_question").find("input[type='text'].incorrect").val("").k_enable();
-            $("#div_question").find("input[type='number'].incorrect").val("").k_enable();
+            $("#div_question").find("input[type='number']").val("").k_enable();
             $(".questionband").find("input[type='radio']").k_enable();
             $(".questionband").find("input[type='radio']").prop('checked', false);
             if (_currentQuestionObj.type == "graph") {
@@ -209,7 +212,7 @@
                     }
                 }
                 this.Loadfeedback(_currentQuestionObj.feedbackIndex);
-                this.SetQuestionStatus();                
+                this.SetQuestionStatus();
             } else {
                 _CustomQuestion.PrevAnswer();
             }
@@ -342,7 +345,7 @@
                     _currentQuestionObj.isAnswered = true;
                     _currentQuestionObj.feedbackIndex = feedbackIndex;
                     $("#linknext").k_enable();
-                    this.SetQuestionStatus();                    
+                    this.SetQuestionStatus();
                     //Need to think on generic logic.
                     //Module specific
                     _CustomQuestion.ActionAfterCheckAnswer();
