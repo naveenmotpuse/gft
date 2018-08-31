@@ -63,9 +63,9 @@
         SetOptionClone: function () {
             var elmarray = $("input[type='number']");
             if (elmarray.length > 0) {
-                for (var i = 0; i <elmarray.length; i++) {
+                for (var i = 0; i < elmarray.length; i++) {
                     var id = $(elmarray[i]).attr("id");
-                    $( "#" + id).clone().appendTo( ".question_txt" );
+                    $("#" + id).clone().appendTo(".question_txt");
                     $("#" + id).replaceWith("<span id='" + id + "span'></span>");
                 }
             }
@@ -76,14 +76,14 @@
             var topincr = 0;
             var elmarray = $("input[type='number']");
             if (elmarray.length > 0) {
-                for (var i = 0; i <elmarray.length; i++) {
+                for (var i = 0; i < elmarray.length; i++) {
                     var id = $(elmarray[i]).attr("id");
                     var d_width = $("#" + id).outerWidth();
                     $("#" + id + "span").css({
                         width: d_width + widthincr,
                         display: "inline-block",
-                        height:"18px",
-                        padding:"3px 0"
+                        height: "18px",
+                        padding: "3px 0"
                     })
                     var d_pos = $("#" + id + "span").position();
                     $("#" + id).css({
@@ -91,7 +91,7 @@
                         left: d_pos.left + leftincr,
                         top: d_pos.top + topincr
                     }).k_show();
-                    if (_currentQuestionObj.type == "graph"){
+                    if (_currentQuestionObj.type == "graph") {
                         $("#actionbtndiv").css({
                             position: "absolute",
                             left: d_pos.left + leftincr,
@@ -99,8 +99,8 @@
                         });
                     }
                 }
-            }  
-                      
+            }
+
         },
         Next: function () {
             var currPage = _Navigator.GetCurrentPage();
@@ -129,7 +129,7 @@
             this.UnloadFeedback()
             $(".btncheckanswer").k_enable();
             $("#div_question").find("input[type='text'].incorrect").val("").k_enable();
-            $("#div_question").find("input[type='number']").val("").k_enable();
+            $("#div_question").find("input[type='number'].incorrect").val("").k_enable();
             $(".questionband").find("input[type='radio']").k_enable();
             $(".questionband").find("input[type='radio']").prop('checked', false);
             if (_currentQuestionObj.type == "graph") {
@@ -227,6 +227,7 @@
             var isWorsen = false;
             var _qPoints = 0.0;
             var isAllCorrect = true;
+            var isEmpty = false;
             var totalOptions = _currentQuestionObj.options.length;
             var feedbackIndex = 0;
 
@@ -236,7 +237,7 @@
             var attemptCurrentQuestionData = _Navigator.GetQuestionAttemptData(pageId, Qid);
 
             $(".btncheckanswer").k_disable();
-            $(".questionband").find("input").k_disable()
+            $(".questionband").find("input").k_disable();
             for (var i = 0; i < totalOptions; i++) {
                 var _optD = _currentQuestionObj.options[i];
 
@@ -299,8 +300,8 @@
                     if (inputval == "") {
                         //Show alert message 
                         $("#" + _optD.id).addClass("incorrect");
-                        this.LoadAlertFeedback();
-                        return;
+                        isEmpty = true;
+
                     }
                     _optD.selectedAnswer = Number(inputval);
                     if (_optD.answer != _optD.selectedAnswer) {
@@ -324,7 +325,11 @@
                     }
                 }
             }
-            if (isAllCorrect) {
+            if (isEmpty) {
+                this.LoadAlertFeedback();
+                return;
+            }
+            else if (isAllCorrect) {
                 //Show Correct Feedback
                 feedbackIndex = 0;
                 this.Loadfeedback(feedbackIndex);
@@ -368,7 +373,6 @@
         },
         lastdummyfunct: function () { },
         SetQuestionStatus: function () {
-
             for (var i = 0; i < _currentQuestionObj.options.length; i++) {
                 var _optD = _currentQuestionObj.options[i];
                 if (_optD.type == "select") {
@@ -417,14 +421,13 @@
                     }
                 }
             }
-            this.SetOptionClone();
             this.SetOptionPosition();
         }
     };
 })();
-$( window ).resize(function() {
+$(window).resize(function () {
     _Question.SetOptionPosition();
-  });
+});
 
 
 $(document).on("click", ".btncheckanswer", function (event) {
