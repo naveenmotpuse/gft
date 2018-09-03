@@ -1,0 +1,123 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>Gains From Trade</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="Cache-Control" content="no-store" />
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="styles/font.css" rel="stylesheet" />
+    <link href="scripts/external/menu/menu.css" rel="stylesheet" />
+    <link href="styles/layout.css" rel="stylesheet" />
+    <link href="styles/device.css" rel="stylesheet" />
+
+    <script src="scripts/external/jquery-2.1.4.min.js"></script>
+    <script src="scripts/external/highcharts.js"></script>
+    <script src="scripts/external/menu/menu.js"></script>
+
+    <script src="scripts/settings.js"></script>
+    <style>
+       #checkbox-elements {
+            background: #fff;
+            border-radius: 5px;
+            padding: 2%;
+        } 
+
+        #checkbox-elements label {
+            display: block;
+            position: relative;
+            margin-bottom: 12px;
+            cursor: pointer;
+            font-size: 16px;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        #page-heading h2 {
+            margin-top: 70px;
+            margin-left: 5%;
+        }
+
+        #checkbox-elements input{
+            cursor: pointer;
+        }
+
+        #main-content {
+            width: 100%;
+            display: inline-flex;
+        }
+
+        #text-heading {
+            margin-left: 5%;
+            width: 25%;
+        }
+
+        #text-heading h4{
+            margin-top: 15%;
+        }
+
+        .checkbox-group {
+            width: 75%;
+            margin-right: 35%;
+        }
+
+        .savebtn {
+            margin-left: 21%;
+            padding-bottom: 2%;
+        }
+
+        #statusdiv {
+            margin-left: 21%;
+            padding-bottom: 2%;
+            color: #f60;
+        }
+    </style>
+</head>
+<body>
+    <div id="wrapper" class="mxwidth">
+        <header role="banner">
+            <center>
+                <div id="header-content" class="mxwidth">
+                    <div id="header-title">
+                        <h1 id="pagetitle">Gains From Trade</h1>
+                    </div>
+                </div>
+            </center>
+        </header>
+        <main role="main">
+            <div id="page-heading">
+                <h2>Settings</h2>
+            </div>
+            <div id="main-content">
+                <div id="text-heading">
+                    <h4>Include levels :</h4>
+                </div>
+                <div class="checkbox-group">
+                    <p id="checkbox-elements">
+                        <label>
+                            <input type="checkbox" id="checkoxlevel1">Level 1
+                        </label>
+                        <label>
+                            <input type="checkbox" id="checkoxlevel2">Level 2
+                        </label>
+                        <label>
+                            <input type="checkbox" id="checkoxlevel3">Level 3
+                        </label>
+                        <label>
+                            <input type="checkbox" id="checkoxlevel4">Level 4
+                        </label>
+                    </p>
+                </div>
+            </div>
+            <div class="savebtn">
+                <input type="button" name="submitbtn" value="Save" id="savebtn">
+            </div>
+            <div id="statusdiv">
+            </div>
+        </main>
+    </div>
+</body>
+</html>
