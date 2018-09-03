@@ -28,8 +28,10 @@ $(document).ready(function () {
     _Template.LoadTopSlider();
     var bookmarkdata = _Navigator.GetBookmarkData();
     var jsonObj = {};
-    jsonObj.isBookMark = true;
-    jsonObj.bookmarkdata = bookmarkdata;
+    if (!_Navigator.isEmpty(bookmarkdata)) {
+        jsonObj.isBookMark = true;
+        jsonObj.bookmarkdata = bookmarkdata;
+    }
     _Navigator.Start(jsonObj);
     $("h1:first").focus();
 

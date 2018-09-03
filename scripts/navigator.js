@@ -6,7 +6,7 @@ var _Navigator = (function () {
     var progressLevels = [1, 8, 8, 3, 6];
     var _AttemptNData = {};
     var _TempNData = {};
-    var _bookmarkData = { };
+    var _bookmarkData = {};
     var _NData = {
         "l1p1": {
             pageId: "l1p1",
@@ -308,10 +308,7 @@ var _Navigator = (function () {
             _NData = JSON.parse(JSON.stringify(_ndata_object));
         },
         LoadPage: function (pageId, jsonObj) {
-            if (jsonObj == undefined) {
-                jsonObj = {};
-            }
-            debugger;
+            
             _currentPageId = pageId;
             if (!this.isEmpty(jsonObj)) {
                 if (jsonObj.isBookMark) {
@@ -360,10 +357,7 @@ var _Navigator = (function () {
             }
         },
         LoadDefaultQuestion: function (jsonObj) {
-            if (jsonObj == undefined) {
-                jsonObj = {};
-            }
-            debugger;
+            
             if (_currentPageObject.questions.length > 0) {
                 _questionId = 0;
                 if (!this.isEmpty(jsonObj)) {
