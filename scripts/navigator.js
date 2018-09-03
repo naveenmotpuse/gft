@@ -6,6 +6,7 @@ var _Navigator = (function () {
     var progressLevels = [1, 8, 8, 3, 6];
     var _AttemptNData = {};
     var _TempNData = {};
+    var _bookmarkData = { pageId: "l1p2", Qid: "Q2" };
     var _NData = {
         "l1p1": {
             pageId: "l1p1",
@@ -277,39 +278,49 @@ var _Navigator = (function () {
         _CustomPage.OnPageLoad();
         _Navigator.LoadDefaultQuestion();
     }
+    function LoadBookmarkQuestion(_currentQuestionObj){
+        _Question.Load(_currentQuestionObj);
+
+    }
     return {
         Get: function () {
             return _NData;
         },
-        Start: function () {
+        Start: function (bookmarkdata) {
+            bookmarkdata = _bookmarkData;
             var Dataurl = $.url('?page');
             if (Dataurl == "" || Dataurl == undefined) {
-                this.LoadPage("l1p1");
+                this.LoadPage("l1p1", bookmarkdata);
             } else {
-                this.LoadPage(Dataurl);
+                this.LoadPage(Dataurl, bookmarkdata);
             }
-            /*
-            var BookmarkData = this.GetBookmarkData();
-            if (BookmarkData.pageId == "" || BookmarkData.pageId == undefined) {
-                this.LoadPage("l1p1");
-            } else {
-                this.LoadPage(BookmarkData.pageId);                
-            }*/ 
-        },
-        SetBookmarkData: function () {
-
         },
         GetBookmarkData: function () {
-            var bookmarkData = [];
-            bookmarkData.pageId = "l1p2";
-            bookmarkData.Qid = "";
-            return bookmarkData;
+            /*var _bookmarkData = {}
+            var _currentPageObject = this.GetCurrentPage();
+            var currentQid = undefined;
+            if (_currentPageObject.questions.length > 0) {
+                var currentQid = _Question.GetCurrentQuestion().Qid;
+            }
+            _bookmarkData.pageId = _currentPageObject.pageId;
+            _bookmarkData.Qid = currentQid;*/
+            return _bookmarkData;
         },
-        LoadPage: function (pageId, jsonObj) {
+        GetNavigationData: function () {
+            return JSON.parse(JSON.stringify(_NData));
+        },
+        SetNavigationData: function (_ndata_object) {
+            _NData = JSON.parse(JSON.stringify(_ndata_object));
+        },
+        LoadPage: function (pageId, bookmarkdata, jsonObj) {
             if (jsonObj == undefined) {
                 jsonObj = {};
             }
+
             _currentPageId = pageId;
+            if (!this.isEmpty(bookmarkdata)) {
+                _currentPageId = bookmarkdata.pageId;
+            }
             this.UpdateProgressBar();
             _currentPageObject = _NData[_currentPageId];
             //NM: Enable Menu Item
@@ -329,11 +340,21 @@ var _Navigator = (function () {
                 $("#linknext").k_disable();
             }
             _currentPageObject.isVisited = true;
-
+            debugger;
             var pageUrl = _Settings.dataRoot + _currentPageObject.dataurl + _Caching.GetUrlExtension();;
             if (_currentPageObject.isStartPage) {
                 $(".main-content").load(pageUrl, function () {
                     OnPageLoad();
+                    if (!_Navigator.isEmpty(bookmarkdata)) {
+                        if(bookmarkdata.Qid!=undefined && bookmarkdata.Qid!=''){
+                            for (var i = 0; i < _currentPageObject.questions.length; i++) {
+                                if ((bookmarkdata.Qid == _currentPageObject.questions[i].Id)) {
+                                    _currentQuestionObj = _currentPageObject.questions[i]
+                                }
+                            }
+                            LoadBookmarkQuestion(_currentQuestionObj);
+                        }
+                    }
                     $("h1").focus();
                     setReader("pagetitle");
                 });
@@ -342,7 +363,17 @@ var _Navigator = (function () {
                     $(".main-content").load(pageUrl, function () {
                         $(this).fadeTo(600, 1)
                         OnPageLoad();
-                        setReader("pageheading"); 
+                        if (!_Navigator.isEmpty(bookmarkdata)) {
+                            if(bookmarkdata.Qid!=undefined && bookmarkdata.Qid!=''){
+                                for (var i = 0; i < _currentPageObject.questions.length; i++) {
+                                    if ((bookmarkdata.Qid == _currentPageObject.questions[i].Id)) {
+                                        _currentQuestionObj = _currentPageObject.questions[i]
+                                    }
+                                }
+                                LoadBookmarkQuestion(_currentQuestionObj);
+                            }
+                        }
+                        setReader("pageheading");
                     });
                 })
             }
@@ -362,7 +393,7 @@ var _Navigator = (function () {
                 });
             }
 
-        },        
+        },
         Prev: function () {
             if (_currentPageObject.questions.length > 0) {
                 if (_currentPageObject.questions[0].isCurrent) {
@@ -399,6 +430,7 @@ var _Navigator = (function () {
                     this.CompletePage()
                 }
                 this.LoadPage(_currentPageObject.nextPageId);
+
             }
         },
         GetProgressData: function () {
