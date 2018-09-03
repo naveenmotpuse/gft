@@ -6,7 +6,8 @@ var _Navigator = (function () {
     var progressLevels = [1, 8, 8, 3, 6];
     var _AttemptNData = {};
     var _TempNData = {};
-    var _bookmarkData = {};
+    var _bookmarkData = { pageId: 'l1p2', Qid: "Q1" };
+    var _levelStartPages = ["l1p1", "l1p2", "l2p1", "l3p1", "l4p1"];
     var _NData = {
         "l1p1": {
             pageId: "l1p1",
@@ -276,6 +277,7 @@ var _Navigator = (function () {
     function OnPageLoad(jsonObj) {
         _TopSlider.OnLoad();
         _CustomPage.OnPageLoad();
+        _Navigator.UpdateMenuVisibility();
         _Navigator.LoadDefaultQuestion(jsonObj);
     }
     return {
@@ -309,7 +311,7 @@ var _Navigator = (function () {
         },
         LoadPage: function (pageId, jsonObj) {
             _currentPageId = pageId;
-            if (!this.isEmpty(jsonObj) && jsonObj!=undefined) {
+            if (!this.isEmpty(jsonObj) && jsonObj != undefined) {
                 if (jsonObj.isBookMark) {
                     _currentPageId = jsonObj.bookmarkdata.pageId;
                 }
@@ -322,6 +324,7 @@ var _Navigator = (function () {
             _currentPageObject = _NData[_currentPageId];
             //NM: Enable Menu Item
             $("a.menuitem[data-id='" + _currentPageId + "']").closest("li").css("display", "block");
+
             //
             if (_currentPageObject.isStartPage != undefined && _currentPageObject.isStartPage) {
                 $("#linkprevious").k_disable();
@@ -358,7 +361,7 @@ var _Navigator = (function () {
         LoadDefaultQuestion: function (jsonObj) {
             if (_currentPageObject.questions.length > 0) {
                 _questionId = 0;
-                if (!this.isEmpty(jsonObj) && jsonObj!=undefined) {
+                if (!this.isEmpty(jsonObj) && jsonObj != undefined) {
                     if (jsonObj.isBookMark) {
                         for (var i = 0; i < _currentPageObject.questions.length; i++) {
                             if ((jsonObj.bookmarkdata.Qid == _currentPageObject.questions[i].Id)) {
@@ -367,6 +370,10 @@ var _Navigator = (function () {
                         }
                     }
                     else if (jsonObj.isMenuVisit) {
+                        for (var i = 0; i < _currentPageObject.questions.length; i++) {
+                            _currentPageObject.questions[i].isQuestionVisit = false;
+                        }
+                        _currentPageObject.questions[0].isQuestionVisit = true;
                         _questionId = 0;
                     }
 
@@ -424,6 +431,14 @@ var _Navigator = (function () {
                 }
                 this.LoadPage(_currentPageObject.nextPageId);
 
+            }
+        },
+        UpdateMenuVisibility: function () {
+            for (var i = 0; i < _levelStartPages.length; i++) {
+                if(_NData[_levelStartPages[i]].isVisited)
+                {
+                    $("a.menuitem[data-id='" + _NData[_levelStartPages[i]].pageId + "']").closest("li").css("display", "block"); 
+                }
             }
         },
         GetProgressData: function () {
