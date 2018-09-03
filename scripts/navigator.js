@@ -308,9 +308,8 @@ var _Navigator = (function () {
             _NData = JSON.parse(JSON.stringify(_ndata_object));
         },
         LoadPage: function (pageId, jsonObj) {
-            
             _currentPageId = pageId;
-            if (!this.isEmpty(jsonObj)) {
+            if (!this.isEmpty(jsonObj) && jsonObj!=undefined) {
                 if (jsonObj.isBookMark) {
                     _currentPageId = jsonObj.bookmarkdata.pageId;
                 }
@@ -357,10 +356,9 @@ var _Navigator = (function () {
             }
         },
         LoadDefaultQuestion: function (jsonObj) {
-            
             if (_currentPageObject.questions.length > 0) {
                 _questionId = 0;
-                if (!this.isEmpty(jsonObj)) {
+                if (!this.isEmpty(jsonObj) && jsonObj!=undefined) {
                     if (jsonObj.isBookMark) {
                         for (var i = 0; i < _currentPageObject.questions.length; i++) {
                             if ((jsonObj.bookmarkdata.Qid == _currentPageObject.questions[i].Id)) {
