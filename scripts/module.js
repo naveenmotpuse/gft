@@ -21,12 +21,18 @@ jQuery.fn.extend({
 
 
 $(document).ready(function () {
-    
+
     //always first in ready. should be called only once.
     _Navigator.UpdateDefaultNData();
 
     _Template.LoadTopSlider();
-    _Navigator.Start();
+    var bookmarkdata = _Navigator.GetBookmarkData();
+    var jsonObj = {};
+    if (!_Navigator.isEmpty(bookmarkdata)) {
+        jsonObj.isBookMark = true;
+        jsonObj.bookmarkdata = bookmarkdata;
+    }
+    _Navigator.Start(jsonObj);
     $("h1:first").focus();
 
     if (_Settings.enableCache) {
@@ -35,7 +41,7 @@ $(document).ready(function () {
     }
     _Scenario.ShuffleScenario();
     _Scenario.updateQuestionData();
-    
+
     var isIE11version = !!navigator.userAgent.match(/Trident.*rv\:11\./);
     if (/Edge/.test(navigator.userAgent) || isIE11version) {
         $('head').append('<link rel="stylesheet" href="styles/IE.css" type="text/css" />');
@@ -43,7 +49,7 @@ $(document).ready(function () {
     else if ((/Firefox[\/\s](\d+\.\d+)/.test(navigator.userAgent))) {
         $('head').append('<link rel="stylesheet" href="styles/firefox.css" type="text/css" />');
     }
-    else{
+    else {
         $('head').append('<link rel="stylesheet" href="styles/mainslider.css" type="text/css" />');
     }
 });

@@ -6,6 +6,7 @@ var _Navigator = (function () {
     var progressLevels = [1, 8, 8, 3, 6];
     var _AttemptNData = {};
     var _TempNData = {};
+    var _bookmarkData = {};
     var _NData = {
         "l1p1": {
             pageId: "l1p1",
@@ -272,44 +273,51 @@ var _Navigator = (function () {
     }
     var _StateData = {}
 
-    function OnPageLoad() {
+    function OnPageLoad(jsonObj) {
         _TopSlider.OnLoad();
         _CustomPage.OnPageLoad();
-        _Navigator.LoadDefaultQuestion();
+        _Navigator.LoadDefaultQuestion(jsonObj);
     }
     return {
         Get: function () {
             return _NData;
         },
-        Start: function () {
+        Start: function (jsonObj) {
             var Dataurl = $.url('?page');
             if (Dataurl == "" || Dataurl == undefined) {
-                this.LoadPage("l1p1");
+                this.LoadPage("l1p1", jsonObj);
             } else {
-                this.LoadPage(Dataurl);
+                this.LoadPage(Dataurl, jsonObj);
             }
-            /*
-            var BookmarkData = this.GetBookmarkData();
-            if (BookmarkData.pageId == "" || BookmarkData.pageId == undefined) {
-                this.LoadPage("l1p1");
-            } else {
-                this.LoadPage(BookmarkData.pageId);                
-            }*/ 
-        },
-        SetBookmarkData: function () {
-
         },
         GetBookmarkData: function () {
-            var bookmarkData = [];
-            bookmarkData.pageId = "l1p2";
-            bookmarkData.Qid = "";
-            return bookmarkData;
+            /*var _bookmarkData = {}
+            var _currentPageObject = this.GetCurrentPage();
+            var currentQid = undefined;
+            if (_currentPageObject.questions.length > 0) {
+                var currentQid = _Question.GetCurrentQuestion().Qid;
+            }
+            _bookmarkData.pageId = _currentPageObject.pageId;
+            _bookmarkData.Qid = currentQid;*/
+            return _bookmarkData;
+        },
+        GetNavigationData: function () {
+            return JSON.parse(JSON.stringify(_NData));
+        },
+        SetNavigationData: function (_ndata_object) {
+            _NData = JSON.parse(JSON.stringify(_ndata_object));
         },
         LoadPage: function (pageId, jsonObj) {
-            if (jsonObj == undefined) {
-                jsonObj = {};
-            }
             _currentPageId = pageId;
+            if (!this.isEmpty(jsonObj) && jsonObj!=undefined) {
+                if (jsonObj.isBookMark) {
+                    _currentPageId = jsonObj.bookmarkdata.pageId;
+                }
+                else if (jsonObj.isMenuVisit) {
+                    _currentPageId = jsonObj.pageId;
+                }
+
+            }
             this.UpdateProgressBar();
             _currentPageObject = _NData[_currentPageId];
             //NM: Enable Menu Item
@@ -333,7 +341,7 @@ var _Navigator = (function () {
             var pageUrl = _Settings.dataRoot + _currentPageObject.dataurl + _Caching.GetUrlExtension();;
             if (_currentPageObject.isStartPage) {
                 $(".main-content").load(pageUrl, function () {
-                    OnPageLoad();
+                    OnPageLoad(jsonObj);
                     $("h1").focus();
                     setReader("pagetitle");
                 });
@@ -341,28 +349,44 @@ var _Navigator = (function () {
                 $(".main-content").fadeTo(250, 0.25, function () {
                     $(".main-content").load(pageUrl, function () {
                         $(this).fadeTo(600, 1)
-                        OnPageLoad();
-                        setReader("pageheading"); 
+                        OnPageLoad(jsonObj);
+                        setReader("pageheading");
                     });
                 })
             }
         },
-        LoadDefaultQuestion: function () {
+        LoadDefaultQuestion: function (jsonObj) {
             if (_currentPageObject.questions.length > 0) {
                 _questionId = 0;
-                _currentPageObject.questions[0].isQuestionVisit = true;
-                for (var i = 0; i < _currentPageObject.questions.length; i++) {
-                    if (_currentPageObject.questions[i].isCurrent) {
-                        _questionId = i;
+                if (!this.isEmpty(jsonObj) && jsonObj!=undefined) {
+                    if (jsonObj.isBookMark) {
+                        for (var i = 0; i < _currentPageObject.questions.length; i++) {
+                            if ((jsonObj.bookmarkdata.Qid == _currentPageObject.questions[i].Id)) {
+                                _questionId = i;
+                            }
+                        }
+                    }
+                    else if (jsonObj.isMenuVisit) {
+                        _questionId = 0;
+                    }
+
+                }
+                else {
+                    _currentPageObject.questions[0].isQuestionVisit = true;
+                    for (var i = 0; i < _currentPageObject.questions.length; i++) {
+                        if (_currentPageObject.questions[i].isCurrent) {
+                            _questionId = i;
+                        }
                     }
                 }
+
                 //second parameter is to disable question effect.
                 _Question.Load(_currentPageObject.questions[_questionId], {
                     disableEffect: true
                 });
             }
 
-        },        
+        },
         Prev: function () {
             if (_currentPageObject.questions.length > 0) {
                 if (_currentPageObject.questions[0].isCurrent) {
@@ -399,6 +423,7 @@ var _Navigator = (function () {
                     this.CompletePage()
                 }
                 this.LoadPage(_currentPageObject.nextPageId);
+
             }
         },
         GetProgressData: function () {

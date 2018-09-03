@@ -3,11 +3,11 @@
 
     function OnQuestionLoad(qObj) {
         _CustomQuestion.OnQuestionLoad();
-        if (_currentQuestionObj.isAnswered) {
-            _Question.PrevAnswer();
-        }
         _Question.SetOptionClone();
         _Question.SetOptionPosition();
+        if (_currentQuestionObj.isAnswered) {
+            _Question.PrevAnswer();
+        }        
     }
     return {
         Load: function (qObj, jsonObj) {
