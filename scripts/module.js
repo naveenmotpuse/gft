@@ -26,7 +26,8 @@ $(document).ready(function () {
     _Navigator.UpdateDefaultNData();
 
     _Template.LoadTopSlider();
-    _Navigator.Start();
+    var bookmarkdata = _Navigator.GetBookmarkData();
+    _Navigator.Start(bookmarkdata);
     $("h1:first").focus();
 
     if (_Settings.enableCache) {

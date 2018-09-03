@@ -6,7 +6,7 @@ var _Navigator = (function () {
     var progressLevels = [1, 8, 8, 3, 6];
     var _AttemptNData = {};
     var _TempNData = {};
-    var _bookmarkData = { pageId: "l1p2", Qid: "Q2" };
+    var _bookmarkData = {};
     var _NData = {
         "l1p1": {
             pageId: "l1p1",
@@ -287,7 +287,6 @@ var _Navigator = (function () {
             return _NData;
         },
         Start: function (bookmarkdata) {
-            bookmarkdata = _bookmarkData;
             var Dataurl = $.url('?page');
             if (Dataurl == "" || Dataurl == undefined) {
                 this.LoadPage("l1p1", bookmarkdata);
@@ -318,7 +317,7 @@ var _Navigator = (function () {
             }
 
             _currentPageId = pageId;
-            if (!this.isEmpty(bookmarkdata)) {
+            if (!this.isEmpty(bookmarkdata) && bookmarkdata!=undefined) {
                 _currentPageId = bookmarkdata.pageId;
             }
             this.UpdateProgressBar();
