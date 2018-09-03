@@ -6,7 +6,7 @@ var _Navigator = (function () {
     var progressLevels = [1, 8, 8, 3, 6];
     var _AttemptNData = {};
     var _TempNData = {};
-    var _bookmarkData = { pageId: 'l1p2', Qid: "Q1" };
+    var _bookmarkData = {  };
     var _levelStartPages = ["l1p1", "l1p2", "l2p1", "l3p1", "l4p1"];
     var _NData = {
         "l1p1": {
