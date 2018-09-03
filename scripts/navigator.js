@@ -6,7 +6,9 @@ var _Navigator = (function () {
     var progressLevels = [1, 8, 8, 3, 6];
     var _AttemptNData = {};
     var _TempNData = {};
-    var _bookmarkData = {};
+    var _bookmarkData = { pageId: "l1p2", Qid: "Q2" };
+    var _testNData = { "l1p1": { "pageId": "l1p1", "prevPageId": "", "nextPageId": "l1p2", "dataurl": "l1p1.htm", "datalevel": 0, "questions": [], "isStartPage": true, "hasAnimation": true, "isVisited": true, "IsComplete": true }, "l1p2": { "pageId": "l1p2", "prevPageId": "l1p1", "nextPageId": "l1p3", "dataurl": "l1p2.htm", "datalevel": 1, "questions": [{ "Id": "Q1", "dataurl": "l1p2/q1.htm", "isQuestionVisit": true, "isCurrent": false, "Qid": "Q1", "type": "question", "tryCount": 0, "totalTry": 2, "totalPoints": 1, "options": [{ "type": "input", "id": "inputCal", "answer": "3000", "answerId": "", "selectedAnswer": 3000, "points": 1, "isCorrect": true }], "feedback": ["l1p2/q1c1.htm", "ic1.htm", "l1p2/q1ic2.htm"], "points": 1, "isAnswered": true, "feedbackIndex": 0 }, { "Id": "Q2", "dataurl": "l1p2/q2.htm", "isCurrent": true, "Qid": "Q2", "type": "question", "tryCount": 0, "totalTry": 2, "totalPoints": 1, "options": [{ "type": "input", "id": "inputLal", "answer": "96", "answerId": "", "selectedAnswer": 96, "points": 1, "isCorrect": true }], "feedback": ["l1p2/q2c1.htm", "ic1.htm", "l1p2/q2ic2.htm"], "isQuestionVisit": true, "points": 1, "isAnswered": true, "feedbackIndex": 0 }, { "Id": "Q3", "dataurl": "l1p2/q3.htm", "isCurrent": false }], "hasAnimation": true, "isVisited": true }, "l1p3": { "pageId": "l1p3", "prevPageId": "l1p2", "nextPageId": "l1p4", "dataurl": "l1p3.htm", "datalevel": 1, "questions": [{ "Id": "Q4", "dataurl": "l1p3/q4.htm" }], "hasTimeSlider": true, "hasAnimation": true }, "l1p4": { "pageId": "l1p4", "prevPageId": "l1p3", "nextPageId": "l1p5", "dataurl": "l1p4.htm", "datalevel": 1, "questions": [{ "Id": "Q5", "dataurl": "l1p4/q5.htm" }, { "Id": "Q6", "dataurl": "l1p4/q6.htm" }, { "Id": "Q7", "dataurl": "l1p4/q7.htm" }], "hasAnimation": true, "isFriday": true }, "l1p5": { "pageId": "l1p5", "prevPageId": "l1p4", "nextPageId": "l2p1", "dataurl": "l1p5.htm", "datalevel": 1, "questions": [{ "Id": "Q8", "dataurl": "l1p5/q8.htm" }], "hasTimeSlider": true, "hasAnimation": true, "isFriday": true }, "l2p1": { "pageId": "l2p1", "prevPageId": "l1p5", "nextPageId": "l2p2", "dataurl": "l2p1.htm", "datalevel": 2, "questions": [], "hasAnimation": true }, "l2p2": { "pageId": "l2p2", "prevPageId": "l2p1", "nextPageId": "l2p3", "dataurl": "l2p2.htm", "datalevel": 2, "questions": [{ "Id": "Q9", "dataurl": "l2p2/q9.htm" }, { "Id": "Q10", "dataurl": "l2p2/q10.htm" }, { "Id": "Q11", "dataurl": "l2p2/q11.htm" }, { "Id": "Q12", "dataurl": "l2p2/q12.htm" }, { "Id": "Q13", "dataurl": "l2p2/q13.htm" }, { "Id": "Q14", "dataurl": "l2p2/q14.htm" }] }, "l2p3": { "pageId": "l2p3", "prevPageId": "l2p2", "nextPageId": "l3p1", "dataurl": "l2p3.htm", "datalevel": 2, "questions": [{ "Id": "Q15", "dataurl": "l2p3/q15.htm" }], "customNext": { "isComplete": false, "jsFunction": "EventManager.onNextDay();" }, "hasTimeSlider": true, "hasTradeSlider": true, "hasAnimation": true }, "l3p1": { "pageId": "l3p1", "prevPageId": "l2p3", "nextPageId": "l3p2", "dataurl": "l3p1.htm", "datalevel": 3, "questions": [], "hasActivity": true, "hasAnimation": true }, "l3p2": { "pageId": "l3p2", "prevPageId": "l3p1", "nextPageId": "l3p3", "dataurl": "l3p2.htm", "datalevel": 3, "questions": [{ "Id": "Q16", "dataurl": "l3p2/q16.htm" }], "customNext": { "isComplete": false, "jsFunction": "EventManager.onNextDay();" }, "hasTimeSlider": true, "hasTradeSlider": true, "hasAnimation": true }, "l3p3": { "pageId": "l3p3", "prevPageId": "l3p2", "nextPageId": "l4p1", "dataurl": "l3p3.htm", "datalevel": 3, "questions": [{ "Id": "Q17", "dataurl": "l3p3/q17.htm" }], "customNext": { "isComplete": false, "jsFunction": "EventManager.onNextDay();" }, "hasTimeSlider": true, "hasTradeSlider": true, "hasAnimation": true }, "l4p1": { "pageId": "l4p1", "prevPageId": "l3p3", "nextPageId": "l4p2", "dataurl": "l4p1.htm", "datalevel": 4, "questions": [], "hasTimeSlider": false, "hasTradeSlider": false, "hasAnimation": true }, "l4p2": { "pageId": "l4p2", "prevPageId": "l4p1", "nextPageId": "l4p3", "dataurl": "l4p2.htm", "datalevel": 4, "questions": [{ "Id": "Q18", "dataurl": "l4p2/q18.htm" }] }, "l4p3": { "pageId": "l4p3", "prevPageId": "l4p2", "nextPageId": "l4p4", "dataurl": "l4p3.htm", "datalevel": 4, "isFriday": true, "questions": [{ "Id": "Q19", "dataurl": "l4p3/q19.htm" }] }, "l4p4": { "pageId": "l4p4", "prevPageId": "l4p3", "nextPageId": "l4p5", "dataurl": "l4p4.htm", "datalevel": 4, "questions": [{ "Id": "Q20", "dataurl": "l4p4/q20.htm" }, { "Id": "Q21", "dataurl": "l4p4/q21.htm" }], "hasTimeSlider": false, "hasTradeSlider": false, "hasAnimation": false, "hasScenario": true }, "l4p5": { "pageId": "l4p5", "prevPageId": "l4p4", "nextPageId": "summary", "dataurl": "l4p5.htm", "datalevel": 4, "questions": [{ "Id": "Q22", "dataurl": "l4p5/q22.htm" }], "customNext": { "isComplete": false, "jsFunction": "EventManager.onNextDay();" }, "hasTimeSlider": true, "hasTradeSlider": true, "hasAnimation": true }, "summary": { "pageId": "summary", "prevPageId": "l4p5", "nextPageId": "", "dataurl": "summary.htm", "datalevel": 5, "questions": [], "isLastPage": true } };
+    var testStateData = {};
     var _NData = {
         "l1p1": {
             pageId: "l1p1",
@@ -273,25 +275,21 @@ var _Navigator = (function () {
     }
     var _StateData = {}
 
-    function OnPageLoad() {
+    function OnPageLoad(jsonObj) {
         _TopSlider.OnLoad();
         _CustomPage.OnPageLoad();
-        _Navigator.LoadDefaultQuestion();
-    }
-    function LoadBookmarkQuestion(_currentQuestionObj){
-        _Question.Load(_currentQuestionObj);
-
+        _Navigator.LoadDefaultQuestion(jsonObj);
     }
     return {
         Get: function () {
             return _NData;
         },
-        Start: function (bookmarkdata) {
+        Start: function (jsonObj) {
             var Dataurl = $.url('?page');
             if (Dataurl == "" || Dataurl == undefined) {
-                this.LoadPage("l1p1", bookmarkdata);
+                this.LoadPage("l1p1", jsonObj);
             } else {
-                this.LoadPage(Dataurl, bookmarkdata);
+                this.LoadPage(Dataurl, jsonObj);
             }
         },
         GetBookmarkData: function () {
@@ -311,14 +309,20 @@ var _Navigator = (function () {
         SetNavigationData: function (_ndata_object) {
             _NData = JSON.parse(JSON.stringify(_ndata_object));
         },
-        LoadPage: function (pageId, bookmarkdata, jsonObj) {
+        LoadPage: function (pageId, jsonObj) {
             if (jsonObj == undefined) {
                 jsonObj = {};
             }
-
+            debugger;
             _currentPageId = pageId;
-            if (!this.isEmpty(bookmarkdata) && bookmarkdata!=undefined) {
-                _currentPageId = bookmarkdata.pageId;
+            if (!this.isEmpty(jsonObj)) {
+                if (jsonObj.isBookMark) {
+                    _currentPageId = jsonObj.bookmarkdata.pageId;
+                }
+                else if (jsonObj.isMenuVisit) {
+                    _currentPageId = jsonObj.pageId;
+                }
+
             }
             this.UpdateProgressBar();
             _currentPageObject = _NData[_currentPageId];
@@ -339,21 +343,11 @@ var _Navigator = (function () {
                 $("#linknext").k_disable();
             }
             _currentPageObject.isVisited = true;
-            debugger;
+
             var pageUrl = _Settings.dataRoot + _currentPageObject.dataurl + _Caching.GetUrlExtension();;
             if (_currentPageObject.isStartPage) {
                 $(".main-content").load(pageUrl, function () {
-                    OnPageLoad();
-                    if (!_Navigator.isEmpty(bookmarkdata)) {
-                        if(bookmarkdata.Qid!=undefined && bookmarkdata.Qid!=''){
-                            for (var i = 0; i < _currentPageObject.questions.length; i++) {
-                                if ((bookmarkdata.Qid == _currentPageObject.questions[i].Id)) {
-                                    _currentQuestionObj = _currentPageObject.questions[i]
-                                }
-                            }
-                            LoadBookmarkQuestion(_currentQuestionObj);
-                        }
-                    }
+                    OnPageLoad(jsonObj);
                     $("h1").focus();
                     setReader("pagetitle");
                 });
@@ -361,31 +355,41 @@ var _Navigator = (function () {
                 $(".main-content").fadeTo(250, 0.25, function () {
                     $(".main-content").load(pageUrl, function () {
                         $(this).fadeTo(600, 1)
-                        OnPageLoad();
-                        if (!_Navigator.isEmpty(bookmarkdata)) {
-                            if(bookmarkdata.Qid!=undefined && bookmarkdata.Qid!=''){
-                                for (var i = 0; i < _currentPageObject.questions.length; i++) {
-                                    if ((bookmarkdata.Qid == _currentPageObject.questions[i].Id)) {
-                                        _currentQuestionObj = _currentPageObject.questions[i]
-                                    }
-                                }
-                                LoadBookmarkQuestion(_currentQuestionObj);
-                            }
-                        }
+                        OnPageLoad(jsonObj);
                         setReader("pageheading");
                     });
                 })
             }
         },
-        LoadDefaultQuestion: function () {
+        LoadDefaultQuestion: function (jsonObj) {
+            if (jsonObj == undefined) {
+                jsonObj = {};
+            }
+            debugger;
             if (_currentPageObject.questions.length > 0) {
                 _questionId = 0;
-                _currentPageObject.questions[0].isQuestionVisit = true;
-                for (var i = 0; i < _currentPageObject.questions.length; i++) {
-                    if (_currentPageObject.questions[i].isCurrent) {
-                        _questionId = i;
+                if (!this.isEmpty(jsonObj)) {
+                    if (jsonObj.isBookMark) {
+                        for (var i = 0; i < _currentPageObject.questions.length; i++) {
+                            if ((jsonObj.bookmarkdata.Qid == _currentPageObject.questions[i].Id)) {
+                                _questionId = i;
+                            }
+                        }
+                    }
+                    else if (jsonObj.isMenuVisit) {
+                        _questionId = 0;
+                    }
+
+                }
+                else {
+                    _currentPageObject.questions[0].isQuestionVisit = true;
+                    for (var i = 0; i < _currentPageObject.questions.length; i++) {
+                        if (_currentPageObject.questions[i].isCurrent) {
+                            _questionId = i;
+                        }
                     }
                 }
+
                 //second parameter is to disable question effect.
                 _Question.Load(_currentPageObject.questions[_questionId], {
                     disableEffect: true
