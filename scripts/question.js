@@ -67,6 +67,10 @@
                     var id = $(elmarray[i]).attr("id");
                     $("#" + id).clone().appendTo(".question_txt");
                     $("#" + id).replaceWith("<span id='" + id + "span'></span>");
+                    
+                    $("#div_question").find("input[type=number]").attr({oninput:"javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"});
+                    
+                    
                 }
             }
         },
