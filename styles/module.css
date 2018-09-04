@@ -1099,3 +1099,10 @@ td[rowspan] {
 .graphtitlediv{
     text-align: center;
 }
+
+
+
+.graphtitlediv{
+    width: 100%!important;
+}
+
