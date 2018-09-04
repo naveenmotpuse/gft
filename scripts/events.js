@@ -115,3 +115,18 @@ $(document).on("click", ".levelbtnretry", function (event) {
 $(document).on("click", ".bookmark", function (event) {
     _Navigator.Start();
 });
+$(document).on("keyup", "input[type='number']", function (event) {
+    debugger;
+    var max = $(this).attr("max");
+    var min = $(this).attr("min");
+    if (max != undefined && min != undefined) {
+        max = Number(max);
+        min = Number(min);
+        if ($(this).val() > max) {
+            $(this).val(max);
+        }
+        if ($(this).val() < min) {
+            $(this).val(min);
+        }
+    }
+})
