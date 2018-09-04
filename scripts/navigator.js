@@ -322,10 +322,7 @@ var _Navigator = (function () {
             }
             this.UpdateProgressBar();
             _currentPageObject = _NData[_currentPageId];
-            //NM: Enable Menu Item
-            $("a.menuitem[data-id='" + _currentPageId + "']").closest("li").css("display", "block");
-
-            //
+            
             if (_currentPageObject.isStartPage != undefined && _currentPageObject.isStartPage) {
                 $("#linkprevious").k_disable();
                 $("#linknext").k_enable();
@@ -558,7 +555,7 @@ var _Navigator = (function () {
             _Navigator.UpdateProgressBar();
             _Navigator.UpdateScore();
             DataStorage.ModuleRetry();
-            _Navigator.Start();
+            _Navigator.LoadPage('l1p1');
 
             var progData = this.GetProgressData();
             for (var i = 0; i < progData.length; i++) {
@@ -566,6 +563,7 @@ var _Navigator = (function () {
             }
         },
         ReAttemptLevel: function (datalevel) {
+            debugger;
             var pageId = "";
             for (var i in _NData) {
                 if (_NData[i].datalevel == datalevel) {
