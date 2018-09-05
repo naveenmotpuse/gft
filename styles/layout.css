@@ -591,4 +591,22 @@ table caption {
     float: left;
 }
 
+input[type='range']:focus::-webkit-slider-thumb,
+input[type='range']:active::-webkit-slider-thumb{
+    outline: #ff8c00 solid 2px;
+    border-radius: 0px;
+}
+input[type='range']:focus::-moz-range-thumb,
+input[type='range']:active::-moz-range-thumb{
+    outline: #ff8c00 solid 2px;
+    border-radius: 0px;
+}
+
+input[type='range']:focus::-ms-thumb,
+input[type='range']:active::-ms-thumb{
+    outline: #ff8c00 solid 2px;
+    border-radius: 0px;
+}
+
+
 
