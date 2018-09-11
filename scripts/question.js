@@ -3,8 +3,8 @@
 
     function OnQuestionLoad(qObj) {
         _CustomQuestion.OnQuestionLoad();
-        _Question.SetOptionClone();
-        _Question.SetOptionPosition();
+        //_Question.SetOptionClone();
+        //_Question.SetOptionPosition();
         if (_currentQuestionObj.isAnswered) {
             _Question.PrevAnswer();
         }        
@@ -163,8 +163,9 @@
                 _Question.SetFeedbackTop()
                 _CustomQuestion.OnFeedbackLoad()
                 $("body").animate({
-                    scrollTop: $(document).height()
+                    scrollTop: $(document).height()                    
                 }, 1000);
+                setReader("div_feedback");
             });
         },
         LoadAlertFeedback: function () {
@@ -175,6 +176,7 @@
                 $("body").animate({
                     scrollTop: $(document).height()
                 }, 1000);
+                setReader("div_feedback");
             });
         },
         SetFeedbackTop: function () {
@@ -395,38 +397,65 @@
                             'color': ColorCodes.green,
                             'font-weight': 'bold'
                         });
+                        $("#" + _optD.selectedId).attr("aria-label", $("label[for='" + _optD.selectedId + "']").text() + " correct");
+                        if (isIE11version || isIEEdge) {
+                            $("label[for='" + _optD.selectedId + "']").attr("aria-hidden", "true");
+                        }
                     } else {
                         $("label[for='" + _optD.selectedId + "']").css({
                             "color": ColorCodes.red,
                             "font-weight": "bold"
                         }).append(' <i class="fa fa-times" style="padding:3px;color:' + ColorCodes.red + '"></i> ');
+                        $("#" + _optD.selectedId).attr("aria-label", $("label[for='" + _optD.selectedId + "']").text() + " incorrect");
 
                         $("label[for='" + _optD.answerId + "']").css({
                             'color': ColorCodes.green,
                             'font-weight': 'bold'
                         });
+                        $("#" + _optD.answerId).attr("aria-label", $("label[for='" + _optD.answerId + "']").text() + " correct");
+                        if (isIE11version || isIEEdge) {
+                            $("label[for='" + _optD.selectedId + "']").attr("aria-hidden", "true");
+                            $("label[for='" + _optD.answerId + "']").attr("aria-hidden", "true");
+                        }
                     }
                 } else if (_optD.type == "input") {
+                    //debugger;                    
                     if (_optD.isCorrect) {
                         $("#" + _optD.id).css({
                             'color': ColorCodes.green,
                             'font-weight': 'bold'
-                        });
+                        })                        
+                        if(isIOS){
+                            $("#" + _optD.id).closest("div").attr({"role":"text","aria-label":"Correct "+_optD.answer+" "+$('label[for="'+_optD.id+'"]').text()});
+                            //$("#" + _optD.id).closest("div").attr("<span role='text' style='font-size:0px;'>"+"Correct " + _optD.answer+" "+$('label[for="'+_optD.id+'"]').text()+"<span>")
+                        }else{
+                            $('label[for="'+_optD.id+'"]').attr("aria-hidden", "true");
+                            $("#" + _optD.id).attr("aria-hidden", "true");
+                            $("#" + _optD.id).closest("div").after("<span style='font-size:0px;'>"+"Correct " + _optD.answer+" "+$('label[for="'+_optD.id+'"]').text()+"<span>")
+                        }
                     } else {
                         $("#" + _optD.id).css({
                             'color': ColorCodes.red,
                             'font-weight': 'bold'
                         })
-                        $("#" + _optD.id + "span").after('<label class="incurrect_label"><i class="fa fa-times" style="padding:3px;color:' + ColorCodes.red + '"></i><span aria-hidden="true" style="color:' + ColorCodes.green + ';font-weight:bold;font-size:16px;"> ' + _optD.answer + '</span> </label>');
+                        if(isIOS){
+                            $("#" + _optD.id).after('<label class="incurrect_label"><i class="fa fa-times" style="padding:3px;color:' + ColorCodes.red + '"></i><span style="color:' + ColorCodes.green + ';font-weight:bold;font-size:16px;"> ' + _optD.answer + '</span> </label>');
+                            $("#" + _optD.id).closest("div").attr({"role":"text","aria-label":"you have entered " + $("#" + _optD.id).val() + " correct value is " + _optD.answer+" "+$('label[for="'+_optD.id+'"]').text()});
+                        }else{
+                            $("#" + _optD.id).after('<label class="incurrect_label"><i class="fa fa-times" aria-hidden="true" style="padding:3px;color:' + ColorCodes.red + '"></i><span aria-hidden="true" style="color:' + ColorCodes.green + ';font-weight:bold;font-size:16px;"> ' + _optD.answer + '</span> </label>');
+                            $('label[for="'+_optD.id+'"]').attr("aria-hidden", "true");
+                            $("#" + _optD.id).attr("aria-hidden", "true");
+                            $("#" + _optD.id).closest("div").after("<span style='font-size:0px;'>"+"you have entered " + $("#" + _optD.id).val() + " correct value is " + _optD.answer+" "+$('label[for="'+_optD.id+'"]').text()+"<span>")
+                        }
                     }
                 }
             }
-            this.SetOptionPosition();
+            //this.SetOptionPosition();
         }
     };
 })();
 $(window).resize(function () {
-    _Question.SetOptionPosition();
+    //_Question.SetOptionPosition();
 });
 
 

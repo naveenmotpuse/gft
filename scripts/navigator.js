@@ -18,6 +18,7 @@ var _Navigator = (function () {
             questions: [],
             isStartPage: true,
             hasAnimation: true,
+            isLevelStart:true,
         },
         "l1p2": {
             pageId: "l1p2",
@@ -81,7 +82,7 @@ var _Navigator = (function () {
             }],
             hasTimeSlider: true,
             hasAnimation: true,
-            isFriday: true,
+            isFriday: true,            
         },
         "l2p1": {
             pageId: "l2p1",
@@ -91,6 +92,7 @@ var _Navigator = (function () {
             datalevel: 2,
             questions: [],
             hasAnimation: true,
+            isLevelStart:true,
         },
         "l2p2": {
             pageId: "l2p2",
@@ -151,6 +153,7 @@ var _Navigator = (function () {
             questions: [],
             hasActivity: true,
             hasAnimation: true,
+            isLevelStart:true,
         },
         "l3p2": {
             pageId: "l3p2",
@@ -198,6 +201,7 @@ var _Navigator = (function () {
             hasTimeSlider: false,
             hasTradeSlider: false,
             hasAnimation: true,
+            isLevelStart:true,
         },
         "l4p2": {
             pageId: "l4p2",
@@ -279,6 +283,8 @@ var _Navigator = (function () {
         _CustomPage.OnPageLoad();
         _Navigator.UpdateMenuVisibility();
         _Navigator.LoadDefaultQuestion(jsonObj);
+        //RA6Sep18 - set accessibility for pages
+        _Navigator.SetPageAccesibility();
     }
     return {
         Get: function () {
@@ -310,6 +316,7 @@ var _Navigator = (function () {
             _NData = JSON.parse(JSON.stringify(_ndata_object));
         },
         LoadPage: function (pageId, jsonObj) {
+            //debugger;
             _currentPageId = pageId;
             if (!this.isEmpty(jsonObj) && jsonObj != undefined) {
                 if (jsonObj.isBookMark) {
@@ -383,14 +390,197 @@ var _Navigator = (function () {
                         }
                     }
                 }
-
                 //second parameter is to disable question effect.
                 _Question.Load(_currentPageObject.questions[_questionId], {
                     disableEffect: true
                 });
             }
-
         },
+        //RA-6Sep18 - Function to set graph labels - start
+        SetPageAccesibility:function(){
+            //debugger;
+            var _currentPage = _Navigator.GetCurrentPage();
+            var _currPageId = _currentPage.pageId;
+            var _currPageQId = '';
+            if (_currentPage.questions.length > 0) {
+                for (var n21 = 0; n21 < _currentPage.questions.length; n21++) {
+                    if (_currentPage.questions[n21].isCurrent) {
+                        _currPageQId = _currentPage.questions[n21].Id;
+                    }
+                }
+            }
+            
+            if (_currentPage.isLevelStart == undefined) {
+                if ($(".assistive-text").length == 0) {
+                    if (isAndroid) {
+                        $("#wrapper").append('<span aria-live="assertive" class="assistive-text"></span>');
+                    } else {
+                        $("#wrapper").append('<span aria-live="assertive" role="alert" class="assistive-text"></span>');
+                    }
+                }
+            }
+
+            if (isIOS) {
+                $("#ppfchart_c").attr({
+                    "role": "text",
+                    "aria-label": "Production Possibilities Frontier graph for Firewoods from 0 to 120 in pounds vs. Fish in calories. Refer table for more details."
+                });
+                $("#surpluschart_c").attr({
+                    "aria-label": "Surplus Inventory graph for inventory of fish and woods from day 0 to 4."
+                });
+
+                if (_currPageId == "l1p2" && _currPageQId == "Q3") {
+                    $("#questionchart").attr({
+                        "aria-label": "Your Production Possibility Frontier graph for Firewoods from 0 to 120 in pounds vs. Fish from 0 to 3500 in calories. Refer above table for more details."
+                    });
+                }
+                if (_currPageId == "l1p4" && _currPageQId == "Q3") {
+                    $("#questionIntro").attr({
+                        "aria-label": "Friday's Production Possibility Frontier graph for Firewoods from 0 to 120 in pounds vs. Fish from 0 to 6500 in calories. Refer above table for more details."
+                    });
+                }
+                if (_currPageId == "l2p2" && (_currPageQId == "Q9" || _currPageQId == "Q10" || _currPageQId == "Q11" || _currPageQId == "Q12" || _currPageQId == "Q13" || _currPageQId == "Q14")) {
+                    $("#questionIntro").attr({
+                        "aria-label": "Production Possibilities Frontier graph for Firewoods from 0 to 120 in pounds vs. Fish from 0 to 7000 in calories. Graph represents your PPF, Friday's PPF and Both Student and Friday's Production Point."
+                    });
+                }
+                if (_currPageId == "l2p3" && _currPageQId == "Q15") {                    
+                    $("#studenttradeGraph").attr({
+                        "aria-label": "Your Production Possibility graph for Firewoods from 0 to 110 in pounds vs. Fish from 0 to 5000 in calories."
+                    });
+                    $("#fridaytradeGraph").attr({
+                        "aria-label": "Friday's Production Possibility Frontier graph for Firewoods from 0 to 110 in pounds vs. Fish from 0 to 8000 in calories."
+                    });
+                }
+                if (_currPageId == "l3p2" && _currPageQId == "Q16") {                    
+                    $("#studenttradeGraph").attr({
+                        "aria-label": "Your Production Possibility graph for Firewoods from 0 to 110 in pounds vs. Fish from 0 to 5000 in calories."
+                    });
+                    $("#fridaytradeGraph").attr({
+                        "aria-label": "Friday's Production Possibility Frontier graph for Firewoods from 0 to 110 in pounds vs. Fish from 0 to 8000 in calories."
+                    });
+                }
+                if (_currPageId == "l3p3" && _currPageQId == "Q17") {                    
+                    $("#studenttradeGraph").attr({
+                        "aria-label": "Your Production Possibility graph for Firewoods from 0 to 110 in pounds vs. Fish from 0 to 5000 in calories."
+                    });
+                    $("#fridaytradeGraph").attr({
+                        "aria-label": "Friday's Production Possibility Frontier graph for Firewoods from 0 to 110 in pounds vs. Fish from 0 to 8000 in calories."
+                    });
+                }
+                if (_currPageId == "l4p2" && _currPageQId == "Q18") {
+                    $("#questionchart").attr({
+                        "aria-label": "Your Production Possibility Frontier graph for Firewoods from 0 to 120 in pounds vs. Fish from 0 to 6500 in calories. Refer above table for more details."
+                    });
+                }
+                if (_currPageId == "l4p3" && _currPageQId == "Q19") {
+                    $("#questionchart").attr({
+                        "aria-label": "Your Production Possibility Frontier graph for Firewoods from 0 to 120 in pounds vs. Fish from 0 to 4500 in calories. Refer above table for more details."
+                    });
+                }
+                if (_currPageId == "l4p4" && (_currPageQId == "Q20" || _currPageQId == "Q21")) {
+                    $("#questionIntro").attr({
+                        "aria-label": "Production Possibilities Frontier graph for Firewoods from 0 to 120 in pounds vs. Fish from 0 to 7000 in calories. Graph represents your PPF, Friday's PPF."
+                    });
+                }
+                if (_currPageId == "l4p5" && _currPageQId == "Q22") {                    
+                    $("#studenttradeGraph").attr({
+                        "aria-label": "Your Production Possibility graph for Firewoods from 0 to 110 in pounds vs. Fish from 0 to 8000 in calories."
+                    });
+                    $("#fridaytradeGraph").attr({
+                        "aria-label": "Friday's Production Possibility Frontier graph for Firewoods from 0 to 110 in pounds vs. Fish from 0 to 5000 in calories."
+                    });
+                }
+
+            } else {
+                $("#ppfchart_c").find(".highcharts-container").attr("aria-hidden", "true");
+                $("#ppfchart_c").attr({
+                    "aria-label": "Production Possibilities Frontier graph for Firewoods from 0 to 120 in pounds vs. Fish in calories. Refer table for more details."
+                });
+                $("#surpluschart_c").find(".highcharts-container").attr("aria-hidden", "true");
+                $("#surpluschart_c").attr({
+                    "aria-label": "Surplus Inventory graph for inventory of fish and woods from day 0 to 4."
+                });
+
+                if (_currPageId == "l1p2" && _currPageQId == "Q3") {
+                    $("#questionchart").find(".highcharts-container").attr("aria-hidden", "true");
+                    $("#questionchart").attr({
+                        "aria-label": "Your Production Possibility Frontier graph for Firewoods from 0 to 120 in pounds vs. Fish from 0 to 3500 in calories. Refer above table for more details."
+                    });
+                }
+                if (_currPageId == "l1p4" && _currPageQId == "Q3") {
+                    $("#questionIntro").find(".highcharts-container").attr("aria-hidden", "true");
+                    $("#questionIntro").attr({
+                        "aria-label": "Friday's Production Possibility Frontier graph for Firewoods from 0 to 120 in pounds vs. Fish from 0 to 6500 in calories. Refer above table for more details."
+                    });
+                }
+                if (_currPageId == "l2p2" && (_currPageQId == "Q9" || _currPageQId == "Q10" || _currPageQId == "Q11" || _currPageQId == "Q12" || _currPageQId == "Q13" || _currPageQId == "Q14")) {
+                    $("#questionIntro").find(".highcharts-container").attr("aria-hidden", "true");
+                    $("#questionIntro").attr({
+                        "aria-label": "Production Possibilities Frontier graph for Firewoods from 0 to 120 in pounds vs. Fish from 0 to 7000 in calories. Graph represents your PPF, Friday's PPF and Both Student and Friday's Production Point."
+                    });
+                }
+                if (_currPageId == "l2p3" && _currPageQId == "Q15") {  
+                    $("#studenttradeGraph").find(".highcharts-container").attr("aria-hidden", "true");
+                    $("#studenttradeGraph").attr({
+                        "aria-label": "Your Production Possibility graph for Firewoods from 0 to 110 in pounds vs. Fish from 0 to 5000 in calories."
+                    });
+                    $("#fridaytradeGraph").find(".highcharts-container").attr("aria-hidden", "true");
+                    $("#fridaytradeGraph").attr({
+                        "aria-label": "Friday's Production Possibility Frontier graph for Firewoods from 0 to 110 in pounds vs. Fish from 0 to 8000 in calories."
+                    });
+                }
+                if (_currPageId == "l3p2" && _currPageQId == "Q16") {  
+                    $("#studenttradeGraph").find(".highcharts-container").attr("aria-hidden", "true");
+                    $("#studenttradeGraph").attr({
+                        "aria-label": "Your Production Possibility graph for Firewoods from 0 to 110 in pounds vs. Fish from 0 to 5000 in calories."
+                    });
+                    $("#fridaytradeGraph").find(".highcharts-container").attr("aria-hidden", "true");
+                    $("#fridaytradeGraph").attr({
+                        "aria-label": "Friday's Production Possibility Frontier graph for Firewoods from 0 to 110 in pounds vs. Fish from 0 to 8000 in calories."
+                    });
+                }
+                if (_currPageId == "l3p3" && _currPageQId == "Q17") {  
+                    $("#studenttradeGraph").find(".highcharts-container").attr("aria-hidden", "true");
+                    $("#studenttradeGraph").attr({
+                        "aria-label": "Your Production Possibility graph for Firewoods from 0 to 110 in pounds vs. Fish from 0 to 5000 in calories."
+                    });
+                    $("#fridaytradeGraph").find(".highcharts-container").attr("aria-hidden", "true");
+                    $("#fridaytradeGraph").attr({
+                        "aria-label": "Friday's Production Possibility Frontier graph for Firewoods from 0 to 110 in pounds vs. Fish from 0 to 8000 in calories."
+                    });
+                }
+                if (_currPageId == "l4p2" && _currPageQId == "Q18") {
+                    $("#questionchart").find(".highcharts-container").attr("aria-hidden", "true");
+                    $("#questionchart").attr({
+                        "aria-label": "Your Production Possibility Frontier graph for Firewoods from 0 to 120 in pounds vs. Fish from 0 to 6500 in calories. Refer above table for more details."
+                    });
+                }
+                if (_currPageId == "l4p3" && _currPageQId == "Q19") {
+                    $("#questionchart").find(".highcharts-container").attr("aria-hidden", "true");
+                    $("#questionchart").attr({
+                        "aria-label": "Your Production Possibility Frontier graph for Firewoods from 0 to 120 in pounds vs. Fish from 0 to 4500 in calories. Refer above table for more details."
+                    });
+                }
+                if (_currPageId == "l4p4" && (_currPageQId == "Q20" || _currPageQId == "Q21")) {
+                    $("#questionIntro").find(".highcharts-container").attr("aria-hidden", "true");
+                    $("#questionIntro").attr({
+                        "aria-label": "Production Possibilities Frontier graph for Firewoods from 0 to 120 in pounds vs. Fish from 0 to 7000 in calories. Graph represents your PPF, Friday's PPF."
+                    });
+                }
+                if (_currPageId == "l4p5" && _currPageQId == "Q22") {  
+                    $("#studenttradeGraph").find(".highcharts-container").attr("aria-hidden", "true");
+                    $("#studenttradeGraph").attr({
+                        "aria-label": "Your Production Possibility graph for Firewoods from 0 to 110 in pounds vs. Fish from 0 to 8000 in calories."
+                    });
+                    $("#fridaytradeGraph").find(".highcharts-container").attr("aria-hidden", "true");
+                    $("#fridaytradeGraph").attr({
+                        "aria-label": "Friday's Production Possibility Frontier graph for Firewoods from 0 to 110 in pounds vs. Fish from 0 to 5000 in calories."
+                    });
+                }
+            }
+        },
+        //End
         Prev: function () {
             if (_currentPageObject.questions.length > 0) {
                 if (_currentPageObject.questions[0].isCurrent) {
@@ -435,6 +625,7 @@ var _Navigator = (function () {
                 if(_NData[_levelStartPages[i]].isVisited)
                 {
                     $("a.menuitem[data-id='" + _NData[_levelStartPages[i]].pageId + "']").closest("li").css("display", "block"); 
+                    $("a.menuitem[data-id='" + _NData[_levelStartPages[i]].pageId + "']").closest("li").removeAttr("aria-hidden");
                 }
             }
         },
@@ -500,8 +691,9 @@ var _Navigator = (function () {
             return score.toFixed(0);
         },
         UpdateScore: function () {
+            //debugger;
             var percScore = this.GetTotalScore()
-            $("#scoreInnrDiv").html(percScore + "%");
+            $("#scorediv").html("Overall Score: " + percScore + "%");
         },
         GetLevelScore: function (Data_Level) {
             var ObtainPoint = 0;
@@ -563,7 +755,7 @@ var _Navigator = (function () {
             }
         },
         ReAttemptLevel: function (datalevel) {
-            debugger;
+            //debugger;
             var pageId = "";
             for (var i in _NData) {
                 if (_NData[i].datalevel == datalevel) {

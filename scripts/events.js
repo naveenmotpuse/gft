@@ -1,12 +1,12 @@
 $(document).on("click", "#ppfchart .imggraph", function (event) {
     var _this = $(this);
     $("#ppfcharttable_c").hide(function () {        
-        $(".imgtable").k_enable();
+        $(".imgtable").addClass("custIdisabled");
         $(".imgtable").attr("aria-expanded","false");
         $(".imgtable").attr("aria-current", "false")
     });
     $("#ppfchart_c").show(function () {
-        _this.k_disable();
+        _this.removeClass("custIdisabled");
         _this.attr("aria-expanded","true");        
         _this.attr("aria-current", "true")
     });
@@ -14,19 +14,18 @@ $(document).on("click", "#ppfchart .imggraph", function (event) {
 $(document).on("click", "#ppfchart .imgtable", function (event) {
     var _this = $(this);
     $("#ppfcharttable_c").show(function () {
-        _this.k_disable();
+        _this.removeClass("custIdisabled");
         _this.attr("aria-expanded","true");        
         _this.attr("aria-current", "true")
     });
     $("#ppfchart_c").hide(function () {
-        $(".imggraph").k_enable();
+        $(".imggraph").addClass("custIdisabled");
         $(".imggraph").attr("aria-expanded","false");
         $(".imggraph").attr("aria-current", "false")
     });
 });
 
 $(document).on("click", "#linkppf", function (event) {
-
     if ($(this).k_IsDisabled()) {
         return false;
     } else {
@@ -116,7 +115,7 @@ $(document).on("click", ".bookmark", function (event) {
     _Navigator.Start();
 });
 $(document).on("keyup", "input[type='number']", function (event) {
-    debugger;
+    //debugger;
     var max = $(this).attr("max");
     var min = $(this).attr("min");
     if (max != undefined && min != undefined) {

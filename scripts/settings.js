@@ -5,7 +5,7 @@ var _interactivesesstings = {};
 var _serviceurl = window.location.origin + "/econservice";
 
 $(document).ready(function () {
-    debugger;
+    //debugger;
     _problem_guid = getParameterByName("pid");
     _resourceId = getParameterByName("resid");
     getInflationSettings();
@@ -25,7 +25,7 @@ function getInflationSettings() {
         data: jsonSerialized,
         success: function (result) {
             _interactivesesstings = JSON.parse(JSON.stringify(result));
-            debugger;
+            //debugger;
             if (_interactivesesstings.level1 == true) {
                 $("#checkoxlevel1").attr("checked", "checked")
             }
@@ -114,7 +114,7 @@ function check_for_active_users() {
 }
 
 $("savebtn").on("click", function () {
-    debugger;
+    //debugger;
     if ($(this).closest(".savebtn").hasClass("k_disable"))
         return;
 

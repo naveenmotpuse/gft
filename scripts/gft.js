@@ -187,11 +187,11 @@ var _Template = (function () {
             var pageUrl = "templates/topslider.htm" + _Caching.GetUrlExtension();
             $(".top-slider").load(pageUrl, function () {
                 //onload callback
-                $(".imggraph").k_disable();
+                //$(".imggraph").k_enable();
                 $(".imggraph").attr("aria-expanded", "true");
                 $(".imggraph").attr("aria-current", "true");
 
-                $(".imgtable").k_enable();
+                $(".imgtable").addClass("custIdisabled");
                 $(".imgtable").attr("aria-expanded", "false");
                 $(".imgtable").attr("aria-current", "false");
                 _ModuleCharts.DrawSurplusChart();
@@ -223,7 +223,7 @@ var _Template = (function () {
             var pageUrl = "templates/tradeslider.htm" + _Caching.GetUrlExtension();
             $(".trade_slider_wrapper").load(pageUrl, function () {
                 var currPage = _Navigator.GetCurrentPage();
-                debugger;
+                //debugger;
                 if (currPage.IsComplete == undefined || !currPage.IsComplete) {
                     _Slider.InitSelectTimeSlider();
                 }
@@ -316,6 +316,19 @@ var _CustomQuestion = (function () {
                 _ModuleCharts.DrawQuestionChart(qObj.graphData);
                 $(".graphbtncheckanswer").k_disable();
             }
+            $("#graph-div").attr("aria-label", "Daytime Schedule Idle");
+            if(qObj.Id == "Q15"){
+                $("#graph-div").attr("aria-label", "Daytime Schedule Collect Wood 12 Hour Collect Fish 0 Hour Idle 0 Hour");
+            }
+            if(qObj.Id == "Q16"){
+                $("#graph-div").attr("aria-label", "Daytime Schedule Collect Wood 12 Hour Collect Fish 0 Hour Idle 0 Hour");
+            }
+            if(qObj.Id == "Q17"){
+                $("#graph-div").attr("aria-label", "Daytime Schedule Collect Wood 12 Hour Collect Fish 0 Hour Idle 0 Hour");
+            }
+            if(qObj.Id == "Q22"){
+                $("#graph-div").attr("aria-label", "Daytime Schedule Collect Wood 0 Hour Collect Fish 12 Hour Idle 0 Hour");
+            }
             if (qObj.Id == "Q18") {
                 $("#woodPerHr").html(_Scenario.getCurrentScenario().woodPerHr);
                 $("#fishPerHr").html(_Scenario.getCurrentScenario().fishPerHr);
@@ -334,7 +347,8 @@ var _CustomQuestion = (function () {
             if (qObj.Id == "Q21") {
                 $("#youcalories").html(qObj.calories[0]);
                 $("#fridaycalories").html(qObj.calories[1]);
-            }
+            }      
+            _Navigator.SetPageAccesibility();      
         },
         UpdateScenarioTable: function () {
 
@@ -350,7 +364,9 @@ var _CustomQuestion = (function () {
                 if (isNaN(fish) || isNaN(wood)) {
                     //Validation failed.
                 } else {
-                    //Add Point                    
+                    //Add Point
+                    $(".assistive-text").text('');
+                    $(".assistive-text").text("Production Possibility Frontier updated for points, wood "+ wood+" and fish "+ fish);
                     var chart = $('#questionchart').highcharts();
                     var series = chart.get("new_series");
                     //NM: Need to show feedback when user add same point twice.
@@ -456,7 +472,7 @@ var _CustomQuestion = (function () {
                     _Question.Loadfeedback(feedbackIndex);
                 } else {
                     _Question.Loadfeedback(feedbackIndex);
-                    debugger;
+                    //debugger;
                     //best score
                     var pageId = _Navigator.GetCurrentPage().pageId;
                     var Qid = _currentQuestionObj.Qid; 
@@ -626,7 +642,7 @@ var _CustomQuestion = (function () {
                 };
                 var isonline = this.IsPointOnLine(currPoint, point1, point2)
                 if (!isonline) {
-                    debugger;
+                    //debugger;
                     chart.get('new_series').data[i].graphic.attr({
                         fill: ColorCodes.red
                     });

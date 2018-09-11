@@ -354,9 +354,11 @@ var EventManager = function () {
         onStart: function () {
             $('body').animate({
                 scrollTop: $(".t_animation_c").position().top - _Settings.topMargin
-            }, 200, function () {
+            }, 200, function () {                
                 var currPage = _Navigator.GetCurrentPage();
                 if (currPage.hasTradeSlider != undefined && currPage.hasTradeSlider) {
+                    $(".assistive-text").text('');
+                    $(".assistive-text").text("Daytime Schedule calculation in progress");
                     $('.friday-raftSprites').removeClass('friday-raftSprites').addClass('friday-raftSprites2');
                     $('.fridaySprites').removeClass('fridaySprites').addClass('fridaySprites2');
                     $('.castawaySprites1').removeClass('castawaySprites1').addClass('castawaySprites');
@@ -372,6 +374,8 @@ var EventManager = function () {
                         _Slider.StartScheduler();
                     }, 2000)
                 } else {
+                    $(".assistive-text").text('');
+                    $(".assistive-text").text("Daytime Schedule calculation in progress");
                     $(".questionband").k_hide();
                     $('.castawaySprites1, .fridaycastawaySprites').k_hide();
                     _Slider.setDefaultValue();
@@ -383,6 +387,8 @@ var EventManager = function () {
             $('body').animate({
                 scrollTop: $(".t_animation_c").position().top - _Settings.topMargin
             }, 200, null, function () {
+                $(".assistive-text").text('');
+                $(".assistive-text").text("Night time Schedule calculation in progress");
                 var currPage = _Navigator.GetCurrentPage();
                 var fish = 0;
                 var wood = 0;
@@ -444,6 +450,8 @@ var EventManager = function () {
             $(".nighttimeslider").k_hide();
             $("#onewoodfor-range").k_enable();
             $("#givewood-range").k_enable();
+            $("#graph-div").attr("aria-label", "Daytime Schedule Idle");
+            $(".assistive-text").text('');
             _Question.UnloadFeedback();
             $("#btnfindout").k_enable();
             $("#dayno").text(DataStorage.getCurrentDay());
@@ -540,7 +548,7 @@ var EventManager = function () {
             }
         },
         onNightAnimComplete: function () {
-            debugger;
+            //debugger;
             _Animation.day();
             var currPage = _Navigator.GetCurrentPage();
             var isdie = false;
