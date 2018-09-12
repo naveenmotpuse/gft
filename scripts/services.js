@@ -12,8 +12,7 @@
     return {
         InitLaunch: function (_ldata, _settings) {
             if (_ldata.Mode.trim().toLowerCase() == LaunchMode.do) {
-                _levelstarttime = _startTime;
-                //_globals.DI_Id = TPIData.SessionData.launch_data["context_id"];
+                _levelstarttime = _startTime;                
                 _globals.DI_Id = _ldata.TargetId;
                 _globals.DITitle = _ldata.TargetTitle;
                 _globals.Assignment_Id = _ldata.ResourceId;
@@ -26,12 +25,13 @@
                 _globals.NumberOfAttempts = _ldata.AllowedAttempts;
                 _globals.TargetPoints = _ldata.TargetPoints;
                 _globals.LevelsAssigned = _settings;
+                _globals.Mode = _ldata.Mode;
 
                 this.PostLaunchData();
             }
         },
         InitLevel: function (lid) {
-            if (TPIData.Mode.trim().toLowerCase() == LaunchMode.do) {
+            if (_globals.Mode.trim().toLowerCase() == LaunchMode.do) {
                 //init current level incomplete, set start time 
                 _levelstarttime = new Date();
                 _data.Level_Id = lid;
@@ -39,7 +39,7 @@
             }
         },
         CompleteLevel: function (lid) {
-            if (TPIData.Mode.trim().toLowerCase() == LaunchMode.do) {
+            if (_globals.Mode.trim().toLowerCase() == LaunchMode.do) {
                 //mark Prev level Complete and post data.
                 if (_data.Level_Id != undefined && _data.Level_Id != "") {
                     if (_data.Level_Id == lid) {
@@ -55,7 +55,7 @@
         SendPageData: function (qObj) {
             //this method is called in UpdateAttemptMaxScore->UpdateUserAttempts to post question data
             //Need to call on pages where UpdateAttemptMaxScore is not called.
-            if (TPIData.Mode.trim().toLowerCase() == LaunchMode.do) {
+            if (_globals.Mode.trim().toLowerCase() == LaunchMode.do) {
                 QDetails = {};
                 if (qObj != undefined && qObj != null) {
                     QDetails.QId = qObj.QId;
@@ -79,14 +79,14 @@
             }
         },
         SetCompletion: function () {
-            if (TPIData.Mode.trim().toLowerCase() == LaunchMode.do) {
+            if (_globals.Mode.trim().toLowerCase() == LaunchMode.do) {
                 _data.QDetails = {};
                 _data.CompletionStatus = "Complete";
                 this.PostData(false);
             }
         },
         InitBookmarking: function () {
-            if (TPIData.Mode.trim().toLowerCase() == LaunchMode.do) {
+            if (_globals.Mode.trim().toLowerCase() == LaunchMode.do) {
                 if (TPIAttempts.Attempts[TPIAttempts.Attempts.length - 1].kBookmarking != undefined) {
                     _data.Level_Id = TPIAttempts.Attempts[TPIAttempts.Attempts.length - 1].kBookmarking.Level_Id;
                     _data.LevelStatus = TPIAttempts.Attempts[TPIAttempts.Attempts.length - 1].kBookmarking.LevelStatus;
@@ -116,7 +116,7 @@
         },
         PostLaunchData: function (p_async) {
             var _async = true;
-            if (TPIData.Mode.trim().toLowerCase() == LaunchMode.do) {
+            if (_globals.Mode.trim().toLowerCase() == LaunchMode.do) {
                 if (p_async != undefined && p_async == false) {
                     _async = false;
                 }
@@ -142,7 +142,7 @@
         },
         PostData: function (p_async) {
             var _async = true;
-            if (TPIData.Mode.trim().toLowerCase() == LaunchMode.do) {
+            if (_globals.Mode.trim().toLowerCase() == LaunchMode.do) {
                 if (p_async != undefined && p_async == false) {
                     _async = false;
                 }
