@@ -2,12 +2,13 @@
     var _currentQuestionObj = {}
 
     function OnQuestionLoad(qObj) {
+        _Navigator.SetBookmarkData({"questionId": _currentQuestionObj.Qid})
         _CustomQuestion.OnQuestionLoad();
         //_Question.SetOptionClone();
         //_Question.SetOptionPosition();
         if (_currentQuestionObj.isAnswered) {
             _Question.PrevAnswer();
-        }        
+        }
     }
     return {
         Load: function (qObj, jsonObj) {
@@ -33,23 +34,22 @@
                 $("#div_question").load(pageUrl, function () {
                     OnQuestionLoad(qObj);
                     if (firstQuestion == _currentQuestionObj.Qid) {
-                        setReader("pageheading");
+                        _Common.SetReader(_Settings.hiddenAnchor,"pageheading");
                     }
                     else {
-                        setReader("question");
+                        _Common.SetReader(_Settings.hiddenAnchor,"question");
                     }
 
                 });
             } else {
                 $("#div_question").load(pageUrl, function () {
                     $(this).hide().fadeIn("slow", function () {
-                        OnQuestionLoad(qObj);
-                        $(".progress .background").focus();
+                        OnQuestionLoad(qObj);                        
                         if (firstQuestion == _currentQuestionObj.Qid) {
-                            setReader("pageheading");
+                            _Common.SetReader(_Settings.hiddenAnchor,"pageheading");
                         }
                         else {
-                            setReader("question");
+                            _Common.SetReader(_Settings.hiddenAnchor,"question");
                         }
                     })
                 });
@@ -165,7 +165,7 @@
                 $("body").animate({
                     scrollTop: $(document).height()                    
                 }, 1000);
-                setReader("div_feedback");
+                _Common.SetReader(_Settings.hiddenAnchor,"div_feedback");
             });
         },
         LoadAlertFeedback: function () {
@@ -176,7 +176,7 @@
                 $("body").animate({
                     scrollTop: $(document).height()
                 }, 1000);
-                setReader("div_feedback");
+                _Common.SetReader(_Settings.hiddenAnchor,"div_feedback");
             });
         },
         SetFeedbackTop: function () {

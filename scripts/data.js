@@ -1,22 +1,4 @@
-﻿//RA-6Sep18 - Global Declaration for different devices. Code start
-var userAgentCustom = window.navigator.userAgent;
-var ua = navigator.userAgent.toLowerCase();
-var isAndroid = ua.indexOf("android") > -1;
-var isIE11version = !!navigator.userAgent.match(/Trident.*rv\:11\./);
-var isIOS = !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform);
-var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
-var CurClientWidth = window.innerWidth;
-var Macbrowser = navigator.userAgent.indexOf('Chrome');
-var Macos = navigator.userAgent.indexOf('Mac');
-var isIpad = userAgentCustom.match(/iPad/i)
-var IsIphone = (navigator.userAgent.match(/iPhone/i))
-var isIEEdge = /Edge/.test(navigator.userAgent)
-var Firefox = /Firefox[\/\s](\d+\.\d+)/.test(navigator.userAgent)
-//Code End
-
-
-
-ColorCodes = {
+﻿ColorCodes = {
     black: "#00000",
     white: "#FFFFFF",
     red: "#B22222",
@@ -261,6 +243,7 @@ var AnimConfig = {
 var _Settings = {
     dataRoot: "pagedata/",
     assetsRoot: "assets/",
+    hiddenAnchor: "#hiddenAnchor",
     enableCache: true,
     topMargin: 144,
     minHeight: 437

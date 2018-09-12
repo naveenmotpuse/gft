@@ -278,7 +278,7 @@ var _ModuleCharts = (function () {
                         name: 'Your PPF',
                         type: 'spline',
                         lineWidth: 1,
-                        data: _Scenario.getUserData(),
+                        data: _Scenario.GetUserData(),
                         color: ColorCodes.user,
                         marker: {
                             enabled: true,
@@ -296,7 +296,7 @@ var _ModuleCharts = (function () {
                         name: "Friday's PPF",
                         type: 'spline',
                         lineWidth: 1,
-                        data: _Scenario.getFridayData(),
+                        data: _Scenario.GetFridayData(),
                         color: ColorCodes.friday,
                         marker: {
                             enabled: true,
@@ -562,9 +562,9 @@ var _ModuleCharts = (function () {
             var fridaymax = 8000;
             var currPage = _Navigator.GetCurrentPage();
             if (currPage.datalevel == 4) {
-                localUserPPF = _Scenario.getUserData();
-                localfridayPPF = _Scenario.getFridayData();
-                if(_Scenario.getScenarioIndex()==0){
+                localUserPPF = _Scenario.GetUserData();
+                localfridayPPF = _Scenario.GetFridayData();
+                if(_Scenario.GetScenarioIndex()==0){
                     usermax = 5000;
                     fridaymax = 5000;
                 }

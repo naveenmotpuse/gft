@@ -1,4 +1,4 @@
-﻿var KnowdlTracking = (function () {
+﻿var _KnowdlServiceManager = (function () {
     var _data = {}
     _data.CompletionStatus = "Inprogress";
     var _globals = {}
@@ -10,42 +10,25 @@
     var _levelstarttime = new Date();
 
     return {
-        InitLaunch: function () {
-            if (TPIData.Mode.trim().toLowerCase() == LaunchMode.do) {
+        InitLaunch: function (_ldata, _settings) {
+            if (_ldata.Mode.trim().toLowerCase() == LaunchMode.do) {
                 _levelstarttime = _startTime;
-
                 //_globals.DI_Id = TPIData.SessionData.launch_data["context_id"];
-                _globals.DI_Id = TPIData.SessionData.launch_data['custom_target_' + TPIData.SessionData.launch_data.custom_currentquestion];
-                _globals.DITitle = TPIData.SessionData.launch_data["custom_questiontitle_" + TPIData.SessionData.launch_data.custom_currentquestion];
-                _globals.Assignment_Id = TPIData.SessionData.launch_data["custom_resource_id"];
+                _globals.DI_Id = _ldata.TargetId;
+                _globals.DITitle = _ldata.TargetTitle;
+                _globals.Assignment_Id = _ldata.ResourceId;
                 _globals.AssignmentLocation = window.location.hostname;
-                _globals.AssignmentTitle = TPIData.SessionData.launch_data["custom_assignmenttitle"];
-                _globals.Student_Id = TPIData.SessionData.launch_data["user_id"];
-                _globals.Session_Id = TPIData.SessionId;
-                _globals.StudentName = TPIData.SessionData.launch_data["custom_firstname"] + " " + TPIData.SessionData.launch_data["custom_lastname"];
-                _globals.Role = TPIData.SessionData.launch_data["roles"];
-                _globals.NumberOfAttempts = TPIData.SessionData.launch_data["custom_attemptsallowed"];
-                _globals.TargetPoints = TPIData.SessionData.launch_data["custom_points_" + TPIData.SessionData.launch_data.custom_currentquestion];
-                _globals.LevelsAssigned = visibleLevels;
+                _globals.AssignmentTitle =_ldata.ResourceTitle;
+                _globals.Student_Id = _ldata.Student_Id
+                _globals.Session_Id = _ldata.SessionId;
+                _globals.StudentName = _ldata.StudentFirstName + " " + _ldata.StudentLastName;
+                _globals.Role = _ldata.Roles
+                _globals.NumberOfAttempts = _ldata.AllowedAttempts;
+                _globals.TargetPoints = _ldata.TargetPoints;
+                _globals.LevelsAssigned = _settings;
 
                 this.PostLaunchData();
             }
-        },
-        InitDefaultLaunch: function () {
-            _globals.DI_Id = "knowdl_local_DS";
-            _globals.DITitle = "Demand and Supply";
-            _globals.Assignment_Id = "Assignment_Local_DS";
-            _globals.AssignmentLocation = window.location.hostname;
-            _globals.AssignmentTitle = "Knowdl Test";
-            _globals.Student_Id = "Student_Local";
-            _globals.StudentName = "Knowdl User";
-            _globals.Role = "Student";
-            _globals.Session_Id = TPIData.SessionId;
-            _globals.NumberOfAttempts = 0
-            _globals.TargetPoints = 1
-            _globals.LevelsAssigned = visibleLevels;
-
-            this.PostLaunchData();
         },
         InitLevel: function (lid) {
             if (TPIData.Mode.trim().toLowerCase() == LaunchMode.do) {
@@ -228,6 +211,177 @@
                 _data.QDetails = {}
             }
         }
-
     };
+})();
+
+var _EconLabServiceManager = (function () {
+    var _serviceurl = window.location.origin + "/econservice";
+    var _settingsData = JSON.parse('{}');
+    var _launchData = {
+        SessionId: '',
+        Student_Id: '',      
+        StudentFirstName:'',
+        StudentLastName:'',
+        Mode: 'do',
+        Roles: '',
+        CurrentQuestion: '',
+        TargetId: '',
+        TargetTitle:'',
+        ResourceId: '',
+        ResourceTitle:'',
+        TargetPoints: 1,
+        AllowedAttempts: 0
+    }
+    var _modes= {
+        "do": "do",
+        "review": "review",
+        "setup": "setup",    
+        "preview": "preview"
+    }    
+    var _sessionState = {}
+    //Private functions
+    function _grade_problem_and_report(_data) {
+        if (_launchData.Mode.trim().toLowerCase() == _modes.do) {
+            var jsonSerialized = JSON.stringify(_data);
+            var servcUrl = _serviceurl + "/gldata/grade_problem_and_report/" + _launchData.SessionId + "/" + _launchData.TargetId + "/";
+            $.ajax({
+                type: "POST",
+                url: servcUrl,
+                data: jsonSerialized,
+                success: function (result) {
+                    console.log("post grade success")
+                },
+                error: function (error) {
+                    console.log("post grade failed: error - " + error)
+                }
+            });
+        }
+    }
+    function _get_settings() {        
+        var obj = {};
+        obj.knowdlresourceid = _launchData.ResourceId;
+        obj.knowdltargetapp = _launchData.TargetId;
+
+        var jsonSerialized = JSON.stringify(obj);
+        var servcUrl = _serviceurl + "/data/econ/inflation/getInflationSettings/";
+        $.ajax({
+            type: "POST",
+            url: servcUrl,
+            async: false,
+            data: jsonSerialized,
+            success: function (result) {
+                console.log("get settings success")   
+                _EconLabServiceManager.GetSettingsSuccessCallback(result);                
+            },
+            error: function (error) {
+                console.log("get settings failed: error - " + error)
+            }
+        });        
+    }    
+    function _get_session_data() {
+        var servcUrl = _serviceurl + "/gldata/get_session_data/" + _launchData.SessionId + "/";
+        $.ajax({
+            type: "GET",
+            url: servcUrl,
+            dataType: "json",
+            async: false,
+            cache: false,
+            success: function (result) {
+                console.log("get session data success")
+                _EconLabServiceManager.GetSessionDataSuccessCallback(result)                                
+            },
+            error: function (error) {
+                console.log("get session data failed: error - " + error)
+            }
+        });
+    }
+    function _put_session_state_data(_data) {
+        if (_launchData.Mode.trim().toLowerCase() == _modes.do) {
+            var jsonSerialized = JSON.stringify(_data);
+            //replace special characters.
+            jsonSerialized = jsonSerialized.replace(/[^a-zA-Z ',"<>!~@#$%&*.+-=|\?()\[\]_{}\\ ]/g, "");
+            var servcUrl = _serviceurl + "/gldata/put_session_state_data/" + _launchData.SessionId + "/";
+            $.ajax({
+                type: "POST",
+                url: servcUrl,
+                data: jsonSerialized,
+                success: function (result) {
+                    console.log("post session data success")
+                },
+                error: function (error) {
+                    console.log("post session data failed: error" + error)
+                }
+            });
+        }
+    }    
+    //end Private Functions
+
+    return {        
+        InitLaunch: function () {
+            _get_session_data();
+        },
+        InitSettings: function(){
+            _get_settings();
+        },   
+        GetSessionDataSuccessCallback: function(_data){
+            if(typeof _data != "undefined"){
+                if(typeof _data == "string" && $.trim(_data)!=""){
+                    _data = JSON.parse(_data);
+                }
+                if(_data.launch_data!=undefined){
+                    //Init Launch Data  
+                    _launchData.Student_Id  = _data.launch_data.user_id            
+                    _launchData.StudentFirstName = _data.launch_data.custom_firstname;
+                    _launchData.StudentLastName = _data.launch_data.custom_lastname;
+                    _launchData.Mode = _data.launch_data.custom_mode;
+                    _launchData.Roles = _data.launch_data.roles;          
+                    _launchData.CurrentQuestion = _data.launch_data.custom_currentquestion;            
+                    _launchData.ResourceId = _data.launch_data.custom_resource_id;
+                    _launchData.ResourceTitle = _data.launch_data.custom_assignmenttitle;
+                    _launchData.AllowedAttempts = _data.launch_data.custom_attemptsallowed;
+                    _launchData.TargetId = _data.launch_data['custom_target_' + _data.launch_data.custom_currentquestion];
+                    _launchData.TargetTitle = _data.launch_data['custom_questiontitle_' + _data.launch_data.custom_currentquestion];
+                    _launchData.TargetPoints = _data.launch_data['custom_points_' + _data.launch_data.custom_currentquestion];
+                    _sessionState = _data.session_state;
+                }
+            }
+        },
+        GetSettingsSuccessCallback: function(_data){
+            if(typeof _data != "undefined"){
+                if(typeof _data == "string" && $.trim(_data)!=""){
+                    _data = JSON.parse(_data);
+                }
+                _settingsData = _data;
+            }
+        },        
+        SaveSessionData: function(_data){            
+            if (_launchData.Mode.trim().toLowerCase() == _modes.do) {  
+                _put_session_state_data(_data); 
+            }
+        },
+        PostFinalGrade: function (_p_totalPoints,_p_duration) {
+            if (_launchData.Mode.trim().toLowerCase() == _modes.do) {  
+                var studentdata = {};
+                studentdata.score = (Number(_p_totalPoints) * Number(_launchData.TargetPoints)).toFixed(2);
+                studentdata.duration = Number(_p_duration);
+                studentdata.submissionCount = 1;
+                studentdata.nAttempts = 1;
+                studentdata.answers = "1";
+                studentdata.problemNumber = _launchData.CurrentQuestion;
+                _grade_problem_and_report(studentdata);
+            }
+        },
+        get_Url: function () {
+            return _serviceurl;
+        },
+        GetSettings: function () {
+            return _settingsData;
+        },
+        GetLaunchData: function () {
+            return _launchData;
+        },
+        GetSessionData: function () {
+            return _sessionState;
+        }
+    }
 })();

@@ -394,7 +394,7 @@ var EventManager = function () {
                 var wood = 0;
                 var animInterval = 0;
                 if (currPage.hasTradeSlider != undefined && currPage.hasTradeSlider) {
-                    var sceanIndex = _Scenario.getScenarioIndex();
+                    var sceanIndex = _Scenario.GetScenarioIndex();
                     if (currPage.datalevel == 4 && sceanIndex == 1) {
                         _Animation.LadyGoWithFish();
                     } else {
@@ -514,7 +514,7 @@ var EventManager = function () {
             }
             if (currPage.hasTradeSlider != undefined && currPage.hasTradeSlider) {
                 $('.castawaySprites1, .fridaycastawaySprites').k_show();
-                var sceanindex = _Scenario.getScenarioIndex();
+                var sceanindex = _Scenario.GetScenarioIndex();
                 if (currPage.datalevel == 4 && sceanindex == 1) {
                     _Animation.LadyComeWithWood();
                 } else {

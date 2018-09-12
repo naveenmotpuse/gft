@@ -256,7 +256,7 @@ var _Slider = (function () {
             if (currPage.isFriday) {
                 if (currPage.datalevel == 4) {
                     _ModuleCharts.ShowSliderPoint([
-                        [_Scenario.getFridayTable()[val1][0], _Scenario.getFridayTable()[val2][1]]
+                        [_Scenario.GetFridayTable()[val1][0], _Scenario.GetFridayTable()[val2][1]]
                     ]);
                 } else {
                     _ModuleCharts.ShowSliderPoint([
@@ -266,7 +266,7 @@ var _Slider = (function () {
             } else {
                 if (currPage.datalevel == 4) {
                     _ModuleCharts.ShowSliderPoint([
-                        [_Scenario.getUserTable()[val1][0], _Scenario.getUserTable()[val2][1]]
+                        [_Scenario.GetUserTable()[val1][0], _Scenario.GetUserTable()[val2][1]]
                     ]);
                 } else {
                     _ModuleCharts.ShowSliderPoint([
@@ -481,15 +481,15 @@ var _TradeSlider = (function () {
             var fridaymaxfishcollection = 0;
             var isDefault = true;
             if (currPage.datalevel == 4) {                
-                if (_Scenario.getScenarioIndex() == 1) {
-                    usermaxfishcollection = _Scenario.getUserTable()[12][1];
-                    fridaymaxwoodcollection = _Scenario.getFridayTable()[12][0];
+                if (_Scenario.GetScenarioIndex() == 1) {
+                    usermaxfishcollection = _Scenario.GetUserTable()[12][1];
+                    fridaymaxwoodcollection = _Scenario.GetFridayTable()[12][0];
                     AnimConfig.nightWoodValueDeductionfriday = 7;
                     AnimConfig.nightFishValueDeductionfriday = 3500;
                     isDefault = false;
                 } else {
-                    usermaxwoodcollection = _Scenario.getUserTable()[12][0];
-                    fridaymaxfishcollection = _Scenario.getFridayTable()[12][1];
+                    usermaxwoodcollection = _Scenario.GetUserTable()[12][0];
+                    fridaymaxfishcollection = _Scenario.GetFridayTable()[12][1];
                     AnimConfig.nightWoodValueDeductionfriday = 40;
                     AnimConfig.nightFishValueDeductionfriday = 450;
                 }
@@ -573,7 +573,7 @@ var _TradeSlider = (function () {
         ResetTimeSlider: function () {
             //Called in _Template.LoadTradeSlider, ResetTradeSlider
             var currPage = _Navigator.GetCurrentPage();
-            if (currPage.datalevel == 4 && _Scenario.getScenarioIndex() == 1) {
+            if (currPage.datalevel == 4 && _Scenario.GetScenarioIndex() == 1) {
                 $("#fish-range").val(AnimConfig.dayTime)
                 $('.fish').find('#f_val').text(AnimConfig.dayTime);
                 DataStorage.setFishSliderVal(Number(AnimConfig.dayTime));
@@ -588,17 +588,17 @@ var _TradeSlider = (function () {
         UpdateTradeSettings: function () {
             var currPage = _Navigator.GetCurrentPage();
             if (currPage.datalevel == 4) {
-                if (_Scenario.getScenarioIndex() == 1) {
-                    TradeSettings.yourwoodlogs = _Scenario.getUserTable()[Number($("#wood-range").val())][0];
-                    TradeSettings.yourfishcals = _Scenario.getUserTable()[Number($("#fish-range").val())][1];
-                    TradeSettings.fridaywoodlogs = _Scenario.getFridayTable()[12][0]
-                    TradeSettings.fridayfishCals = _Scenario.getFridayTable()[0][1];
+                if (_Scenario.GetScenarioIndex() == 1) {
+                    TradeSettings.yourwoodlogs = _Scenario.GetUserTable()[Number($("#wood-range").val())][0];
+                    TradeSettings.yourfishcals = _Scenario.GetUserTable()[Number($("#fish-range").val())][1];
+                    TradeSettings.fridaywoodlogs = _Scenario.GetFridayTable()[12][0]
+                    TradeSettings.fridayfishCals = _Scenario.GetFridayTable()[0][1];
 
                 } else {
-                    TradeSettings.yourwoodlogs = _Scenario.getUserTable()[Number($("#wood-range").val())][0];
-                    TradeSettings.yourfishcals = _Scenario.getUserTable()[Number($("#fish-range").val())][1];
-                    TradeSettings.fridaywoodlogs = _Scenario.getFridayTable()[0][0]
-                    TradeSettings.fridayfishCals = _Scenario.getFridayTable()[12][1];
+                    TradeSettings.yourwoodlogs = _Scenario.GetUserTable()[Number($("#wood-range").val())][0];
+                    TradeSettings.yourfishcals = _Scenario.GetUserTable()[Number($("#fish-range").val())][1];
+                    TradeSettings.fridaywoodlogs = _Scenario.GetFridayTable()[0][0]
+                    TradeSettings.fridayfishCals = _Scenario.GetFridayTable()[12][1];
                 }
             } else {
                 TradeSettings.yourwoodlogs = userPPFTable[Number($("#wood-range").val())][0];
@@ -623,7 +623,7 @@ var _TradeSlider = (function () {
 
             $("#onewoodfor-fish").text(TradeResults.onewoodfor);
             var currPage = _Navigator.GetCurrentPage();
-            if (currPage.datalevel == 4 && _Scenario.getScenarioIndex() == 1) {
+            if (currPage.datalevel == 4 && _Scenario.GetScenarioIndex() == 1) {
                 $("#givefish-range").attr("max", (TradeSettings.yourfishcals + TradeResults.remData.fish));
                 $("#consumption-wood-range").attr("max", (TradeSettings.fridaywoodlogs + TradeResults.remData.fridaywood));
                 $(".consumption-wood.r_label").text((TradeSettings.fridaywoodlogs + TradeResults.remData.fridaywood));
@@ -648,7 +648,7 @@ var _TradeSlider = (function () {
             $("#consumption-fish").text(TradeResults.consumptionfish);
             $("#consumption-wood-range").val(TradeResults.consumptionwood);
             $("#consumption-fish-range").val(TradeResults.consumptionfish);
-            if (currPage.datalevel == 4 && _Scenario.getScenarioIndex() == 1) {
+            if (currPage.datalevel == 4 && _Scenario.GetScenarioIndex() == 1) {
                 $(".assistive-text").text('');
                 $(".assistive-text").text("Your PPF graph, Friday's PPF graph updated. Terms of Trade changed to 1 Wood (logs) for: " + TradeResults.onewoodfor + " fish (cals), Give fish (logs):" + TradeResults.givefish + " and Receive wood (logs): " + TradeResults.receivewood + ". Consumption changed to Collect Wood: " + TradeResults.consumptionwood + " logs and Collect Fish: " + TradeResults.consumptionfish + " cals.");
             } else {
@@ -701,12 +701,12 @@ var _TradeSlider = (function () {
             var point1 = userPPF[userPPF.length - 1]
             var currPage = _Navigator.GetCurrentPage();
             if (currPage.datalevel == 4) {
-                point1 = _Scenario.getUserData()[_Scenario.getUserData().length - 1];
+                point1 = _Scenario.GetUserData()[_Scenario.GetUserData().length - 1];
             }
             if (_chartid == "fridaytradeGraph") {
                 point1 = fridayPPF[0]
                 if (currPage.datalevel == 4) {
-                    point1 = _Scenario.getFridayData()[0];
+                    point1 = _Scenario.GetFridayData()[0];
                 }
             }            
             var x1 = point1[0];
@@ -825,7 +825,7 @@ var _TradeSlider = (function () {
         },
         SetBetterOffTarget: function () {
             Target.goal = "betteroff";
-            if (_Scenario.getScenarioIndex() == 0) {
+            if (_Scenario.GetScenarioIndex() == 0) {
                 Target.goallbs = 32;
                 Target.goalcals = 2000;
                 Target.fridaygoallbs = 40;
