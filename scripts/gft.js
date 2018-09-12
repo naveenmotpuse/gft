@@ -353,7 +353,7 @@ var _CustomQuestion = (function () {
                 $("#youcalories").html(qObj.calories[0]);
                 $("#fridaycalories").html(qObj.calories[1]);
             }      
-            _Navigator.SetPageAccesibility();      
+            _CustomPage.SetPageAccesibility();      
         },
         UpdateScenarioTable: function () {
             var scenario = _Scenario.GetCurrentScenario().ppfData;
