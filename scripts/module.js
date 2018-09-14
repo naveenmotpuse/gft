@@ -11,6 +11,7 @@
         _sessionData.attempts[lastAttIndex].bookmarkData = _Navigator.GetBookmarkData();
         _sessionData.attempts[lastAttIndex].navigationData = _Navigator.GetNavigationData();
         _sessionData.attempts[lastAttIndex].ScenarioIndex = _Scenario.GetScenarioIndex();
+        _sessionData.attempts[lastAttIndex].k_bookmarkData = _KnowdlServiceManager.GetBookmarking();
         _EconLabServiceManager.SaveSessionData(_sessionData)
     }
     return {
@@ -38,14 +39,14 @@
                 _sessionData.attempts = [];
                 _sessionData.attempts.push(_attempt)                
             }
-            else{                        
-                //_KnowdlServiceManager.InitLaunch(_EconLabServiceManager.GetLaunchData());
-                //_KnowdlServiceManager.InitBookmarking();
-                _Navigator.InitBookmarkData(_sessionData.attempts[_sessionData.attempts.length-1].bookmarkData)
-                _Navigator.InitNavigationData(_sessionData.attempts[_sessionData.attempts.length-1].navigationData);
-                _Scenario.SetScenarioIndex(_sessionData.attempts[_sessionData.attempts.length-1].ScenarioIndex);
+            else{  
+                var lastAttIndex = _sessionData.attempts.length-1                    
+                _KnowdlServiceManager.InitLaunch(_EconLabServiceManager.GetLaunchData());
+                _KnowdlServiceManager.InitBookmarking( _sessionData.attempts[lastAttIndex].k_bookmarkData)                
+                _Navigator.InitBookmarkData(_sessionData.attempts[lastAttIndex].bookmarkData)
+                _Navigator.InitNavigationData(_sessionData.attempts[lastAttIndex].navigationData);
+                _Scenario.SetScenarioIndex(_sessionData.attempts[lastAttIndex].ScenarioIndex);                
             }
-
             if (_Settings.enableCache) {
                 _Caching.InitAssetsCaching();
                 _Caching.InitPageCaching();
@@ -71,6 +72,7 @@
 
 
 $(document).ready(function () {
+    debugger;
     //always first in ready. should be called only once.
     var isIE11version = !!navigator.userAgent.match(/Trident.*rv\:11\./);
     if (/Edge/.test(navigator.userAgent) || isIE11version) {
@@ -86,9 +88,10 @@ $(document).ready(function () {
     _Template.LoadTopSlider();
     _Module.Init();
     //NM: Need to check
-    var bookmarkdata = {}//_Navigator.GetBookmarkData();
+    debugger;
+    var bookmarkdata = _Navigator.GetBookmarkData();
     var jsonObj = {};
-    if (!_Common.IsEmptyObject(bookmarkdata)) {
+    if (!_Common.IsEmptyObject(bookmarkdata) && bookmarkdata.pageId!=undefined) {
         jsonObj.isBookMark = true;
         jsonObj.bookmarkdata = bookmarkdata;
     }

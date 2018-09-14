@@ -9,9 +9,16 @@
 
     var _levelstarttime = new Date();
 
+    var _modes= {
+        "do": "do",
+        "review": "review",
+        "setup": "setup",    
+        "preview": "preview"
+    }   
+
     return {
         InitLaunch: function (_ldata, _settings) {
-            if (_ldata.Mode.trim().toLowerCase() == LaunchMode.do) {
+            if (_ldata.Mode.trim().toLowerCase() == _modes.do) {
                 _levelstarttime = _startTime;                
                 _globals.DI_Id = _ldata.TargetId;
                 _globals.DITitle = _ldata.TargetTitle;
@@ -31,7 +38,7 @@
             }
         },
         InitLevel: function (lid) {
-            if (_globals.Mode.trim().toLowerCase() == LaunchMode.do) {
+            if (_globals.Mode.trim().toLowerCase() == _modes.do) {
                 //init current level incomplete, set start time 
                 _levelstarttime = new Date();
                 _data.Level_Id = lid;
@@ -39,7 +46,7 @@
             }
         },
         CompleteLevel: function (lid) {
-            if (_globals.Mode.trim().toLowerCase() == LaunchMode.do) {
+            if (_globals.Mode.trim().toLowerCase() == _modes.do) {
                 //mark Prev level Complete and post data.
                 if (_data.Level_Id != undefined && _data.Level_Id != "") {
                     if (_data.Level_Id == lid) {
@@ -55,7 +62,7 @@
         SendPageData: function (qObj) {
             //this method is called in UpdateAttemptMaxScore->UpdateUserAttempts to post question data
             //Need to call on pages where UpdateAttemptMaxScore is not called.
-            if (_globals.Mode.trim().toLowerCase() == LaunchMode.do) {
+            if (_globals.Mode.trim().toLowerCase() == _modes.do) {
                 QDetails = {};
                 if (qObj != undefined && qObj != null) {
                     QDetails.QId = qObj.QId;
@@ -79,17 +86,17 @@
             }
         },
         SetCompletion: function () {
-            if (_globals.Mode.trim().toLowerCase() == LaunchMode.do) {
+            if (_globals.Mode.trim().toLowerCase() == _modes.do) {
                 _data.QDetails = {};
                 _data.CompletionStatus = "Complete";
                 this.PostData(false);
             }
         },
-        InitBookmarking: function () {
-            if (_globals.Mode.trim().toLowerCase() == LaunchMode.do) {
-                if (TPIAttempts.Attempts[TPIAttempts.Attempts.length - 1].kBookmarking != undefined) {
-                    _data.Level_Id = TPIAttempts.Attempts[TPIAttempts.Attempts.length - 1].kBookmarking.Level_Id;
-                    _data.LevelStatus = TPIAttempts.Attempts[TPIAttempts.Attempts.length - 1].kBookmarking.LevelStatus;
+        InitBookmarking: function (kBookmarking) {
+            if (_globals.Mode.trim().toLowerCase() == _modes.do) {
+                if (kBookmarking != undefined) {
+                    _data.Level_Id = kBookmarking.Level_Id;
+                    _data.LevelStatus = kBookmarking.LevelStatus;
                 }
             }
         },
@@ -116,7 +123,7 @@
         },
         PostLaunchData: function (p_async) {
             var _async = true;
-            if (_globals.Mode.trim().toLowerCase() == LaunchMode.do) {
+            if (_globals.Mode.trim().toLowerCase() == _modes.do) {
                 if (p_async != undefined && p_async == false) {
                     _async = false;
                 }
@@ -142,7 +149,7 @@
         },
         PostData: function (p_async) {
             var _async = true;
-            if (_globals.Mode.trim().toLowerCase() == LaunchMode.do) {
+            if (_globals.Mode.trim().toLowerCase() == _modes.do) {
                 if (p_async != undefined && p_async == false) {
                     _async = false;
                 }
@@ -252,7 +259,7 @@ var _EconLabServiceManager = (function () {
                     console.log("post grade success")
                 },
                 error: function (error) {
-                    console.log("post grade failed: error - " + error)
+                    console.log("post grade failed: error - - status:" + error.status + " statusText:" + error.statusText)
                 }
             });
         }
@@ -274,7 +281,7 @@ var _EconLabServiceManager = (function () {
                 _EconLabServiceManager.GetSettingsSuccessCallback(result);                
             },
             error: function (error) {
-                console.log("get settings failed: error - " + error)
+                console.log("get settings failed: error - status:" + error.status + " statusText:" + error.statusText);
             }
         });        
     }    
@@ -291,7 +298,7 @@ var _EconLabServiceManager = (function () {
                 _EconLabServiceManager.GetSessionDataSuccessCallback(result)                                
             },
             error: function (error) {
-                console.log("get session data failed: error - " + error)
+                console.log("get session data failed: error - status:" + error.status + " statusText:" + error.statusText);
             }
         });
     }
@@ -309,7 +316,7 @@ var _EconLabServiceManager = (function () {
                     console.log("post session data success")
                 },
                 error: function (error) {
-                    console.log("post session data failed: error" + error)
+                    console.log("post session data failed: error- status:" + error.status + " statusText:" + error.statusText);
                 }
             });
         }
