@@ -10,7 +10,7 @@ var _ModuleCharts = (function () {
                 },
                 tooltip: {
                     formatter: function () {
-                        return this.x + ' logs, ' + this.y + ' Cals';
+                        return this.x + ' logs (' + TimePPFTable[this.point.index][0] + ' hours), ' + this.y + ' Cals (' + TimePPFTable[this.point.index][1]+ 'hours)';
                     },
                     positioner: function (labelWidth, labelHeight, point) {
                         var tooltipX, tooltipY;
@@ -111,7 +111,7 @@ var _ModuleCharts = (function () {
                 },
                 tooltip: {
                     formatter: function () {
-                        return this.x + ' logs, ' + this.y + ' Cals';
+                        return this.x + ' logs (' + TimePPFTable[this.point.index][0] + ' hours), ' + this.y + ' Cals (' + TimePPFTable[this.point.index][1]+ 'hours)';
                     },
                     snap:0
                 },
@@ -227,7 +227,7 @@ var _ModuleCharts = (function () {
                 },
                 tooltip: {
                     formatter: function () {
-                        return this.x + ' logs, ' + this.y + ' Cals';
+                        return this.x + ' logs (' + TimePPFTable[this.point.index][0] + ' hours), ' + this.y + ' Cals (' + TimePPFTable[this.point.index][1]+ 'hours)';
                     },
                     snap:0
                 },
@@ -467,10 +467,12 @@ var _ModuleCharts = (function () {
                 title: {
                     //   text: 'Production Possibilities Frontier'
                     text: ' '
+
                 },
-                tooltip: {
+                tooltip: {                    
                     formatter: function () {
-                        return this.x + ' logs, ' + this.y + ' Cals';
+                        debugger;
+                        return this.x + ' logs (' + TimePPFTable[this.point.index][0] + ' hours), ' + this.y + ' Cals (' + TimePPFTable[this.point.index][1]+ 'hours)';
                     },
                     snap:0
                 },
@@ -583,7 +585,7 @@ var _ModuleCharts = (function () {
                 },
                 tooltip: {
                     formatter: function () {
-                        return this.x + ' logs, ' + this.y + ' Cals';
+                        return this.x + ' logs (' + TimePPFTable[this.point.index][0] + ' hours), ' + this.y + ' Cals (' + TimePPFTable[this.point.index][1]+ 'hours)';
                     },
                     snap:0
                 },
@@ -650,7 +652,7 @@ var _ModuleCharts = (function () {
                 },
                 tooltip: {
                     formatter: function () {
-                        return this.x + ' logs, ' + this.y + ' Cals';
+                        return this.x + ' logs (' + TimePPFTable[this.point.index][0] + ' hours), ' + this.y + ' Cals (' + TimePPFTable[this.point.index][1]+ 'hours)';
                     },
                     snap:0
                 },
