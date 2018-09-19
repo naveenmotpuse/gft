@@ -2,7 +2,7 @@
     var _currentQuestionObj = {}
 
     function OnQuestionLoad(qObj) {
-        _Navigator.SetBookmarkData({"questionId": _currentQuestionObj.Qid})
+        _Navigator.SetBookmarkData({ "questionId": _currentQuestionObj.Qid })
         _CustomQuestion.OnQuestionLoad();
         //_Question.SetOptionClone();
         //_Question.SetOptionPosition();
@@ -34,22 +34,22 @@
                 $("#div_question").load(pageUrl, function () {
                     OnQuestionLoad(qObj);
                     if (firstQuestion == _currentQuestionObj.Qid) {
-                        _Common.SetReader(_Settings.hiddenAnchor,"pageheading");
+                        _Common.SetReader(_Settings.hiddenAnchor, "pageheading");
                     }
                     else {
-                        _Common.SetReader(_Settings.hiddenAnchor,"question");
+                        _Common.SetReader(_Settings.hiddenAnchor, "question");
                     }
 
                 });
             } else {
                 $("#div_question").load(pageUrl, function () {
                     $(this).hide().fadeIn("slow", function () {
-                        OnQuestionLoad(qObj);                        
+                        OnQuestionLoad(qObj);
                         if (firstQuestion == _currentQuestionObj.Qid) {
-                            _Common.SetReader(_Settings.hiddenAnchor,"pageheading");
+                            _Common.SetReader(_Settings.hiddenAnchor, "pageheading");
                         }
                         else {
-                            _Common.SetReader(_Settings.hiddenAnchor,"question");
+                            _Common.SetReader(_Settings.hiddenAnchor, "question");
                         }
                     })
                 });
@@ -157,16 +157,33 @@
             $("#div_feedback").css("margin-top", "0px");
         },
         Loadfeedback: function (fId) {
+            debugger;
             var fdbkUrl = _Settings.dataRoot + _currentQuestionObj.feedback[fId] + _Caching.GetUrlExtension();
             $("#div_feedback").k_show();
             $("#div_feedback").load(fdbkUrl, function () {
                 _Question.SetFeedbackTop()
                 _CustomQuestion.OnFeedbackLoad()
+                _Question.DisplayRemainingDataInFeedback()
+                //_Question.DisplayRemDataOnPrev()
                 $("body").animate({
-                    scrollTop: $(document).height()                    
+                    scrollTop: $(document).height()
                 }, 1000);
-                _Common.SetReader(_Settings.hiddenAnchor,"div_feedback");
+                _Common.SetReader(_Settings.hiddenAnchor, "div_feedback");
             });
+        },
+        DisplayRemainingDataInFeedback: function () {
+            debugger;
+            var activityDataArr = DataStorage.getActivityData();   
+            if(activityDataArr.length>0){         
+                if(activityDataArr[activityDataArr.length-1]!=undefined){
+                    var remDatatmp = activityDataArr[activityDataArr.length-1].tradeData.TR.remData;
+                    var userRemainData = remDatatmp.wood + " logs wood and " + remDatatmp.fish + " cals fish ";
+                    var fridayRemainData = remDatatmp.fridaywood + " logs wood and " + remDatatmp.fridayfish + " cals fish ";
+                    $("#usertarget").text(userRemainData);
+                    $("#fridaytarget").text(fridayRemainData);
+                }
+                
+            }
         },
         LoadAlertFeedback: function () {
             var fdbkUrl = _Settings.dataRoot + "alert.htm" + _Caching.GetUrlExtension();
@@ -176,7 +193,7 @@
                 $("body").animate({
                     scrollTop: $(document).height()
                 }, 1000);
-                _Common.SetReader(_Settings.hiddenAnchor,"div_feedback");
+                _Common.SetReader(_Settings.hiddenAnchor, "div_feedback");
             });
         },
         SetFeedbackTop: function () {
@@ -424,28 +441,28 @@
                         $("#" + _optD.id).css({
                             'color': ColorCodes.green,
                             'font-weight': 'bold'
-                        })                        
-                        if(isIOS){
-                            $("#" + _optD.id).closest("div").attr({"role":"text","aria-label":"Correct "+_optD.answer+" "+$('label[for="'+_optD.id+'"]').text()});
+                        })
+                        if (isIOS) {
+                            $("#" + _optD.id).closest("div").attr({ "role": "text", "aria-label": "Correct " + _optD.answer + " " + $('label[for="' + _optD.id + '"]').text() });
                             //$("#" + _optD.id).closest("div").attr("<span role='text' style='font-size:0px;'>"+"Correct " + _optD.answer+" "+$('label[for="'+_optD.id+'"]').text()+"<span>")
-                        }else{
-                            $('label[for="'+_optD.id+'"]').attr("aria-hidden", "true");
+                        } else {
+                            $('label[for="' + _optD.id + '"]').attr("aria-hidden", "true");
                             $("#" + _optD.id).attr("aria-hidden", "true");
-                            $("#" + _optD.id).closest("div").after("<span style='font-size:0px;'>"+"Correct " + _optD.answer+" "+$('label[for="'+_optD.id+'"]').text()+"<span>")
+                            $("#" + _optD.id).closest("div").after("<span style='font-size:0px;'>" + "Correct " + _optD.answer + " " + $('label[for="' + _optD.id + '"]').text() + "<span>")
                         }
                     } else {
                         $("#" + _optD.id).css({
                             'color': ColorCodes.red,
                             'font-weight': 'bold'
                         })
-                        if(isIOS){
+                        if (isIOS) {
                             $("#" + _optD.id).after('<label class="incurrect_label"><i class="fa fa-times" style="padding:3px;color:' + ColorCodes.red + '"></i><span style="color:' + ColorCodes.green + ';font-weight:bold;font-size:16px;"> ' + _optD.answer + '</span> </label>');
-                            $("#" + _optD.id).closest("div").attr({"role":"text","aria-label":"you have entered " + $("#" + _optD.id).val() + " correct value is " + _optD.answer+" "+$('label[for="'+_optD.id+'"]').text()});
-                        }else{
+                            $("#" + _optD.id).closest("div").attr({ "role": "text", "aria-label": "you have entered " + $("#" + _optD.id).val() + " correct value is " + _optD.answer + " " + $('label[for="' + _optD.id + '"]').text() });
+                        } else {
                             $("#" + _optD.id).after('<label class="incurrect_label"><i class="fa fa-times" aria-hidden="true" style="padding:3px;color:' + ColorCodes.red + '"></i><span aria-hidden="true" style="color:' + ColorCodes.green + ';font-weight:bold;font-size:16px;"> ' + _optD.answer + '</span> </label>');
-                            $('label[for="'+_optD.id+'"]').attr("aria-hidden", "true");
+                            $('label[for="' + _optD.id + '"]').attr("aria-hidden", "true");
                             $("#" + _optD.id).attr("aria-hidden", "true");
-                            $("#" + _optD.id).closest("div").after("<span style='font-size:0px;'>"+"you have entered " + $("#" + _optD.id).val() + " correct value is " + _optD.answer+" "+$('label[for="'+_optD.id+'"]').text()+"<span>")
+                            $("#" + _optD.id).closest("div").after("<span style='font-size:0px;'>" + "you have entered " + $("#" + _optD.id).val() + " correct value is " + _optD.answer + " " + $('label[for="' + _optD.id + '"]').text() + "<span>")
                         }
                     }
                 }
