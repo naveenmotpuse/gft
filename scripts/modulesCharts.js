@@ -10,7 +10,7 @@ var _ModuleCharts = (function () {
                 },
                 tooltip: {
                     formatter: function () {
-                        return this.x + ' logs (' + TimePPFTable[this.point.index][0] + ' hours), ' + this.y + ' Cals (' + TimePPFTable[this.point.index][1]+ 'hours)';
+                        return this.x + ' logs (' + TimePPFTable[this.point.index][0] + ' hours), ' + this.y + ' cals (' + TimePPFTable[this.point.index][1]+ 'hours)';
                     },
                     positioner: function (labelWidth, labelHeight, point) {
                         var tooltipX, tooltipY;
@@ -44,7 +44,7 @@ var _ModuleCharts = (function () {
                 },
                 yAxis: {
                     title: {
-                        text: 'Fish (Cals)'
+                        text: 'Fish (cals)'
                     },
                     labels: {
                         format: '{value}'
@@ -111,7 +111,7 @@ var _ModuleCharts = (function () {
                 },
                 tooltip: {
                     formatter: function () {
-                        return this.x + ' logs (' + TimePPFTable[this.point.index][0] + ' hours), ' + this.y + ' Cals (' + TimePPFTable[this.point.index][1]+ 'hours)';
+                        return this.x + ' logs (' + TimePPFTable[this.point.index][0] + ' hours), ' + this.y + ' cals (' + TimePPFTable[this.point.index][1]+ 'hours)';
                     },
                     snap:0
                 },
@@ -136,7 +136,7 @@ var _ModuleCharts = (function () {
                 },
                 yAxis: {
                     title: {
-                        text: 'Fish (Cals)'
+                        text: 'Fish (cals)'
                     },
                     labels: {
                         format: '{value}'
@@ -227,7 +227,7 @@ var _ModuleCharts = (function () {
                 },
                 tooltip: {
                     formatter: function () {
-                        return this.x + ' logs (' + TimePPFTable[this.point.index][0] + ' hours), ' + this.y + ' Cals (' + TimePPFTable[this.point.index][1]+ 'hours)';
+                        return this.x + ' logs (' + TimePPFTable[this.point.index][0] + ' hours), ' + this.y + ' cals (' + TimePPFTable[this.point.index][1]+ 'hours)';
                     },
                     snap:0
                 },
@@ -252,7 +252,7 @@ var _ModuleCharts = (function () {
                 },
                 yAxis: {
                     title: {
-                        text: 'Fish (Cals)'
+                        text: 'Fish (cals)'
                     },
                     labels: {
                         format: '{value}'
@@ -472,7 +472,7 @@ var _ModuleCharts = (function () {
                 tooltip: {                    
                     formatter: function () {
                         debugger;
-                        return this.x + ' logs (' + TimePPFTable[this.point.index][0] + ' hours), ' + this.y + ' Cals (' + TimePPFTable[this.point.index][1]+ 'hours)';
+                        return this.x + ' logs (' + TimePPFTable[this.point.index][0] + ' hours), ' + this.y + ' cals (' + TimePPFTable[this.point.index][1]+ 'hours)';
                     },
                     snap:0
                 },
@@ -497,7 +497,7 @@ var _ModuleCharts = (function () {
                 },
                 yAxis: {
                     title: {
-                        text: 'Fish (Cals)'
+                        text: 'Fish (cals)'
                     },
                     labels: {
                         format: '{value}'
@@ -585,7 +585,7 @@ var _ModuleCharts = (function () {
                 },
                 tooltip: {
                     formatter: function () {
-                        return this.x + ' logs (' + TimePPFTable[this.point.index][0] + ' hours), ' + this.y + ' Cals (' + TimePPFTable[this.point.index][1]+ 'hours)';
+                        return this.x + ' logs (' + TimePPFTable[this.point.index][0] + ' hours), ' + this.y + ' cals (' + TimePPFTable[this.point.index][1]+ 'hours)';
                     },
                     snap:0
                 },
@@ -610,7 +610,7 @@ var _ModuleCharts = (function () {
                 },
                 yAxis: {
                     title: {
-                        text: 'Fish (Cals)'
+                        text: 'Fish (cals)'
                     },
                     labels: {
                         format: '{value}'
@@ -652,7 +652,7 @@ var _ModuleCharts = (function () {
                 },
                 tooltip: {
                     formatter: function () {
-                        return this.x + ' logs (' + TimePPFTable[this.point.index][0] + ' hours), ' + this.y + ' Cals (' + TimePPFTable[this.point.index][1]+ 'hours)';
+                        return this.x + ' logs (' + TimePPFTable[this.point.index][0] + ' hours), ' + this.y + ' cals (' + TimePPFTable[this.point.index][1]+ 'hours)';
                     },
                     snap:0
                 },
@@ -677,7 +677,7 @@ var _ModuleCharts = (function () {
                 },
                 yAxis: {
                     title: {
-                        text: 'Fish (Cals)'
+                        text: 'Fish (cals)'
                     },
                     labels: {
                         format: '{value}'
