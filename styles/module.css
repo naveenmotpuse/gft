@@ -870,7 +870,7 @@ input[type='button'].disabled, a.disabled, input[type='range'].disabled{
 }
 
 .questionband input[type='text'],
-.questionband input[type='number'] {
+.questionband input[type='text'] {
     text-align: center;
     width: 100px;
 }

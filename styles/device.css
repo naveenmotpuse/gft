@@ -330,7 +330,7 @@ margin-top: 10px;
     .spanfish,.spanwood {
         margin: 0px 5px;
     }
-    .questionband input[type="text"], .questionband input[type="number"] {
+    .questionband input[type="text"], .questionband input[type="text"] {
         width: 82px;
     } 
     #collect-fish, #collect-wood {

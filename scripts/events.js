@@ -114,8 +114,8 @@ $(document).on("click", ".levelbtnretry", function (event) {
 $(document).on("click", ".bookmark", function (event) {
     _Navigator.Start();
 });
-$(document).on("keyup", "input[type='number']", function (event) {
-    //debugger;
+$(document).on("keyup", "input[type='text']", function (event) {
+    debugger;
     var max = $(this).attr("max");
     var min = $(this).attr("min");
     if (max != undefined && min != undefined) {
@@ -124,8 +124,23 @@ $(document).on("keyup", "input[type='number']", function (event) {
         if ($(this).val() > max) {
             $(this).val(max);
         }
-        if ($(this).val() < min) {
+        else if ($(this).val() < min) {
             $(this).val(min);
+        }
+    
+        else {
+            var splitarr = $(this).val().split(".");
+            if((splitarr.length>1) && (splitarr[1].length>3)){
+                $(this).val(Number($(this).val()).toFixed(3));
+            }
         }
     }
 })
+
+$(document).on("keypress", "input[type='text']", function (event) {    
+    return _Common.ValidateDecimal(event, $(this));
+})
+
+/*$(document).on("blur", "input[type='text']", function (event) {    
+    return _Common.checkDecimal($(this));
+})*/

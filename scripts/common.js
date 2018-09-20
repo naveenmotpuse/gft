@@ -65,7 +65,60 @@ var _Common = (function () {
         SetReader: function (hiddenAnchor, idToStartReading) {
             $(hiddenAnchor).attr("href", "#" + idToStartReading);
             $(hiddenAnchor)[0].click();
-        }
+        },
+        ValidateDecimal:function (evt, obj) {
+            var charCode = (evt.which) ? evt.which : event.keyCode
+            var value = obj.val();
+            var dotcontains = value.indexOf(".") != -1;
+            if (dotcontains)
+                if (charCode == 46) return false;
+            if (charCode == 46) return true;
+            if (charCode > 31 && (charCode < 48 || charCode > 57))
+                return false;
+            return true;
+        },
+        /*onlyDotsAndNumbers(event, obj) {
+            var charCode = (event.which) ? event.which : event.keyCode
+            if (charCode == 46) {
+                if (obj.value.indexOf(".") < 0)
+                    return true;
+                else
+                    return false;
+            }
+        
+            if (txt.value.indexOf(".") > 0) {
+                var txtlen = obj.value.length;
+                var dotpos = obj.value.indexOf(".");
+                if ((txtlen - dotpos) > 2)
+                    return false;
+            }
+        
+            if (charCode > 31 && (charCode < 48 || charCode > 57))
+                return false;
+        
+            return true;
+        }*/
+         /*isNumberKey(evt) {
+            var charCode = (evt.which) ? evt.which : event.keyCode
+            if (charCode > 31 && (charCode < 48 || charCode > 57) && charCode != 46)
+                return false;
+            else {
+                var len = document.getElementById("input[type='text']").val().length;
+                var index = document.getElementById("input[type='text']").val().indexOf('.');
+                
+                if (index > 0 && charCode == 46) {
+                    return false;
+                }
+                if (index > 0) {
+                    var CharAfterdot = (len + 1) - index;
+                    if (CharAfterdot > 3) {
+                        return false;
+                    }
+                }
+   
+            }
+            return true;
+         }*/
     }
 })();
 

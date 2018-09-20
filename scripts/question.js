@@ -61,7 +61,7 @@
             }
         },
         SetOptionClone: function () {
-            var elmarray = $("input[type='number']");
+            var elmarray = $("input[type='text']");
             if (elmarray.length > 0) {
                 for (var i = 0; i < elmarray.length; i++) {
                     var id = $(elmarray[i]).attr("id");
@@ -74,7 +74,7 @@
             var widthincr = 0;
             var leftincr = 0;
             var topincr = 0;
-            var elmarray = $("input[type='number']");
+            var elmarray = $("input[type='text']");
             if (elmarray.length > 0) {
                 for (var i = 0; i < elmarray.length; i++) {
                     var id = $(elmarray[i]).attr("id");
@@ -129,20 +129,20 @@
             this.UnloadFeedback()
             $(".btncheckanswer").k_enable();
             $("#div_question").find("input[type='text'].incorrect").val("").k_enable();
-            $("#div_question").find("input[type='number'].incorrect").val("").k_enable();
+            $("#div_question").find("input[type='text'].incorrect").val("").k_enable();
             $(".questionband").find("input[type='radio']").k_enable();
             $(".questionband").find("input[type='radio']").prop('checked', false);
             if (_currentQuestionObj.type == "graph") {
                 $("#div_question").find("input.inlineinput").k_enable();
                 $("body").animate({
-                    scrollTop: $("#div_question").find("input[type='number']:first").position().top - _Settings.topMargin
+                    scrollTop: $("#div_question").find("input[type='text']:first").position().top - _Settings.topMargin
                 }, 1000);
                 $("#div_question").find("input.inlineinput:first").focus();
             } else {
                 $("body").animate({
                     scrollTop: $("#div_question .question_img").position().top - _Settings.topMargin
                 }, 1000);
-                $("#div_question").find("input[type='number'].incorrect:first").focus();
+                $("#div_question").find("input[type='text'].incorrect:first").focus();
             }
 
             $(".incorrect").removeClass("incorrect");

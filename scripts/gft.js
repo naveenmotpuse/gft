@@ -655,7 +655,7 @@ var _CustomQuestion = (function () {
         },
         GraphRetry: function () {
             _Question.UnloadFeedback();
-            $("#div_question").find("input[type='number']").val("");
+            $("#div_question").find("input[type='text']").val("");
             $("#addpointbtn").k_enable()
             $("#woodlogtools").k_enable()
             $("#fishlogtools").k_enable()
