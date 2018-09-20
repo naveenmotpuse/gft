@@ -126,8 +126,7 @@ $(document).on("keyup", "input[type='text']", function (event) {
         }
         else if ($(this).val() < min) {
             $(this).val(min);
-        }
-    
+        }    
         else {
             var splitarr = $(this).val().split(".");
             if((splitarr.length>1) && (splitarr[1].length>3)){
