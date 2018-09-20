@@ -25,6 +25,7 @@
      background: #A3610A;
 }
 
+
 #collect-fish .fish-slider::-ms-track {
     width: 100%;
     height: 11px;
@@ -96,7 +97,12 @@
     background: #575694;
     cursor: pointer;
 }
-
+.slider-wrapper .tot-range-wrapper input[type='range']{
+    padding:0px!important;
+ }
+ .tot-range-wrapper div, .tot-range-wrapper input[type='range']{
+    margin-top:-17px;
+}
 
 /**/
 
@@ -151,3 +157,5 @@
 }
 
 .dayfigcaption{width: 418px;}
+
+
