@@ -156,6 +156,7 @@ $(function () {
             return false;
         });
         el.addEventListener("click", function (event) {
+            debugger;
             var levelPageId = event.target.getAttribute("data-id");
             //_Navigator.LoadPage(levelPageId);
             var jsonObj = {};

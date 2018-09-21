@@ -17,7 +17,7 @@ var _Navigator = (function () {
         duration:0
     };*/
     var _lastDuration = 0;
-    var _levelStartPages = ["l1p1", "l1p2", "l2p1", "l3p1", "l4p1"];
+    var _levelStartPages = ["l1p1", "l1p2", "l2p1", "l3p1", "l4p1","summary"];
     var _NData = {
         "l1p1": {
             pageId: "l1p1",
@@ -294,7 +294,7 @@ var _Navigator = (function () {
         _TopSlider.OnLoad();
         _CustomPage.OnPageLoad();
         _Navigator.UpdateMenuVisibility();
-        _Navigator.LoadDefaultQuestion(jsonObj);        
+        _Navigator.LoadDefaultQuestion(jsonObj);  
     }
     return {
         Get: function () {
@@ -333,7 +333,7 @@ var _Navigator = (function () {
         LoadPage: function (pageId, jsonObj) {
             //debugger;
             _currentPageId = pageId;
-            if (!_Common.IsEmptyObject(jsonObj) && jsonObj != undefined) {
+             if (!_Common.IsEmptyObject(jsonObj) && jsonObj != undefined) {
                 if (jsonObj.isBookMark) {
                     _currentPageId = jsonObj.bookmarkdata.pageId;
                 }
@@ -357,6 +357,12 @@ var _Navigator = (function () {
             }
             if (_currentPageObject.isLastPage != undefined && _currentPageObject.isLastPage) {
                 $("#linknext").k_disable();
+                $("#header-btn-container *").hide();
+                $("#scorediv").css("bottom","9px");
+            }
+            else{
+                $("#header-btn-container *").show();
+                $("#scorediv").css("bottom","53px");
             }
             _currentPageObject.isVisited = true;
 

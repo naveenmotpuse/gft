@@ -108,6 +108,10 @@ input[type='range']:active{
 #appmenu *:active {
     outline: #ff8c00 solid 2px;
 }
+#appmenu li[role='menuitem'] a {
+    display: block;
+    outline: 0px;
+}
 
 .progress .background:focus,
 .progress .background:active {
@@ -249,7 +253,7 @@ input[type='range']:active{
     bottom: 55px;    
     margin-right: 25px;
     right: 0px;
-    bottom:37%;
+    /*bottom:53px;*/
 }
 
 #scoreInnrDiv {
