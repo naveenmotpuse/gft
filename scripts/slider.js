@@ -611,9 +611,13 @@ var _TradeSlider = (function () {
             this.SetTradeResult();
         },
         SetTradeResult: function () {  
-            console.log("SetTradeResult")        
+            console.log("SetTradeResult")      
             TradeResults.receivefish = TradeResults.givewood * TradeResults.onewoodfor;
-            TradeResults.receivewood = Number((TradeResults.givefish / TradeResults.onewoodfor).toFixed(1));
+              if(TradeResults.givefish == 0 && TradeResults.onewoodfor == 0){
+                TradeResults.receivewood = 0;
+              }else{
+                TradeResults.receivewood = Number((TradeResults.givefish / TradeResults.onewoodfor).toFixed(1));
+              }
             //AT: add toFixed   
             TradeResults.consumptionwood = Number((((TradeSettings.yourwoodlogs + TradeResults.remData.wood) - TradeResults.givewood) + TradeResults.receivewood).toFixed(1));
             TradeResults.consumptionfish = Number((((TradeSettings.yourfishcals + TradeResults.remData.fish) + TradeResults.receivefish) - TradeResults.givefish).toFixed(1));
