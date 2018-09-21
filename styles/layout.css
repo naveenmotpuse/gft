@@ -84,6 +84,7 @@ button {
 
 input[type="radio"] {
     max-height: 20px;
+    padding: 8px;
 }
 
 a:focus,
