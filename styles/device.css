@@ -44,6 +44,10 @@
 
 }
 @media  screen and (max-width : 768px) {
+    #txtquest, #txtimg{
+        padding-top: 20px;
+    }
+
     body{
         box-sizing: border-box;
       }
@@ -250,9 +254,27 @@ margin-top: 10px;
     margin-top: 13px;
 
     }
+
+    #woodlogdiv{
+        margin-right: 80px;
+    }
+
+    #fishcalsdiv{
+        padding:2px 0 0 20px;
+    }
       
 }
 @media screen and (max-width: 445px){
+    
+    #woodlogdiv{
+        margin-right: 50px;
+    }
+
+    #fishcalsdiv{
+        padding-left: 20px;
+        padding-top: 2px;
+    }
+
     #img-stranded-island {
           width: 415px!important;
     }
