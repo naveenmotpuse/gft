@@ -175,7 +175,7 @@
             debugger;
             var activityDataArr = DataStorage.getActivityData();   
             if(activityDataArr.length>0){         
-                if(activityDataArr[activityDataArr.length-1]!=undefined){
+                if(activityDataArr[activityDataArr.length-1]!=undefined && activityDataArr[activityDataArr.length-1].tradeData!=undefined){
                     var remDatatmp = activityDataArr[activityDataArr.length-1].tradeData.TR.remData;
                     var userRemainData = remDatatmp.wood + " logs wood and " + remDatatmp.fish + " cals fish ";
                     var fridayRemainData = remDatatmp.fridaywood + " logs wood and " + remDatatmp.fridayfish + " cals fish ";
