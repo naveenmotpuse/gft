@@ -442,6 +442,13 @@ margin-top: 10px;
         width: 96%;
         margin: 0 auto;
     }
+    .rTableCell2{
+        margin-top: 28px;
+        position: relative;
+      }
+    .rTableCell4{
+        margin-left:20px;
+        }
      
 }
 @media  screen and (max-width : 420px) {

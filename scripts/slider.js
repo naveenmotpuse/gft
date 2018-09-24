@@ -123,8 +123,8 @@ var DataStorage = DataStorage || function (ui) {
             };
         },
         SetRemainingData: function (remdata) {
-            _DataMap.remWood = remdata.wood;
-            _DataMap.remFish = remdata.fish;
+            _DataMap.remWood = remdata.wood.toFixed(1);
+            _DataMap.remFish = remdata.fish.toFixed(1);
         },
         getRemainingPotData: function () {
             return {
@@ -680,11 +680,11 @@ var _TradeSlider = (function () {
             return $.extend(true, {}, Target);
         },
         SetRemTradeData: function (_remdata) {
-            TradeResults.remData.wood = _remdata.wood;
-            TradeResults.remData.fish = _remdata.fish;
-            TradeResults.remData.fridaywood = _remdata.fridaywood;
-            TradeResults.remData.fridayfish = _remdata.fridayfish;
-            TradeResults.remData.idlehours += TradeSettings.youridlehours;
+            TradeResults.remData.wood = _remdata.wood.toFixed(1);
+            TradeResults.remData.fish = _remdata.fish.toFixed(1);
+            TradeResults.remData.fridaywood = _remdata.fridaywood.toFixed(1);
+            TradeResults.remData.fridayfish = _remdata.fridayfish.toFixed(1);
+            TradeResults.remData.idlehours += TradeSettings.youridlehours.toFixed(1);
         },
         DisplayPointOnGraph: function () {
             this.ShowSliderPoint("studenttradeGraph", [TradeResults.consumptionwood, TradeResults.consumptionfish]);
