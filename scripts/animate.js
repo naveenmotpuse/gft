@@ -367,6 +367,7 @@ var EventManager = function () {
                     $(".startbtnpanel").k_hide();
                     $("#onewoodfor-range").k_disable()
                     $("#givewood-range").k_disable()
+                    $("#givefish-range").k_disable()
                     setTimeout(function () {
                         $('.castawaySprites').removeClass('castawaySprites').addClass('castawaySprites1');
                         $('.castawaySprites1').k_hide();
@@ -417,6 +418,7 @@ var EventManager = function () {
                 $(".nighttimeslider").k_show();
                 $("#onewoodfor-range").k_disable();
                 $("#givewood-range").k_disable();
+                $("#givefish-range").k_disable();
                 $("#btnfindout").k_disable();
                 setTimeout(function () {
                     $('.fishBarrelRaft3').k_hide();
@@ -429,6 +431,7 @@ var EventManager = function () {
 
         },
         OnTryAgain: function () {
+            debugger;
             _Animation.day();
             Table.hide();
             var fishhrs = 0;
@@ -450,6 +453,8 @@ var EventManager = function () {
             $(".nighttimeslider").k_hide();
             $("#onewoodfor-range").k_enable();
             $("#givewood-range").k_enable();
+            $("#givewfish-range").k_enable();
+            $(".tot-slider").removeClass('disabled');
             $("#graph-div").attr("aria-label", "Daytime Schedule Idle");
             $(".assistive-text").text('');
             _Question.UnloadFeedback();
@@ -495,7 +500,8 @@ var EventManager = function () {
             $(".questionband").k_hide();
             $("#btnfindout").k_enable();
             $("#onewoodfor-range").k_enable()
-            $("#givewood-range").k_enable()
+            $("#givewood-range").k_enable();
+            $("#givefish-range").k_enable();
             _Question.UnloadFeedback();
             _TradeSlider.ResetTradeSlider();
             $('body').animate({
