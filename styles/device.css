@@ -12,10 +12,17 @@
     #surpluscharttable_c{       
         width: 40%;    
     } 
+    .inputwood{
+        margin-left: 13%;
+    }
 }
 @media  screen and (max-width: 912px) {  
     .intro-content .intro-p {
         width: 47%;
+    }
+
+    .inputwood{
+        margin-left: 16%;
     }
 }
 @media  screen and (max-width: 893px) {  
@@ -25,6 +32,9 @@
     .intro-content .intro-p {
         width: 44%;
     }  
+    .inputwood{
+        margin-left: 24%;
+    }
 }
 @media  screen and (max-width: 880px) {  
     #surpluscharttable_c{       
@@ -33,6 +43,9 @@
     #surpluschart_c{
         width:98%;
      }
+     .inputwood{
+        margin-left: 25%;
+    }
 }
 @media  screen and (max-width: 840px) {  
     .intro-content .intro-p {
@@ -41,6 +54,16 @@
     #surpluschart_c{
         width:95%;
      }
+
+     .inputwood{
+        margin-left:42%;
+    }
+
+    .inputfish{
+        margin-left: 0%;
+        float: left;
+        margin-top: -5px;
+    }
 
 }
 @media  screen and (max-width : 768px) {
@@ -148,6 +171,16 @@
     .actionbtndiv{
         width: 100%!important;
     }
+
+    .inputfish{
+        margin-top: 0px;
+        margin-left: 1%;
+    }
+
+    .inputwood{
+        margin-top: 0px;
+        margin-left: 0%;
+    }
 }
 @media  screen and (max-width : 543px) {
     .rTableCell1{
@@ -163,6 +196,12 @@
 
     .actionbtndiv{
         width: 100%;
+    }
+
+    .inputfish{
+        margin-top: 0px;
+        margin-left: 0%;
+        padding-top: 1%;
     }
 }
 @media  screen and (max-width : 400px) {

@@ -613,5 +613,14 @@ input[type='range']:active::-ms-thumb{
     border-radius: 0px;
 }
 
+.inputwood{
+margin-left:4%;
+float:left;
+margin-top: -25px;
+}
 
-
+.inputfish{
+margin-left:5px;
+float:left;
+margin-top: -25px;
+}
