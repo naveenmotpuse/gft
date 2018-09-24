@@ -419,7 +419,7 @@ var EventManager = function () {
                 $("#onewoodfor-range").k_disable();
                 $("#givewood-range").k_disable();
                 $("#givefish-range").k_disable();
-               // $("#btnfindout").k_disable();
+                $("#btnfindout").k_disable();
                 setTimeout(function () {
                     $('.fishBarrelRaft3').k_hide();
                     _Animation.night();
