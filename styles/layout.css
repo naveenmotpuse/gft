@@ -624,3 +624,8 @@ margin-left:5px;
 float:left;
 margin-top: -25px;
 }
+
+.questionchart{
+    float: left;
+    width: 100%;
+}
