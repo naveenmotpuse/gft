@@ -492,7 +492,7 @@ var _Navigator = (function () {
             var arialabel = "Introduction progress 0%, Level 1 progress 1%, Level 2 progress 2%, Level 3 progress 3%, Level 4 progress 4%";
             var progData = this.GetProgressData();
             for (var i = 0; i < progData.length; i++) {
-                var lprog_pecent = (progData[i] / _progressLevels[i] * 100).toFixed(2);
+                var lprog_pecent = (progData[i] / _progressLevels[i] * 100);
                 $(".pgBgItem[data-level='" + i + "']").find(".pgBgItemFill").css("width", lprog_pecent + "%");
                 arialabel = arialabel.replace(i + "%", lprog_pecent + "%")
                 if (lprog_pecent == 100) {

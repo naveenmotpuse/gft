@@ -352,6 +352,8 @@ var _Animation = (function () {
 var EventManager = function () {
     return {
         onStart: function () {
+            $("#linkprevious").k_disable();
+            $("#appmenu").k_disable();
             $('body').animate({
                 scrollTop: $(".t_animation_c").position().top - _Settings.topMargin
             }, 200, function () {                
@@ -554,6 +556,8 @@ var EventManager = function () {
             }
         },
         onNightAnimComplete: function () {
+            $("#linkprevious").k_enable();
+            $("#appmenu").k_enable();
             //debugger;
             _Animation.day();
             var currPage = _Navigator.GetCurrentPage();
