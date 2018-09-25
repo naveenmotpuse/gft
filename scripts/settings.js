@@ -50,8 +50,6 @@ function getInflationSettings() {
             else {
                 $("#checkoxlevel4").removeAttr("checked")
             }
-
-
             $("#statusdiv").removeClass("error").html("")
             $("#savebtn").closest(".savebtn").removeClass("k_disable")
         },
