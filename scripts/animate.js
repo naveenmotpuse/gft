@@ -1,6 +1,6 @@
 var round = function (val) {
     if (Math.round(val) !== val) {
-        val = val.toFixed(1);
+        val = Number(val.toFixed(1));
     }
     return val;
 }
@@ -723,7 +723,7 @@ var EventManager = function () {
 var Table = function () {
     var round = function (val) {
         if (Math.round(val) !== val) {
-            val = val.toFixed(1);
+            val = Number(val.toFixed(1));
         }
         return val;
     }

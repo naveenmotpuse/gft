@@ -123,8 +123,8 @@ var DataStorage = DataStorage || function (ui) {
             };
         },
         SetRemainingData: function (remdata) {
-            _DataMap.remWood = remdata.wood.toFixed(1);
-            _DataMap.remFish = remdata.fish.toFixed(1);
+            _DataMap.remWood = Number(remdata.wood.toFixed(1));
+            _DataMap.remFish = Number(remdata.fish.toFixed(1));
         },
         getRemainingPotData: function () {
             return {
@@ -680,11 +680,11 @@ var _TradeSlider = (function () {
             return $.extend(true, {}, Target);
         },
         SetRemTradeData: function (_remdata) {
-            TradeResults.remData.wood = _remdata.wood.toFixed(1);
-            TradeResults.remData.fish = _remdata.fish.toFixed(1);
-            TradeResults.remData.fridaywood = _remdata.fridaywood.toFixed(1);
-            TradeResults.remData.fridayfish = _remdata.fridayfish.toFixed(1);
-            TradeResults.remData.idlehours += TradeSettings.youridlehours.toFixed(1);
+            TradeResults.remData.wood = Number(_remdata.wood.toFixed(1));
+            TradeResults.remData.fish = Number(_remdata.fish.toFixed(1));
+            TradeResults.remData.fridaywood = Number(_remdata.fridaywood.toFixed(1));
+            TradeResults.remData.fridayfish = Number(_remdata.fridayfish.toFixed(1));
+            TradeResults.remData.idlehours += Number(TradeSettings.youridlehours.toFixed(1));
         },
         DisplayPointOnGraph: function () {
             this.ShowSliderPoint("studenttradeGraph", [TradeResults.consumptionwood, TradeResults.consumptionfish]);
@@ -905,8 +905,8 @@ var _TradeSlider = (function () {
             for (var i in activityData) {
                 var data = activityData[i];
                 if (data.tradeData.TR != undefined) {
-                    woodColletion.push([data.day, data.tradeData.TR.remData.wood]);
-                    fishCollection.push([data.day, data.tradeData.TR.remData.fish]);
+                    woodColletion.push([data.day, Number(data.tradeData.TR.remData.wood)]);
+                    fishCollection.push([data.day, Number(data.tradeData.TR.remData.fish)]);
                 }
             }
 
