@@ -1129,3 +1129,7 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
 .inner-box::-webkit-scrollbar { 
     display: none;
 }
+
+.rTableCell5{
+    padding-right: 15px;
+}

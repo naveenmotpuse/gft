@@ -35,6 +35,10 @@
     .inputwood{
         margin-left: 24%;
     }
+
+    .rTableCell2{
+        padding-right: 0px;
+    }
 }
 @media  screen and (max-width: 880px) {  
     #surpluscharttable_c{       
@@ -45,6 +49,13 @@
      }
      .inputwood{
         margin-left: 25%;
+    }
+    .rTableCell2{
+        padding-right: 0px;
+    }
+
+    .rTableCell5{
+        padding-right: 15px;
     }
 }
 @media  screen and (max-width: 840px) {  
@@ -65,6 +76,14 @@
         margin-top: -5px;
     }
 
+    .rTableCell4{
+        margin-left: 30%;
+        margin-top: 15px;
+    }
+
+    .rTableCell5{
+        padding-right: 10px;
+    }
 }
 @media  screen and (max-width : 768px) {
     #txtquest, #txtimg{
@@ -181,6 +200,10 @@
         margin-top: 0px;
         margin-left: 0%;
     }
+
+    .rTableCell5{
+        padding-right: 8px;
+    }
 }
 @media  screen and (max-width : 543px) {
     .rTableCell1{
@@ -203,11 +226,20 @@
         margin-left: 0%;
         padding-top: 1%;
     }
+
+    .rTableCell4{
+            margin-left: 0%;
+    }
+
+    .rTableCell2{
+        padding-right: 6px;
+    }
 }
 @media  screen and (max-width : 400px) {
     .rTableCell2{
-        width: 9%;
+        width: 5%;
         margin-top: 27px;
+        padding-right: 0px!important;
     }
     .rTableCell3{
         width: 80%;
@@ -263,6 +295,10 @@
 margin-top: 10px;
 
 }
+
+.rTableCell2{
+    padding-right: 9px;
+}
 }
 
 @media  screen and (max-width : 460px) {
@@ -307,7 +343,7 @@ margin-top: 10px;
 @media screen and (max-width: 445px){
     
     #woodlogdiv{
-        margin-right: 50px;
+        margin-right: 65px;
     }
     
     #fishcalsdiv{
@@ -447,9 +483,17 @@ margin-top: 10px;
         position: relative;
       }
     .rTableCell4{
-        margin-left:20px;
+        margin-left:0px;
         }
-     
+
+    #questionchart{
+        width: 100%;
+        float: left;
+    }
+
+    .rTableCell2{
+        padding-right: 10px;
+    }
 }
 @media  screen and (max-width : 420px) {
     table.noborder tr th, table.noborder tr td{

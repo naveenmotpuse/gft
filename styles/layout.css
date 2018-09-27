@@ -629,3 +629,7 @@ margin-top: -25px;
     float: left;
     width: 100%;
 }
+
+.level_title{
+    display: flex;
+}
