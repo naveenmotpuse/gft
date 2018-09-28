@@ -772,9 +772,9 @@ var _CustomPage = (function () {
             if (_currentPage.isLevelStart == undefined) {
                 if ($(".assistive-text").length == 0) {
                     if (isAndroid) {
-                        $("#wrapper").append('<span aria-live="assertive" class="assistive-text"></span>');
+                        $("#wrapper").append('<span id="assist-txt" aria-live="assertive" class="assistive-text"></span>');
                     } else {
-                        $("#wrapper").append('<span aria-live="assertive" role="alert" class="assistive-text"></span>');
+                        $("#wrapper").append('<span id="assist-txt" aria-live="assertive" role="alert" class="assistive-text"></span>');
                     }
                 }
             }

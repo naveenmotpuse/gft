@@ -354,6 +354,7 @@ var EventManager = function () {
         onStart: function () {
             $("#linkprevious").k_disable();
             $("#appmenu").k_disable();
+            $("#assist-txt").attr("aria-hidden","false");
             $('body').animate({
                 scrollTop: $(".t_animation_c").position().top - _Settings.topMargin
             }, 200, function () {                
@@ -387,6 +388,7 @@ var EventManager = function () {
             });
         },
         onFind: function () {
+            $("#assist-txt").attr("aria-hidden","false");
             $('body').animate({
                 scrollTop: $(".t_animation_c").position().top - _Settings.topMargin
             }, 200, null, function () {
@@ -511,6 +513,7 @@ var EventManager = function () {
             }, 200);
         },
         onAnimComplete: function () {
+            $("#assist-txt").attr("aria-hidden","true");
             var currPage = _Navigator.GetCurrentPage();
             var fish = DataStorage.getPotData().fish;
             var wood = DataStorage.getPotData().wood;
@@ -558,6 +561,7 @@ var EventManager = function () {
         onNightAnimComplete: function () {
             $("#linkprevious").k_enable();
             $("#appmenu").k_enable();
+            $("#assist-txt").attr("aria-hidden","true");
             //debugger;
             _Animation.day();
             var currPage = _Navigator.GetCurrentPage();
