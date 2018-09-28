@@ -435,16 +435,19 @@ var _Navigator = (function () {
                 custFunction();
             } else if (_currentPageObject.questions.length > 0) {
                 var IsAllQCompleted = true;
+                /*
                 for (var i = 0; i < _currentPageObject.questions.length; i++) {
                     if (_currentPageObject.questions[i].isAnswered == undefined || !_currentPageObject.questions[i].isAnswered || 
                         _currentPageObject.questions[i].isQuestionVisit == undefined || !_currentPageObject.questions[i].isQuestionVisit) {
                         IsAllQCompleted = false;
                         break;
                     }
-                }
-                /*if(_currentPageObject.questions.length == _NData[_currentPageObject.pageId].questions.length) {
-                    IsAllQCompleted = false;
                 }*/
+                if(_Question.GetCurrentQuestion().Id == _currentPageObject.questions[_currentPageObject.questions.length-1].Id) {
+                    IsAllQCompleted = true;
+                } else {
+                    IsAllQCompleted = false;
+                }
                 if (IsAllQCompleted) {
                     this.LoadPage(_currentPageObject.nextPageId);
 
