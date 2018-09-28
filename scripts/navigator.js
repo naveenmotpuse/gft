@@ -404,11 +404,12 @@ var _Navigator = (function () {
                 }
                 else {
                     _currentPageObject.questions[0].isQuestionVisit = true;
-                    for (var i = 0; i < _currentPageObject.questions.length; i++) {
+                    _questionId = 0;
+                    /*for (var i = 0; i < _currentPageObject.questions.length; i++) {
                         if (_currentPageObject.questions[i].isCurrent) {
                             _questionId = i;
                         }
-                    }
+                    }*/
                 }
                 //second parameter is to disable question effect.
                 _Question.Load(_currentPageObject.questions[_questionId], {
@@ -435,11 +436,15 @@ var _Navigator = (function () {
             } else if (_currentPageObject.questions.length > 0) {
                 var IsAllQCompleted = true;
                 for (var i = 0; i < _currentPageObject.questions.length; i++) {
-                    if (_currentPageObject.questions[i].isAnswered == undefined || !_currentPageObject.questions[i].isAnswered || _currentPageObject.questions[i].isQuestionVisit == undefined || !_currentPageObject.questions[i].isQuestionVisit) {
+                    if (_currentPageObject.questions[i].isAnswered == undefined || !_currentPageObject.questions[i].isAnswered || 
+                        _currentPageObject.questions[i].isQuestionVisit == undefined || !_currentPageObject.questions[i].isQuestionVisit) {
                         IsAllQCompleted = false;
                         break;
                     }
                 }
+                /*if(_currentPageObject.questions.length == _NData[_currentPageObject.pageId].questions.length) {
+                    IsAllQCompleted = false;
+                }*/
                 if (IsAllQCompleted) {
                     this.LoadPage(_currentPageObject.nextPageId);
 
@@ -452,7 +457,6 @@ var _Navigator = (function () {
                     this.CompletePage()
                 }
                 this.LoadPage(_currentPageObject.nextPageId);
-
             }
         },
         UpdateMenuVisibility: function () {
