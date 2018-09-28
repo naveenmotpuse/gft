@@ -404,11 +404,7 @@ var _Navigator = (function () {
                 }
                 else {
                     _currentPageObject.questions[0].isQuestionVisit = true;
-                    for (var i = 0; i < _currentPageObject.questions.length; i++) {
-                        if (_currentPageObject.questions[i].isCurrent) {
-                            _questionId = i;
-                        }
-                    }
+                    _questionId = 0;
                 }
                 //second parameter is to disable question effect.
                 _Question.Load(_currentPageObject.questions[_questionId], {
@@ -418,7 +414,8 @@ var _Navigator = (function () {
         },        
         Prev: function () {
             if (_currentPageObject.questions.length > 0) {
-                if (_currentPageObject.questions[0].isCurrent) {
+                //if current question is first then jump to prev page
+                if(_Question.GetCurrentQuestion().Id == _currentPageObject.questions[0].Id) {
                     this.LoadPage(_currentPageObject.prevPageId);
                 } else {
                     _Question.Prev();
@@ -434,11 +431,21 @@ var _Navigator = (function () {
                 custFunction();
             } else if (_currentPageObject.questions.length > 0) {
                 var IsAllQCompleted = true;
+                /*
+                jumping logic implemented below
                 for (var i = 0; i < _currentPageObject.questions.length; i++) {
-                    if (_currentPageObject.questions[i].isAnswered == undefined || !_currentPageObject.questions[i].isAnswered || _currentPageObject.questions[i].isQuestionVisit == undefined || !_currentPageObject.questions[i].isQuestionVisit) {
+                    if (_currentPageObject.questions[i].isAnswered == undefined || !_currentPageObject.questions[i].isAnswered || 
+                        _currentPageObject.questions[i].isQuestionVisit == undefined || !_currentPageObject.questions[i].isQuestionVisit) {
                         IsAllQCompleted = false;
                         break;
                     }
+                }*/
+                
+                //if current question is last then over, jump to next page
+                if(_Question.GetCurrentQuestion().Id == _currentPageObject.questions[_currentPageObject.questions.length-1].Id) {
+                    IsAllQCompleted = true;
+                } else {
+                    IsAllQCompleted = false;
                 }
                 if (IsAllQCompleted) {
                     this.LoadPage(_currentPageObject.nextPageId);
@@ -452,7 +459,6 @@ var _Navigator = (function () {
                     this.CompletePage()
                 }
                 this.LoadPage(_currentPageObject.nextPageId);
-
             }
         },
         UpdateMenuVisibility: function () {

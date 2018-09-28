@@ -762,11 +762,13 @@ var _CustomPage = (function () {
             var _currPageId = _currentPage.pageId;
             var _currPageQId = '';
             if (_currentPage.questions.length > 0) {
-                for (var n21 = 0; n21 < _currentPage.questions.length; n21++) {
-                    if (_currentPage.questions[n21].isCurrent) {
-                        _currPageQId = _currentPage.questions[n21].Id;
-                    }
-                }
+                debugger;
+                _currPageQId = _Question.GetCurrentQuestion().Id;
+                //for (var n21 = 0; n21 < _currentPage.questions.length; n21++) {
+                    //if (_currentPage.questions[n21].isCurrent) {
+                        //_currPageQId = _currentPage.questions[n21].Id;
+                    //}
+                //}
             }
             
             if (_currentPage.isLevelStart == undefined) {

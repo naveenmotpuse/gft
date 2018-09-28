@@ -115,7 +115,6 @@ $(document).on("click", ".bookmark", function (event) {
     _Navigator.Start();
 });
 $(document).on("keyup", "input[type='text']", function (event) {
-    debugger;
     var max = $(this).attr("max");
     var min = $(this).attr("min");
     if (max != undefined && min != undefined) {

@@ -18,7 +18,7 @@
             var currPage = _Navigator.GetCurrentPage();
             var firstQuestion = "";
             for (var i = 0; i < currPage.questions.length; i++) {
-                currPage.questions[i].isCurrent = false;
+                //currPage.questions[i].isCurrent = false;
                 // currPage.questions[i].isAnswered = true;
                 if (i == 0) {
                     firstQuestion = currPage.questions[i].Id;
@@ -27,7 +27,7 @@
             }
             qObj = $.extend(qObj, _QData[qObj.Id]);
             _currentQuestionObj = qObj;
-            qObj.isCurrent = true;
+            //qObj.isCurrent = true;
 
             var pageUrl = _Settings.dataRoot + qObj.dataurl + _Caching.GetUrlExtension();
             if (jsonObj.disableEffect != undefined && jsonObj.disableEffect) {
