@@ -333,8 +333,8 @@ var _Navigator = (function () {
         InitNavigationData: function (_ndata_object) {
             _NData = JSON.parse(JSON.stringify(_ndata_object));
         },
-        LoadPage: function (pageId, jsonObj) {
-            //debugger;
+        LoadPage: function (pageId, jsonObj, buttonPressed) {
+            debugger;
             _currentPageId = pageId;
              if (!_Common.IsEmptyObject(jsonObj) && jsonObj != undefined) {
                 if (jsonObj.isBookMark) {
@@ -346,6 +346,24 @@ var _Navigator = (function () {
 
             }
             this.UpdateProgressBar();
+            
+            /*if(this.GetBookmarkData().levelRetry != undefined) {
+                if(_currentPageObject.datalevel !== _NData[_currentPageId].datalevel) {
+                    if(this.GetBookmarkData().levelRetry == 'all' && buttonPressed == 'next') {
+                        _currentPageId = 'summary';
+                    } else {
+                        _currentPageId = 'summary';
+                    }
+                    if(this.GetBookmarkData().levelRetry == 'level' && buttonPressed == 'next') {
+                        _currentPageId = this.JumpToNextAccessibleLevel(_currentPageObject.datalevel);
+                    } else {
+                        _currentPageId = this.JumpToPrevAccessibleLevel(_currentPageObject.datalevel);
+                    }
+
+                } else {
+                    
+                }
+            }*/
             _currentPageObject = _NData[_currentPageId];
             
             if (_currentPageObject.isStartPage != undefined && _currentPageObject.isStartPage) {
@@ -419,12 +437,12 @@ var _Navigator = (function () {
             if (_currentPageObject.questions.length > 0) {
                 //if current question is first then jump to prev page
                 if(_Question.GetCurrentQuestion().Id == _currentPageObject.questions[0].Id) {
-                    this.LoadPage(_currentPageObject.prevPageId);
+                    this.LoadPage(_currentPageObject.prevPageId, undefined,'prev');
                 } else {
                     _Question.Prev();
                 }
             } else {
-                this.LoadPage(_currentPageObject.prevPageId);
+                this.LoadPage(_currentPageObject.prevPageId, undefined,'prev');
             }
         },
         Next: function () {
@@ -434,15 +452,6 @@ var _Navigator = (function () {
                 custFunction();
             } else if (_currentPageObject.questions.length > 0) {
                 var IsAllQCompleted = true;
-                /*
-                jumping logic implemented below
-                for (var i = 0; i < _currentPageObject.questions.length; i++) {
-                    if (_currentPageObject.questions[i].isAnswered == undefined || !_currentPageObject.questions[i].isAnswered || 
-                        _currentPageObject.questions[i].isQuestionVisit == undefined || !_currentPageObject.questions[i].isQuestionVisit) {
-                        IsAllQCompleted = false;
-                        break;
-                    }
-                }*/
                 
                 //if current question is last then over, jump to next page
                 if(_Question.GetCurrentQuestion().Id == _currentPageObject.questions[_currentPageObject.questions.length-1].Id) {
@@ -451,7 +460,7 @@ var _Navigator = (function () {
                     IsAllQCompleted = false;
                 }
                 if (IsAllQCompleted) {
-                    this.LoadPage(_currentPageObject.nextPageId);
+                    this.LoadPage(_currentPageObject.nextPageId, undefined, 'next');
 
                 } else {
                     this.UpdateProgressBar();
@@ -461,7 +470,7 @@ var _Navigator = (function () {
                 if (_currentPageObject.IsComplete == undefined || !_currentPageObject.IsComplete) {
                     this.CompletePage()
                 }
-                this.LoadPage(_currentPageObject.nextPageId);
+                this.LoadPage(_currentPageObject.nextPageId, undefined, 'next');
             }
         },
         UpdateMenuVisibility: function () {
@@ -602,7 +611,7 @@ var _Navigator = (function () {
                     }
                 }
             }
-            _Navigator.SetBookmarkData({ "levelRetry": datalevel })
+            _Navigator.SetBookmarkData({ "levelRetry": 'level' })
             _Navigator.LoadPage(pageId);
             _Navigator.UpdateScore();
             DataStorage.ModuleRetry();
