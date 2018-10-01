@@ -177,8 +177,8 @@
             if(activityDataArr.length>0){         
                 if(activityDataArr[activityDataArr.length-1]!=undefined && activityDataArr[activityDataArr.length-1].tradeData!=undefined){
                     var remDatatmp = activityDataArr[activityDataArr.length-1].tradeData.TR.remData;
-                    var userRemainData = remDatatmp.wood + " logs wood and " + remDatatmp.fish + " cals fish ";
-                    var fridayRemainData = remDatatmp.fridaywood + " logs wood and " + remDatatmp.fridayfish + " cals fish ";
+                    var userRemainData = remDatatmp.wood + " logs OF wood and " + remDatatmp.fish + " cals OF fish ";
+                    var fridayRemainData = remDatatmp.fridaywood + " logs OF wood and " + remDatatmp.fridayfish + " cals OF fish ";
                     $("#usertarget").text(userRemainData);
                     $("#fridaytarget").text(fridayRemainData);
                 }
