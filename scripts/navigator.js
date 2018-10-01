@@ -347,23 +347,23 @@ var _Navigator = (function () {
             }
             this.UpdateProgressBar();
             
-            /*if(this.GetBookmarkData().levelRetry != undefined) {
+            if(this.GetBookmarkData().levelRetry != undefined) {
                 if(_currentPageObject.datalevel !== _NData[_currentPageId].datalevel) {
                     if(this.GetBookmarkData().levelRetry == 'all' && buttonPressed == 'next') {
                         _currentPageId = 'summary';
                     } else {
                         _currentPageId = 'summary';
                     }
-                    if(this.GetBookmarkData().levelRetry == 'level' && buttonPressed == 'next') {
+                    /*if(this.GetBookmarkData().levelRetry == 'level' && buttonPressed == 'next') {
                         _currentPageId = this.JumpToNextAccessibleLevel(_currentPageObject.datalevel);
                     } else {
                         _currentPageId = this.JumpToPrevAccessibleLevel(_currentPageObject.datalevel);
-                    }
+                    }*/
 
                 } else {
                     
                 }
-            }*/
+            }
             _currentPageObject = _NData[_currentPageId];
             
             if (_currentPageObject.isStartPage != undefined && _currentPageObject.isStartPage) {
