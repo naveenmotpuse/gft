@@ -346,24 +346,6 @@ var _Navigator = (function () {
 
             }
             this.UpdateProgressBar();
-            
-            if(this.GetBookmarkData().levelRetry != undefined) {
-                if(_currentPageObject.datalevel == _NData[_currentPageId].datalevel) {
-                    if(this.GetBookmarkData().levelRetry == 'level' && buttonPressed == 'next') {
-                        _currentPageId = 'summary';
-                    } else {
-                        _currentPageId = 'summary';
-                    }
-                    /*if(this.GetBookmarkData().levelRetry == 'all' && buttonPressed == 'next') {
-                        _currentPageId = this.JumpToNextAccessibleLevel(_currentPageObject.datalevel);
-                    } else {
-                        _currentPageId = this.JumpToPrevAccessibleLevel(_currentPageObject.datalevel);
-                    }*/
-
-                } else {
-                    
-                }
-            }
             _currentPageObject = _NData[_currentPageId];
             
             if (_currentPageObject.isStartPage != undefined && _currentPageObject.isStartPage) {
@@ -437,12 +419,12 @@ var _Navigator = (function () {
             if (_currentPageObject.questions.length > 0) {
                 //if current question is first then jump to prev page
                 if(_Question.GetCurrentQuestion().Id == _currentPageObject.questions[0].Id) {
-                    this.LoadPage(_currentPageObject.prevPageId, undefined,'prev');
+                    this.LoadPage(_currentPageObject.prevPageId);
                 } else {
                     _Question.Prev();
                 }
             } else {
-                this.LoadPage(_currentPageObject.prevPageId, undefined,'prev');
+                this.LoadPage(_currentPageObject.prevPageId);
             }
         },
         Next: function () {
@@ -460,7 +442,7 @@ var _Navigator = (function () {
                     IsAllQCompleted = false;
                 }
                 if (IsAllQCompleted) {
-                    this.LoadPage(_currentPageObject.nextPageId, undefined, 'next');
+                    this.LoadPage(_currentPageObject.nextPageId);
 
                 } else {
                     this.UpdateProgressBar();
@@ -470,7 +452,7 @@ var _Navigator = (function () {
                 if (_currentPageObject.IsComplete == undefined || !_currentPageObject.IsComplete) {
                     this.CompletePage()
                 }
-                this.LoadPage(_currentPageObject.nextPageId, undefined, 'next');
+                this.LoadPage(_currentPageObject.nextPageId);
             }
         },
         UpdateMenuVisibility: function () {
