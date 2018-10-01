@@ -347,28 +347,19 @@ var _Navigator = (function () {
             }
             this.UpdateProgressBar();
             
-            if(this.GetBookmarkData().levelRetry != undefined) {
-                if(_currentPageObject.datalevel == _NData[_currentPageId].datalevel) {
-                    if(this.GetBookmarkData().levelRetry == 'level' && buttonPressed == 'next') {
-                        _currentPageId = 'summary';
-                    } else {
-                        _currentPageId = 'summary';
-                    }
-                    /*if(this.GetBookmarkData().levelRetry == 'all' && buttonPressed == 'next') {
-                        _currentPageId = this.JumpToNextAccessibleLevel(_currentPageObject.datalevel);
-                    } else {
-                        _currentPageId = this.JumpToPrevAccessibleLevel(_currentPageObject.datalevel);
-                    }*/
-
-                } else {
-                    
-                }
+            if(this.GetBookmarkData().levelRetry == 'level') {
+                if(_currentPageObject.datalevel < _NData[_currentPageId].datalevel) {
+                    _currentPageId = 'summary';
+                } 
             }
             _currentPageObject = _NData[_currentPageId];
             
             if (_currentPageObject.isStartPage != undefined && _currentPageObject.isStartPage) {
                 $("#linkprevious").k_disable();
                 $("#linknext").k_enable();
+            }
+            if(_currentPageObject.levelRetry == 'level') {
+                $("#linkprevious").k_disable();
             }
             if (_currentPageObject.hasActivity != undefined && _currentPageObject.hasActivity &&
                 (_currentPageObject.IsComplete == undefined || !_currentPageObject.IsComplete)) {
