@@ -291,6 +291,8 @@ var _Navigator = (function () {
     function OnPageLoad(jsonObj) {
         _bookmarkData.pageId = _currentPageObject.pageId;
         _bookmarkData.questionId = "";
+        _bookmarkData.levelRetry = "";
+        
         _TopSlider.OnLoad();
         _CustomPage.OnPageLoad();
         _Navigator.UpdateMenuVisibility();
@@ -607,19 +609,19 @@ var _Navigator = (function () {
         GetLastPageId: function (thisLevel) {  
             var prevPageId = 1;  
             for (var key in arrTreeSettings) { 
-              if (typeof arrTreeSettings[key] != "undefined" && 
+                if (typeof arrTreeSettings[key] != "undefined" && 
                     typeof arrTreeSettings[key].options != "undefined" && 
                     arrTreeSettings[key].options[0].level == thisLevel) {
                 if (typeof arrTreeSettings[key].isLastPage != "undefined" && 
                         arrTreeSettings[key].isLastPage != undefined && 
                         arrTreeSettings[key].isLastPage) {
-                  prevPageId = arrTreeSettings[key].pgid;
-                  break;
+                    prevPageId = arrTreeSettings[key].pgid;
+                    break;
                 };
-              };
+                };
             };
             return prevPageId;
-          },
+        },
     };
 })();
 
