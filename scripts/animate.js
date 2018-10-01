@@ -550,6 +550,7 @@ var EventManager = function () {
                     $('body').animate({
                         scrollTop: document.body.scrollHeight
                     }, 1000);
+                    _Common.SetReader(_Settings.hiddenAnchor,"div_question");
                 }, 2500)
             } else {
                 Table.setfish(DataStorage.getProducedData().fish, fish);
@@ -565,6 +566,7 @@ var EventManager = function () {
                 $('body').animate({
                     scrollTop: document.body.scrollHeight
                 }, 1000);
+                _Common.SetReader(_Settings.hiddenAnchor,"div_question");
             }
         },
         onNightAnimComplete: function () {
