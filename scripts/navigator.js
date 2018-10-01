@@ -347,6 +347,7 @@ var _Navigator = (function () {
             }
             this.UpdateProgressBar();
             
+            // if level retry then jump to summary page
             if(this.GetBookmarkData().levelRetry == 'level') {
                 if(_currentPageObject.datalevel < _NData[_currentPageId].datalevel) {
                     _currentPageId = 'summary';
@@ -358,7 +359,7 @@ var _Navigator = (function () {
                 $("#linkprevious").k_disable();
                 $("#linknext").k_enable();
             }
-            if(_currentPageObject.levelRetry == 'level') {
+            if(this.GetBookmarkData().levelRetry == 'level' && _currentPageObject.isLevelStart) {
                 $("#linkprevious").k_disable();
             }
             if (_currentPageObject.hasActivity != undefined && _currentPageObject.hasActivity &&
