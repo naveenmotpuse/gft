@@ -709,8 +709,12 @@ var EventManager = function () {
         },
         UpdateDayInFeedback: function () {
             var currentDay = DataStorage.getCurrentDay();
-            var dayval = ""
-            var days = {
+            var dayval = _Navigator.ordinalInWord(currentDay);
+            $("#dayval").text(dayval);
+             //var remdata = DataStorage.getRemainingPotData();
+            // PPFQuestion.FindOutComplete({ IsAlive: true, totalRemainingLbs: remdata.wood, totalRemainingCals: remdata.fish, day: dayval });
+           // var dayval = ""
+           /* var days = {
                 1: "st",
                 2: "nd",
                 3: "rd"
@@ -719,8 +723,7 @@ var EventManager = function () {
                 dayval = currentDay + "th";
             } else {
                 dayval = currentDay + days[(currentDay % 10)]
-            }
-            $("#dayval").text(dayval);
+            }*/ 
         }        
     }
 }();
