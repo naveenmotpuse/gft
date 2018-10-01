@@ -370,8 +370,6 @@
                     //Show tryCount incorrect feedback
                     this.Loadfeedback(feedbackIndex);
                 } else {
-                    //Show final incorrect feedback
-                    this.Loadfeedback(feedbackIndex);
                     _currentQuestionObj.points = _qPoints;
                     _currentQuestionObj.isAnswered = true;
                     _currentQuestionObj.feedbackIndex = feedbackIndex;
@@ -381,6 +379,8 @@
                     //Module specific
                     _CustomQuestion.ActionAfterCheckAnswer();
                     _Navigator.UpdateScore();
+                    //Show final incorrect feedback
+                    this.Loadfeedback(feedbackIndex);
                 }
             }
         },
