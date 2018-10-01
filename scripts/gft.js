@@ -599,6 +599,7 @@ var _CustomQuestion = (function () {
                 //_TradeSlider.SetTradeResult();
                 $("#onewoodfor-range").k_disable();
                 $("#givewood-range").k_disable();
+                $(".tot-slider").addClass('disabled');
             } else {
                 if (activityData.pageId == currPage.pageId) {
                     Table.setWood(activityData._woodsLbs, 0);
