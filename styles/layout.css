@@ -624,7 +624,9 @@ margin-left:5px;
 float:left;
 margin-top: -25px;
 }
-
+table.tableFridayInventory.ppftablestyle {
+    margin-top: 3%;
+}
 .questionchart{
     float: left;
     width: 100%;

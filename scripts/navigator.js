@@ -377,7 +377,7 @@ var _Navigator = (function () {
                     $(".main-content").load(pageUrl, function () {
                         $(this).fadeTo(600, 1)
                         OnPageLoad(jsonObj);
-                        _Common.SetReader(_Settings.hiddenAnchor,"pageheading");
+                        _Common.SetReader(_Settings.hiddenAnchor,"progress_bar");
                     });
                 })
             }
@@ -604,6 +604,22 @@ var _Navigator = (function () {
             _Navigator.UpdateProgressBar();
             $(".pgBgItem[data-level='" + datalevel + "']").removeClass("pgBgItemComplete");
         },
+        GetLastPageId: function (thisLevel) {  
+            var prevPageId = 1;  
+            for (var key in arrTreeSettings) { 
+              if (typeof arrTreeSettings[key] != "undefined" && 
+                    typeof arrTreeSettings[key].options != "undefined" && 
+                    arrTreeSettings[key].options[0].level == thisLevel) {
+                if (typeof arrTreeSettings[key].isLastPage != "undefined" && 
+                        arrTreeSettings[key].isLastPage != undefined && 
+                        arrTreeSettings[key].isLastPage) {
+                  prevPageId = arrTreeSettings[key].pgid;
+                  break;
+                };
+              };
+            };
+            return prevPageId;
+          },
     };
 })();
 

@@ -499,24 +499,89 @@ margin-top: 10px;
     table.noborder tr th, table.noborder tr td{
         padding: 0px;
     }
+    /* Iphone animation css */
+    /* Lady Come With Fish */
     .friday-raftSprites{
-        left: 19px;
-        top: 197px;
+        left: 31px;
+        top: 206px;
         animation: raft 2.5s steps(22);
     }
     @keyframes raft {
-        0% {top:235px; left: -41px;}
-        100% { top:197px; left: 19px; }
+        0% {top:245px; left: -31px;}
+        100% { top:206px; left: 31px; }
       }
     .fridaySprites{
-        left: 20px;
-        top: 141px;
+        left: 25px;
+        top: 153px;
         animation: lady 2.5s steps(11);
     }
     @keyframes lady {
-        0% { top: 200px; left: -60px; background-position: -0px } 
-        50% { top: 166px; left: -20px; background-position: 0px }  
-        100% {top: 141px; left: 20px;  background-position: -794px }
+        0% { top: 195px; left: -25px; background-position: -0px } 
+        50% { top: 168px; left: 5px; background-position: 0px }  
+        100% {top: 153px; left: 25px;  background-position: -794px }
+    }
+
+
+    /* Lady come with fish */
+    .fishBarrelRaft2{
+        left: 90px;
+        top: 208px;
+    }
+    @keyframes fbarrel2 {
+        0% {top:242px; left: 38px;}
+        100% { top:208px; left: 90px; }
+    }
+
+    /* Lady Go With Wood */
+    .fridaySprites2 {
+        left: -74px;
+        top: 292px;
+        animation: lady2 2.5s steps(11);
+    }
+    
+    @keyframes lady2 {
+        0% {
+            top: 160px;
+            left: 30px;
+            background-position: -794px;
+        }
+        50% {
+            top: 184.5px;
+            left: -15px;
+            background-position: 0px
+        }
+        100% {
+            top: 272px;
+            left: -80px;
+            background-position: -0px;
+        }
+    }
+    
+    .friday-raftSprites2 {
+        left: -60px;
+        top: 270px;
+        animation: raft2 2.5s steps(22);
+    }
+    @keyframes raft2 {
+        0% {
+            top: 208px;
+            left: 31px;
+        }
+        100% {
+            top: 291px;
+            left: -72px;
+        }
+    }
+    
+    /*going stick barrel*/
+.stickBarrelRaft2 {
+    left: -11px;
+    top: 280px;
+    animation: sbarrel2 2.5s steps(22);
+}
+    @keyframes sbarrel2 {
+        0% { top:218px; left: 85px;}
+        100% { top:280px; left: -11px; }
     }
     h1 {font-size: 22px;}
 }
