@@ -291,8 +291,9 @@ var _Navigator = (function () {
     function OnPageLoad(jsonObj) {
         _bookmarkData.pageId = _currentPageObject.pageId;
         _bookmarkData.questionId = "";
-        _bookmarkData.levelRetry = "";
-        
+        if(_currentPageObject.pageId == "summary") {
+            _bookmarkData.levelRetry = "";    
+        }
         _TopSlider.OnLoad();
         _CustomPage.OnPageLoad();
         _Navigator.UpdateMenuVisibility();
@@ -578,6 +579,7 @@ var _Navigator = (function () {
             _AttemptNData = $.extend(true, {}, _NData);
             _NData = $.extend(true, {}, _TempNData);
 
+            _Navigator.SetBookmarkData({ "levelRetry": 'all' })
             _Navigator.UpdateProgressBar();
             _Navigator.UpdateScore();
             DataStorage.ModuleRetry();
@@ -600,6 +602,7 @@ var _Navigator = (function () {
                     }
                 }
             }
+            _Navigator.SetBookmarkData({ "levelRetry": datalevel })
             _Navigator.LoadPage(pageId);
             _Navigator.UpdateScore();
             DataStorage.ModuleRetry();
