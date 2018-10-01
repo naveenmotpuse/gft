@@ -288,7 +288,7 @@ var _Navigator = (function () {
     }
     var _StateData = {}
 
-    function OnPageLoad(jsonObj) {
+    function OnPageLoad(jsonObj, buttonPressed) {
         _bookmarkData.pageId = _currentPageObject.pageId;
         _bookmarkData.questionId = "";
         if(_currentPageObject.pageId == "summary") {
@@ -297,7 +297,7 @@ var _Navigator = (function () {
         _TopSlider.OnLoad();
         _CustomPage.OnPageLoad();
         _Navigator.UpdateMenuVisibility();
-        _Navigator.LoadDefaultQuestion(jsonObj);  
+        _Navigator.LoadDefaultQuestion(jsonObj, buttonPressed);  
     }
     return {
         Get: function () {
@@ -378,23 +378,23 @@ var _Navigator = (function () {
             }
             _currentPageObject.isVisited = true;
 
-            var pageUrl = _Settings.dataRoot + _currentPageObject.dataurl + _Caching.GetUrlExtension();;
+            var pageUrl = _Settings.dataRoot + _currentPageObject.dataurl + _Caching.GetUrlExtension();
             if (_currentPageObject.isStartPage) {
                 $(".main-content").load(pageUrl, function () {
-                    OnPageLoad(jsonObj);                    
+                    OnPageLoad(jsonObj, buttonPressed);                    
                     _Common.SetReader(_Settings.hiddenAnchor,"pagetitle");
                 });
             } else {
                 $(".main-content").fadeTo(250, 0.25, function () {
                     $(".main-content").load(pageUrl, function () {
                         $(this).fadeTo(600, 1)
-                        OnPageLoad(jsonObj);
+                        OnPageLoad(jsonObj, buttonPressed);
                         _Common.SetReader(_Settings.hiddenAnchor,"progress_bar");
                     });
                 })
             }
         },
-        LoadDefaultQuestion: function (jsonObj) {
+        LoadDefaultQuestion: function (jsonObj, buttonPressed) {
             if (_currentPageObject.questions.length > 0) {
                 _questionId = 0;
                 if (!_Common.IsEmptyObject(jsonObj) && jsonObj != undefined) {
@@ -417,6 +417,9 @@ var _Navigator = (function () {
                 else {
                     _currentPageObject.questions[0].isQuestionVisit = true;
                     _questionId = 0;
+                    if(buttonPressed == 'prev') {
+                        _questionId = _currentPageObject.questions.length - 1
+                    }
                 }
                 //second parameter is to disable question effect.
                 _Question.Load(_currentPageObject.questions[_questionId], {
