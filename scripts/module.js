@@ -19,7 +19,8 @@
             //Init Econ service launch and GetSettings
             //It calls webservice call to get launchdata, statedata and settings
             _EconLabServiceManager.InitLaunch();
-            _EconLabServiceManager.InitSettings();            
+            _EconLabServiceManager.InitSettings();
+            LevelAccess.SetVisibleLevels(_EconLabServiceManager.GetSettings());
             //Get SessionData from service manager.
             _sessionData = _EconLabServiceManager.GetSessionData()
 
