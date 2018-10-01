@@ -693,6 +693,9 @@ var _CustomPage = (function () {
     return {
         OnPageLoad: function () {
             var currPage = _Navigator.GetCurrentPage();
+            if(window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1"){
+                $('.exambtnsubmindiv').hide();
+            }
             if (currPage.datalevel == 2) {
                 _ModuleCharts.DrawL2QuestionIntroChart();
             }
