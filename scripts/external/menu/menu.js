@@ -52,6 +52,8 @@ $(function () {
 
             });
         });
+        
+        el.setAttribute('tabindex', '1');
         el.addEventListener("click", function (event) {
             if (this.getAttribute('aria-expanded') == 'false' || this.getAttribute('aria-expanded') == null) {
                 this.setAttribute('aria-expanded', "true");

@@ -34,7 +34,7 @@
                 $("#div_question").load(pageUrl, function () {
                     OnQuestionLoad(qObj);
                     if (firstQuestion == _currentQuestionObj.Qid) {
-                        _Common.SetReader(_Settings.hiddenAnchor, "pageheading");
+                        _Common.SetReader(_Settings.hiddenAnchor, "progress_bar");
                     }
                     else {
                         _Common.SetReader(_Settings.hiddenAnchor, "question");
@@ -46,7 +46,7 @@
                     $(this).hide().fadeIn("slow", function () {
                         OnQuestionLoad(qObj);
                         if (firstQuestion == _currentQuestionObj.Qid) {
-                            _Common.SetReader(_Settings.hiddenAnchor, "pageheading");
+                            _Common.SetReader(_Settings.hiddenAnchor, "progress_bar");
                         }
                         else {
                             _Common.SetReader(_Settings.hiddenAnchor, "question");
@@ -191,7 +191,7 @@
             $("#div_feedback").load(fdbkUrl, function () {
                 _Question.SetFeedbackTop()
                 $("body").animate({
-                    scrollTop: $(document).height()
+                    scrollTop: window.innerHeight || $(document).height() || $(document).height()
                 }, 1000);
                 _Common.SetReader(_Settings.hiddenAnchor, "div_feedback");
             });
@@ -259,10 +259,11 @@
             $(".questionband").find("input").k_disable();
             for (var i = 0; i < totalOptions; i++) {
                 var _optD = _currentQuestionObj.options[i];
-
+                var currPage = _Navigator.GetCurrentPage();
                 var attemptCurrentQuestionData_Options = undefined;
                 if (attemptCurrentQuestionData != undefined) {
-                    attemptCurrentQuestionData_Options = attemptCurrentQuestionData.options[i];
+                    var qOptions = _currentQuestionObj.options;
+                    attemptCurrentQuestionData_Options = attemptCurrentQuestionData.qOptions;
                 }
                 if (_optD.type == "select") {
                     var _boxGrp = $("select#" + _optD.id);

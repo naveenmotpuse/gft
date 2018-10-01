@@ -291,6 +291,9 @@ var _Navigator = (function () {
     function OnPageLoad(jsonObj) {
         _bookmarkData.pageId = _currentPageObject.pageId;
         _bookmarkData.questionId = "";
+        if(_currentPageObject.pageId == "summary") {
+            _bookmarkData.levelRetry = "";    
+        }
         _TopSlider.OnLoad();
         _CustomPage.OnPageLoad();
         _Navigator.UpdateMenuVisibility();
@@ -330,8 +333,8 @@ var _Navigator = (function () {
         InitNavigationData: function (_ndata_object) {
             _NData = JSON.parse(JSON.stringify(_ndata_object));
         },
-        LoadPage: function (pageId, jsonObj) {
-            //debugger;
+        LoadPage: function (pageId, jsonObj, buttonPressed) {
+            debugger;
             _currentPageId = pageId;
              if (!_Common.IsEmptyObject(jsonObj) && jsonObj != undefined) {
                 if (jsonObj.isBookMark) {
@@ -343,6 +346,24 @@ var _Navigator = (function () {
 
             }
             this.UpdateProgressBar();
+            
+            /*if(this.GetBookmarkData().levelRetry != undefined) {
+                if(_currentPageObject.datalevel !== _NData[_currentPageId].datalevel) {
+                    if(this.GetBookmarkData().levelRetry == 'all' && buttonPressed == 'next') {
+                        _currentPageId = 'summary';
+                    } else {
+                        _currentPageId = 'summary';
+                    }
+                    if(this.GetBookmarkData().levelRetry == 'level' && buttonPressed == 'next') {
+                        _currentPageId = this.JumpToNextAccessibleLevel(_currentPageObject.datalevel);
+                    } else {
+                        _currentPageId = this.JumpToPrevAccessibleLevel(_currentPageObject.datalevel);
+                    }
+
+                } else {
+                    
+                }
+            }*/
             _currentPageObject = _NData[_currentPageId];
             
             if (_currentPageObject.isStartPage != undefined && _currentPageObject.isStartPage) {
@@ -377,7 +398,7 @@ var _Navigator = (function () {
                     $(".main-content").load(pageUrl, function () {
                         $(this).fadeTo(600, 1)
                         OnPageLoad(jsonObj);
-                        _Common.SetReader(_Settings.hiddenAnchor,"pageheading");
+                        _Common.SetReader(_Settings.hiddenAnchor,"progress_bar");
                     });
                 })
             }
@@ -416,12 +437,12 @@ var _Navigator = (function () {
             if (_currentPageObject.questions.length > 0) {
                 //if current question is first then jump to prev page
                 if(_Question.GetCurrentQuestion().Id == _currentPageObject.questions[0].Id) {
-                    this.LoadPage(_currentPageObject.prevPageId);
+                    this.LoadPage(_currentPageObject.prevPageId, undefined,'prev');
                 } else {
                     _Question.Prev();
                 }
             } else {
-                this.LoadPage(_currentPageObject.prevPageId);
+                this.LoadPage(_currentPageObject.prevPageId, undefined,'prev');
             }
         },
         Next: function () {
@@ -431,15 +452,6 @@ var _Navigator = (function () {
                 custFunction();
             } else if (_currentPageObject.questions.length > 0) {
                 var IsAllQCompleted = true;
-                /*
-                jumping logic implemented below
-                for (var i = 0; i < _currentPageObject.questions.length; i++) {
-                    if (_currentPageObject.questions[i].isAnswered == undefined || !_currentPageObject.questions[i].isAnswered || 
-                        _currentPageObject.questions[i].isQuestionVisit == undefined || !_currentPageObject.questions[i].isQuestionVisit) {
-                        IsAllQCompleted = false;
-                        break;
-                    }
-                }*/
                 
                 //if current question is last then over, jump to next page
                 if(_Question.GetCurrentQuestion().Id == _currentPageObject.questions[_currentPageObject.questions.length-1].Id) {
@@ -448,7 +460,7 @@ var _Navigator = (function () {
                     IsAllQCompleted = false;
                 }
                 if (IsAllQCompleted) {
-                    this.LoadPage(_currentPageObject.nextPageId);
+                    this.LoadPage(_currentPageObject.nextPageId, undefined, 'next');
 
                 } else {
                     this.UpdateProgressBar();
@@ -458,7 +470,7 @@ var _Navigator = (function () {
                 if (_currentPageObject.IsComplete == undefined || !_currentPageObject.IsComplete) {
                     this.CompletePage()
                 }
-                this.LoadPage(_currentPageObject.nextPageId);
+                this.LoadPage(_currentPageObject.nextPageId, undefined, 'next');
             }
         },
         UpdateMenuVisibility: function () {
@@ -576,6 +588,7 @@ var _Navigator = (function () {
             _AttemptNData = $.extend(true, {}, _NData);
             _NData = $.extend(true, {}, _TempNData);
 
+            _Navigator.SetBookmarkData({ "levelRetry": 'all' })
             _Navigator.UpdateProgressBar();
             _Navigator.UpdateScore();
             DataStorage.ModuleRetry();
@@ -598,13 +611,33 @@ var _Navigator = (function () {
                     }
                 }
             }
+            _Navigator.SetBookmarkData({ "levelRetry": 'level' })
             _Navigator.LoadPage(pageId);
             _Navigator.UpdateScore();
             DataStorage.ModuleRetry();
             _Navigator.UpdateProgressBar();
             $(".pgBgItem[data-level='" + datalevel + "']").removeClass("pgBgItemComplete");
         },
+<<<<<<< HEAD
         ordinalInWord: function(t){var e=["Zeroth","First","Second","Third","Fourth","Fifth","Sixth","Seventh","Eighth","Ninth","Tenth","Eleventh","Twelfth","Thirteenth","Fourteenth","Fifteenth","Sixteenth","Seventeenth","Eighteenth","Nineteenth","Twentieth"];return t<=20?e[t]:t%10==0?{30:"Thirtieth",40:"Fortieth",50:"Fiftieth",60:"Sixtieth",70:"Seventieth",80:"Eightieth",90:"Ninetieth",100:"Hundredth"}[t]:{20:"Twenty ",30:"Thirty ",40:"Forty ",50:"Fifty ",60:"Sixty ",70:"Seventy ",80:"Eighty ",90:"Ninety ",100:"Hundred "}[t-t%10]+e[t%10]},
+=======
+        GetLastPageId: function (thisLevel) {  
+            var prevPageId = 1;  
+            for (var key in arrTreeSettings) { 
+                if (typeof arrTreeSettings[key] != "undefined" && 
+                    typeof arrTreeSettings[key].options != "undefined" && 
+                    arrTreeSettings[key].options[0].level == thisLevel) {
+                if (typeof arrTreeSettings[key].isLastPage != "undefined" && 
+                        arrTreeSettings[key].isLastPage != undefined && 
+                        arrTreeSettings[key].isLastPage) {
+                    prevPageId = arrTreeSettings[key].pgid;
+                    break;
+                };
+                };
+            };
+            return prevPageId;
+        },
+>>>>>>> 3d96cc87d6391ffd09dfe36a44276ea8ace07c9a
     };
 })();
 
