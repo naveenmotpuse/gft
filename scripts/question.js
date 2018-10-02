@@ -157,7 +157,7 @@
             })
             $("#div_feedback").css("margin-top", "0px");
         },
-        Loadfeedback: function (fId) {
+        Loadfeedback: function (fId, isWorse) {
             var fdbkUrl = _Settings.dataRoot + _currentQuestionObj.feedback[fId] + _Caching.GetUrlExtension();
             $("#div_feedback").k_show();
             $("#div_feedback").load(fdbkUrl, function () {
@@ -165,6 +165,9 @@
                 _CustomQuestion.OnFeedbackLoad()
                 _Question.DisplayRemainingDataInFeedback()
                 //_Question.DisplayRemDataOnPrev()
+                if(isWorse) {
+                    $("#div_feedback p:last").prepend($('<p class="popupNote"><span><i>Note: Even though you missed this question, because you got a better score in a previous attempt, the score from that attempt will count towards the final grade.</i></span></p></br>'));
+                }
                 $("body").animate({
                     scrollTop: $(document).height()
                 }, 1000);
@@ -305,6 +308,7 @@
                             _optD.points = optPoints;
                             _optD.isCorrect = true;
                             _qPoints += optPoints;
+                            isWorsen = true;
                         }
                     } else {
                         var optPoints = parseFloat(_currentQuestionObj.totalPoints) / parseFloat(totalOptions)
@@ -335,6 +339,7 @@
                             _optD.points = optPoints;
                             _optD.isCorrect = true;
                             _qPoints += optPoints;
+                            isWorsen = true;
                         }
                     } else {
                         var optPoints = parseFloat(_currentQuestionObj.totalPoints) / parseFloat(totalOptions)
@@ -380,7 +385,7 @@
                     _CustomQuestion.ActionAfterCheckAnswer();
                     _Navigator.UpdateScore();
                     //Show final incorrect feedback
-                    this.Loadfeedback(feedbackIndex);
+                    this.Loadfeedback(feedbackIndex, isWorsen);
                 }
             }
         },
