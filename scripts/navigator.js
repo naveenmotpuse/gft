@@ -47,7 +47,6 @@ var _Navigator = (function () {
                 dataurl: "l1p2/q3.htm"
             }],
             hasAnimation: true,
-            isLevelStart:true
         },
         "l1p3": {
             pageId: "l1p3",
@@ -392,9 +391,6 @@ var _Navigator = (function () {
                 $(".main-content").load(pageUrl, function () {
                     OnPageLoad(jsonObj, buttonPressed);                    
                     _Common.SetReader(_Settings.hiddenAnchor,"pagetitle");
-                    if(_Navigator.GetBookmarkData().levelRetry == 'level' || _Navigator.GetBookmarkData().levelRetry == 'all') {
-                        $("#appmenu").k_disable();
-                    }
                 });
             } else {
                 $(".main-content").fadeTo(250, 0.25, function () {
@@ -402,9 +398,6 @@ var _Navigator = (function () {
                         $(this).fadeTo(600, 1)
                         OnPageLoad(jsonObj, buttonPressed);
                         _Common.SetReader(_Settings.hiddenAnchor,"progress_bar");
-                        if(_Navigator.GetBookmarkData().levelRetry == 'level' || _Navigator.GetBookmarkData().levelRetry == 'all') {
-                            $("#appmenu").k_disable();
-                        }
                     });
                 })
             }
@@ -516,7 +509,7 @@ var _Navigator = (function () {
             return progData;
         },
         UpdateProgressBar: function () {
-            var arialabel = "Level 1 progress 1%, Level 2 progress 2%, Level 3 progress 3%, Level 4 progress 4%";
+            var arialabel = " Level 1 progress 1%, Level 2 progress 2%, Level 3 progress 3%, Level 4 progress 4%";
             var progData = this.GetProgressData();
             for (var i = 0; i < progData.length; i++) {
                 var lprog_pecent = (progData[i] / _progressLevels[i] * 100);
@@ -550,11 +543,12 @@ var _Navigator = (function () {
                 }
             }
             var score = (ObtainPoint / totalPoints) * 100;
-            return Number(score.toFixed(0));
+            return Number(score.toFixed(2));
         },
         UpdateScore: function () {
+            //debugger;
             var percScore = this.GetTotalScore()
-            $("#scorediv").html("Overall Score: " + (percScore) + "%");
+            $("#scorediv").html("Overall Score: " + (percScore.toFixed(0)) + "%");
         },
         GetLevelScore: function (Data_Level) {
             var ObtainPoint = 0;
@@ -586,7 +580,7 @@ var _Navigator = (function () {
         GetQuestionAttemptData: function (pageId, Qid) {
             if (!_Common.IsEmptyObject(_AttemptNData)) {
                 for (var i = 0; i < _AttemptNData[pageId].questions.length; i++) {
-                    if (_AttemptNData[pageId].questions.Id == Qid) {
+                    if (_AttemptNData[pageId].questions.Qid = Qid) {
                         return _AttemptNData[pageId].questions[i];
                     }
                 }
@@ -608,6 +602,7 @@ var _Navigator = (function () {
             }
         },
         ReAttemptLevel: function (datalevel) {
+            //debugger;
             var pageId = "";
             for (var i in _NData) {
                 if (_NData[i].datalevel == datalevel) {
