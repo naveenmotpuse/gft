@@ -586,7 +586,7 @@ var _Navigator = (function () {
         GetQuestionAttemptData: function (pageId, Qid) {
             if (!_Common.IsEmptyObject(_AttemptNData)) {
                 for (var i = 0; i < _AttemptNData[pageId].questions.length; i++) {
-                    if (_AttemptNData[pageId].questions.Id == Qid) {
+                    if (_AttemptNData[pageId].questions[i].Id == Qid) {
                         return _AttemptNData[pageId].questions[i];
                     }
                 }
