@@ -586,16 +586,9 @@ var _Navigator = (function () {
         GetQuestionAttemptData: function (pageId, Qid) {
             if (!_Common.IsEmptyObject(_AttemptNData)) {
                 for (var i = 0; i < _AttemptNData[pageId].questions.length; i++) {
-<<<<<<< HEAD
-                    if (_AttemptNData[pageId].questions.Qid == Qid) {
-=======
-                    if (_AttemptNData[pageId].questions[i].Id == Qid) {
->>>>>>> 64d6ababa7f15fe0e2e5cdad9a2f454aea72b27b
+                    if (_AttemptNData[pageId].questions.Id == Qid) {
                         return _AttemptNData[pageId].questions[i];
                     }
-                    /*if (_AttemptNData[pageId].questions.Qid = Qid) {
-                        return _AttemptNData[pageId].questions[i];
-                    }*/
                 }
             }
         },        
