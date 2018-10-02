@@ -757,9 +757,9 @@ var _CustomPage = (function () {
                 if (currPage.IsComplete != undefined && currPage.IsComplete) {
                     $("#" + currPage.goal).attr('checked', 'checked');
                     _TradeSlider.ToggleGoal(currPage.goal);
+                    _TradeSlider.UpdateTarget(currPage.goal)
                     $("p.goaldesc[goal='" + currPage.goal + "']").k_show();
                     $("input.goalRadio").k_disable();
-                    $("#next")
                 }
             }
 
