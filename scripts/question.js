@@ -262,8 +262,7 @@
                 var currPage = _Navigator.GetCurrentPage();
                 var attemptCurrentQuestionData_Options = undefined;
                 if (attemptCurrentQuestionData != undefined) {
-                    var qOptions = _currentQuestionObj.options;
-                    attemptCurrentQuestionData_Options = attemptCurrentQuestionData.qOptions;
+                    attemptCurrentQuestionData_Options = attemptCurrentQuestionData.options[i];
                 }
                 if (_optD.type == "select") {
                     var _boxGrp = $("select#" + _optD.id);
