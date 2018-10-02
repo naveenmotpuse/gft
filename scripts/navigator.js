@@ -348,7 +348,7 @@ var _Navigator = (function () {
             }
             this.UpdateProgressBar();
             
-            if(isIpad == true){
+            if(isIpad){
                 $('.progress *').removeAttr('aria-hidden');
                 $('.progress').attr('aria-label','Introduction progress 0%, Level 1 progress 0%, Level 2 progress 0%, Level 3 progress 0%, Level 4 progress 0%')
                 $('.progress').attr('role','text');

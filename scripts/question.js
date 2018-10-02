@@ -132,6 +132,7 @@
             $("#div_question").find("input[type='text'].incorrect").val("").k_enable();
             $(".questionband").find("input[type='radio']").k_enable();
             $(".questionband").find("input[type='radio']").prop('checked', false);
+            $("input[type='text']").removeAttr('readonly');
             if (_currentQuestionObj.type == "graph") {
                 $("#div_question").find("input.inlineinput").k_enable();
                 $("body").animate({
@@ -313,6 +314,7 @@
                         $("#" + _optD.selectedId).addClass("correct");
                     }
                 } else if (_optD.type == "input") {
+                    $("input[type='text']").attr('readonly', true);
                     var inputval = $("#" + _optD.id).val();
                     var _boxGrp = $("#" + _optD.id);
                     if (inputval == "") {
