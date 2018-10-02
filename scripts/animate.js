@@ -1,6 +1,6 @@
 var round = function (val) {
     if (Math.round(val) !== val) {
-        val = Number(val.toFixed(1));
+        val = Number(val.toFixed(0));
     }
     return val;
 }
