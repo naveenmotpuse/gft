@@ -157,7 +157,6 @@
             $("#div_feedback").css("margin-top", "0px");
         },
         Loadfeedback: function (fId) {
-            debugger;
             var fdbkUrl = _Settings.dataRoot + _currentQuestionObj.feedback[fId] + _Caching.GetUrlExtension();
             $("#div_feedback").k_show();
             $("#div_feedback").load(fdbkUrl, function () {
@@ -177,8 +176,8 @@
             if(activityDataArr.length>0){         
                 if(activityDataArr[activityDataArr.length-1]!=undefined && activityDataArr[activityDataArr.length-1].tradeData!=undefined){
                     var remDatatmp = activityDataArr[activityDataArr.length-1].tradeData.TR.remData;
-                    var userRemainData = remDatatmp.wood + " logs OF wood and " + remDatatmp.fish + " cals OF fish ";
-                    var fridayRemainData = remDatatmp.fridaywood + " logs OF wood and " + remDatatmp.fridayfish + " cals OF fish ";
+                    var userRemainData = remDatatmp.wood + " logs of wood and " + remDatatmp.fish + " cals of fish ";
+                    var fridayRemainData = remDatatmp.fridaywood + " logs of wood and " + remDatatmp.fridayfish + " cals of fish ";
                     $("#usertarget").text(userRemainData);
                     $("#fridaytarget").text(fridayRemainData);
                 }
@@ -262,8 +261,7 @@
                 var currPage = _Navigator.GetCurrentPage();
                 var attemptCurrentQuestionData_Options = undefined;
                 if (attemptCurrentQuestionData != undefined) {
-                    var qOptions = _currentQuestionObj.options;
-                    attemptCurrentQuestionData_Options = attemptCurrentQuestionData.qOptions;
+                    attemptCurrentQuestionData_Options = attemptCurrentQuestionData.options[i];
                 }
                 if (_optD.type == "select") {
                     var _boxGrp = $("select#" + _optD.id);

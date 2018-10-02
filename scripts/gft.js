@@ -507,10 +507,9 @@ var _CustomQuestion = (function () {
                             if (!isonline) {
                                 allliesonline = false;
                             } else {
-                                  crrcount++;
-                                    _currentQuestionObj.selectedAnswer[countval] = [newSerData[i][0], newSerData[i][1]];
-                                    countval++;
-                                
+                                crrcount++;
+                                _currentQuestionObj.selectedAnswer[countval] = [newSerData[i][0], newSerData[i][1]];
+                                countval++;                                
                             }
                         }
 
