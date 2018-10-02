@@ -157,7 +157,6 @@
             $("#div_feedback").css("margin-top", "0px");
         },
         Loadfeedback: function (fId) {
-            debugger;
             var fdbkUrl = _Settings.dataRoot + _currentQuestionObj.feedback[fId] + _Caching.GetUrlExtension();
             $("#div_feedback").k_show();
             $("#div_feedback").load(fdbkUrl, function () {

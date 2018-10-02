@@ -347,6 +347,13 @@ var _Navigator = (function () {
             }
             this.UpdateProgressBar();
             
+            if(isIpad == true){
+                $('.progress *').removeAttr('aria-hidden');
+                $('.progress').attr('aria-label','Introduction progress 0%, Level 1 progress 0%, Level 2 progress 0%, Level 3 progress 0%, Level 4 progress 0%')
+                $('.progress').attr('role','text');
+                $('.progress').attr('tabindex','0')
+            }
+
             // if level retry then jump to summary page
             if(this.GetBookmarkData().levelRetry == 'level') {
                 if(_currentPageObject.datalevel < _NData[_currentPageId].datalevel) {
@@ -539,7 +546,6 @@ var _Navigator = (function () {
             return Number(score.toFixed(2));
         },
         UpdateScore: function () {
-            //debugger;
             var percScore = this.GetTotalScore()
             $("#scorediv").html("Overall Score: " + (percScore.toFixed(0)) + "%");
         },
@@ -573,9 +579,12 @@ var _Navigator = (function () {
         GetQuestionAttemptData: function (pageId, Qid) {
             if (!_Common.IsEmptyObject(_AttemptNData)) {
                 for (var i = 0; i < _AttemptNData[pageId].questions.length; i++) {
-                    if (_AttemptNData[pageId].questions.Qid = Qid) {
+                    if (_AttemptNData[pageId].questions[i].Id == Qid) {
                         return _AttemptNData[pageId].questions[i];
                     }
+                    /*if (_AttemptNData[pageId].questions.Qid = Qid) {
+                        return _AttemptNData[pageId].questions[i];
+                    }*/
                 }
             }
         },        
@@ -595,7 +604,6 @@ var _Navigator = (function () {
             }
         },
         ReAttemptLevel: function (datalevel) {
-            //debugger;
             var pageId = "";
             for (var i in _NData) {
                 if (_NData[i].datalevel == datalevel) {
