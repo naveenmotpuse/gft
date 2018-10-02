@@ -502,7 +502,7 @@ var _Navigator = (function () {
             return progData;
         },
         UpdateProgressBar: function () {
-            var arialabel = "Introduction progress 0%, Level 1 progress 1%, Level 2 progress 2%, Level 3 progress 3%, Level 4 progress 4%";
+            var arialabel = "Level 1 progress 1%, Level 2 progress 2%, Level 3 progress 3%, Level 4 progress 4%";
             var progData = this.GetProgressData();
             for (var i = 0; i < progData.length; i++) {
                 var lprog_pecent = (progData[i] / _progressLevels[i] * 100);
@@ -536,12 +536,12 @@ var _Navigator = (function () {
                 }
             }
             var score = (ObtainPoint / totalPoints) * 100;
-            return Number(score.toFixed(2));
+            return Number(score.toFixed(0));
         },
         UpdateScore: function () {
             //debugger;
             var percScore = this.GetTotalScore()
-            $("#scorediv").html("Overall Score: " + (percScore.toFixed(0)) + "%");
+            $("#scorediv").html("Overall Score: " + (percScore) + "%");
         },
         GetLevelScore: function (Data_Level) {
             var ObtainPoint = 0;

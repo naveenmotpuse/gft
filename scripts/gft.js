@@ -324,15 +324,19 @@ var _CustomQuestion = (function () {
             $("#graph-div").attr("aria-label", "Daytime Schedule Idle");
             if(qObj.Id == "Q15"){
                 $("#graph-div").attr("aria-label", "Daytime Schedule Collect Wood 12 Hour Collect Fish 0 Hour Idle 0 Hour");
+                $("#img-stranded-island").attr("alt","Friday rafts over to your island proposing that you could be better off through trade.");
             }
             if(qObj.Id == "Q16"){
                 $("#graph-div").attr("aria-label", "Daytime Schedule Collect Wood 12 Hour Collect Fish 0 Hour Idle 0 Hour");
+                $("#img-stranded-island").attr("alt","Friday rafts over to your island proposing that you could be better off through trade.");
             }
             if(qObj.Id == "Q17"){
                 $("#graph-div").attr("aria-label", "Daytime Schedule Collect Wood 12 Hour Collect Fish 0 Hour Idle 0 Hour");
+                $("#img-stranded-island").attr("alt","Friday rafts over to your island proposing that you could be better off through trade.");
             }
             if(qObj.Id == "Q22"){
                 $("#graph-div").attr("aria-label", "Daytime Schedule Collect Wood 0 Hour Collect Fish 12 Hour Idle 0 Hour");
+                $("#img-stranded-island").attr("alt","Friday rafts over to your island proposing that you could be better off through trade.");
             }
             if (qObj.Id == "Q18") {
                 $("#woodPerHr").html(_Scenario.GetCurrentScenario().woodPerHr);
@@ -706,7 +710,7 @@ var _CustomPage = (function () {
             if (currPage.pageId == "summary") {
                 for (var i = 1; i <= 4; i++) {
                     var levelscore = _Navigator.GetLevelScore(i);
-                    $("#level" + i + "score").html(levelscore.toFixed(0));
+                    $("#level" + i + "score").html(levelscore);
                     if (Number(levelscore) >= 80) {
                         $("#imglevel" + i).attr("src", "assets/images/stars_3.png")
                         $("#imglevel" + i).attr("alt", "Level " + i + " : 3 star").attr("aria-label", "Level " + i + " : 3 star")
@@ -780,7 +784,7 @@ var _CustomPage = (function () {
                     if (isAndroid) {
                         $("#wrapper").append('<span id="assist-txt" aria-live="assertive" class="assistive-text"></span>');
                     } else {
-                        $("#wrapper").append('<span id="assist-txt" aria-live="assertive" role="alert" class="assistive-text"></span>');
+                        $("#wrapper").append('<span id="assist-txt" aria-live="assertive" class="assistive-text"></span>');
                     }
                 }
             }
@@ -822,7 +826,7 @@ var _CustomPage = (function () {
                         "aria-label": "Your Production Possibility graph for Firewoods from 0 to 110 in logs vs. Fish from 0 to 5000 in calories."
                     });
                     $("#fridaytradeGraph").attr({
-                        "aria-label": "Friday's Production Possibility Frontier graph for Firewoods from 0 to 110 in logs vs. Fish from 0 to 8000 in calories."
+                        "alt": "Friday's Production Possibility Frontier graph for Firewoods from 0 to 110 in logs vs. Fish from 0 to 8000 in calories."
                     });
                 }
                 if (_currPageId == "l3p3" && _currPageQId == "Q17") {                    
