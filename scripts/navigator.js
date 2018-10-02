@@ -47,6 +47,7 @@ var _Navigator = (function () {
                 dataurl: "l1p2/q3.htm"
             }],
             hasAnimation: true,
+            isLevelStart:true
         },
         "l1p3": {
             pageId: "l1p3",
@@ -384,6 +385,9 @@ var _Navigator = (function () {
                 $(".main-content").load(pageUrl, function () {
                     OnPageLoad(jsonObj, buttonPressed);                    
                     _Common.SetReader(_Settings.hiddenAnchor,"pagetitle");
+                    if(_Navigator.GetBookmarkData().levelRetry == 'level' || _Navigator.GetBookmarkData().levelRetry == 'all') {
+                        $("#appmenu").k_disable();
+                    }
                 });
             } else {
                 $(".main-content").fadeTo(250, 0.25, function () {
@@ -391,6 +395,9 @@ var _Navigator = (function () {
                         $(this).fadeTo(600, 1)
                         OnPageLoad(jsonObj, buttonPressed);
                         _Common.SetReader(_Settings.hiddenAnchor,"progress_bar");
+                        if(_Navigator.GetBookmarkData().levelRetry == 'level' || _Navigator.GetBookmarkData().levelRetry == 'all') {
+                            $("#appmenu").k_disable();
+                        }
                     });
                 })
             }
@@ -573,7 +580,7 @@ var _Navigator = (function () {
         GetQuestionAttemptData: function (pageId, Qid) {
             if (!_Common.IsEmptyObject(_AttemptNData)) {
                 for (var i = 0; i < _AttemptNData[pageId].questions.length; i++) {
-                    if (_AttemptNData[pageId].questions.Qid = Qid) {
+                    if (_AttemptNData[pageId].questions.Qid == Qid) {
                         return _AttemptNData[pageId].questions[i];
                     }
                 }
