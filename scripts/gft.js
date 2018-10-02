@@ -749,7 +749,7 @@ var _CustomPage = (function () {
                     if (target.goal != "survive") {
                         $("p.goaldesc").k_hide();
                         $("p.goaldesc[goal='" + target.goal + "']").k_show()
-                    }
+                    }  
                     
                 }
             }
