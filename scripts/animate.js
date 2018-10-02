@@ -571,7 +571,11 @@ var EventManager = function () {
         },
         onNightAnimComplete: function () {
             $("#linkprevious").k_enable();
-            $("#appmenu").k_enable();
+            if(_Navigator.GetBookmarkData().levelRetry == 'level' || _Navigator.GetBookmarkData().levelRetry == 'all') {
+                $("#appmenu").k_disable();
+            }else{
+                $("#appmenu").k_enable();
+            }
             $("#assist-txt").attr("aria-hidden","true");
             //debugger;
             _Animation.day();

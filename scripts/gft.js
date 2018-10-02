@@ -692,6 +692,7 @@ var _CustomQuestion = (function () {
 var _CustomPage = (function () {
     return {
         OnPageLoad: function () {
+            debugger;
             var currPage = _Navigator.GetCurrentPage();
             if(window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1"){
                 $('.exambtnsubmindiv').hide();
@@ -705,7 +706,7 @@ var _CustomPage = (function () {
             if (currPage.pageId == "summary") {
                 for (var i = 1; i <= 4; i++) {
                     var levelscore = _Navigator.GetLevelScore(i);
-                    $("#level" + i + "score").html(levelscore.toFixed(0));
+                    $("#level" + i + "score").html(levelscore.toFixed(2));
                     if (Number(levelscore) >= 80) {
                         $("#imglevel" + i).attr("src", "assets/images/stars_3.png")
                         $("#imglevel" + i).attr("alt", "Level " + i + " : 3 star").attr("aria-label", "Level " + i + " : 3 star")
@@ -745,12 +746,14 @@ var _CustomPage = (function () {
                         $("p.goaldesc").k_hide();
                         $("p.goaldesc[goal='" + target.goal + "']").k_show()
                     }
+                    
                 }
             }
             if (currPage.hasActivity != undefined && currPage.hasActivity) {
                 if (currPage.IsComplete != undefined && currPage.IsComplete) {
                     $("#" + currPage.goal).attr('checked', 'checked');
                     _TradeSlider.ToggleGoal(currPage.goal);
+                    $("p.goaldesc[goal='" + currPage.goal + "']").k_show();
                     $("input.goalRadio").k_disable();
                     $("#next")
                 }
