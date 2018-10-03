@@ -710,7 +710,7 @@ var _CustomPage = (function () {
             if (currPage.pageId == "summary") {
                 for (var i = 1; i <= 4; i++) {
                     var levelscore = _Navigator.GetLevelScore(i);
-                    $("#level" + i + "score").html(levelscore.toFixed(2));
+                    $("#level" + i + "score").html(levelscore.toFixed(0));
                     if (Number(levelscore) >= 80) {
                         $("#imglevel" + i).attr("src", "assets/images/stars_3.png")
                         $("#imglevel" + i).attr("alt", "Level " + i + " : 3 star").attr("aria-label", "Level " + i + " : 3 star")
