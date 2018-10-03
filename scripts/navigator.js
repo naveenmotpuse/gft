@@ -487,7 +487,8 @@ var _Navigator = (function () {
                 if(_NData[_levelStartPages[i]].isVisited)
                 {
                     $("a.menuitem[data-id='" + _NData[_levelStartPages[i]].pageId + "']").closest("li").css("display", "block"); 
-                    $("a.menuitem[data-id='" + _NData[_levelStartPages[i]].pageId + "']").closest("li").removeAttr("aria-hidden");
+                    // double reading issue //
+                    //$("a.menuitem[data-id='" + _NData[_levelStartPages[i]].pageId + "']").closest("li").removeAttr("aria-hidden");
                 }
             }
         },

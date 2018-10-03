@@ -948,6 +948,16 @@ var _CustomPage = (function () {
                     $("#fridaytradeGraph").attr({
                         "aria-label": "Friday's Production Possibility Frontier graph for Firewoods from 0 to 110 in logs vs. Fish from 0 to 5000 in calories."
                     });
+                }    
+                /*Temp issue */ 
+                if(_currPageId == "l2p1" || _currPageId == "l3p1" || _currPageId == "l4p1"){
+                    /*$(document).on("load", "#img-stranded-island", function (event) {    
+                        $("#img-stranded-island").attr("alt","Friday rafts over to your island proposing that you could be better off through trade.");
+                    });
+                    */
+                    setTimeout(function(){
+                        $("#img-stranded-island").attr("alt","Friday rafts over to your island proposing that you could be better off through trade.");
+                    }, 1000)
                 }
             }
         }        
