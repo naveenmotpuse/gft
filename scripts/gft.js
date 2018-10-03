@@ -518,7 +518,7 @@ var _CustomQuestion = (function () {
                     _currentQuestionObj.isAnswered = true;
                     _currentQuestionObj.feedbackIndex = feedbackIndex;
 
-                    _Question.Loadfeedback(feedbackIndex);
+                    _Question.Loadfeedback(feedbackIndex, isWorsen);
                     $("#linknext").k_enable();
                     _CustomQuestion.UpdateGraphSubmitStatus();
                     //Need to think on generic logic.
