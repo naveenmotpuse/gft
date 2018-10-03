@@ -468,6 +468,7 @@ var EventManager = function () {
             $("#givewood-range").k_enable();
             $("#givewfish-range").k_enable();
             $(".tot-slider").removeClass('disabled');
+            $(".tot-slider").removeAttr('disabled');
             $("#graph-div").attr("aria-label", "Daytime Schedule Idle");
             $(".assistive-text").text('');
             _Question.UnloadFeedback();
