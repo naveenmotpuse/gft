@@ -401,7 +401,12 @@ var _Navigator = (function () {
                     $(".main-content").load(pageUrl, function () {
                         $(this).fadeTo(600, 1)
                         OnPageLoad(jsonObj, buttonPressed);
-                        _Common.SetReader(_Settings.hiddenAnchor,"progress_bar");
+                        
+                        if (isIpad) {
+                            _Common.SetReader(_Settings.hiddenAnchor, "progress");
+                        } else {
+                            _Common.SetReader(_Settings.hiddenAnchor, "progress_bar");
+                        }
                         if(_Navigator.GetBookmarkData().levelRetry == 'level' || _Navigator.GetBookmarkData().levelRetry == 'all') {
                             $("#appmenu").k_disable();
                         }

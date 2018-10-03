@@ -288,7 +288,11 @@ var _Animation = (function () {
                 $('.castawaySprites1').removeClass('castawaySprites1').addClass('castawaySprites');
                 $('.friday-raftSprites, .fridaySprites').k_show();
                     setTimeout(function(){
-                        _Common.SetReader(_Settings.hiddenAnchor,"progress_bar");
+                        if (isIpad) {
+                            _Common.SetReader(_Settings.hiddenAnchor, "progress");
+                        } else {
+                            _Common.SetReader(_Settings.hiddenAnchor, "progress_bar");
+                        }
                   },3000);
             } else if (currPage.hasTradeSlider != undefined && currPage.hasTradeSlider) {
                 if (currPage.pageId == "l2p3") {
@@ -308,11 +312,15 @@ var _Animation = (function () {
                 }, 2500)
             } else if (currPage.pageId == 'l3p2') {
                 $('.fishBarrelRaft2').k_hide();
-            }else if( currPage.pageId == 'l3p1' || currPage.pageId == 'l4p1'){
+            } else if( currPage.pageId == 'l3p1' || currPage.pageId == 'l4p1'){
                  $('.fishBarrelRaft2').k_hide();
                 //Added for on level start page giving focus after animation completion
                  setTimeout(function(){
-                   _Common.SetReader(_Settings.hiddenAnchor,"progress_bar");
+                    if (isIpad) {
+                        _Common.SetReader(_Settings.hiddenAnchor, "progress");
+                    } else {
+                        _Common.SetReader(_Settings.hiddenAnchor, "progress_bar");
+                    }
                 },3000);
             }
         },

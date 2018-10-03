@@ -508,7 +508,8 @@ var _CustomQuestion = (function () {
                             } else {
                                 crrcount++;
                                 _currentQuestionObj.selectedAnswer[countval] = [newSerData[i][0], newSerData[i][1]];
-                                countval++;                                
+                                countval++;
+                                isWorsen = true;                            
                             }
                         }
 
