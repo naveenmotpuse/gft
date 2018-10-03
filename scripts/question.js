@@ -458,8 +458,8 @@
                         })
                         if (isIOS || isIpad) {
                             //$("#" + _optD.id).closest("div").attr({ "role": "text", "aria-label": "Correct " + _optD.answer + " " + $('label[for="' + _optD.id + '"]').text() });
-                            var inputTxt = $("#" + _optD.id).closest("div").text();
-                            $(".question_txt").attr({ "role": "text", "aria-label": inputTxt + "Correct " + _optD.answer + " " + $('label[for="' + _optD.id + '"]').text() });
+                            var inputTxt = $("#" + _optD.id).closest("div").prev().text();
+                            $(".question_txt").attr({ "role": "text", "aria-label": inputTxt + " Correct " + _optD.answer + " " + $('label[for="' + _optD.id + '"]').text() });
                         } else {
                             $('label[for="' + _optD.id + '"]').attr("aria-hidden", "true");
                             $("#" + _optD.id).attr("aria-hidden", "true");
@@ -474,8 +474,8 @@
                             $("#" + _optD.id).after('<label class="incurrect_label"><i class="fa fa-times" style="padding:3px;color:' + ColorCodes.red + '"></i><span style="color:' + ColorCodes.green + ';font-weight:bold;font-size:16px;"> ' + _optD.answer + '</span> </label>');
                             //$("#" + _optD.id).find("div").attr({ "role": "text", "aria-label": "you have entered " + $("#" + _optD.id).val() + " correct value is " + _optD.answer + " " + $('label[for="' + _optD.id + '"]').text() });
                             
-                            var inputTxt =$("#" + _optD.id).closest("div").text();
-                            $(".question_txt").attr({ "role": "text", "aria-label": inputTxt + "you have entered " + $("#" + _optD.id).val() + " correct value is " + _optD.answer + " " + $('label[for="' + _optD.id + '"]').text() });
+                            var inputTxt =$("#" + _optD.id).closest("div").prev().text();
+                            $(".question_txt").attr({ "role": "text", "aria-label": inputTxt + " you have entered " + $("#" + _optD.id).val() + " correct value is " + _optD.answer + " " + $('label[for="' + _optD.id + '"]').text() });
                         } else {
                             $("#" + _optD.id).after('<label class="incurrect_label"><i class="fa fa-times" style="padding:3px;color:' + ColorCodes.red + '"></i><span style="color:' + ColorCodes.green + ';font-weight:bold;font-size:16px;"> ' + _optD.answer + '</span> </label>');
                             $('label[for="' + _optD.id + '"]').attr("aria-hidden", "true");
