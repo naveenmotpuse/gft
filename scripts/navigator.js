@@ -405,6 +405,11 @@ var _Navigator = (function () {
                         if(_Navigator.GetBookmarkData().levelRetry == 'level' || _Navigator.GetBookmarkData().levelRetry == 'all') {
                             $("#appmenu").k_disable();
                         }
+                        if(_currentPageObject.pageId == 'summary'){
+                            $("#appmenu").k_enable();
+                            $("#appmenu").removeAttr('disabled');
+                            $("#appmenu").removeClass('disabled');
+                        }
                     });
                 })
             }
