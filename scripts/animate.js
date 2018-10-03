@@ -1,6 +1,9 @@
 var round = function (val) {
-    if (Math.round(val) !== val) {
+    if (!Number.isNaN(val) && Math.round(val) !== val) {
         val = Number(val.toFixed(0));
+    } else {
+        // if value is invalid then set to 0 by default
+        val = 0;
     }
     return val;
 }

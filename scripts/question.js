@@ -450,7 +450,7 @@
                         }
                     }
                 } else if (_optD.type == "input") {
-                    //debugger;                    
+                    debugger;                    
                     if (_optD.isCorrect && _optD.answer == $("#" + _optD.id).val()) {
                         $("#" + _optD.id).css({
                             'color': ColorCodes.green,
