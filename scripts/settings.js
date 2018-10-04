@@ -122,9 +122,3 @@ $("savebtn").on("click", function () {
         check_for_active_users();
     }
 });
-
-
-
-
-
-
