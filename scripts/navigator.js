@@ -346,7 +346,6 @@ var _Navigator = (function () {
                 }
 
             }
-            this.UpdateProgressBar();
             
             if(isIpad){
                 $('.progress *').removeAttr('aria-hidden');
@@ -354,7 +353,8 @@ var _Navigator = (function () {
                 $('.progress').attr('role','text');
                 $('.progress').attr('tabindex','0')
             }
-
+            this.UpdateProgressBar();
+            
             // if level retry then jump to summary page
             if(this.GetBookmarkData().levelRetry == 'level') {
                 if(_currentPageObject.datalevel < _NData[_currentPageId].datalevel) {
@@ -499,7 +499,15 @@ var _Navigator = (function () {
                     $("a.menuitem[data-id='" + _NData[_levelStartPages[i]].pageId + "']").closest("li").css("display", "block"); 
                     // double reading issue //
                     //$("a.menuitem[data-id='" + _NData[_levelStartPages[i]].pageId + "']").closest("li").removeAttr("aria-hidden");
+                    if (isAndroid){
+                        var panel=  $("a.menuitem[data-id='" + _NData[_levelStartPages[i]].pageId + "']").closest("li a").text();
+                         $("a.menuitem[data-id='" + _NData[_levelStartPages[i]].pageId + "']").closest("li").attr('aria-label', panel)
+                         $("a.menuitem[data-id='" + _NData[_levelStartPages[i]].pageId + "']").closest("li a").attr('aria-hidden','true');
+                    }
                 }
+            }
+            if(isIpad){
+                $('.menu-icon *').removeAttr("aria-hidden");
             }
         },
         GetProgressData: function () {
@@ -537,7 +545,11 @@ var _Navigator = (function () {
                     $(".pgBgItem[data-level='" + i + "']").addClass("pgBgItemComplete")
                 }
             }
-            $(".progress .background").attr("aria-label", arialabel);
+            if(isIpad){
+                $(".progress").attr("aria-label", arialabel);
+            }else{
+                $(".progress .background").attr("aria-label", arialabel);
+            }
         },
         GetCurrentPage: function () {
             return _currentPageObject;

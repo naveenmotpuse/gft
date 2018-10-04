@@ -16,6 +16,7 @@
     }
     return {
         Init: function(){
+            debugger;
             //Init Econ service launch and GetSettings
             //It calls webservice call to get launchdata, statedata and settings
             _EconLabServiceManager.InitLaunch();
