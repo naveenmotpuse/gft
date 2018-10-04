@@ -376,6 +376,7 @@
                 _CustomQuestion.ActionAfterCheckAnswer();
 
                 _Navigator.UpdateScore();
+                _Module.SaveSessionData();
             } else {
                 _currentQuestionObj.tryCount += 1;
                 feedbackIndex = _currentQuestionObj.tryCount;
@@ -394,6 +395,7 @@
                     _Navigator.UpdateScore();
                     //Show final incorrect feedback
                     this.Loadfeedback(feedbackIndex, isWorsen);
+                    _Module.SaveSessionData();
                 }
             }
         },
@@ -489,11 +491,10 @@
         }
     };
 })();
+
 $(window).resize(function () {
     //_Question.SetOptionPosition();
 });
-
-
 $(document).on("click", ".btncheckanswer", function (event) {
     if ($(this).k_IsDisabled()) return;
     _Question.CheckAnswer();

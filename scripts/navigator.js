@@ -298,7 +298,8 @@ var _Navigator = (function () {
         _TopSlider.OnLoad();
         _CustomPage.OnPageLoad();
         _Navigator.UpdateMenuVisibility();
-        _Navigator.LoadDefaultQuestion(jsonObj, buttonPressed);  
+        _Navigator.LoadDefaultQuestion(jsonObj, buttonPressed);
+        _Module.SaveSessionData();
     }
     return {
         Get: function () {

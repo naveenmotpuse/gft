@@ -15,6 +15,9 @@
         _EconLabServiceManager.SaveSessionData(_sessionData)
     }
     return {
+        Get: function() { 
+            return _sessionData;
+        },
         Init: function(){
             debugger;
             //Init Econ service launch and GetSettings
@@ -26,22 +29,19 @@
             _sessionData = _EconLabServiceManager.GetSessionData()
 
             //Init Session Data
-            if((typeof _sessionData == "undefined") || 
-            (typeof _sessionData == "string" && $.trim(_sessionData)=="")){
+            if((typeof _sessionData == "undefined") || (typeof _sessionData == "string" && $.trim(_sessionData)=="")){
                 _sessionData.attempts = [];
                 _sessionData.attempts.push(_attempt)                        
-            }else if(typeof _sessionData == "string"){
+            } else if(typeof _sessionData == "string"){
                 _sessionData = JSON.parse(_sessionData);
                 if(_sessionData.attempts == undefined || _sessionData.attempts.length<=0){
                     _sessionData.attempts = [];
                     _sessionData.attempts.push(_attempt)
                 }
-            }
-            else if(_Common.IsEmptyObject(_sessionData)){
+            } else if(_Common.IsEmptyObject(_sessionData)){
                 _sessionData.attempts = [];
                 _sessionData.attempts.push(_attempt)                
-            }
-            else{  
+            } else{  
                 var lastAttIndex = _sessionData.attempts.length-1                    
                 _KnowdlServiceManager.InitLaunch(_EconLabServiceManager.GetLaunchData());
                 _KnowdlServiceManager.InitBookmarking( _sessionData.attempts[lastAttIndex].k_bookmarkData)                
