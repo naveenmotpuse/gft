@@ -593,10 +593,10 @@ var _CustomQuestion = (function () {
                 $("#consumption-wood").text(activityData.tradeData.TR.consumptionwood)
                 $(".consumption-wood.r_label").text(activityData.tradeData.TR.consumptionwood + activityData.tradeData.TR.givewood)
                 $("#consumption-wood-range").attr("max", activityData.tradeData.TR.consumptionwood + activityData.tradeData.TR.givewood)
-                $("#consumption-wood-range").val(activityData.tradeData.TR.consumptionwood)
+                $("#consumption-wood-range").val(activityData.tradeData.TR.consumptionwood);
                 $("#consumption-fish").text(activityData.tradeData.TR.consumptionfish)
                 $("#consumption-fish-range").attr("max", activityData.tradeData.TR.fridayconsumptionfish + activityData.tradeData.TR.receivefish)
-                $("#consumption-fish-range").val(activityData.tradeData.TR.consumptionfish)
+                $("#consumption-fish-range").val(activityData.tradeData.TR.consumptionfish);
                 $(".consumption-fish.r_label").text(activityData.tradeData.TR.fridayconsumptionfish + activityData.tradeData.TR.receivefish);
 
                 _TradeSlider.ShowSliderPoint("studenttradeGraph", [activityData.tradeData.TR.consumptionwood, activityData.tradeData.TR.consumptionfish]);
