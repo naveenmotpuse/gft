@@ -501,7 +501,7 @@ var _Navigator = (function () {
                     //$("a.menuitem[data-id='" + _NData[_levelStartPages[i]].pageId + "']").closest("li").removeAttr("aria-hidden");
                     if (isAndroid){
                         var panel=  $("a.menuitem[data-id='" + _NData[_levelStartPages[i]].pageId + "']").closest("li a").text();
-                         $("a.menuitem[data-id='" + _NData[_levelStartPages[i]].pageId + "']").closest("li").attr('aria-label', panel)
+                         $("a.menuitem[data-id='" + _NData[_levelStartPages[i]].pageId + "']").closest("li").attr('aria-label', panel).removeAttr('aria-hidden');
                          $("a.menuitem[data-id='" + _NData[_levelStartPages[i]].pageId + "']").closest("li a").attr('aria-hidden','true');
                     }
                 }
