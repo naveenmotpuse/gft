@@ -6941,7 +6941,7 @@
             minorTickPosition: 'outside', // inside or outside
             //minorTickWidth: 0,
             //opposite: false,
-            //offset: 0,
+            offset: 5,
             //plotBands: [{
             //    events: {},
             //    zIndex: 1,
@@ -6964,7 +6964,7 @@
             tickmarkPlacement: 'between', // on or between
             tickPixelInterval: 100,
             tickPosition: 'outside',
-            //tickWidth: 1,
+            tickWidth: 1,
             title: {
                 //text: null,
                 align: 'middle', // low, middle or high
@@ -6993,11 +6993,11 @@
                 x: -8,
                 y: 3
             },
-            lineWidth: 0,
+            lineWidth: 1,
             maxPadding: 0.05,
             minPadding: 0.05,
             startOnTick: true,
-            //tickWidth: 0,
+            tickWidth: 1,
             title: {
                 rotation: 270,
                 text: 'Values'

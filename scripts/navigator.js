@@ -350,7 +350,7 @@ var _Navigator = (function () {
             
             if(isIpad){
                 $('.progress *').removeAttr('aria-hidden');
-                $('.progress').attr('aria-label','Introduction progress 0%, Level 1 progress 0%, Level 2 progress 0%, Level 3 progress 0%, Level 4 progress 0%')
+                $('.progress').attr('aria-label','Level 1 progress 0%, Level 2 progress 0%, Level 3 progress 0%, Level 4 progress 0%')
                 $('.progress').attr('role','text');
                 $('.progress').attr('tabindex','0')
             }
@@ -401,9 +401,19 @@ var _Navigator = (function () {
                     $(".main-content").load(pageUrl, function () {
                         $(this).fadeTo(600, 1)
                         OnPageLoad(jsonObj, buttonPressed);
-                        _Common.SetReader(_Settings.hiddenAnchor,"progress_bar");
+                        
+                        if (isIpad) {
+                            _Common.SetReader(_Settings.hiddenAnchor, "progress");
+                        } else {
+                            _Common.SetReader(_Settings.hiddenAnchor, "progress_bar");
+                        }
                         if(_Navigator.GetBookmarkData().levelRetry == 'level' || _Navigator.GetBookmarkData().levelRetry == 'all') {
                             $("#appmenu").k_disable();
+                        }
+                        if(_currentPageObject.pageId == 'summary'){
+                            $("#appmenu").k_enable();
+                            $("#appmenu").removeAttr('disabled');
+                            $("#appmenu").removeClass('disabled');
                         }
                     });
                 })

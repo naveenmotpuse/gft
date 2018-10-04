@@ -426,6 +426,7 @@ var _CustomQuestion = (function () {
                 return true;
         },
         CheckGraphAnswer: function (valPoints) {
+            var isWorsen = false;
             var feedbackIndex = 0;
             $(".graphbtncheckanswer").k_disable();
             var point1 = {}
@@ -479,8 +480,6 @@ var _CustomQuestion = (function () {
                     //Show tryCount incorrect feedback                    
                     _Question.Loadfeedback(feedbackIndex);
                 } else {
-                    _Question.Loadfeedback(feedbackIndex);
-                    //debugger;
                     //best score
                     var pageId = _Navigator.GetCurrentPage().pageId;
                     var Qid = _currentQuestionObj.Qid; 
@@ -509,7 +508,8 @@ var _CustomQuestion = (function () {
                             } else {
                                 crrcount++;
                                 _currentQuestionObj.selectedAnswer[countval] = [newSerData[i][0], newSerData[i][1]];
-                                countval++;                                
+                                countval++;
+                                isWorsen = true;                            
                             }
                         }
 
@@ -518,6 +518,8 @@ var _CustomQuestion = (function () {
                     _currentQuestionObj.points = crrcount / valPoints;
                     _currentQuestionObj.isAnswered = true;
                     _currentQuestionObj.feedbackIndex = feedbackIndex;
+
+                    _Question.Loadfeedback(feedbackIndex, isWorsen);
                     $("#linknext").k_enable();
                     _CustomQuestion.UpdateGraphSubmitStatus();
                     //Need to think on generic logic.
@@ -698,7 +700,7 @@ var _CustomPage = (function () {
         OnPageLoad: function () {
             debugger;
             var currPage = _Navigator.GetCurrentPage();
-            if(window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1"){
+            if(true || window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1"){
                 $('.exambtnsubmindiv').hide();
             }
             if (currPage.datalevel == 2) {

@@ -475,6 +475,11 @@ var _TradeSlider = (function () {
             $("#onewoodfor-range, #givewood-range, #givefish-range").off("mouseup").on("mouseup", document, function (event) {
                 _TradeSlider.DisplayPointOnGraph();
             });
+            // for touch screen only
+            $("#onewoodfor-range, #givewood-range, #givefish-range").off("touchend").on("touchend", document, function (event) {
+                _TradeSlider.DisplayPointOnGraph();
+            });
+            
             _ModuleCharts.DrawTradeCharts();
             //Complete Reset  
             DataStorage.resetDay();

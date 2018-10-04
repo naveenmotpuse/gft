@@ -34,7 +34,11 @@
                 $("#div_question").load(pageUrl, function () {
                     OnQuestionLoad(qObj);
                     if (firstQuestion == _currentQuestionObj.Qid) {
-                        _Common.SetReader(_Settings.hiddenAnchor, "progress_bar");
+                        if (isIpad) {
+                            _Common.SetReader(_Settings.hiddenAnchor, "progress");
+                        } else {
+                            _Common.SetReader(_Settings.hiddenAnchor, "progress_bar");
+                        }
                     }
                     else {
                         _Common.SetReader(_Settings.hiddenAnchor, "question");
@@ -46,7 +50,11 @@
                     $(this).hide().fadeIn("slow", function () {
                         OnQuestionLoad(qObj);
                         if (firstQuestion == _currentQuestionObj.Qid) {
-                            _Common.SetReader(_Settings.hiddenAnchor, "progress_bar");
+                            if (isIpad) {
+                                _Common.SetReader(_Settings.hiddenAnchor, "progress");
+                            } else {
+                                _Common.SetReader(_Settings.hiddenAnchor, "progress_bar");
+                            }
                         }
                         else {
                             _Common.SetReader(_Settings.hiddenAnchor, "question");
@@ -442,15 +450,16 @@
                         }
                     }
                 } else if (_optD.type == "input") {
-                    //debugger;                    
-                    if (_optD.isCorrect) {
+                    debugger;                    
+                    if (_optD.isCorrect && _optD.answer == $("#" + _optD.id).val()) {
                         $("#" + _optD.id).css({
                             'color': ColorCodes.green,
                             'font-weight': 'bold'
                         })
-                        if (isIOS) {
-                            $("#" + _optD.id).closest("div").attr({ "role": "text", "aria-label": "Correct " + _optD.answer + " " + $('label[for="' + _optD.id + '"]').text() });
-                            //$("#" + _optD.id).closest("div").attr("<span role='text' style='font-size:0px;'>"+"Correct " + _optD.answer+" "+$('label[for="'+_optD.id+'"]').text()+"<span>")
+                        if (isIOS || isIpad) {
+                            //$("#" + _optD.id).closest("div").attr({ "role": "text", "aria-label": "Correct " + _optD.answer + " " + $('label[for="' + _optD.id + '"]').text() });
+                            var inputTxt = $("#" + _optD.id).closest("div").prev().text();
+                            $(".question_txt").attr({ "role": "text", "aria-label": inputTxt + " Correct " + _optD.answer + " " + $('label[for="' + _optD.id + '"]').text() });
                         } else {
                             $('label[for="' + _optD.id + '"]').attr("aria-hidden", "true");
                             $("#" + _optD.id).attr("aria-hidden", "true");
@@ -461,9 +470,12 @@
                             'color': ColorCodes.red,
                             'font-weight': 'bold'
                         })
-                        if (isIOS) {
+                        if (isIOS || isIpad) {
                             $("#" + _optD.id).after('<label class="incurrect_label"><i class="fa fa-times" style="padding:3px;color:' + ColorCodes.red + '"></i><span style="color:' + ColorCodes.green + ';font-weight:bold;font-size:16px;"> ' + _optD.answer + '</span> </label>');
-                            $("#" + _optD.id).closest("div").attr({ "role": "text", "aria-label": "you have entered " + $("#" + _optD.id).val() + " correct value is " + _optD.answer + " " + $('label[for="' + _optD.id + '"]').text() });
+                            //$("#" + _optD.id).find("div").attr({ "role": "text", "aria-label": "you have entered " + $("#" + _optD.id).val() + " correct value is " + _optD.answer + " " + $('label[for="' + _optD.id + '"]').text() });
+                            
+                            var inputTxt =$("#" + _optD.id).closest("div").prev().text();
+                            $(".question_txt").attr({ "role": "text", "aria-label": inputTxt + " you have entered " + $("#" + _optD.id).val() + " correct value is " + _optD.answer + " " + $('label[for="' + _optD.id + '"]').text() });
                         } else {
                             $("#" + _optD.id).after('<label class="incurrect_label"><i class="fa fa-times" style="padding:3px;color:' + ColorCodes.red + '"></i><span style="color:' + ColorCodes.green + ';font-weight:bold;font-size:16px;"> ' + _optD.answer + '</span> </label>');
                             $('label[for="' + _optD.id + '"]').attr("aria-hidden", "true");
