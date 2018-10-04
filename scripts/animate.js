@@ -152,9 +152,9 @@ var _Animation = (function () {
     var _SetFridayWood = function (val, dur) {}
     var _SetFridayFish = function (val, dur) {}
     var _setimgaccessibility = function () {
-        if (AnimationPlace != undefined && AnimationPlace != "" && $('.woodcounter .count').length > 0 && $('.fishcounter .count').length > 0) {
+        /*if (AnimationPlace != undefined && AnimationPlace != "" && $('.woodcounter .count').length > 0 && $('.fishcounter .count').length > 0) {
             $(AnimationPlace).attr("alt", "wood " + $('.woodcounter .count').text() + " logs, fish " + $('.fishcounter .count').text() + " cals")
-        }
+        }*/
     }
     var _Night = function () {
         var div = getDiv();

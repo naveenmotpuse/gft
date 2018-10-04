@@ -786,9 +786,9 @@ var _CustomPage = (function () {
             if (_currentPage.isLevelStart == undefined) {
                 if ($(".assistive-text").length == 0) {
                     if (isAndroid) {
-                        $("#wrapper").append('<span id="assist-txt" aria-live="assertive" class="assistive-text"></span>');
+                        $("main[role='main']").append('<span id="assist-txt" aria-live="assertive" class="assistive-text"></span>');
                     } else {
-                        $("#wrapper").append('<span id="assist-txt" aria-live="assertive" class="assistive-text"></span>');
+                        $("main[role='main']").append('<span id="assist-txt" aria-live="assertive" class="assistive-text"></span>');
                     }
                 }
             }
@@ -799,6 +799,7 @@ var _CustomPage = (function () {
                     "aria-label": "Production Possibilities Frontier graph for Firewoods from 0 to 120 in logs vs. Fish from 0 to 3500 in calories. Refer table for more details."
                 });
                 $("#surpluschart_c").attr({
+                    "role": "text",
                     "aria-label": "Surplus Inventory graph for inventory of fish and woods from day 0 to 4."
                 });
 
@@ -810,6 +811,7 @@ var _CustomPage = (function () {
                 }
                 if (_currPageId == "l1p4" &&  (_currPageQId == "Q3" ||  _currPageQId == "Q7")) {
                     $("#questionIntro").attr({
+                        "role": "text", 
                         "aria-label": "Friday's Production Possibility Frontier graph for Firewoods from 0 to 120 in logs vs. Fish from 0 to 6500 in calories. Refer above table for more details."
                     });
                 }
