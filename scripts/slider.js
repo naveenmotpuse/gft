@@ -623,7 +623,8 @@ var _TradeSlider = (function () {
 
             this.SetTradeResult();
         },
-        SetTradeResult: function () {  
+        SetTradeResult: function () { 
+            debugger; 
             console.log("SetTradeResult")      
             TradeResults.receivefish = TradeResults.givewood * TradeResults.onewoodfor;
               if(TradeResults.givefish == 0 && TradeResults.onewoodfor == 0){
@@ -659,12 +660,13 @@ var _TradeSlider = (function () {
                 $("#consumption-fish-range").attr("max", (TradeSettings.fridayfishCals + TradeResults.remData.fridayfish));
                 $(".consumption-fish.r_label").text((TradeSettings.fridayfishCals + TradeResults.remData.fridayfish));
                 $("#givewood-logs").text(TradeResults.givewood);
-                $("#receivefish-cals").text(TradeResults.receivefish);
+                console.log("+++===" + TradeResults.receivefish);
+                $("#receivefish-cals").text(TradeResults.receivefish).attr("aria-label",TradeResults.consumptionfish);
             }
             $("#consumption-wood").text(TradeResults.consumptionwood);
             $("#consumption-fish").text(TradeResults.consumptionfish);
-            $("#consumption-wood-range").val(TradeResults.consumptionwood);
-            $("#consumption-fish-range").val(TradeResults.consumptionfish);
+            $("#consumption-wood-range").val(TradeResults.consumptionwood).attr("aria-valuenow",TradeResults.consumptionwood);
+            $("#consumption-fish-range").val(TradeResults.consumptionfish).attr("aria-valuenow",TradeResults.consumptionfish);
             if (currPage.datalevel == 4 && _Scenario.GetScenarioIndex() == 1) {
                 $(".assistive-text").text('');
                 $(".assistive-text").text("Your PPF graph, Friday's PPF graph updated. Terms of Trade changed to 1 Wood (logs) for: " + TradeResults.onewoodfor + " fish (cals), Give fish (logs):" + TradeResults.givefish + " and Receive wood (logs): " + TradeResults.receivewood + ". Consumption changed to Collect Wood: " + TradeResults.consumptionwood + " logs and Collect Fish: " + TradeResults.consumptionfish + " cals.");
