@@ -1,7 +1,3 @@
-document.addEventListener("click", function(){
-    document.getElementById("demo").innerHTML = "Hello World";
-});
-
 $(document).on("click", "#ppfchart .imggraph", function (event) {
     var _this = $(this);
     $("#ppfcharttable_c").hide(function () {        
