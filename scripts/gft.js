@@ -804,63 +804,76 @@ var _CustomPage = (function () {
 
                 if (_currPageId == "l1p2" && _currPageQId == "Q3") {
                     $("#questionchart").attr({
+                        "role": "text",
                         "aria-label": "Your Production Possibility Frontier graph for Firewoods from 0 to 120 in logs vs. Fish from 0 to 3500 in calories. Refer above table for more details."
                     });
                 }
-                if (_currPageId == "l1p4" && _currPageQId == "Q3") {
+                if (_currPageId == "l1p4" &&  (_currPageQId == "Q3" ||  _currPageQId == "Q7")) {
                     $("#questionIntro").attr({
                         "aria-label": "Friday's Production Possibility Frontier graph for Firewoods from 0 to 120 in logs vs. Fish from 0 to 6500 in calories. Refer above table for more details."
                     });
                 }
                 if (_currPageId == "l2p2" && (_currPageQId == "Q9" || _currPageQId == "Q10" || _currPageQId == "Q11" || _currPageQId == "Q12" || _currPageQId == "Q13" || _currPageQId == "Q14")) {
                     $("#questionIntro").attr({
+                        "role": "text",
                         "aria-label": "Production Possibilities Frontier graph for Firewoods from 0 to 120 in logs vs. Fish from 0 to 7000 in calories. Graph represents your PPF, Friday's PPF and Both Student and Friday's Production Point."
                     });
                 }
                 if (_currPageId == "l2p3" && _currPageQId == "Q15") {                    
                     $("#studenttradeGraph").attr({
+                        "role": "text",
                         "aria-label": "Your Production Possibility graph for Firewoods from 0 to 110 in logs vs. Fish from 0 to 5000 in calories."
                     });
                     $("#fridaytradeGraph").attr({
+                        "role": "text",
                         "aria-label": "Friday's Production Possibility Frontier graph for Firewoods from 0 to 110 in logs vs. Fish from 0 to 8000 in calories."
                     });
                 }
                 if (_currPageId == "l3p2" && _currPageQId == "Q16") {                    
                     $("#studenttradeGraph").attr({
+                        "role": "text",
                         "aria-label": "Your Production Possibility graph for Firewoods from 0 to 110 in logs vs. Fish from 0 to 5000 in calories."
                     });
                     $("#fridaytradeGraph").attr({
-                        "alt": "Friday's Production Possibility Frontier graph for Firewoods from 0 to 110 in logs vs. Fish from 0 to 8000 in calories."
+                        "role": "text",
+                        "aria-label": "Friday's Production Possibility Frontier graph for Firewoods from 0 to 110 in logs vs. Fish from 0 to 8000 in calories."
                     });
                 }
                 if (_currPageId == "l3p3" && _currPageQId == "Q17") {                    
                     $("#studenttradeGraph").attr({
+                        "role": "text",
                         "aria-label": "Your Production Possibility graph for Firewoods from 0 to 110 in logs vs. Fish from 0 to 5000 in calories."
                     });
                     $("#fridaytradeGraph").attr({
+                        "role": "text",
                         "aria-label": "Friday's Production Possibility Frontier graph for Firewoods from 0 to 110 in logs vs. Fish from 0 to 8000 in calories."
                     });
                 }
                 if (_currPageId == "l4p2" && _currPageQId == "Q18") {
                     $("#questionchart").attr({
+                        "role": "text",
                         "aria-label": "Your Production Possibility Frontier graph for Firewoods from 0 to 120 in logs vs. Fish from 0 to 6500 in calories. Refer above table for more details."
                     });
                 }
                 if (_currPageId == "l4p3" && _currPageQId == "Q19") {
                     $("#questionchart").attr({
+                        "role": "text",
                         "aria-label": "Your Production Possibility Frontier graph for Firewoods from 0 to 120 in logs vs. Fish from 0 to 4500 in calories. Refer above table for more details."
                     });
                 }
                 if (_currPageId == "l4p4" && (_currPageQId == "Q20" || _currPageQId == "Q21")) {
                     $("#questionIntro").attr({
+                        "role":"text",
                         "aria-label": "Production Possibilities Frontier graph for Firewoods from 0 to 120 in logs vs. Fish from 0 to 7000 in calories. Graph represents your PPF, Friday's PPF."
                     });
                 }
                 if (_currPageId == "l4p5" && _currPageQId == "Q22") {                    
                     $("#studenttradeGraph").attr({
+                        "role":"text",
                         "aria-label": "Your Production Possibility graph for Firewoods from 0 to 110 in logs vs. Fish from 0 to 8000 in calories."
                     });
                     $("#fridaytradeGraph").attr({
+                        "role":"text",
                         "aria-label": "Friday's Production Possibility Frontier graph for Firewoods from 0 to 110 in logs vs. Fish from 0 to 5000 in calories."
                     });
                 }
@@ -881,11 +894,12 @@ var _CustomPage = (function () {
                         "aria-label": "Your Production Possibility Frontier graph for Firewoods from 0 to 120 in logs vs. Fish from 0 to 3500 in calories. Refer above table for more details."
                     });
                 }
-                if (_currPageId == "l1p4" && _currPageQId == "Q3") {
+                if (_currPageId == "l1p4" &&  (_currPageQId == "Q3" ||  _currPageQId == "Q7")) {
                     $("#questionIntro").find(".highcharts-container").attr("aria-hidden", "true");
                     $("#questionIntro").attr({
                         "aria-label": "Friday's Production Possibility Frontier graph for Firewoods from 0 to 120 in logs vs. Fish from 0 to 6500 in calories. Refer above table for more details."
                     });
+                    
                 }
                 if (_currPageId == "l2p2" && (_currPageQId == "Q9" || _currPageQId == "Q10" || _currPageQId == "Q11" || _currPageQId == "Q12" || _currPageQId == "Q13" || _currPageQId == "Q14")) {
                     $("#questionIntro").find(".highcharts-container").attr("aria-hidden", "true");
