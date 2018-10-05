@@ -117,7 +117,6 @@ $(document).ready(function () {
     _Template.LoadTopSlider();
     _Module.Init();
     //NM: Need to check
-    debugger;
     var bookmarkdata = _Navigator.GetBookmarkData();
     var jsonObj = {};
     if (!_Common.IsEmptyObject(bookmarkdata) && bookmarkdata.pageId!=undefined) {

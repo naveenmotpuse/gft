@@ -141,7 +141,6 @@ $(function () {
                     prevdef = true;
                     break;
                 case keys.enter:
-                    debugger;
                     var levelPageId = $(event.target).find(".menuitem").attr("data-id");
                     _Navigator.LoadPage(levelPageId);
                     $("#appmenu li").attr("aria-expanded", false).css({ 'background': '#045C42' });
@@ -158,7 +157,6 @@ $(function () {
             return false;
         });
         el.addEventListener("click", function (event) {
-            debugger;
             var levelPageId = event.target.getAttribute("data-id");
             //_Navigator.LoadPage(levelPageId);
             var jsonObj = {};

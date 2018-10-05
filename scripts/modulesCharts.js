@@ -471,7 +471,6 @@ var _ModuleCharts = (function () {
                 },
                 tooltip: {                    
                     formatter: function () {
-                        debugger;
                         return this.x + ' logs (' + TimePPFTable[this.point.index][0] + ' hours), ' + this.y + ' cals (' + TimePPFTable[this.point.index][1]+ ' hours)';
                     },
                     snap:0

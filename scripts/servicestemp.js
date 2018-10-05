@@ -345,7 +345,6 @@ var LevelAccess = (function () {
 
 // 2. User Scoring
 var g_userScore = (function () {
-    debugger;
     var arrScore = [0, 0, 0, 0],
         bestScore = [0, 0, 0, 0];
 
@@ -388,7 +387,6 @@ var g_userScore = (function () {
             }
         },
         UpdateBestScore: function (idx) {
-            debugger;
             if (bestScore[idx] < arrScore[idx]) {
                 bestScore[idx] = arrScore[idx];
             }

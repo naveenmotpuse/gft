@@ -698,7 +698,6 @@ var _CustomQuestion = (function () {
 var _CustomPage = (function () {
     return {
         OnPageLoad: function () {
-            debugger;
             var currPage = _Navigator.GetCurrentPage();
             if(true || window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1"){
                 $('.exambtnsubmindiv').hide();
@@ -774,7 +773,6 @@ var _CustomPage = (function () {
             var _currPageId = _currentPage.pageId;
             var _currPageQId = '';
             if (_currentPage.questions.length > 0) {
-                debugger;
                 _currPageQId = _Question.GetCurrentQuestion().Id;
                 //for (var n21 = 0; n21 < _currentPage.questions.length; n21++) {
                     //if (_currentPage.questions[n21].isCurrent) {

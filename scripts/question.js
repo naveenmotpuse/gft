@@ -183,7 +183,6 @@
             });
         },
         DisplayRemainingDataInFeedback: function () {
-            debugger;
             var activityDataArr = DataStorage.getActivityData();   
             if(activityDataArr.length>0){         
                 if(activityDataArr[activityDataArr.length-1]!=undefined && activityDataArr[activityDataArr.length-1].tradeData!=undefined){
@@ -452,7 +451,6 @@
                         }
                     }
                 } else if (_optD.type == "input") {
-                    debugger;                    
                     if (_optD.isCorrect && _optD.answer == $("#" + _optD.id).val()) {
                         $("#" + _optD.id).css({
                             'color': ColorCodes.green,
