@@ -96,6 +96,12 @@
             }
             return pyes;
         },
+        EndLevel: function (level) {
+            //if(!ReviewMode.isOn()){
+              this.IncreamentAttempted(level);
+              _KnowdlServiceManager.CompleteLevel("Level" + level);
+            //}
+          },
     };
 })();
 

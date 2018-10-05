@@ -706,13 +706,17 @@ var EventManager = function () {
                     _currentQuestionObj.isAnswered = true;
                     _currentQuestionObj.points = parseFloat(_currentQuestionObj.totalPoints);
                     currPage.IsComplete = true;
-                    Module.IncreamentAttempted(_currentQuestionObj.datalevel);
                     _Question.Loadfeedback(0);
                 }
 
                 DataStorage.updateCollection();
                 _Navigator.UpdateScore();
-                $("#linknext").k_enable()
+                //activity is complete and page is last then increment the attempt
+                if(_currentQuestionObj.isAnswered) { // TODO: add end page condition
+                    Module.IncreamentAttempted(_currentQuestionObj.datalevel);
+                }
+                $("#linknext").k_enable();
+
             } else if (diereason == "less_fish" || diereason == "you_die") {
                 if (currPage.pageId == "l4p5") {
                     if (diereason2 == "wood") {
