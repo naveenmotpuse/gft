@@ -30,6 +30,9 @@
             //Get SessionData from service manager.
             _sessionData = _EconLabServiceManager.GetSessionData()
 
+            // to disable the levels on init
+            _LevelAccess.InitLevels();
+
             //Init Session Data
             if((typeof _sessionData == "undefined") || (typeof _sessionData == "string" && $.trim(_sessionData)=="")){
                 _sessionData.attempts = [];

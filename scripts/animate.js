@@ -714,8 +714,8 @@ var EventManager = function () {
                 $("#linknext").k_enable();
                 
                 //activity is complete and page is last then increment the attempt
-                if(_currentQuestionObj.isAnswered && !_Question.GetCurrentQuestion().isAnswered) { // TODO: add end page condition
-                    _Module.IncrementAttempted(_currentQuestionObj.datalevel);
+                if(_currentQuestionObj.isAnswered) { // TODO: add end page condition
+                    _Module.IncrementAttempted(currPage.datalevel);
                 }
                 if(_currentQuestionObj.isAnswered) {
                     _Module.SaveSessionData();
