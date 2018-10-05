@@ -174,7 +174,7 @@
                 _data.LevelPoints = g_userScore.GetLevelScore(idx)
 
                 //Calculate level score
-                var l_allLevels = LevelAccess.GetAllLevelsArray();
+                var l_allLevels = _LevelAccess.GetAllLevelsArray();
                 _data.LevelScore = (g_userScore.GetLevelScore(idx) / l_allLevels[idx].totQs) * 100;
 
                 _data.OverallTimeSpent = parseInt((new Date().getTime() - _startTime.getTime()) / 1000) + g_TPIDuration;

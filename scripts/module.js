@@ -3,14 +3,15 @@
     var _attempt = {
         status:AttemptStatus.new, 
         bookmarkData:{}, 
-        navigationData:{}
+        navigationData:{},
+        levels: [{}, {}, {}, {}, {}],
     }   
     function save_session_data (_param_status) {
         var lastAttIndex = _sessionData.attempts.length-1;                
         _sessionData.attempts[lastAttIndex].status = _param_status;
         _sessionData.attempts[lastAttIndex].bookmarkData = _Navigator.GetBookmarkData();
         _sessionData.attempts[lastAttIndex].navigationData = _Navigator.GetNavigationData();
-        _sessionData.attempts[lastAttIndex].navigationData = _LevelAccess.GetLevelsData();
+        //_sessionData.attempts[lastAttIndex].levels = _LevelAccess.GetLevelsData();
         _sessionData.attempts[lastAttIndex].ScenarioIndex = _Scenario.GetScenarioIndex();
         _sessionData.attempts[lastAttIndex].k_bookmarkData = _KnowdlServiceManager.GetBookmarking();
         _EconLabServiceManager.SaveSessionData(_sessionData)
@@ -25,7 +26,7 @@
             //It calls webservice call to get launchdata, statedata and settings
             _EconLabServiceManager.InitLaunch();
             _EconLabServiceManager.InitSettings();
-            LevelAccess.SetVisibleLevels(_EconLabServiceManager.GetSettings());
+            _LevelAccess.SetVisibleLevels(_EconLabServiceManager.GetSettings());
             //Get SessionData from service manager.
             _sessionData = _EconLabServiceManager.GetSessionData()
 
@@ -42,12 +43,13 @@
             } else if(_Common.IsEmptyObject(_sessionData)){
                 _sessionData.attempts = [];
                 _sessionData.attempts.push(_attempt)                
-            } else{  
+            } else {  
                 var lastAttIndex = _sessionData.attempts.length-1                    
                 _KnowdlServiceManager.InitLaunch(_EconLabServiceManager.GetLaunchData());
                 _KnowdlServiceManager.InitBookmarking( _sessionData.attempts[lastAttIndex].k_bookmarkData)                
                 _Navigator.InitBookmarkData(_sessionData.attempts[lastAttIndex].bookmarkData)
                 _Navigator.InitNavigationData(_sessionData.attempts[lastAttIndex].navigationData);
+                //_LevelAccess.SetLevelsData(_sessionData.attempts[lastAttIndex].levels);
                 _Scenario.SetScenarioIndex(_sessionData.attempts[lastAttIndex].ScenarioIndex);                
             }
             if (_Settings.enableCache) {
