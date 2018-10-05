@@ -461,7 +461,6 @@ var EventManager = function () {
 
         },
         OnTryAgain: function () {
-            debugger;
             _Animation.day();
             Table.hide();
             var fishhrs = 0;
@@ -595,7 +594,6 @@ var EventManager = function () {
                 $("#appmenu").k_enable();
             }
             $("#assist-txt").attr("aria-hidden","true");
-            //debugger;
             _Animation.day();
             var currPage = _Navigator.GetCurrentPage();
             var isdie = false;
