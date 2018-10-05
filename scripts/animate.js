@@ -711,11 +711,15 @@ var EventManager = function () {
 
                 DataStorage.updateCollection();
                 _Navigator.UpdateScore();
-                //activity is complete and page is last then increment the attempt
-                if(_currentQuestionObj.isAnswered) { // TODO: add end page condition
-                    Module.IncreamentAttempted(_currentQuestionObj.datalevel);
-                }
                 $("#linknext").k_enable();
+                
+                //activity is complete and page is last then increment the attempt
+                if(_currentQuestionObj.isAnswered && !_Question.GetCurrentQuestion().isAnswered) { // TODO: add end page condition
+                    _Module.IncrementAttempted(_currentQuestionObj.datalevel);
+                }
+                if(_currentQuestionObj.isAnswered) {
+                    _Module.SaveSessionData();
+                }                
 
             } else if (diereason == "less_fish" || diereason == "you_die") {
                 if (currPage.pageId == "l4p5") {
