@@ -1,11 +1,12 @@
 //1. Level Access
-var LevelAccess = (function () {
+var _LevelAccess = (function () {
   var visibleLevels = JSON.parse('{"Intro": true, "level1": true, "level2": true, "level3": true, "level4": true }');
+  var levels = [{}, {}, {}, {}],
   var tempVisLvls = [
     {
-      level: "intro", //datalevel
+      level: "intro",
       pgid: 'intro',
-      isLevel: true,
+      isLevel: false,
     }, {
       level: "level1",
       pgid: 'l1p1',
@@ -30,6 +31,9 @@ var LevelAccess = (function () {
     }];
 
   return {
+    GetLevelsData: function() {
+      return levels;
+    },
     GetVisibleLevels: function() {
       return visibleLevels;
     },
@@ -47,13 +51,15 @@ var LevelAccess = (function () {
       }
       return false;
     },
-  IsLevelAttempted: function (_indx) {
+    IsLevelAttempted: function (_indx) {
       var pyes = false;
+
+      var launchData = _EconLabServiceManager.GetLaunchData();
       if (tempVisLvls[_indx].isLevel) {
-        if (TPIData.Mode != LaunchMode.review) {
-          if (TPIData.AllowedAttempts > 0 &&
+        if (launchData.Mode != LaunchModes.review) {
+          if (launchData.AllowedAttempts > 0 &&
               TPIAttempts.Attempts[attLength - 1].levels[tempVisLvls[_indx].id].attempted != undefined &&
-              TPIAttempts.Attempts[attLength - 1].levels[tempVisLvls[_indx].id].attempted >= TPIData.AllowedAttempts) {
+              TPIAttempts.Attempts[attLength - 1].levels[tempVisLvls[_indx].id].attempted >= launchData.AllowedAttempts) {
             pyes = true;
           }
         }

@@ -10,6 +10,7 @@
         _sessionData.attempts[lastAttIndex].status = _param_status;
         _sessionData.attempts[lastAttIndex].bookmarkData = _Navigator.GetBookmarkData();
         _sessionData.attempts[lastAttIndex].navigationData = _Navigator.GetNavigationData();
+        _sessionData.attempts[lastAttIndex].navigationData = _LevelAccess.GetLevelsData();
         _sessionData.attempts[lastAttIndex].ScenarioIndex = _Scenario.GetScenarioIndex();
         _sessionData.attempts[lastAttIndex].k_bookmarkData = _KnowdlServiceManager.GetBookmarking();
         _EconLabServiceManager.SaveSessionData(_sessionData)
@@ -68,7 +69,31 @@
                 var duration = _Navigator.GetTotalDuration();
                 _EconLabServiceManager.PostFinalGrade(totalPoints, duration);
             }            
-        }                
+        },
+        IncrementAttempted: function (levelNo) {
+            //if (TPIData.Mode != LaunchModes.review) {
+              var cLevel = _sessionData.attempts[_sessionData.attempts.length-1].levels[levelNo];
+              if (cLevel.attempted === undefined) {
+                cLevel.attempted = 0;
+              }
+              cLevel.attempted++;
+            //}
+        },
+        IsLevelAttempted: function (_indx) {
+            var pyes = false;
+      
+            var launchData = _EconLabServiceManager.GetLaunchData();
+            if (tempVisLvls[_indx].isLevel) {
+              if (launchData.Mode != LaunchModes.review) {
+                if (launchData.AllowedAttempts > 0 &&
+                    _sessionData.attempts[_sessionData.attempts.length-1].levels[tempVisLvls[_indx].id].attempted != undefined &&
+                    _sessionData.attempts[_sessionData.attempts.length-1].levels[tempVisLvls[_indx].id].attempted >= launchData.AllowedAttempts) {
+                  pyes = true;
+                }
+              }
+            }
+            return pyes;
+        },
     };
 })();
 

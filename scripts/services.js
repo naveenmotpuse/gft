@@ -18,7 +18,7 @@
 
     return {
         InitLaunch: function (_ldata, _settings) {
-            if (_ldata.Mode.trim().toLowerCase() == _modes.do) {
+            if (_ldata.Mode.trim().toLowerCase() == LaunchModes.do) {
                 _levelstarttime = _startTime;                
                 _globals.DI_Id = _ldata.TargetId;
                 _globals.DITitle = _ldata.TargetTitle;
@@ -38,7 +38,7 @@
             }
         },
         InitLevel: function (lid) {
-            if (_globals.Mode.trim().toLowerCase() == _modes.do) {
+            if (_globals.Mode.trim().toLowerCase() == LaunchModes.do) {
                 //init current level incomplete, set start time 
                 _levelstarttime = new Date();
                 _data.Level_Id = lid;
@@ -46,7 +46,7 @@
             }
         },
         CompleteLevel: function (lid) {
-            if (_globals.Mode.trim().toLowerCase() == _modes.do) {
+            if (_globals.Mode.trim().toLowerCase() == LaunchModes.do) {
                 //mark Prev level Complete and post data.
                 if (_data.Level_Id != undefined && _data.Level_Id != "") {
                     if (_data.Level_Id == lid) {
@@ -62,7 +62,7 @@
         SendPageData: function (qObj) {
             //this method is called in UpdateAttemptMaxScore->UpdateUserAttempts to post question data
             //Need to call on pages where UpdateAttemptMaxScore is not called.
-            if (_globals.Mode.trim().toLowerCase() == _modes.do) {
+            if (_globals.Mode.trim().toLowerCase() == LaunchModes.do) {
                 QDetails = {};
                 if (qObj != undefined && qObj != null) {
                     QDetails.QId = qObj.QId;
@@ -86,14 +86,14 @@
             }
         },
         SetCompletion: function () {
-            if (_globals.Mode.trim().toLowerCase() == _modes.do) {
+            if (_globals.Mode.trim().toLowerCase() == LaunchModes.do) {
                 _data.QDetails = {};
                 _data.CompletionStatus = "Complete";
                 this.PostData(false);
             }
         },
         InitBookmarking: function (kBookmarking) {
-            if (_globals.Mode.trim().toLowerCase() == _modes.do) {
+            if (_globals.Mode.trim().toLowerCase() == LaunchModes.do) {
                 if (kBookmarking != undefined) {
                     _data.Level_Id = kBookmarking.Level_Id;
                     _data.LevelStatus = kBookmarking.LevelStatus;
@@ -123,7 +123,7 @@
         },
         PostLaunchData: function (p_async) {
             var _async = true;
-            if (_globals.Mode.trim().toLowerCase() == _modes.do) {
+            if (_globals.Mode.trim().toLowerCase() == LaunchModes.do) {
                 if (p_async != undefined && p_async == false) {
                     _async = false;
                 }
@@ -149,7 +149,7 @@
         },
         PostData: function (p_async) {
             var _async = true;
-            if (_globals.Mode.trim().toLowerCase() == _modes.do) {
+            if (_globals.Mode.trim().toLowerCase() == LaunchModes.do) {
                 if (p_async != undefined && p_async == false) {
                     _async = false;
                 }
@@ -239,16 +239,11 @@ var _EconLabServiceManager = (function () {
         TargetPoints: 1,
         AllowedAttempts: 0
     }
-    var _modes= {
-        "do": "do",
-        "review": "review",
-        "setup": "setup",    
-        "preview": "preview"
-    }    
+      
     var _sessionState = {}
     //Private functions
     function _grade_problem_and_report(_data) {
-        if (_launchData.Mode.trim().toLowerCase() == _modes.do) {
+        if (_launchData.Mode.trim().toLowerCase() == LaunchModes.do) {
             var jsonSerialized = JSON.stringify(_data);
             var servcUrl = _serviceurl + "/gldata/grade_problem_and_report/" + _launchData.SessionId + "/" + _launchData.TargetId + "/";
             $.ajax({
@@ -303,7 +298,7 @@ var _EconLabServiceManager = (function () {
         });
     }
     function _put_session_state_data(_data) {
-        if (_launchData.Mode.trim().toLowerCase() == _modes.do) {
+        if (_launchData.Mode.trim().toLowerCase() == LaunchModes.do) {
             var jsonSerialized = JSON.stringify(_data);
             //replace special characters.
             jsonSerialized = jsonSerialized.replace(/[^a-zA-Z ',"<>!~@#$%&*.+-=|\?()\[\]_{}\\ ]/g, "");
@@ -331,7 +326,7 @@ var _EconLabServiceManager = (function () {
             _get_settings();
         },   
         GetSessionDataSuccessCallback: function(_data){
-            
+
             var arr = window.location.href.split("/");
             _launchData.SessionId = arr[arr.length - 2];
 
@@ -366,12 +361,12 @@ var _EconLabServiceManager = (function () {
             }
         },        
         SaveSessionData: function(_data){            
-            if (_launchData.Mode.trim().toLowerCase() == _modes.do) {  
+            if (_launchData.Mode.trim().toLowerCase() == LaunchModes.do) {  
                 _put_session_state_data(_data); 
             }
         },
         PostFinalGrade: function (_p_totalPoints,_p_duration) {
-            if (_launchData.Mode.trim().toLowerCase() == _modes.do) {  
+            if (_launchData.Mode.trim().toLowerCase() == LaunchModes.do) {  
                 var studentdata = {};
                 studentdata.score = (Number(_p_totalPoints) * Number(_launchData.TargetPoints)).toFixed(2);
                 studentdata.duration = Number(_p_duration);

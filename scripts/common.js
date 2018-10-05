@@ -39,7 +39,7 @@ var AttemptStatus = {
     "complete":"complete"
 }
 
-var LaunchMode = {
+var LaunchModes = {
     "do": "do",
     "review": "review",
     "setup": "setup",    
