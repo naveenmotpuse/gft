@@ -706,6 +706,7 @@ var EventManager = function () {
                     _currentQuestionObj.isAnswered = true;
                     _currentQuestionObj.points = parseFloat(_currentQuestionObj.totalPoints);
                     currPage.IsComplete = true;
+                    Module.IncreamentAttempted(_currentQuestionObj.datalevel);
                     _Question.Loadfeedback(0);
                 }
 

@@ -1,7 +1,6 @@
 //1. Level Access
 var _LevelAccess = (function () {
   var visibleLevels = JSON.parse('{"Intro": true, "level1": true, "level2": true, "level3": true, "level4": true }');
-  //var levels = [{}, {}, {}, {}];
   var tempVisLvls = [
     {
       level: "intro",

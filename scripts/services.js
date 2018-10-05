@@ -9,13 +9,6 @@
 
     var _levelstarttime = new Date();
 
-    var _modes= {
-        "do": "do",
-        "review": "review",
-        "setup": "setup",    
-        "preview": "preview"
-    }   
-
     return {
         InitLaunch: function (_ldata, _settings) {
             if (_ldata.Mode.trim().toLowerCase() == LaunchModes.do) {
