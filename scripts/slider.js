@@ -80,7 +80,6 @@ var DataStorage = DataStorage || function (ui) {
             return _DataMap.day;
         },
         setWoodSliderVal: function (hrs) {
-            //debugger;
             var currPage = _Navigator.GetCurrentPage();
             if (currPage.isFriday) {
                 _DataMap._woodsLbs = Number(hrs) * AnimConfig.fridayWoodPerHr;
@@ -191,7 +190,6 @@ var _Slider = (function () {
             _Slider.sliderSchedule();
         },
         UpdateSliderFromInput: function (slidertype, woodhrs, fishhrs) {
-            //debugger;
             if (slidertype == "wood") {} else {}
             $("#w_val").text(woodhrs);
             $("#f_val").text(fishhrs);
@@ -279,7 +277,6 @@ var _Slider = (function () {
             if (currPage.hasTradeSlider) {
                 _TradeSlider.UpdateTradeSettings();
             }
-            //debugger;
             var calIdleHours = 12 - (val1+val2); 
             var txt = "Collect Wood " + val1 + " Hour Collect Fish " + val2 + " Hour " + "Daytime Schedule Collect Wood " + val1 + " Hour Collect Fish " + val2 + " Hour" + " Idle " + calIdleHours + " Hour";
             var txt1 = "Daytime Schedule Collect Wood " + val1 + " Hour Collect Fish " + val2 + " Hour" + " Idle " + calIdleHours + " Hour";
@@ -624,8 +621,6 @@ var _TradeSlider = (function () {
             this.SetTradeResult();
         },
         SetTradeResult: function () { 
-            debugger; 
-            console.log("SetTradeResult")      
             TradeResults.receivefish = TradeResults.givewood * TradeResults.onewoodfor;
               if(TradeResults.givefish == 0 && TradeResults.onewoodfor == 0){
                 TradeResults.receivewood = 0;
