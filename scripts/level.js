@@ -1,7 +1,7 @@
 //1. Level Access
 var _LevelAccess = (function() {
   var visibleLevels = JSON.parse(
-    '{"0": true, "1": true, "2": true, "3": true, "4": true}'
+    '{"0": true, "1": true, "2": false, "3": false, "4": false}'
   );
   var tempVisLvls = [
     {
@@ -50,6 +50,7 @@ var _LevelAccess = (function() {
     SetVisibleLevels: function(visLev) {
       visibleLevels = _Common.IsEmptyObject(visLev) ? visibleLevels : visLev;
     },
+    // check level visibility according to settings
     IsLevelVisible: function(lvl) {
       for (var key in visibleLevels) {
         if (visibleLevels.hasOwnProperty(key)) {
@@ -61,6 +62,7 @@ var _LevelAccess = (function() {
       }
       return false;
     },
+    // check if level attempt exided 
     IsLevelAttempted: function(_indx) {
       var pyes = false;
       var sessionData = _Module.Get();
@@ -76,7 +78,25 @@ var _LevelAccess = (function() {
       }
       return pyes;
     },
+    // check if all levels attempted with visible levels
     IsAllLevelsAttempted: function() {
+      var result = true;
+      var _this = this;
+      var Attempted = function(tmp) {
+        for (var i = 1; i <= tmp.length - 1; i++) {
+          if (_this.IsLevelVisible(tmp[i])) {
+            if (!_this.IsLevelAttempted(i)) {
+              result = false;
+              break;
+            }
+          }
+        }
+      };
+      Attempted(tempVisLvls);
+      return result;
+    },
+    // TODO: check if level attempts are exided with visible levels 
+    IsLevelComplete: function(lvlNo) {
       var result = true;
       var _this = this;
       var Attempted = function(tmp) {
@@ -159,11 +179,10 @@ var _LevelAccess = (function() {
       var levelObject = visibleLevels;
       for (var i = 0; i < Object.keys(levelObject).length; i++) {
         if (Object.keys(levelObject)[i] === i+'') {
-          if (levelObject[Object.keys(levelObject)[i]] === false) {
+          if (levelObject[Object.keys(levelObject)[i]] === false || this.IsLevelAttempted(i)) {
             $('.pgBgItem[data-level="' + i + '"],.levelbtnretry[data-level="' + i + '"]')
             .addClass("l_disabled")
             .attr({ "aria-disabled": "true" });
-           // $('.pgBgItem[data-level="' + i + '"] .pgBgItemFill::after').css("background","#c3c3c3");
           } else {
             $('.pgBgItem[data-level="' + i + '"],.levelbtnretry[data-level="' + i + '"]')
             .removeClass("l_disabled")

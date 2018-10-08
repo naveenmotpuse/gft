@@ -30,9 +30,6 @@
             //Get SessionData from service manager.
             _sessionData = _EconLabServiceManager.GetSessionData()
 
-            // to disable the levels on init
-            _LevelAccess.InitLevels();
-
             //Init Session Data
             if((typeof _sessionData == "undefined") || (typeof _sessionData == "string" && $.trim(_sessionData)=="")){
                 _sessionData.attempts = [];
@@ -61,6 +58,9 @@
             }
             _Scenario.ShuffleScenario();
             _Scenario.UpdateQuestionData();
+
+            // to disable the levels on init
+            _LevelAccess.InitLevels();
         },
         SaveSessionData: function(){                       
             if (_sessionData.attempts[_sessionData.attempts.length-1].status != AttemptStatus.complete) {
