@@ -725,8 +725,8 @@ var _CustomPage = (function () {
                 }
 
                 // set TPI completion
-                ServiceCalls.PostFinalGrade();
-                ServiceCalls.SaveSessionData();
+                _EconLabServiceManager.PostFinalGrade();
+                _EconLabServiceManager.SaveSessionData();
             }
             if (currPage.hasTimeSlider != undefined && currPage.hasTimeSlider) {
                 _Template.LoadRangeSlider();
