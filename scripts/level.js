@@ -95,23 +95,6 @@ var _LevelAccess = (function() {
       Attempted(tempVisLvls);
       return result;
     },
-    // TODO: check if level attempts are exided with visible levels 
-    IsLevelComplete: function(lvlNo) {
-      var result = true;
-      var _this = this;
-      var Attempted = function(tmp) {
-        for (var i = 1; i <= tmp.length - 1; i++) {
-          if (_this.IsLevelVisible(tmp[i])) {
-            if (!_this.IsLevelAttempted(i)) {
-              result = false;
-              break;
-            }
-          }
-        }
-      };
-      Attempted(tempVisLvls);
-      return result;
-    },
     GetLevelPageId: function(thisLevel, isNext) {
       var _nData = _Navigator.Get(),
         currPageId = 0;
@@ -179,12 +162,22 @@ var _LevelAccess = (function() {
       var levelObject = visibleLevels;
       for (var i = 0; i < Object.keys(levelObject).length; i++) {
         if (Object.keys(levelObject)[i] === i+'') {
-          if (levelObject[Object.keys(levelObject)[i]] === false || this.IsLevelAttempted(i)) {
-            $('.pgBgItem[data-level="' + i + '"],.levelbtnretry[data-level="' + i + '"]')
+          if (levelObject[Object.keys(levelObject)[i]] === false) {
+            $('.pgBgItem[data-level="' + i + '"]')
             .addClass("l_disabled")
             .attr({ "aria-disabled": "true" });
           } else {
-            $('.pgBgItem[data-level="' + i + '"],.levelbtnretry[data-level="' + i + '"]')
+            $('.pgBgItem[data-level="' + i + '"]')
+            .removeClass("l_disabled")
+            .removeAttr("aria-disabled");
+          }
+
+          if (levelObject[Object.keys(levelObject)[i]] === false || this.IsLevelAttempted(i)) {
+            $('.levelbtnretry[data-level="' + i + '"]')
+            .addClass("l_disabled")
+            .attr({ "aria-disabled": "true" });
+          } else {
+            $('.levelbtnretry[data-level="' + i + '"]')
             .removeClass("l_disabled")
             .removeAttr("aria-disabled");
           }
