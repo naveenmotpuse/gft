@@ -1,7 +1,7 @@
 //1. Level Access
 var _LevelAccess = (function() {
   var visibleLevels = JSON.parse(
-    '{"0": true, "1": true, "2": false, "3": false, "4": false}'
+    '{"0": true, "1": true, "2": true, "3": true, "4": true}'
   );
   var tempVisLvls = [
     {
@@ -68,8 +68,8 @@ var _LevelAccess = (function() {
       if (tempVisLvls[_indx].isLevel) {
         if (launchData.Mode != LaunchModes.review) {
           if (launchData.AllowedAttempts > 0 &&
-              sessionData.attempts[sessionData.attempts.length-1].levels[tempVisLvls[_indx].id].attempted != undefined &&
-              sessionData.attempts[sessionData.attempts.length-1].levels[tempVisLvls[_indx].id].attempted >= launchData.AllowedAttempts) {
+              sessionData.attempts[sessionData.attempts.length-1].levels[tempVisLvls[_indx].level].attempted != undefined &&
+              sessionData.attempts[sessionData.attempts.length-1].levels[tempVisLvls[_indx].level].attempted >= launchData.AllowedAttempts) {
             pyes = true;
           }
         }
