@@ -727,6 +727,11 @@ var _CustomPage = (function () {
                 // set TPI completion
                 _Module.PostFinalGrade();
                 _Module.SaveSessionData();
+                if(_LevelAccess.IsAllLevelsAttempted()){
+                    $(".exambtnretry").k_disable();
+                }else{
+                    $(".exambtnretry").k_enable();
+                }
             }
             if (currPage.hasTimeSlider != undefined && currPage.hasTimeSlider) {
                 _Template.LoadRangeSlider();
