@@ -1,7 +1,7 @@
 //1. Level Access
 var _LevelAccess = (function() {
   var visibleLevels = JSON.parse(
-    '{"0": true, "1": true, "2": false, "3": true, "4": true}'
+    '{"0": true, "1": true, "2": false, "3": false, "4": true}'
   );
   var tempVisLvls = [
     {
@@ -159,17 +159,19 @@ var _LevelAccess = (function() {
       return gotopageid;
     },
     InitLevels: function() {
+      debugger;
       var levelObject = visibleLevels;
       for (var i = 0; i < Object.keys(levelObject).length; i++) {
         if (Object.keys(levelObject)[i] === i+'') {
           if (levelObject[Object.keys(levelObject)[i]] === false) {
-            $('div[data-level="' + i + '"]')
-              .addClass("l_disabled")
-              .attr({ "aria-disabled": "true" });
+            $('.pgBgItem[data-level="' + i + '"],.levelbtnretry[data-level="' + i + '"]')
+            .addClass("l_disabled")
+            .attr({ "aria-disabled": "true" });
+           // $('.pgBgItem[data-level="' + i + '"] .pgBgItemFill::after').css("background","#c3c3c3");
           } else {
-            $('div[data-level="' + i + '"]')
-              .removeClass("l_disabled")
-              .removeAttr("aria-disabled");
+            $('.pgBgItem[data-level="' + i + '"],.levelbtnretry[data-level="' + i + '"]')
+            .removeClass("l_disabled")
+            .removeAttr("aria-disabled");
           }
         }
       }
