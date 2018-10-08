@@ -422,6 +422,7 @@ var _Navigator = (function () {
                             $("#appmenu").k_enable();
                             $("#appmenu").removeAttr('disabled');
                             $("#appmenu").removeClass('disabled');
+                            _LevelAccess.InitLevels();
                         }
                     });
                 })
