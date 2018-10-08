@@ -126,16 +126,12 @@ var _LevelAccess = (function() {
       debugger;
       var previous = function(tmp, key) {
         for (var i = tmp.length - 1; i > 1; i--) {
-          if (tmp[i].level === key) {
+          if (tmp[i].level === key+'') {
             do {
               i--;
             } while (i > 0 && _this.IsLevelVisible(tmp[i]) == false);
-            var lvl = Number(tmp[i].level.replace("level", ""));
-            if (tmp[i].level == "0") {
-              lvl = 0;
-            } else {
-              gotopageid = _this.GetLevelPageId(lvl);
-            }
+            var lvl = Number(tmp[i].level);
+            gotopageid = _this.GetLevelPageId(lvl);
             break;
           }
         }
