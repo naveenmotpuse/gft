@@ -289,6 +289,7 @@ var _Navigator = (function () {
             dataurl: "summary.htm",
             datalevel: 5,
             questions: [],
+            isLevelStart:true,
             isLevelEnd:true,
             isLastPage: true,
         }
