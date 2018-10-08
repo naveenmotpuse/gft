@@ -125,7 +125,7 @@ var _LevelAccess = (function() {
       var _this = this;
       debugger;
       var previous = function(tmp, key) {
-        for (var i = tmp.length - 1; i > 1; i--) {
+        for (var i = tmp.length - 1; i > 0; i--) {
           if (tmp[i].level === key+'') {
             do {
               i--;
