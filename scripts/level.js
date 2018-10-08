@@ -1,7 +1,7 @@
 //1. Level Access
 var _LevelAccess = (function() {
   var visibleLevels = JSON.parse(
-    '{"Intro": true, "level1": true, "level2": true, "level3": true, "level4": true }'
+    '{"Intro": true, "level1": true, "level2": false, "level3": true, "level4": true }'
   );
   var tempVisLvls = [
     {
@@ -173,7 +173,8 @@ var _LevelAccess = (function() {
       //return gotopageid;
       _Navigator.LoadPage(gotopageid);
     },
-    InitLevels: function(levelObject) {
+    InitLevels: function() {
+      var levelObject = visibleLevels;
       for (var i = 0; i < Object.keys(levelObject).length; i++) {
         if (Object.keys(levelObject)[i] === "level" + i) {
           if (levelObject[Object.keys(levelObject)[i]] === false) {
