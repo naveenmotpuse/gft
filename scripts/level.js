@@ -1,37 +1,37 @@
 //1. Level Access
 var _LevelAccess = (function() {
   var visibleLevels = JSON.parse(
-    '{"Intro": true, "level1": true, "level2": false, "level3": true, "level4": true }'
+    '{"0": true, "1": true, "2": false, "3": true, "4": true}'
   );
   var tempVisLvls = [
     {
-      level: "intro",
-      pgid: "intro",
+      level: "0",
+      pgid: "l1p1",
       isLevel: false
     },
     {
-      level: "level1",
-      pgid: "l1p1",
+      level: "1",
+      pgid: "l1p2",
       isLevel: true
     },
     {
-      level: "level2",
+      level: "2",
       pgid: "l2p1",
       isLevel: true
     },
     {
-      level: "level3",
+      level: "3",
       pgid: "l3p1",
       isLevel: true
     },
     {
-      level: "level4",
+      level: "4",
       id: 4,
       pgid: "l4p1",
       isLevel: true
     },
     {
-      level: "summary",
+      level: "5",
       pgid: "summary",
       isLevel: false
     }
@@ -86,7 +86,7 @@ var _LevelAccess = (function() {
       var Attempted = function(tmp) {
         for (var i = 1; i <= tmp.length - 1; i++) {
           if (_this.IsLevelVisible(tmp[i])) {
-            if (!this.IsLevelAttempted(i)) {
+            if (!_this.IsLevelAttempted(i)) {
               result = false;
               break;
             }
@@ -131,10 +131,10 @@ var _LevelAccess = (function() {
               i--;
             } while (i > 0 && _this.IsLevelVisible(tmp[i]) == false);
             var lvl = Number(tmp[i].level.replace("level", ""));
-            if (tmp[i].level == "intro") {
+            if (tmp[i].level == "0") {
               lvl = 0;
             } else {
-              gotopageid = _Navigator.GetLevelPageId(lvl);
+              gotopageid = _this.GetLevelPageId(lvl);
             }
             break;
           }
@@ -160,23 +160,23 @@ var _LevelAccess = (function() {
               i < tmp.length - 2
             );
             var lvl = Number(tmp[i].level.replace("level", ""));
-            if (tmp[i].level == "intro") {
+            if (tmp[i].level == "0") {
               lvl = 0;
             } else {
-              gotopageid = _Navigator.GetLevelPageId(lvl, true);
+              gotopageid = _this.GetLevelPageId(lvl, true);
             }
             break;
           }
         }
       };
-      next(tempVisLvls, thisLevel);
-      //return gotopageid;
-      _Navigator.LoadPage(gotopageid);
+      next(tempVisLvls, thisLevel+'');
+      return gotopageid;
+      //_Navigator.LoadPage(gotopageid);
     },
     InitLevels: function() {
       var levelObject = visibleLevels;
       for (var i = 0; i < Object.keys(levelObject).length; i++) {
-        if (Object.keys(levelObject)[i] === "level" + i) {
+        if (Object.keys(levelObject)[i] === i+'') {
           if (levelObject[Object.keys(levelObject)[i]] === false) {
             $('div[data-level="' + i + '"]')
               .addClass("l_disabled")

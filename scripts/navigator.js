@@ -480,7 +480,9 @@ var _Navigator = (function () {
                     IsAllQCompleted = false;
                 }
                 if (IsAllQCompleted) {
-                    this.LoadPage(_currentPageObject.nextPageId, undefined, 'next');
+                    var nxtPageId = _LevelAccess.JumpToNextAccessibleLevel(_currentPageObject.datalevel);
+                    //_currentPageObject.nextPageId
+                    this.LoadPage(nxtPageId, undefined, 'next');
 
                 } else {
                     this.UpdateProgressBar();
@@ -490,7 +492,9 @@ var _Navigator = (function () {
                 if (_currentPageObject.IsComplete == undefined || !_currentPageObject.IsComplete) {
                     this.CompletePage()
                 }
-                this.LoadPage(_currentPageObject.nextPageId, undefined, 'next');
+                var nxtPageId = _LevelAccess.JumpToNextAccessibleLevel(_currentPageObject.datalevel);
+                //_currentPageObject.nextPageId
+                this.LoadPage(nxtPageId, undefined, 'next');
             }
         },
         UpdateMenuVisibility: function () {
