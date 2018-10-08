@@ -141,37 +141,26 @@ var _LevelAccess = (function() {
         }
       };
       previous(tempVisLvls, thisLevel);
-
-      //return gotopageid;
-      _Navigator.LoadPage(gotopageid);
+      return gotopageid;
     },
     JumpToNextAccessibleLevel: function(thisLevel) {
       debugger;
       var gotopageid = 0;
       var _this = this;
       var next = function(tmp, key) {
-        for (var i = 0; i < tmp.length - 2; i++) {
+        for (var i = 0; i < tmp.length - 1; i++) {
           if (tmp[i].level === key) {
             do {
               i++;
-            } while (
-              (_this.IsLevelVisible(tmp[i]) == false ||
-                _this.IsLevelAttempted(i)) &&
-              i < tmp.length - 2
-            );
-            var lvl = Number(tmp[i].level.replace("level", ""));
-            if (tmp[i].level == "0") {
-              lvl = 0;
-            } else {
-              gotopageid = _this.GetLevelPageId(lvl, true);
-            }
+            } while ((_this.IsLevelVisible(tmp[i]) == false || _this.IsLevelAttempted(i)) && i < tmp.length - 1);
+            var lvl = tmp[i].level;
+            gotopageid = _this.GetLevelPageId(lvl, true);
             break;
           }
         }
       };
       next(tempVisLvls, thisLevel+'');
       return gotopageid;
-      //_Navigator.LoadPage(gotopageid);
     },
     InitLevels: function() {
       var levelObject = visibleLevels;

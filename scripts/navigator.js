@@ -29,6 +29,7 @@ var _Navigator = (function () {
             isStartPage: true,
             hasAnimation: true,
             isLevelStart:true,
+            isLevelEnd:true
         },
         "l1p2": {
             pageId: "l1p2",
@@ -93,7 +94,8 @@ var _Navigator = (function () {
             }],
             hasTimeSlider: true,
             hasAnimation: true,
-            isFriday: true,            
+            isFriday: true,
+            isLevelEnd:true       
         },
         "l2p1": {
             pageId: "l2p1",
@@ -154,6 +156,7 @@ var _Navigator = (function () {
             hasTimeSlider: true,
             hasTradeSlider: true,
             hasAnimation: true,
+            isLevelEnd:true
         },
         "l3p1": {
             pageId: "l3p1",
@@ -201,6 +204,7 @@ var _Navigator = (function () {
             hasTimeSlider: true,
             hasTradeSlider: true,
             hasAnimation: true,
+            isLevelEnd:true
         },
         "l4p1": {
             pageId: "l4p1",
@@ -276,6 +280,7 @@ var _Navigator = (function () {
             hasTimeSlider: true,
             hasTradeSlider: true,
             hasAnimation: true,
+            isLevelEnd:true
         },
         "summary": {
             pageId: "summary",
@@ -480,8 +485,10 @@ var _Navigator = (function () {
                     IsAllQCompleted = false;
                 }
                 if (IsAllQCompleted) {
-                    var nxtPageId = _LevelAccess.JumpToNextAccessibleLevel(_currentPageObject.datalevel);
-                    //_currentPageObject.nextPageId
+                    var nxtPageId = _currentPageObject.nextPageId
+                    if(_currentPageObject.isLevelEnd) {
+                        nxtPageId = _LevelAccess.JumpToNextAccessibleLevel(_currentPageObject.datalevel);
+                    }                    
                     this.LoadPage(nxtPageId, undefined, 'next');
 
                 } else {
@@ -492,8 +499,10 @@ var _Navigator = (function () {
                 if (_currentPageObject.IsComplete == undefined || !_currentPageObject.IsComplete) {
                     this.CompletePage()
                 }
-                var nxtPageId = _LevelAccess.JumpToNextAccessibleLevel(_currentPageObject.datalevel);
-                //_currentPageObject.nextPageId
+                var nxtPageId = _currentPageObject.nextPageId;
+                if(_currentPageObject.isLevelEnd) {
+                    nxtPageId = _LevelAccess.JumpToNextAccessibleLevel(_currentPageObject.datalevel);
+                }
                 this.LoadPage(nxtPageId, undefined, 'next');
             }
         },
