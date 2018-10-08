@@ -1,7 +1,7 @@
 //1. Level Access
 var _LevelAccess = (function() {
   var visibleLevels = JSON.parse(
-    '{"0": true, "1": true, "2": false, "3": false, "4": true}'
+    '{"0": true, "1": true, "2": false, "3": false, "4": false}'
   );
   var tempVisLvls = [
     {
@@ -63,17 +63,13 @@ var _LevelAccess = (function() {
     },
     IsLevelAttempted: function(_indx) {
       var pyes = false;
-
+      var sessionData = _Module.Get();
       var launchData = _EconLabServiceManager.GetLaunchData();
       if (tempVisLvls[_indx].isLevel) {
         if (launchData.Mode != LaunchModes.review) {
-          if (
-            launchData.AllowedAttempts > 0 &&
-            TPIAttempts.Attempts[attLength - 1].levels[tempVisLvls[_indx].id]
-              .attempted != undefined &&
-            TPIAttempts.Attempts[attLength - 1].levels[tempVisLvls[_indx].id]
-              .attempted >= launchData.AllowedAttempts
-          ) {
+          if (launchData.AllowedAttempts > 0 &&
+              sessionData.attempts[sessionData.attempts.length-1].levels[tempVisLvls[_indx].id].attempted != undefined &&
+              sessionData.attempts[sessionData.attempts.length-1].levels[tempVisLvls[_indx].id].attempted >= launchData.AllowedAttempts) {
             pyes = true;
           }
         }

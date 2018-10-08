@@ -230,7 +230,7 @@ var _EconLabServiceManager = (function () {
         ResourceId: '',
         ResourceTitle:'',
         TargetPoints: 1,
-        AllowedAttempts: 0
+        AllowedAttempts: 1
     }
       
     var _sessionState = {}

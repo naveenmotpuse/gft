@@ -84,21 +84,6 @@
               cLevel.attempted++;
             //}
         },
-        IsLevelAttempted: function (_indx) {
-            var pyes = false;
-      
-            var launchData = _EconLabServiceManager.GetLaunchData();
-            if (tempVisLvls[_indx].isLevel) {
-              if (launchData.Mode != LaunchModes.review) {
-                if (launchData.AllowedAttempts > 0 &&
-                    _sessionData.attempts[_sessionData.attempts.length-1].levels[tempVisLvls[_indx].id].attempted != undefined &&
-                    _sessionData.attempts[_sessionData.attempts.length-1].levels[tempVisLvls[_indx].id].attempted >= launchData.AllowedAttempts) {
-                  pyes = true;
-                }
-              }
-            }
-            return pyes;
-        },
         EndLevel: function (level) {
             //if(!ReviewMode.isOn()){
               this.IncreamentAttempted(level);
