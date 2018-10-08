@@ -289,6 +289,7 @@ var _Navigator = (function () {
             dataurl: "summary.htm",
             datalevel: 5,
             questions: [],
+            isLevelEnd:true,
             isLastPage: true,
         }
     }
@@ -462,12 +463,20 @@ var _Navigator = (function () {
             if (_currentPageObject.questions.length > 0) {
                 //if current question is first then jump to prev page
                 if(_Question.GetCurrentQuestion().Id == _currentPageObject.questions[0].Id) {
-                    this.LoadPage(_currentPageObject.prevPageId, undefined,'prev');
+                    var prvPageId = _currentPageObject.prevPageId;
+                    if(_currentPageObject.isLevelStart) {
+                        prvPageId = _LevelAccess.JumpToPreviousAvailableLevel(_currentPageObject.datalevel);
+                    }
+                    this.LoadPage(prvPageId, undefined,'prev');
                 } else {
                     _Question.Prev();
                 }
             } else {
-                this.LoadPage(_currentPageObject.prevPageId, undefined,'prev');
+                var prvPageId = _currentPageObject.prevPageId;
+                if(_currentPageObject.isLevelStart) {
+                    prvPageId = _LevelAccess.JumpToPreviousAvailableLevel(_currentPageObject.datalevel);
+                }
+                this.LoadPage(prvPageId, undefined,'prev');
             }
         },
         Next: function () {
