@@ -723,6 +723,10 @@ var _CustomPage = (function () {
                         $("#imglevel" + i).attr("alt", "Level " + i + " : 1 star").attr("aria-label", "Level " + i + " : 1 star")
                     }
                 }
+
+                // set TPI completion
+                _EconLabServiceManager.PostFinalGrade();
+                _EconLabServiceManager.SaveSessionData();
             }
             if (currPage.hasTimeSlider != undefined && currPage.hasTimeSlider) {
                 _Template.LoadRangeSlider();

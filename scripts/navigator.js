@@ -588,11 +588,13 @@ var _Navigator = (function () {
             var ObtainPoint = 0;
             var totalPoints = 0;
             for (var i in _NData) {
-                if (_NData[i].questions.length > 0) {
-                    for (var j = 0; j < _NData[i].questions.length; j++) {
-                        totalPoints = totalPoints + _QData[_NData[i].questions[j].Id].totalPoints;
-                        if (_NData[i].questions[j].isAnswered != undefined && _NData[i].questions[j].isAnswered) {
-                            ObtainPoint = ObtainPoint + (_NData[i].questions[j].points);
+                if(_LevelAccess.IsLevelVisible({"level": _NData[i].datalevel})) {
+                    if (_NData[i].questions.length > 0) {
+                        for (var j = 0; j < _NData[i].questions.length; j++) {
+                            totalPoints = totalPoints + _QData[_NData[i].questions[j].Id].totalPoints;
+                            if (_NData[i].questions[j].isAnswered != undefined && _NData[i].questions[j].isAnswered) {
+                                ObtainPoint = ObtainPoint + (_NData[i].questions[j].points);
+                            }
                         }
                     }
                 }
