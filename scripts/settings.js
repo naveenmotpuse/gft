@@ -1,13 +1,27 @@
-
 var _problem_guid = "";
 var _resourceId = "";
 var _interactivesesstings = {};
 var _serviceurl = window.location.origin + "/econservice";
 
+var Utility = function () {
+    return {
+        shuffle: function (e) {
+            for (var t, n, r = e.length; 0 !== r;) n = Math.floor(Math.random() * r), r -= 1, t = e[r], e[r] = e[n], e[n] = t;
+            return e
+        },
+        getParameterByName: function (e, t) {
+            e = e.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+            var n = new RegExp("[\\?&]" + e + "=([^&#]*)"),
+                r = n.exec(t);
+            return null === r ? "" : decodeURIComponent(r[1].replace(/\+/g, " "))
+        },
+    }
+}();
+
 $(document).ready(function () {
     //debugger;
-    _problem_guid = document.getParameterByName("pid");
-    _resourceId = document.getParameterByName("resid");
+    _problem_guid = Utility.getParameterByName("pid");
+    _resourceId = Utility.getParameterByName("resid");
     getInflationSettings();
 })
 
