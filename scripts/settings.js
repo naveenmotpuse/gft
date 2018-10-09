@@ -125,7 +125,7 @@ function check_for_active_users() {
     });
 }
 
-$("savebtn").on("click", function () {
+$("#savebtn").on("click", function () {
     //debugger;
     if ($(this).closest(".savebtn").hasClass("k_disable"))
         return;
