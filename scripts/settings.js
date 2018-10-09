@@ -20,8 +20,8 @@ var Utility = function () {
 
 $(document).ready(function () {
     //debugger;
-    _problem_guid = Utility.getParameterByName("pid");
-    _resourceId = Utility.getParameterByName("resid");
+    _problem_guid = Utility.getParameterByName("pid", window.location.href);
+    _resourceId = Utility.getParameterByName("resid", window.location.href);
     getInflationSettings();
 })
 
