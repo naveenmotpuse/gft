@@ -1,7 +1,7 @@
 //1. Level Access
 var _LevelAccess = (function() {
   var visibleLevels = JSON.parse(
-    '{"0": true, "1": true, "2": false, "3": false, "4": false}'
+    '{"0": true, "1": true, "2": true, "3": true, "4": true}'
   );
   var tempVisLvls = [
     {
@@ -160,26 +160,20 @@ var _LevelAccess = (function() {
     InitLevels: function() {
       debugger;
       var levelObject = visibleLevels;
-      for (var i = 0; i < Object.keys(levelObject).length; i++) {
-        if (Object.keys(levelObject)[i] === i+'') {
-          if (levelObject[Object.keys(levelObject)[i]] === false) {
-            $('.pgBgItem[data-level="' + i + '"]')
-            .addClass("l_disabled")
-            .attr({ "aria-disabled": "true" });
+      //for (var i = 0; i < Object.keys(levelObject).length; i++) {
+      for (var i = 0; i < levelObject.length; i++) {
+        //if (Object.keys(levelObject)[i] === i+'') {
+        if (levelObject[i] === i+'') {
+          //if (levelObject[Object.keys(levelObject)[i]] === false) {
+          if (levelObject[i] === false) {
+            $('.pgBgItem[data-level="' + i + '"]').addClass("l_disabled").attr({ "aria-disabled": "true" });
           } else {
-            $('.pgBgItem[data-level="' + i + '"]')
-            .removeClass("l_disabled")
-            .removeAttr("aria-disabled");
+            $('.pgBgItem[data-level="' + i + '"]').removeClass("l_disabled").removeAttr("aria-disabled");
           }
-
-          if (levelObject[Object.keys(levelObject)[i]] === false || this.IsLevelAttempted(i)) {
-            $('.levelbtnretry[data-level="' + i + '"]')
-            .addClass("l_disabled")
-            .attr({ "aria-disabled": "true" });
+          if (levelObject[i] === false || this.IsLevelAttempted(i)) {
+            $('.levelbtnretry[data-level="' + i + '"]').addClass("l_disabled").attr({ "aria-disabled": "true" });
           } else {
-            $('.levelbtnretry[data-level="' + i + '"]')
-            .removeClass("l_disabled")
-            .removeAttr("aria-disabled");
+            $('.levelbtnretry[data-level="' + i + '"]').removeClass("l_disabled").removeAttr("aria-disabled");
           }
         }
       }
