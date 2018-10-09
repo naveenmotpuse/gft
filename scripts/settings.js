@@ -6,8 +6,8 @@ var _serviceurl = window.location.origin + "/econservice";
 
 $(document).ready(function () {
     //debugger;
-    _problem_guid = getParameterByName("pid");
-    _resourceId = getParameterByName("resid");
+    _problem_guid = document.getParameterByName("pid");
+    _resourceId = document.getParameterByName("resid");
     getInflationSettings();
 })
 
