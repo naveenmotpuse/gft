@@ -49,11 +49,16 @@ var _LevelAccess = (function() {
     },
     SetVisibleLevels: function(visLev) {
       if(typeof visLev != undefined && !_Common.IsEmptyObject(visLev)) {
-        for(var i=0;i<=Object.keys(visLev).length;i++) {
-          visLev[i] = typeof visLev["level" + i] === 'undefined' ? true : visLev["level" + i];
+        for(var i=0,j=Object.keys(visLev).length;i<=j;i++) {
+          if(i == 0) {
+            visLev[i] = true;
+          } else if(typeof visLev["level" + i] !== 'undefined') {
+            visLev[i] =  visLev["level" + i];
+          }
           delete visLev["level" + i];
         }
       }
+      
       visibleLevels = _Common.IsEmptyObject(visLev) ? visibleLevels : visLev;
     },
     // check level visibility according to settings
