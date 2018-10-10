@@ -1143,3 +1143,6 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
 #header-progress .background .l_disabled .filler::after {
     background-color: #A39F9A;
 }
+.sub_question_txt{
+    display: inline;
+}

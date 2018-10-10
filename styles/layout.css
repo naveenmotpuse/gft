@@ -573,6 +573,7 @@ table caption {
 
 .rTableCell4 {
     margin-top: 24px;
+    min-width: 35%;
 }
 
 .rTableCell,
@@ -614,15 +615,11 @@ input[type='range']:active::-ms-thumb{
 }
 
 .inputwood{
-margin-left:4%;
-float:left;
-margin-top: -25px;
+    display: inline;
 }
 
 .inputfish{
-margin-left:5px;
-float:left;
-margin-top: -25px;
+    display: inline;
 }
 table.tableFridayInventory.ppftablestyle {
     margin-top: 3%;
