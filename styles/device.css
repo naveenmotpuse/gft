@@ -57,6 +57,9 @@
     .rTableCell5{
         padding-right: 15px;
     }
+    .actionbtndiv {
+        margin-top: 5px;
+    }
 }
 @media  screen and (max-width: 840px) {  
     .intro-content .intro-p {
@@ -79,6 +82,7 @@
     .rTableCell4{
         margin-left: 30%;
         margin-top: 15px;
+        min-width: 45%;
     }
 
     .rTableCell5{
@@ -204,12 +208,15 @@
     .rTableCell5{
         padding-right: 8px;
     }
+    #woodlogdiv{
+        margin-right: 10px;
+    }
 }
 @media  screen and (max-width : 543px) {
     .rTableCell1{
         width: 100%;
     }
-
+    
     .spanwood, .spanfish{
         width: 100%!important;
     }
@@ -229,6 +236,7 @@
 
     .rTableCell4{
             margin-left: 0%;
+            width: 100%;
     }
 
     .rTableCell2{
@@ -341,6 +349,7 @@ margin-top: 10px;
       
 }
 @media screen and (max-width: 445px){
+    
     
     #woodlogdiv{
         margin-right: 65px;
@@ -484,6 +493,7 @@ margin-top: 10px;
       }
     .rTableCell4{
         margin-left:0px;
+        widows: 100;
         }
 
     #questionchart{
