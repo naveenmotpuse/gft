@@ -50,8 +50,8 @@ var _LevelAccess = (function() {
     SetVisibleLevels: function(visLev) {
       if(typeof visLev != undefined && !_Common.IsEmptyObject(visLev)) {
         for(var i=0;i<=Object.keys(visLev).length;i++) {
-          visibleLevels[i] = typeof visLev["level" + i] === 'undefined' ? true : visLev["level" + i];
-          visLev["level" + i];
+          visLev[i] = typeof visLev["level" + i] === 'undefined' ? true : visLev["level" + i];
+          delete visLev["level" + i];
         }
       }
       visibleLevels = _Common.IsEmptyObject(visLev) ? visibleLevels : visLev;
