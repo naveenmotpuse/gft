@@ -318,11 +318,10 @@ var _EconLabServiceManager = (function () {
         InitSettings: function(){
             _get_settings();
         },   
+        SetSessionId: function(sid) {
+            _launchData.SessionId = sid;
+        },
         GetSessionDataSuccessCallback: function(_data){
-
-            var arr = window.location.href.split("/");
-            _launchData.SessionId = arr[arr.length - 2];
-
             if(typeof _data != "undefined"){
                 if(typeof _data == "string" && $.trim(_data)!=""){
                     _data = JSON.parse(_data);
