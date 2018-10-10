@@ -107,6 +107,9 @@ $(document).ready(function () {
     else {
         $('head').append('<link rel="stylesheet" href="styles/mainslider.css" type="text/css" />');
     }
+    var arr = window.location.href.split("/");
+    _EconLabServiceManager.SetSessionId(arr[arr.length - 2]);
+
     _Navigator.UpdateDefaultNData();
     _Template.LoadTopSlider();
     _Module.Init();
