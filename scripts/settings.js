@@ -23,6 +23,19 @@ $(document).ready(function () {
     _problem_guid = Utility.getParameterByName("pid", window.location.href);
     _resourceId = Utility.getParameterByName("resid", window.location.href);
     getInflationSettings();
+
+    // attach handlers here
+    $("#savebtn").on("click", function () {
+        //debugger;
+        if ($(this).closest(".savebtn").hasClass("k_disable"))
+            return;
+    
+        var valid = true;
+    
+        if (valid) {
+            check_for_active_users();
+        }
+    });
 })
 
 
@@ -124,15 +137,3 @@ function check_for_active_users() {
         }
     });
 }
-
-$("#savebtn").on("click", function () {
-    //debugger;
-    if ($(this).closest(".savebtn").hasClass("k_disable"))
-        return;
-
-    var valid = true;
-
-    if (valid) {
-        check_for_active_users();
-    }
-});
