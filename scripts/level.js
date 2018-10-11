@@ -49,6 +49,10 @@ var _LevelAccess = (function() {
     },
     SetVisibleLevels: function(visLev) {
       if(typeof visLev != undefined && !_Common.IsEmptyObject(visLev)) {
+        if(typeof visLev.intro != undefined) {
+          delete visLev["intro"];
+          delete visLev["level5"];
+        }
         for(var i=0,j=Object.keys(visLev).length;i<=j;i++) {
           if(i == 0) {
             visLev[i] = true;
