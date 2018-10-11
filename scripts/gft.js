@@ -128,7 +128,7 @@ var _TopSlider = (function () {
                     //console.log("ppf visible")
                     setTimeout(function () {
                         $("#linkppf").focus();
-                    }, 100);
+                    }, 500);
                 } else {
                     setTimeout(function () {
                         $(".questionband .headinglevel2div").focus();
@@ -142,7 +142,7 @@ var _TopSlider = (function () {
                     //console.log("surplus visible")
                     setTimeout(function () {
                         $("#linksurplus").focus();
-                    }, 100);
+                    }, 500);
                 }
             });
         }

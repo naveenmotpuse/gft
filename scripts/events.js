@@ -9,6 +9,7 @@ $(document).on("click", "#ppfchart .imggraph", function (event) {
         _this.removeClass("custIdisabled");
         _this.attr("aria-expanded","true");        
         _this.attr("aria-current", "true")
+        _this.focus();
     });
 });
 $(document).on("click", "#ppfchart .imgtable", function (event) {
@@ -16,7 +17,8 @@ $(document).on("click", "#ppfchart .imgtable", function (event) {
     $("#ppfcharttable_c").show(function () {
         _this.removeClass("custIdisabled");
         _this.attr("aria-expanded","true");        
-        _this.attr("aria-current", "true")
+        _this.attr("aria-current", "true");
+        _this.focus();
     });
     $("#ppfchart_c").hide(function () {
         $(".imggraph").addClass("custIdisabled");

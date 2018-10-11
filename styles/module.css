@@ -1144,5 +1144,5 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
     background-color: #A39F9A;
 }
 .sub_question_txt{
-    display: inline;
+    display: inline; 
 }
