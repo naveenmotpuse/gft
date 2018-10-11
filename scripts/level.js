@@ -1,7 +1,7 @@
 //1. Level Access
 var _LevelAccess = (function() {
   var visibleLevels = JSON.parse(
-    '{"0": true, "1": true, "2": true, "3": true, "4": true}'
+    '{"0": true, "1": true, "2": false, "3": false, "4": false}'
   );
   var tempVisLvls = [
     {
@@ -171,10 +171,9 @@ var _LevelAccess = (function() {
     InitLevels: function() {
       debugger;
       var levelObject = visibleLevels;
-      //for (var i = 0; i < Object.keys(levelObject).length; i++) {
-      for (var i = 0; i < levelObject.length; i++) {
+      for (var i = 0; i < Object.keys(levelObject).length; i++) {
         //if (Object.keys(levelObject)[i] === i+'') {
-        if (levelObject[i] === i+'') {
+        {
           //if (levelObject[Object.keys(levelObject)[i]] === false) {
           if (levelObject[i] === false) {
             $('.pgBgItem[data-level="' + i + '"]').addClass("l_disabled").attr({ "aria-disabled": "true" });
