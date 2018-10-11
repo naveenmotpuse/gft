@@ -25,7 +25,7 @@
                 }
 
             }
-            qObj = $.extend(qObj, _QData[qObj.Id]);
+            qObj = $.extend(true, qObj, _QData[qObj.Id]); //true because need to  extend bookmard data
             _currentQuestionObj = qObj;
             //qObj.isCurrent = true;
 
