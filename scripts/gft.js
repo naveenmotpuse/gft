@@ -916,6 +916,7 @@ var _CustomPage = (function () {
                         "aria-label": "Production Possibilities Frontier graph for Firewoods from 0 to 120 in logs vs. Fish from 0 to 7000 in calories. Graph represents your PPF, Friday's PPF and Both Student and Friday's Production Point."
                     });
                 }
+                debugger;
                 if (_currPageId == "l2p3" && _currPageQId == "Q15") {  
                     $("#studenttradeGraph").find(".highcharts-container").attr("aria-hidden", "true");
                     $("#studenttradeGraph").attr({
