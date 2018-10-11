@@ -100,6 +100,8 @@ var _ModuleCharts = (function () {
                         }
                     }
                 ]
+            }, function() {
+                _CustomPage.SetPageAccesibility();
             });
         },
         DrawL2QuestionIntroChart: function () {
@@ -215,6 +217,8 @@ var _ModuleCharts = (function () {
                         }
                     }
                 ]
+            }, function() {
+                _CustomPage.SetPageAccesibility();
             });
 
         },
@@ -331,6 +335,8 @@ var _ModuleCharts = (function () {
                         }
                     }*/
                 ]
+            }, function() {
+                _CustomPage.SetPageAccesibility();
             });
 
         },
@@ -554,6 +560,8 @@ var _ModuleCharts = (function () {
                         }
                     }
                 ]
+            }, function() {
+                _CustomPage.SetPageAccesibility();
             });
         },
         DrawTradeCharts: function () {
@@ -644,6 +652,8 @@ var _ModuleCharts = (function () {
                         symbol: "circle"
                     }
                 }]
+            }, function() {
+                _CustomPage.SetPageAccesibility();
             });
             Highcharts.chart('fridaytradeGraph', {
                 title: {
@@ -711,6 +721,8 @@ var _ModuleCharts = (function () {
                         symbol: "circle"
                     }
                 }]
+            }, function() {
+                _CustomPage.SetPageAccesibility();
             });
         },
         ShowSliderPoint: function (_data) {

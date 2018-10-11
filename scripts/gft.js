@@ -773,7 +773,7 @@ var _CustomPage = (function () {
                 }
             }
 
-            this.SetPageAccesibility();
+            //this.SetPageAccesibility();
         },
         //RA-6Sep18 - Function to set graph labels - start
         SetPageAccesibility:function(){
@@ -916,8 +916,9 @@ var _CustomPage = (function () {
                         "aria-label": "Production Possibilities Frontier graph for Firewoods from 0 to 120 in logs vs. Fish from 0 to 7000 in calories. Graph represents your PPF, Friday's PPF and Both Student and Friday's Production Point."
                     });
                 }
-                debugger;
+                console.log("in");
                 if (_currPageId == "l2p3" && _currPageQId == "Q15") {  
+                    console.log("in2"+$("#studenttradeGraph").length);
                     $("#studenttradeGraph").find(".highcharts-container").attr("aria-hidden", "true");
                     $("#studenttradeGraph").attr({
                         "aria-label": "Your Production Possibility graph for Firewoods from 0 to 110 in logs vs. Fish from 0 to 5000 in calories."
