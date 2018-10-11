@@ -11,6 +11,7 @@
         _sessionData.attempts[lastAttIndex].status = _param_status;
         _sessionData.attempts[lastAttIndex].bookmarkData = _Navigator.GetBookmarkData();
         _sessionData.attempts[lastAttIndex].navigationData = _Navigator.GetNavigationData();
+        _sessionData.attempts[lastAttIndex].sliderData = DataStorage.getCollection();
         _sessionData.attempts[lastAttIndex].ScenarioIndex = _Scenario.GetScenarioIndex();
         _sessionData.attempts[lastAttIndex].k_bookmarkData = _KnowdlServiceManager.GetBookmarking();
         _EconLabServiceManager.SaveSessionData(_sessionData)
@@ -48,6 +49,7 @@
                 _KnowdlServiceManager.InitBookmarking( _sessionData.attempts[lastAttIndex].k_bookmarkData)                
                 _Navigator.InitBookmarkData(_sessionData.attempts[lastAttIndex].bookmarkData)
                 _Navigator.InitNavigationData(_sessionData.attempts[lastAttIndex].navigationData);
+                DataStorage.InitCollection(_sessionData.attempts[lastAttIndex].sliderData);
                 _Scenario.SetScenarioIndex(_sessionData.attempts[lastAttIndex].ScenarioIndex);                
             }
             if (_Settings.enableCache) {

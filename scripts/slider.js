@@ -13,6 +13,12 @@ var DataStorage = DataStorage || function (ui) {
     var _DataCollection = [];
     var timeSpent = '';
     return {
+        print: function() {
+            return {'DM': _DataMap, 'RDC': _RetryDataCollection, 'DC': _DataCollection, 'TS': timeSpent}
+        },
+        InitCollection: function(_dc_object) {
+            _DataCollection = JSON.parse(JSON.stringify(_dc_object));
+        },
         ModuleRetry: function () {
             _RetryDataCollection = $.extend(true, [], _DataCollection)
             _DataCollection = [];
