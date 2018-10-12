@@ -63,9 +63,9 @@
             _LevelAccess.InitLevels();
         },
         SaveSessionData: function(){                       
-            if (_sessionData.attempts[_sessionData.attempts.length-1].status != AttemptStatus.complete) {
+            //if (_sessionData.attempts[_sessionData.attempts.length-1].status != AttemptStatus.complete) {
                 save_session_data(AttemptStatus.inprogress);
-            } 
+            //} 
         },
         PostFinalGrade: function () {            
             if (_sessionData.attempts[_sessionData.attempts.length-1].status != AttemptStatus.complete) {

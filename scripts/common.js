@@ -77,6 +77,13 @@ var _Common = (function () {
                 return false;
             return true;
         },
+        Remove: function(_arr, _prop, _val) {
+            _arr = $.grep(_arr, function(e){ 
+              return e[_prop] != _val; 
+            });
+            return _arr;
+        },
+        ordinalInWord: function(t){var e=["zeroth","first","second","third","fourth","fifth","sixth","seventh","eighth","ninth","tenth","eleventh","twelfth","thirteenth","fourteenth","fifteenth","sixteenth","seventeenth","eighteenth","nineteenth","twentieth"];return t<=20?e[t]:t%10==0?{30:"thirtieth",40:"fortieth",50:"fiftieth",60:"sixtieth",70:"seventieth",80:"eightieth",90:"ninetieth",100:"hundredth"}[t]:{20:"twenty ",30:"thirty ",40:"forty ",50:"fifty ",60:"sixty ",70:"seventy ",80:"eighty ",90:"ninety ",100:"hundred "}[t-t%10]+e[t%10]},
         /*onlyDotsAndNumbers(event, obj) {
             var charCode = (event.which) ? event.which : event.keyCode
             if (charCode == 46) {
