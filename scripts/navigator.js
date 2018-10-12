@@ -297,7 +297,7 @@ var _Navigator = (function () {
     var _StateData = {}
 
     function OnPageLoad(jsonObj, buttonPressed) {
-        if (!jsonObj.isBookMark) {
+        if (typeof jsonObj != undefined && !jsonObj.isBookMark) {
             _bookmarkData.pageId = _currentPageObject.pageId;
             _bookmarkData.questionId = "";
             if(_currentPageObject.pageId == "summary") {
@@ -437,7 +437,7 @@ var _Navigator = (function () {
                 if (!_Common.IsEmptyObject(jsonObj) && jsonObj != undefined) {
                     if (jsonObj.isBookMark) {
                         for (var i = 0; i < _currentPageObject.questions.length; i++) {
-                            if ((jsonObj.bookmarkdata.Qid == _currentPageObject.questions[i].Id)) {
+                            if ((jsonObj.bookmarkdata.questionId == _currentPageObject.questions[i].Id)) {
                                 _questionId = i;
                             }
                         }
