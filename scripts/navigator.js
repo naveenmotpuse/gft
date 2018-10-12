@@ -306,6 +306,7 @@ var _Navigator = (function () {
         _CustomPage.OnPageLoad();
         _Navigator.UpdateMenuVisibility();
         _Navigator.LoadDefaultQuestion(jsonObj, buttonPressed);
+        _Navigator.UpdateScore();
         _Module.SaveSessionData();
     }
     return {
