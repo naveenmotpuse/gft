@@ -67,6 +67,11 @@
             } else {
                 $("#linknext").k_enable();
             }
+            if(_Navigator.GetCurrentPage().isLevelStart && _Navigator.GetCurrentPage().questions[0].Qid == _Question.GetCurrentQuestion().Id) {
+                $("#linkprevious").k_disable();
+            } else {
+                $("#linkprevious").k_enable();
+            }
         },
         SetOptionClone: function () {
             var elmarray = $("input[type='text']");
