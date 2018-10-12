@@ -1,12 +1,8 @@
 //1. Level Access
 var _LevelAccess = (function() {
   var visibleLevels = JSON.parse(
-<<<<<<< HEAD
     '{"0": true, "1": true, "2": true, "3": true, "4": true}'
     //'{"0": true, "1": true, "2": false, "3": false, "4": false}'
-=======
-    '{"0": true, "1": true, "2": false, "3": false, "4": false}'
->>>>>>> 752a04fa1ebcfb03d60db86a22baf9c0c2bc1ea6
   );
   var tempVisLvls = [
     {

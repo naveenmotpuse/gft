@@ -29,7 +29,7 @@ var _Navigator = (function () {
             isStartPage: true,
             hasAnimation: true,
             isLevelStart:true,
-            isLevelEnd:true
+            isLevelEnd:true,
         },
         "l1p2": {
             pageId: "l1p2",
@@ -663,7 +663,7 @@ var _Navigator = (function () {
                 if (_NData[i].datalevel == datalevel) {
                     _AttemptNData[i] = $.extend(true, {}, _NData[i]);
                     _NData[i] = $.extend(true, {}, _TempNData[i]);
-                    if (pageId == "") {
+                    if (pageId == "" && _NData[i].isLevelStart) {
                         pageId = _NData[i].pageId;
                     }
                 }
