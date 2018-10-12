@@ -67,7 +67,7 @@
             } else {
                 $("#linknext").k_enable();
             }
-            if(_Navigator.GetCurrentPage().isLevelStart && _Navigator.GetCurrentPage().questions[0].Qid == _Question.GetCurrentQuestion().Id) {
+            if(currPage.isLevelStart && currPage.questions[0].Qid == _currentQuestionObj.Id) {
                 $("#linkprevious").k_disable();
             } else {
                 $("#linkprevious").k_enable();
