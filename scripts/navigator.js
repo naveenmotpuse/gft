@@ -297,10 +297,12 @@ var _Navigator = (function () {
     var _StateData = {}
 
     function OnPageLoad(jsonObj, buttonPressed) {
-        _bookmarkData.pageId = _currentPageObject.pageId;
-        _bookmarkData.questionId = "";
-        if(_currentPageObject.pageId == "summary") {
-            _bookmarkData.levelRetry = "";    
+        if (!jsonObj.isBookMark) {
+            _bookmarkData.pageId = _currentPageObject.pageId;
+            _bookmarkData.questionId = "";
+            if(_currentPageObject.pageId == "summary") {
+                _bookmarkData.levelRetry = "";    
+            }
         }
         _TopSlider.OnLoad();
         _CustomPage.OnPageLoad();
