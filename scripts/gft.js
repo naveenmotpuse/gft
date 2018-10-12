@@ -471,6 +471,7 @@ var _CustomQuestion = (function () {
                 _CustomQuestion.UpdateGraphSubmitStatus();
                 _CustomQuestion.ActionAfterCheckAnswer();
                 _Navigator.UpdateScore();
+                _Module.SaveSessionData();
                 $("#linknext").k_enable();
             } else {
                 _currentQuestionObj.tryCount += 1;
@@ -525,6 +526,7 @@ var _CustomQuestion = (function () {
                     //Need to think on generic logic.
                     _CustomQuestion.ActionAfterCheckAnswer();
                     _Navigator.UpdateScore();
+                    _Module.SaveSessionData();
                 }
             }
 
