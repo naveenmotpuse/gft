@@ -335,7 +335,7 @@ var _Navigator = (function () {
             return parseInt((new Date().getTime() - _startTime.getTime()) / 1000) + _lastDuration;
         },
         GetNavigationData: function () {
-            var bookmarkNavData = {'currentNav': JSON.parse(JSON.stringify(_AttemptNData)), 'bestNav': JSON.parse(JSON.stringify(_NData))};
+            var bookmarkNavData = {'currentNav': JSON.parse(JSON.stringify(_NData)), 'bestNav': JSON.parse(JSON.stringify(_AttemptNData))};
             return bookmarkNavData;
         },
         InitNavigationData: function (_ndata_object) {
