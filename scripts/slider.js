@@ -25,9 +25,24 @@ var DataStorage = DataStorage || function (ui) {
             var bookmarkDC = { 'DM': JSON.parse(JSON.stringify(_DataMap)), 'RDC': JSON.parse(JSON.stringify(_RetryDataCollection)), 'DC': JSON.parse(JSON.stringify(_DataCollection)), 'TS': JSON.parse(JSON.stringify(timeSpent)) };
             return bookmarkDC;
         },
-        ModuleRetry: function () {
-            _RetryDataCollection = $.extend(true, [], _DataCollection)
-            _DataCollection = [];
+        ModuleRetry: function (dlevel) {
+            if(dlevel) { //retry level
+                for (var i in _DataCollection) {
+                    if (_Navigator.Get(_DataCollection[i].pageId).datalevel == dlevel) {
+                        _RetryDataCollection[i] = $.extend(true, {}, _DataCollection[i]);
+                        _DataCollection[i].markfordeletion = true;
+                    }
+                }
+            }
+            _Common.Remove(_DataCollection, 'markfordeletion', true);
+        },
+        ModuleRetryAll: function() {
+            // retry all  
+            for(var i=1; i<5; i++) {  //TODO: remove hardcoding
+                if (!_LevelAccess.IsLevelAttempted(i) && _LevelAccess.IsLevelVisible({'level': i})) {
+                    this.ModuleRetry(i);
+                }
+            }            
         },
         ResetDataMap: function (jsonObj) {
             _DataMap = $(true, {}, _DataMap, jsonObj);

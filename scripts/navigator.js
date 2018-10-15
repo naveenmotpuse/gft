@@ -467,7 +467,7 @@ var _Navigator = (function () {
                 if(_Question.GetCurrentQuestion().Id == _currentPageObject.questions[0].Id) {
                     var prvPageId = _currentPageObject.prevPageId;
                     if(_currentPageObject.isLevelStart) {
-                        prvPageId = _LevelAccess.JumpToPreviousAvailableLevel(_currentPageObject.datalevel, _Navigator.GetBookmarkData().levelRetry != '');
+                        prvPageId = _LevelAccess.JumpToPreviousAvailableLevel(_currentPageObject.datalevel, (_Navigator.GetBookmarkData().levelRetry == 'all' || _Navigator.GetBookmarkData().levelRetry == 'level'));
                     }
                     this.LoadPage(prvPageId, undefined,'prev');
                 } else {
@@ -476,7 +476,7 @@ var _Navigator = (function () {
             } else {
                 var prvPageId = _currentPageObject.prevPageId;
                 if(_currentPageObject.isLevelStart) {
-                    prvPageId = _LevelAccess.JumpToPreviousAvailableLevel(_currentPageObject.datalevel, _Navigator.GetBookmarkData().levelRetry != '');
+                    prvPageId = _LevelAccess.JumpToPreviousAvailableLevel(_currentPageObject.datalevel, (_Navigator.GetBookmarkData().levelRetry == 'all' || _Navigator.GetBookmarkData().levelRetry == 'level'));
                 }
                 this.LoadPage(prvPageId, undefined,'prev');
             }
@@ -498,7 +498,7 @@ var _Navigator = (function () {
                 if (IsAllQCompleted) {
                     var nxtPageId = _currentPageObject.nextPageId
                     if(_currentPageObject.isLevelEnd) {
-                        nxtPageId = _LevelAccess.JumpToNextAccessibleLevel(_currentPageObject.datalevel, _Navigator.GetBookmarkData().levelRetry != '');
+                        nxtPageId = _LevelAccess.JumpToNextAccessibleLevel(_currentPageObject.datalevel, (_Navigator.GetBookmarkData().levelRetry == 'all' || _Navigator.GetBookmarkData().levelRetry == 'level'));
                     }                    
                     this.LoadPage(nxtPageId, undefined, 'next');
 
@@ -512,7 +512,7 @@ var _Navigator = (function () {
                 }
                 var nxtPageId = _currentPageObject.nextPageId;
                 if(_currentPageObject.isLevelEnd) {
-                    nxtPageId = _LevelAccess.JumpToNextAccessibleLevel(_currentPageObject.datalevel, _Navigator.GetBookmarkData().levelRetry != '');
+                    nxtPageId = _LevelAccess.JumpToNextAccessibleLevel(_currentPageObject.datalevel, (_Navigator.GetBookmarkData().levelRetry == 'all' || _Navigator.GetBookmarkData().levelRetry == 'level'));
                 }
                 this.LoadPage(nxtPageId, undefined, 'next');
             }
@@ -642,7 +642,7 @@ var _Navigator = (function () {
                 }
             }
         },        
-        ReAttempt: function () {
+        ReAttempt: function () { //retry all
             //_AttemptNData = $.extend(true, {}, _NData);
             //_NData = $.extend(true, {}, _TempNData);
             
@@ -655,7 +655,7 @@ var _Navigator = (function () {
             _Navigator.SetBookmarkData({ "levelRetry": 'all' })
             _Navigator.UpdateProgressBar();
             _Navigator.UpdateScore();
-            DataStorage.ModuleRetry();
+            DataStorage.ModuleRetryAll();
             _Navigator.LoadPage('l1p1');
 
             var progData = this.GetProgressData();
@@ -663,7 +663,7 @@ var _Navigator = (function () {
                 $(".pgBgItem[data-level='" + i + "']").removeClass("pgBgItemComplete");
             }
         },
-        ReAttemptLevel: function (datalevel) {
+        ReAttemptLevel: function (datalevel) { //level retry
             var pageId = "";
             for (var i in _NData) {
                 if (_NData[i].datalevel == datalevel) {
@@ -677,7 +677,7 @@ var _Navigator = (function () {
             _Navigator.SetBookmarkData({ "levelRetry": 'level' })
             _Navigator.LoadPage(pageId);
             _Navigator.UpdateScore();
-            DataStorage.ModuleRetry();
+            DataStorage.ModuleRetry(datalevel);
             _Navigator.UpdateProgressBar();
             $(".pgBgItem[data-level='" + datalevel + "']").removeClass("pgBgItemComplete");
         },
