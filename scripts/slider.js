@@ -22,7 +22,7 @@ var DataStorage = DataStorage || function (ui) {
             _DataMap = JSON.parse(JSON.stringify(_dc_object.DM));
         },
         GetSliderData: function() {
-            var bookmarkDC = {'DM': _DataMap, 'RDC': _RetryDataCollection, 'DC': _DataCollection, 'TS': timeSpent}
+            var bookmarkDC = { 'DM': JSON.parse(JSON.stringify(_DataMap)), 'RDC': JSON.parse(JSON.stringify(_RetryDataCollection)), 'DC': JSON.parse(JSON.stringify(_DataCollection)), 'TS': JSON.parse(JSON.stringify(timeSpent)) };
             return bookmarkDC;
         },
         ModuleRetry: function () {
@@ -433,6 +433,13 @@ var _TradeSlider = (function () {
         goalhours: undefined
     }
     return {
+        GetTradeSliderBK: function() {
+            var bookmarkDC = { 'target': JSON.parse(JSON.stringify(Target)) };
+            return bookmarkDC;
+        },
+        InitTradeSliderBK: function(ts_obbject) {
+            Target = JSON.parse(JSON.stringify(ts_obbject.target));
+        },
         InitSlider: function () {
             $("#onewoodfor-range").off("input").on("input", document, function (event) {
                 event.preventDefault();
