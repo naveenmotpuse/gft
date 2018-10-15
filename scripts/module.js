@@ -62,10 +62,12 @@
             // to disable the levels on init
             _LevelAccess.InitLevels();
         },
-        SaveSessionData: function(){                       
-            //if (_sessionData.attempts[_sessionData.attempts.length-1].status != AttemptStatus.complete) {
+        SaveSessionData: function(){
+            if (_sessionData.attempts[_sessionData.attempts.length-1].status == AttemptStatus.complete) {
+                save_session_data(AttemptStatus.complete);
+            } else { 
                 save_session_data(AttemptStatus.inprogress);
-            //} 
+            }
         },
         PostFinalGrade: function () {            
             if (_sessionData.attempts[_sessionData.attempts.length-1].status != AttemptStatus.complete) {

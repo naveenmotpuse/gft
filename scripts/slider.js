@@ -17,10 +17,13 @@ var DataStorage = DataStorage || function (ui) {
             return {'DM': _DataMap, 'RDC': _RetryDataCollection, 'DC': _DataCollection, 'TS': timeSpent}
         },
         InitSliderData: function(_dc_object) {
-            _DataCollection = JSON.parse(JSON.stringify(_dc_object));
+            _DataCollection = JSON.parse(JSON.stringify(_dc_object.DC));
+            _RetryDataCollection = JSON.parse(JSON.stringify(_dc_object.RDC));
+            _DataMap = JSON.parse(JSON.stringify(_dc_object.DM));
         },
         GetSliderData: function() {
-            return _DataCollection;
+            var bookmarkDC = {'DM': _DataMap, 'RDC': _RetryDataCollection, 'DC': _DataCollection, 'TS': timeSpent}
+            return bookmarkDC;
         },
         ModuleRetry: function () {
             _RetryDataCollection = $.extend(true, [], _DataCollection)
