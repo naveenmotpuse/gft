@@ -1618,7 +1618,11 @@
                 //clip: true,
                 //dashStyle: null,
                 //enableMouseTracking: true,
-                events: {},
+                events: {
+                    legendItemClick: function () {
+                        return false; 
+                    }
+                },
                 //legendIndex: 0,
                 //linecap: 'round',
                 lineWidth: 2,
@@ -6941,7 +6945,7 @@
             minorTickPosition: 'outside', // inside or outside
             //minorTickWidth: 0,
             //opposite: false,
-            offset: 5,
+            //offset: 5,
             //plotBands: [{
             //    events: {},
             //    zIndex: 1,

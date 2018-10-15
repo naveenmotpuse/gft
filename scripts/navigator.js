@@ -568,7 +568,7 @@ var _Navigator = (function () {
             for (var i = 0; i < progData.length; i++) {
                 var lprog_pecent = (progData[i] / _progressLevels[i] * 100);
                 $(".pgBgItem[data-level='" + i + "']").find(".pgBgItemFill").css("width", lprog_pecent + "%");
-                arialabel = arialabel.replace(i + "%", lprog_pecent + "%")
+                arialabel = arialabel.replace(i + "%", Number(lprog_pecent.toFixed(2)) + "%")
                 if (lprog_pecent == 100) {
                     $(".pgBgItem[data-level='" + i + "']").addClass("pgBgItemComplete")
                 }
