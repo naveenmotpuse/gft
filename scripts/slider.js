@@ -689,7 +689,6 @@ var _TradeSlider = (function () {
                 $("#consumption-fish-range").attr("max", (TradeSettings.fridayfishCals + TradeResults.remData.fridayfish));
                 $(".consumption-fish.r_label").text((TradeSettings.fridayfishCals + TradeResults.remData.fridayfish));
                 $("#givewood-logs").text(TradeResults.givewood);
-                console.log("+++===" + TradeResults.receivefish);
                 $("#receivefish-cals").text(TradeResults.receivefish).attr("aria-label",TradeResults.consumptionfish);
             }
             $("#consumption-wood").text(TradeResults.consumptionwood);
