@@ -466,8 +466,8 @@ var _Navigator = (function () {
                 //if current question is first then jump to prev page
                 if(_Question.GetCurrentQuestion().Id == _currentPageObject.questions[0].Id) {
                     var prvPageId = _currentPageObject.prevPageId;
-                    if(_currentPageObject.isLevelStart  && _Navigator.GetBookmarkData().levelRetry != '') {
-                        prvPageId = _LevelAccess.JumpToPreviousAvailableLevel(_currentPageObject.datalevel);
+                    if(_currentPageObject.isLevelStart) {
+                        prvPageId = _LevelAccess.JumpToPreviousAvailableLevel(_currentPageObject.datalevel, _Navigator.GetBookmarkData().levelRetry != '');
                     }
                     this.LoadPage(prvPageId, undefined,'prev');
                 } else {
@@ -475,8 +475,8 @@ var _Navigator = (function () {
                 }
             } else {
                 var prvPageId = _currentPageObject.prevPageId;
-                if(_currentPageObject.isLevelStart  && _Navigator.GetBookmarkData().levelRetry != '') {
-                    prvPageId = _LevelAccess.JumpToPreviousAvailableLevel(_currentPageObject.datalevel);
+                if(_currentPageObject.isLevelStart) {
+                    prvPageId = _LevelAccess.JumpToPreviousAvailableLevel(_currentPageObject.datalevel, _Navigator.GetBookmarkData().levelRetry != '');
                 }
                 this.LoadPage(prvPageId, undefined,'prev');
             }
@@ -497,8 +497,8 @@ var _Navigator = (function () {
                 }
                 if (IsAllQCompleted) {
                     var nxtPageId = _currentPageObject.nextPageId
-                    if(_currentPageObject.isLevelEnd && _Navigator.GetBookmarkData().levelRetry != '') {
-                        nxtPageId = _LevelAccess.JumpToNextAccessibleLevel(_currentPageObject.datalevel);
+                    if(_currentPageObject.isLevelEnd) {
+                        nxtPageId = _LevelAccess.JumpToNextAccessibleLevel(_currentPageObject.datalevel, _Navigator.GetBookmarkData().levelRetry != '');
                     }                    
                     this.LoadPage(nxtPageId, undefined, 'next');
 
@@ -511,8 +511,8 @@ var _Navigator = (function () {
                     this.CompletePage()
                 }
                 var nxtPageId = _currentPageObject.nextPageId;
-                if(_currentPageObject.isLevelEnd && _Navigator.GetBookmarkData().levelRetry != '') {
-                    nxtPageId = _LevelAccess.JumpToNextAccessibleLevel(_currentPageObject.datalevel);
+                if(_currentPageObject.isLevelEnd) {
+                    nxtPageId = _LevelAccess.JumpToNextAccessibleLevel(_currentPageObject.datalevel, _Navigator.GetBookmarkData().levelRetry != '');
                 }
                 this.LoadPage(nxtPageId, undefined, 'next');
             }

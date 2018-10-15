@@ -135,7 +135,7 @@ var _LevelAccess = (function() {
       }
       return currPageId;
     },
-    JumpToPreviousAvailableLevel: function(thisLevel) {
+    JumpToPreviousAvailableLevel: function(thisLevel, isLevelRetry) {
       var gotopageid = 0;
       var _this = this;
       debugger;
@@ -144,7 +144,7 @@ var _LevelAccess = (function() {
           if (tmp[i].level === key+'') {
             do {
               i--;
-            } while (i > 0 && (this.IsLevelVisible(tmp[i]) == false || this.IsLevelAttempted(tmp[i])));
+            } while (i > 0 && (this.IsLevelVisible(tmp[i]) == false || (isLevelRetry && this.IsLevelAttempted(tmp[i]))));
             var lvl = Number(tmp[i].level);
             gotopageid = _this.GetLevelPageId(lvl);
             break;
@@ -154,7 +154,7 @@ var _LevelAccess = (function() {
       previous(tempVisLvls, thisLevel);
       return gotopageid;
     },
-    JumpToNextAccessibleLevel: function(thisLevel) {
+    JumpToNextAccessibleLevel: function(thisLevel, isLevelRetry) {
       debugger;
       var gotopageid = 0;
       var _this = this;
@@ -163,7 +163,7 @@ var _LevelAccess = (function() {
           if (tmp[i].level === key) {
             do {
               i++;
-            } while ((_this.IsLevelVisible(tmp[i]) == false || _this.IsLevelAttempted(i)) && i < tmp.length - 1);
+            } while ((_this.IsLevelVisible(tmp[i]) == false || (isLevelRetry && _this.IsLevelAttempted(i))) && i < tmp.length - 1);
             var lvl = tmp[i].level;
             gotopageid = _this.GetLevelPageId(lvl, true);
             break;
