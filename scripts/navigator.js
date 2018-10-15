@@ -292,11 +292,7 @@ var _Navigator = (function () {
     var _StateData = {}
 
     function OnPageLoad(jsonObj, buttonPressed) {
-<<<<<<< HEAD
         if (typeof jsonObj != undefined && !jsonObj.isBookMark) {
-=======
-        if (typeof jsonObj == 'undefined' || (typeof jsonObj != 'undefined' && !jsonObj.isBookMark)) {
->>>>>>> 4504a2818b708fa3f9c3eb7302bd82ac46333e57
             _bookmarkData.pageId = _currentPageObject.pageId;
             _bookmarkData.questionId = "";
             if(_currentPageObject.pageId == "summary") {
