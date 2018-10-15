@@ -375,7 +375,7 @@ var _Navigator = (function () {
                 $("#linkprevious").k_disable();
                 $("#linknext").k_enable();
             }
-            if(this.GetBookmarkData().levelRetry == 'level' && _currentPageObject.isLevelStart) {
+            if(this.GetBookmarkData().levelRetry == 'level' && _currentPageObject.isLevelStart && _currentPageObject.pageId != 'summary') {
                 $("#linkprevious").k_disable();
             }
             if (_currentPageObject.hasActivity != undefined && _currentPageObject.hasActivity &&
