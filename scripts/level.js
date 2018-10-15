@@ -1,7 +1,7 @@
 //1. Level Access
 var _LevelAccess = (function() {
   var visibleLevels = JSON.parse(
-    '{"0": true, "1": true, "2": true, "3": true, "4": true}'
+    '{"0": false, "1": false, "2": true, "3": false, "4": false}'
     //'{"0": true, "1": true, "2": false, "3": false, "4": false}'
   );
   var tempVisLvls = [
@@ -144,7 +144,7 @@ var _LevelAccess = (function() {
           if (tmp[i].level === key+'') {
             do {
               i--;
-            } while (i > 0 && _this.IsLevelVisible(tmp[i]) == false);
+            } while (i > 0 && (this.IsLevelVisible(tmp[i]) == false || this.IsLevelAttempted(tmp[i])));
             var lvl = Number(tmp[i].level);
             gotopageid = _this.GetLevelPageId(lvl);
             break;

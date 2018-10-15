@@ -12,9 +12,10 @@
         _sessionData.attempts[lastAttIndex].bookmarkData = _Navigator.GetBookmarkData();
         _sessionData.attempts[lastAttIndex].navigationData = _Navigator.GetNavigationData();
         _sessionData.attempts[lastAttIndex].sliderData = DataStorage.GetSliderData();
+        _sessionData.attempts[lastAttIndex].tradeSliderData = _TradeSlider.GetTradeSliderBK();
         _sessionData.attempts[lastAttIndex].ScenarioIndex = _Scenario.GetScenarioIndex();
         _sessionData.attempts[lastAttIndex].k_bookmarkData = _KnowdlServiceManager.GetBookmarking();
-        _EconLabServiceManager.SaveSessionData(_sessionData)
+        _EconLabServiceManager.SaveSessionData(_sessionData);
     }
     return {
         Get: function() { 
@@ -50,6 +51,7 @@
                 _Navigator.InitBookmarkData(_sessionData.attempts[lastAttIndex].bookmarkData)
                 _Navigator.InitNavigationData(_sessionData.attempts[lastAttIndex].navigationData);
                 DataStorage.InitSliderData(_sessionData.attempts[lastAttIndex].sliderData);
+                _TradeSlider.InitTradeSliderBK(_sessionData.attempts[lastAttIndex].tradeSliderData);
                 _Scenario.SetScenarioIndex(_sessionData.attempts[lastAttIndex].ScenarioIndex);                
             }
             if (_Settings.enableCache) {

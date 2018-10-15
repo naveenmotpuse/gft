@@ -10,12 +10,7 @@ var _Navigator = (function () {
     var _AttemptNData = {};
     var _TempNData = {};
     var _bookmarkData = {};
-    /*
-    var _bookmarkData = {
-        pageId:"",
-        questionId:"",
-        duration:0
-    };*/
+
     var _lastDuration = 0;
     var _levelStartPages = ["l1p1", "l1p2", "l2p1", "l3p1", "l4p1","summary"];
     var _NData = {
@@ -340,10 +335,12 @@ var _Navigator = (function () {
             return parseInt((new Date().getTime() - _startTime.getTime()) / 1000) + _lastDuration;
         },
         GetNavigationData: function () {
-            return JSON.parse(JSON.stringify(_NData));
+            var bookmarkNavData = {'currentNav': JSON.parse(JSON.stringify(_NData)), 'bestNav': JSON.parse(JSON.stringify(_AttemptNData))};
+            return bookmarkNavData;
         },
         InitNavigationData: function (_ndata_object) {
-            _NData = JSON.parse(JSON.stringify(_ndata_object));
+            _NData = JSON.parse(JSON.stringify(_ndata_object.currentNav));
+            _AttemptNData = JSON.parse(JSON.stringify(_ndata_object.bestNav));
         },
         LoadPage: function (pageId, jsonObj, buttonPressed) {
             debugger;
@@ -469,7 +466,7 @@ var _Navigator = (function () {
                 //if current question is first then jump to prev page
                 if(_Question.GetCurrentQuestion().Id == _currentPageObject.questions[0].Id) {
                     var prvPageId = _currentPageObject.prevPageId;
-                    if(_currentPageObject.isLevelStart) {
+                    if(_currentPageObject.isLevelStart  && _Navigator.GetBookmarkData().levelRetry != '') {
                         prvPageId = _LevelAccess.JumpToPreviousAvailableLevel(_currentPageObject.datalevel);
                     }
                     this.LoadPage(prvPageId, undefined,'prev');
@@ -478,7 +475,7 @@ var _Navigator = (function () {
                 }
             } else {
                 var prvPageId = _currentPageObject.prevPageId;
-                if(_currentPageObject.isLevelStart) {
+                if(_currentPageObject.isLevelStart  && _Navigator.GetBookmarkData().levelRetry != '') {
                     prvPageId = _LevelAccess.JumpToPreviousAvailableLevel(_currentPageObject.datalevel);
                 }
                 this.LoadPage(prvPageId, undefined,'prev');
@@ -500,7 +497,7 @@ var _Navigator = (function () {
                 }
                 if (IsAllQCompleted) {
                     var nxtPageId = _currentPageObject.nextPageId
-                    if(_currentPageObject.isLevelEnd) {
+                    if(_currentPageObject.isLevelEnd && _Navigator.GetBookmarkData().levelRetry != '') {
                         nxtPageId = _LevelAccess.JumpToNextAccessibleLevel(_currentPageObject.datalevel);
                     }                    
                     this.LoadPage(nxtPageId, undefined, 'next');
@@ -514,7 +511,7 @@ var _Navigator = (function () {
                     this.CompletePage()
                 }
                 var nxtPageId = _currentPageObject.nextPageId;
-                if(_currentPageObject.isLevelEnd) {
+                if(_currentPageObject.isLevelEnd && _Navigator.GetBookmarkData().levelRetry != '') {
                     nxtPageId = _LevelAccess.JumpToNextAccessibleLevel(_currentPageObject.datalevel);
                 }
                 this.LoadPage(nxtPageId, undefined, 'next');
@@ -646,9 +643,15 @@ var _Navigator = (function () {
             }
         },        
         ReAttempt: function () {
-            _AttemptNData = $.extend(true, {}, _NData);
-            _NData = $.extend(true, {}, _TempNData);
-
+            //_AttemptNData = $.extend(true, {}, _NData);
+            //_NData = $.extend(true, {}, _TempNData);
+            
+            for (var i in _NData) {
+                if (!_LevelAccess.IsLevelAttempted(_NData[i].datalevel) && _LevelAccess.IsLevelVisible({'level': _NData[i].datalevel})) {
+                    _AttemptNData[i] = $.extend(true, {}, _NData[i]);
+                    _NData[i] = $.extend(true, {}, _TempNData[i]);
+                }
+            }
             _Navigator.SetBookmarkData({ "levelRetry": 'all' })
             _Navigator.UpdateProgressBar();
             _Navigator.UpdateScore();
