@@ -297,7 +297,7 @@ var _Navigator = (function () {
     var _StateData = {}
 
     function OnPageLoad(jsonObj, buttonPressed) {
-        if (typeof jsonObj != 'undefined' && !jsonObj.isBookMark) {
+        if (typeof jsonObj != undefined && !jsonObj.isBookMark) {
             _bookmarkData.pageId = _currentPageObject.pageId;
             _bookmarkData.questionId = "";
             if(_currentPageObject.pageId == "summary") {
@@ -378,7 +378,7 @@ var _Navigator = (function () {
                 $("#linkprevious").k_disable();
                 $("#linknext").k_enable();
             }
-            if(this.GetBookmarkData().levelRetry == 'level' && _currentPageObject.isLevelStart && _currentPageObject.pageId != 'summary') {
+            if(this.GetBookmarkData().levelRetry == 'level' && _currentPageObject.isLevelStart) {
                 $("#linkprevious").k_disable();
             }
             if (_currentPageObject.hasActivity != undefined && _currentPageObject.hasActivity &&
@@ -646,9 +646,15 @@ var _Navigator = (function () {
             }
         },        
         ReAttempt: function () {
-            _AttemptNData = $.extend(true, {}, _NData);
-            _NData = $.extend(true, {}, _TempNData);
-
+            //_AttemptNData = $.extend(true, {}, _NData);
+            //_NData = $.extend(true, {}, _TempNData);
+            
+            for (var i in _NData) {
+                if (!_LevelAccess.IsLevelAttempted(_NData[i].datalevel) && _LevelAccess.IsLevelVisible({'level': _NData[i].datalevel})) {
+                    _AttemptNData[i] = $.extend(true, {}, _NData[i]);
+                    _NData[i] = $.extend(true, {}, _TempNData[i]);
+                }
+            }
             _Navigator.SetBookmarkData({ "levelRetry": 'all' })
             _Navigator.UpdateProgressBar();
             _Navigator.UpdateScore();
