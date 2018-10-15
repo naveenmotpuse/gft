@@ -632,3 +632,10 @@ table.tableFridayInventory.ppftablestyle {
 .level_title{
     display: flex;
 } 
+
+
+.rTableCell3 td{
+    border: none;
+    padding: 0px;
+    float: left;
+}
