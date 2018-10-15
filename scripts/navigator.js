@@ -292,7 +292,7 @@ var _Navigator = (function () {
     var _StateData = {}
 
     function OnPageLoad(jsonObj, buttonPressed) {
-        if (typeof jsonObj != undefined && !jsonObj.isBookMark) {
+        if (typeof jsonObj == 'undefined' || (typeof jsonObj != 'undefined' && !jsonObj.isBookMark)) {
             _bookmarkData.pageId = _currentPageObject.pageId;
             _bookmarkData.questionId = "";
             if(_currentPageObject.pageId == "summary") {
@@ -375,7 +375,7 @@ var _Navigator = (function () {
                 $("#linkprevious").k_disable();
                 $("#linknext").k_enable();
             }
-            if(this.GetBookmarkData().levelRetry == 'level' && _currentPageObject.isLevelStart) {
+            if(this.GetBookmarkData().levelRetry == 'level' && _currentPageObject.isLevelStart && _currentPageObject.pageId != 'summary') {
                 $("#linkprevious").k_disable();
             }
             if (_currentPageObject.hasActivity != undefined && _currentPageObject.hasActivity &&
