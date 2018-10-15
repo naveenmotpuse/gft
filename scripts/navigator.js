@@ -10,12 +10,7 @@ var _Navigator = (function () {
     var _AttemptNData = {};
     var _TempNData = {};
     var _bookmarkData = {};
-    /*
-    var _bookmarkData = {
-        pageId:"",
-        questionId:"",
-        duration:0
-    };*/
+
     var _lastDuration = 0;
     var _levelStartPages = ["l1p1", "l1p2", "l2p1", "l3p1", "l4p1","summary"];
     var _NData = {
@@ -340,10 +335,12 @@ var _Navigator = (function () {
             return parseInt((new Date().getTime() - _startTime.getTime()) / 1000) + _lastDuration;
         },
         GetNavigationData: function () {
-            return JSON.parse(JSON.stringify(_NData));
+            var bookmarkNavData = {'currentNav': JSON.parse(JSON.stringify(_AttemptNData)), 'bestNav': JSON.parse(JSON.stringify(_NData))};
+            return bookmarkNavData;
         },
         InitNavigationData: function (_ndata_object) {
-            _NData = JSON.parse(JSON.stringify(_ndata_object));
+            _NData = JSON.parse(JSON.stringify(_ndata_object.currentNav));
+            _AttemptNData = JSON.parse(JSON.stringify(_ndata_object.bestNav));
         },
         LoadPage: function (pageId, jsonObj, buttonPressed) {
             debugger;
