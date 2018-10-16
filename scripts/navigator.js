@@ -655,7 +655,8 @@ var _Navigator = (function () {
             _Navigator.UpdateProgressBar();
             _Navigator.UpdateScore();
             DataStorage.ModuleRetryAll();
-            _Navigator.LoadPage('l1p2');
+            var goto = _LevelAccess.JumpToNextAccessibleLevel(1, true);
+            _Navigator.LoadPage(goto);
 
             var progData = this.GetProgressData();
             for (var i = 0; i < progData.length; i++) {
