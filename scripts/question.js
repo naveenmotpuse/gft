@@ -172,7 +172,7 @@
             })
             $("#div_feedback").css("margin-top", "0px");
         },
-        Loadfeedback: function (fId, isWorse) {
+        Loadfeedback: function (fId, isWorse, isLoaded) {
             var fdbkUrl = _Settings.dataRoot + _currentQuestionObj.feedback[fId] + _Caching.GetUrlExtension();
             $("#div_feedback").k_show();
             $("#div_feedback").load(fdbkUrl, function () {
@@ -183,10 +183,12 @@
                 if(isWorse) {
                     $("#div_feedback p:last").prepend($('<p class="popupNote"><span><i>Note: Even though you missed this question, because you got a better score in a previous attempt, the score from that attempt will count towards the final grade.</i></span></p></br>'));
                 }
-                $("body").animate({
-                    scrollTop: $(document).height()
-                }, 1000);
-                _Common.SetReader(_Settings.hiddenAnchor, "div_feedback");
+                if(!isLoaded) {
+                    $("body").animate({
+                        scrollTop: $(document).height()
+                    }, 1000);
+                    _Common.SetReader(_Settings.hiddenAnchor, "div_feedback");
+                }
             });
         },
         DisplayRemainingDataInFeedback: function () {
@@ -253,7 +255,7 @@
                         }
                     }
                 }
-                this.Loadfeedback(_currentQuestionObj.feedbackIndex);
+                this.Loadfeedback(_currentQuestionObj.feedbackIndex, false);
                 this.SetQuestionStatus();
             } else {
                 _CustomQuestion.PrevAnswer();
