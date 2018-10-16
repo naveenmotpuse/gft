@@ -255,7 +255,7 @@
                         }
                     }
                 }
-                this.Loadfeedback(_currentQuestionObj.feedbackIndex, true);
+                this.Loadfeedback(_currentQuestionObj.feedbackIndex, undefined, true);
                 this.SetQuestionStatus();
             } else {
                 _CustomQuestion.PrevAnswer();
