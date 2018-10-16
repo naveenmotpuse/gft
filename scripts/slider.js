@@ -540,6 +540,8 @@ var _TradeSlider = (function () {
             } else {
                 usermaxwoodcollection = userPPFTable[12][0];
                 fridaymaxfishcollection = fridayPPFTable[12][1];
+                AnimConfig.nightWoodValueDeductionfriday = 32;
+                AnimConfig.nightFishValueDeductionfriday = 2000;
             }
             
             TradeResults = {
