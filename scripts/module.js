@@ -22,7 +22,6 @@
             return _sessionData;
         },
         Init: function(){
-            debugger;
             //Init Econ service launch and GetSettings
             //It calls webservice call to get launchdata, statedata and settings
             _EconLabServiceManager.InitLaunch();
@@ -99,7 +98,6 @@
 
 
 $(document).ready(function () {
-    debugger;
     //always first in ready. should be called only once.
     var isIE11version = !!navigator.userAgent.match(/Trident.*rv\:11\./);
     if (/Edge/.test(navigator.userAgent) || isIE11version) {

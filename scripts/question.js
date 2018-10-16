@@ -67,7 +67,9 @@
             } else {
                 $("#linknext").k_enable();
             }
-            if(currPage.isLevelStart && currPage.questions[0].Qid == _currentQuestionObj.Id) {
+            if(currPage.isLevelStart && currPage.questions[0].Qid == _currentQuestionObj.Id && _Navigator.GetBookmarkData().levelRetry == 'level') {
+                $("#linkprevious").k_disable();
+            } if(currPage.isLevelStart && _currentQuestionObj.pageId == "l1p2" && (_Navigator.GetBookmarkData().levelRetry == 'level' || _Navigator.GetBookmarkData().levelRetry == 'all')) {
                 $("#linkprevious").k_disable();
             } else {
                 $("#linkprevious").k_enable();
@@ -220,7 +222,6 @@
             }
         },
         PrevAnswer: function () {
-            debugger;
             if (_currentQuestionObj.type == "question") {
                 var totalOptions = _currentQuestionObj.options.length;
                 $(".btncheckanswer").k_disable();

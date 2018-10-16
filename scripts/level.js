@@ -138,7 +138,6 @@ var _LevelAccess = (function() {
     JumpToPreviousAvailableLevel: function(thisLevel, isLevelRetry) {
       var gotopageid = 0;
       var _this = this;
-      debugger;
       var previous = function(tmp, key) {
         for (var i = tmp.length - 1; i > 0; i--) {
           if (tmp[i].level === key+'') {
@@ -155,7 +154,6 @@ var _LevelAccess = (function() {
       return gotopageid;
     },
     JumpToNextAccessibleLevel: function(thisLevel, isLevelRetry) {
-      debugger;
       var gotopageid = 0;
       var _this = this;
       var next = function(tmp, key) {
@@ -174,7 +172,6 @@ var _LevelAccess = (function() {
       return gotopageid;
     },
     InitLevels: function() {
-      debugger;
       var levelObject = visibleLevels;
       for (var i = 0; i < Object.keys(levelObject).length; i++) {
         //if (Object.keys(levelObject)[i] === i+'') {

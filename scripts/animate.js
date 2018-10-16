@@ -587,7 +587,6 @@ var EventManager = function () {
             }
         },
         onNightAnimComplete: function () {
-            debugger;
             $("#linkprevious").k_enable();
             if(_Navigator.GetBookmarkData().levelRetry == 'level' || _Navigator.GetBookmarkData().levelRetry == 'all') {
                 $("#appmenu").k_disable();
