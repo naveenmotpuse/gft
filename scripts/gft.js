@@ -518,7 +518,12 @@ var _CustomQuestion = (function () {
 
                     _currentQuestionObj.points = crrcount / valPoints;
                     _currentQuestionObj.isAnswered = true;
-                    _currentQuestionObj.feedbackIndex = feedbackIndex;
+                    if(isWorsen){
+                        _currentQuestionObj.feedbackIndex = attemptCurrentQuestionData.feedbackIndex;
+                    }
+                    else{
+                        _currentQuestionObj.feedbackIndex = feedbackIndex;
+                    }
 
                     _Question.Loadfeedback(feedbackIndex, isWorsen);
                     $("#linknext").k_enable();

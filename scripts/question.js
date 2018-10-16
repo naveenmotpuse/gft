@@ -220,6 +220,7 @@
             }
         },
         PrevAnswer: function () {
+            debugger;
             if (_currentQuestionObj.type == "question") {
                 var totalOptions = _currentQuestionObj.options.length;
                 $(".btncheckanswer").k_disable();
@@ -390,7 +391,12 @@
                 } else {
                     _currentQuestionObj.points = _qPoints;
                     _currentQuestionObj.isAnswered = true;
-                    _currentQuestionObj.feedbackIndex = feedbackIndex;
+                    if(isWorsen){
+                        _currentQuestionObj.feedbackIndex = attemptCurrentQuestionData.feedbackIndex;
+                    }
+                    else{
+                        _currentQuestionObj.feedbackIndex = feedbackIndex;
+                    }
                     $("#linknext").k_enable();
                     this.SetQuestionStatus();
                     //Need to think on generic logic.
