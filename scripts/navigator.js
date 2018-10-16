@@ -343,6 +343,7 @@ var _Navigator = (function () {
             _AttemptNData = JSON.parse(JSON.stringify(_ndata_object.bestNav));
         },
         LoadPage: function (pageId, jsonObj, buttonPressed) {
+            debugger;
             _currentPageId = pageId;
              if (!_Common.IsEmptyObject(jsonObj) && jsonObj != undefined) {
                 if (jsonObj.isBookMark) {
