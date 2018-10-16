@@ -64,7 +64,7 @@ var _Common = (function () {
         },
         SetReader: function (hiddenAnchor, idToStartReading) {
             $(hiddenAnchor).attr("href", "#" + idToStartReading);
-            $(hiddenAnchor)[0].click();
+            //$(hiddenAnchor)[0].click();
         },
         ValidateDecimal:function (evt, obj) {
             var charCode = (evt.which) ? evt.which : event.keyCode
