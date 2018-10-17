@@ -186,11 +186,12 @@
                 if(isWorse) {
                     $("#div_feedback p:last").prepend($('<p class="popupNote"><span><i>Note: Even though you missed this question, because you got a better score in a previous attempt, the score from that attempt will count towards the final grade.</i></span></p></br>'));
                 }
+                $("#div_feedback p").first().attr("id","feedback_text")
                 if(isLoaded !== true) {
                     $("body").animate({
                         scrollTop: $(document).height()
                     }, 1000);
-                    _Common.SetReader(_Settings.hiddenAnchor, "div_feedback");
+                    _Common.SetReader(_Settings.hiddenAnchor, "feedback_text", true);
                 }
             });
         },

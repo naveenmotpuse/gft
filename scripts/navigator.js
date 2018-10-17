@@ -345,7 +345,6 @@ var _Navigator = (function () {
             _AttemptNData = JSON.parse(JSON.stringify(_ndata_object.bestNav));
         },
         LoadPage: function (pageId, jsonObj, buttonPressed) {
-            debugger;
             _currentPageId = pageId;
              if (!_Common.IsEmptyObject(jsonObj) && jsonObj != undefined) {
                 if (jsonObj.isBookMark) {
@@ -412,9 +411,9 @@ var _Navigator = (function () {
                         OnPageLoad(jsonObj, buttonPressed);
                         
                         if (isIpad) {
-                            _Common.SetReader(_Settings.hiddenAnchor, "progress");
+                            _Common.SetReader(_Settings.hiddenAnchor, "progress", true);
                         } else {
-                            _Common.SetReader(_Settings.hiddenAnchor, "progress_bar");
+                            _Common.SetReader(_Settings.hiddenAnchor, "progress_bar", true);
                         }
                         if(_Navigator.GetBookmarkData().levelRetry == 'level' || _Navigator.GetBookmarkData().levelRetry == 'all') {
                             $("#appmenu").k_disable();
