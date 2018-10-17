@@ -35,13 +35,13 @@
                     OnQuestionLoad(qObj);
                     if (firstQuestion == _currentQuestionObj.Qid) {
                         if (isIpad) {
-                            _Common.SetReader(_Settings.hiddenAnchor, "progress");
+                            _Common.SetReader(_Settings.hiddenAnchor, "progress", true);
                         } else {
-                            _Common.SetReader(_Settings.hiddenAnchor, "progress_bar");
+                            _Common.SetReader(_Settings.hiddenAnchor, "progress_bar", true);
                         }
                     }
                     else {
-                        _Common.SetReader(_Settings.hiddenAnchor, "question");
+                        _Common.SetReader(_Settings.hiddenAnchor, "progress_bar", true);
                     }
 
                 });
@@ -51,13 +51,13 @@
                         OnQuestionLoad(qObj);
                         if (firstQuestion == _currentQuestionObj.Qid) {
                             if (isIpad) {
-                                _Common.SetReader(_Settings.hiddenAnchor, "progress");
+                                _Common.SetReader(_Settings.hiddenAnchor, "progress", true);
                             } else {
-                                _Common.SetReader(_Settings.hiddenAnchor, "progress_bar");
+                                _Common.SetReader(_Settings.hiddenAnchor, "progress_bar", true);
                             }
                         }
                         else {
-                            _Common.SetReader(_Settings.hiddenAnchor, "question");
+                            _Common.SetReader(_Settings.hiddenAnchor, "progress_bar", true);
                         }
                     })
                 });
@@ -69,7 +69,7 @@
             }
             if(currPage.isLevelStart && currPage.questions[0].Qid == _currentQuestionObj.Id && _Navigator.GetBookmarkData().levelRetry == 'level') {
                 $("#linkprevious").k_disable();
-            } if(currPage.isLevelStart && _currentQuestionObj.pageId == "l1p2" && (_Navigator.GetBookmarkData().levelRetry == 'level' || _Navigator.GetBookmarkData().levelRetry == 'all')) {
+            }else if(currPage.isLevelStart && _currentQuestionObj.pageId == "l1p2" && (_Navigator.GetBookmarkData().levelRetry == 'level' || _Navigator.GetBookmarkData().levelRetry == 'all')) {
                 $("#linkprevious").k_disable();
             } else {
                 $("#linkprevious").k_enable();
