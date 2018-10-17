@@ -298,6 +298,7 @@ var _Navigator = (function () {
             if(_currentPageObject.pageId == "summary") {
                 _bookmarkData.levelRetry = "";    
             }
+            
         }
         _TopSlider.OnLoad();
         _CustomPage.OnPageLoad();
@@ -305,6 +306,7 @@ var _Navigator = (function () {
         _Navigator.LoadDefaultQuestion(jsonObj, buttonPressed);
         _Navigator.UpdateScore();
         _Module.SaveSessionData();
+        _ModuleCharts.DrawPPFChartonBookmark();
     }
     return {
         Get: function () {
@@ -353,7 +355,6 @@ var _Navigator = (function () {
                 }
 
             }
-            
             if(isIpad){
                 $('.progress *').removeAttr('aria-hidden');
                 $('.progress').attr('aria-label','Level 1 progress 0%, Level 2 progress 0%, Level 3 progress 0%, Level 4 progress 0%')

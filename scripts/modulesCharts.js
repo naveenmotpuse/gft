@@ -10,7 +10,7 @@ var _ModuleCharts = (function () {
                 },
                 tooltip: {
                     formatter: function () {
-                        return this.x + ' logs (' + TimePPFTable[this.point.index][0] + ' hours), ' + this.y + ' cals (' + TimePPFTable[this.point.index][1]+ ' hours)';
+                        return this.x + ' logs (' + TimePPFTable[this.point.index][0] + ' hours), ' + this.y + ' cals (' + TimePPFTable[this.point.index][1] + ' hours)';
                     },
                     positioner: function (labelWidth, labelHeight, point) {
                         var tooltipX, tooltipY;
@@ -21,13 +21,13 @@ var _ModuleCharts = (function () {
                             y: tooltipY
                         }
                     },
-                    snap:0
-                },  
+                    snap: 0
+                },
                 plotOptions: {
-                    series:{
-                        stickyTracking:false
+                    series: {
+                        stickyTracking: false
                     }
-                },              
+                },
                 xAxis: {
                     title: {
                         text: 'Firewood (logs)'
@@ -65,47 +65,47 @@ var _ModuleCharts = (function () {
                     enabled: false
                 },
                 series: [{
-                        id: ser1,
-                        name: ser1,
-                        type: 'line',
-                        lineWidth: 0,
-                        data: _data,
-                        color: ColorCodes.gray,
-                        marker: {
-                            enabled: true,
-                            radius: 5,
-                            symbol: "circle"
-                        },
-                        states: {
-                            hover: {
-                                lineWidthPlus: 0
-                            }
-                        }
+                    id: ser1,
+                    name: ser1,
+                    type: 'line',
+                    lineWidth: 0,
+                    data: _data,
+                    color: ColorCodes.gray,
+                    marker: {
+                        enabled: true,
+                        radius: 5,
+                        symbol: "circle"
                     },
-                    {
-                        id: ser2,
-                        name: ser2,
-                        type: 'line',
-                        lineWidth: 0,
-                        color: ColorCodes.blue,
-                        marker: {
-                            enabled: true,
-                            radius: 5,
-                            symbol: "circle"
-                        },
-                        states: {
-                            hover: {
-                                lineWidthPlus: 0
-                            }
+                    states: {
+                        hover: {
+                            lineWidthPlus: 0
                         }
                     }
+                },
+                {
+                    id: ser2,
+                    name: ser2,
+                    type: 'line',
+                    lineWidth: 0,
+                    color: ColorCodes.blue,
+                    marker: {
+                        enabled: true,
+                        radius: 5,
+                        symbol: "circle"
+                    },
+                    states: {
+                        hover: {
+                            lineWidthPlus: 0
+                        }
+                    }
+                }
                 ]
-            }, function() {
+            }, function () {
                 _CustomPage.SetPageAccesibility();
             });
         },
         DrawL2QuestionIntroChart: function () {
-            if($("#questionIntro").length<=0) return;
+            if ($("#questionIntro").length <= 0) return;
             Highcharts.chart('questionIntro', {
                 title: {
                     //   text: 'Production Possibilities Frontier'
@@ -113,13 +113,13 @@ var _ModuleCharts = (function () {
                 },
                 tooltip: {
                     formatter: function () {
-                        return this.x + ' logs (' + TimePPFTable[this.point.index][0] + ' hours), ' + this.y + ' cals (' + TimePPFTable[this.point.index][1]+ ' hours)';
+                        return this.x + ' logs (' + TimePPFTable[this.point.index][0] + ' hours), ' + this.y + ' cals (' + TimePPFTable[this.point.index][1] + ' hours)';
                     },
-                    snap:0
+                    snap: 0
                 },
                 plotOptions: {
-                    series:{
-                        stickyTracking:false
+                    series: {
+                        stickyTracking: false
                     }
                 },
                 xAxis: {
@@ -160,70 +160,70 @@ var _ModuleCharts = (function () {
                     enabled: false
                 },
                 series: [{
-                        id: 'userppfser',
-                        name: 'Your PPF',
-                        type: 'spline',
-                        lineWidth: 1,
-                        data: userPPF,
-                        color: ColorCodes.user,
-                        marker: {
-                            enabled: true,
-                            radius: 7,
-                            symbol: "circle"
-                        },
-                        states: {
-                            hover: {
-                                lineWidthPlus: 0
-                            }
-                        }
+                    id: 'userppfser',
+                    name: 'Your PPF',
+                    type: 'spline',
+                    lineWidth: 1,
+                    data: userPPF,
+                    color: ColorCodes.user,
+                    marker: {
+                        enabled: true,
+                        radius: 7,
+                        symbol: "circle"
                     },
-                    {
-                        id: 'fridayppfser',
-                        name: "Friday's PPF",
-                        type: 'spline',
-                        lineWidth: 1,
-                        data: fridayPPF,
-                        color: ColorCodes.friday,
-                        marker: {
-                            enabled: true,
-                            radius: 5,
-                            symbol: "circle"
-                        },
-                        states: {
-                            hover: {
-                                lineWidthPlus: 0
-                            }
-                        }
-                    },
-                    {
-                        id: 'bothppfppoint',
-                        name: "Both Student and Friday's Production Point",
-                        type: 'spline',
-                        lineWidth: 0,
-                        data: [
-                            [32, 2000]
-                        ],
-                        color: ColorCodes.transparent,
-                        marker: {
-                            fillOpacity: 0,
-                            lineWidth: 2,
-                            lineColor: ColorCodes.both,
-                            radius: 10,
-                        },
-                        states: {
-                            hover: {
-                                lineWidthPlus: 0
-                            }
+                    states: {
+                        hover: {
+                            lineWidthPlus: 0
                         }
                     }
+                },
+                {
+                    id: 'fridayppfser',
+                    name: "Friday's PPF",
+                    type: 'spline',
+                    lineWidth: 1,
+                    data: fridayPPF,
+                    color: ColorCodes.friday,
+                    marker: {
+                        enabled: true,
+                        radius: 5,
+                        symbol: "circle"
+                    },
+                    states: {
+                        hover: {
+                            lineWidthPlus: 0
+                        }
+                    }
+                },
+                {
+                    id: 'bothppfppoint',
+                    name: "Both Student and Friday's Production Point",
+                    type: 'spline',
+                    lineWidth: 0,
+                    data: [
+                        [32, 2000]
+                    ],
+                    color: ColorCodes.transparent,
+                    marker: {
+                        fillOpacity: 0,
+                        lineWidth: 2,
+                        lineColor: ColorCodes.both,
+                        radius: 10,
+                    },
+                    states: {
+                        hover: {
+                            lineWidthPlus: 0
+                        }
+                    }
+                }
                 ]
-            }, function() {
+            }, function () {
                 _CustomPage.SetPageAccesibility();
             });
 
         },
         DrawL4QuestionIntroChart: function () {
-            if($("#questionIntro").length<=0) return;
+            if ($("#questionIntro").length <= 0) return;
             Highcharts.chart('questionIntro', {
                 title: {
                     //   text: 'Production Possibilities Frontier'
@@ -231,13 +231,13 @@ var _ModuleCharts = (function () {
                 },
                 tooltip: {
                     formatter: function () {
-                        return this.x + ' logs (' + TimePPFTable[this.point.index][0] + ' hours), ' + this.y + ' cals (' + TimePPFTable[this.point.index][1]+ ' hours)';
+                        return this.x + ' logs (' + TimePPFTable[this.point.index][0] + ' hours), ' + this.y + ' cals (' + TimePPFTable[this.point.index][1] + ' hours)';
                     },
-                    snap:0
+                    snap: 0
                 },
                 plotOptions: {
-                    series:{
-                        stickyTracking:false
+                    series: {
+                        stickyTracking: false
                     }
                 },
                 xAxis: {
@@ -278,41 +278,41 @@ var _ModuleCharts = (function () {
                     enabled: false
                 },
                 series: [{
-                        id: 'userppfser',
-                        name: 'Your PPF',
-                        type: 'spline',
-                        lineWidth: 1,
-                        data: _Scenario.GetUserData(),
-                        color: ColorCodes.user,
-                        marker: {
-                            enabled: true,
-                            radius: 5,
-                            symbol: "circle"
-                        },
-                        states: {
-                            hover: {
-                                lineWidthPlus: 0
-                            }
-                        }
+                    id: 'userppfser',
+                    name: 'Your PPF',
+                    type: 'spline',
+                    lineWidth: 1,
+                    data: _Scenario.GetUserData(),
+                    color: ColorCodes.user,
+                    marker: {
+                        enabled: true,
+                        radius: 5,
+                        symbol: "circle"
                     },
-                    {
-                        id: 'fridayppfser',
-                        name: "Friday's PPF",
-                        type: 'spline',
-                        lineWidth: 1,
-                        data: _Scenario.GetFridayData(),
-                        color: ColorCodes.friday,
-                        marker: {
-                            enabled: true,
-                            radius: 5,
-                            symbol: "circle"
-                        },
-                        states: {
-                            hover: {
-                                lineWidthPlus: 0
-                            }
+                    states: {
+                        hover: {
+                            lineWidthPlus: 0
                         }
-                    }/*,
+                    }
+                },
+                {
+                    id: 'fridayppfser',
+                    name: "Friday's PPF",
+                    type: 'spline',
+                    lineWidth: 1,
+                    data: _Scenario.GetFridayData(),
+                    color: ColorCodes.friday,
+                    marker: {
+                        enabled: true,
+                        radius: 5,
+                        symbol: "circle"
+                    },
+                    states: {
+                        hover: {
+                            lineWidthPlus: 0
+                        }
+                    }
+                }/*,
                     {
                         id: 'bothppfppoint',
                         name: "Both Student and Friday's Production Point",
@@ -335,7 +335,7 @@ var _ModuleCharts = (function () {
                         }
                     }*/
                 ]
-            }, function() {
+            }, function () {
                 _CustomPage.SetPageAccesibility();
             });
 
@@ -466,6 +466,7 @@ var _ModuleCharts = (function () {
             if (chart.get('Wood') != undefined && chart.get('Wood') != null) {
                 chart.get('Wood').setData(_wooddata)
             }
+            _ModuleCharts.setSurplusChartAccessibility();
             //chart.series[0].setData(_data)
         },
         DrawPPFChart: function () {
@@ -475,15 +476,15 @@ var _ModuleCharts = (function () {
                     text: ' '
 
                 },
-                tooltip: {                    
+                tooltip: {
                     formatter: function () {
-                        return this.x + ' logs (' + TimePPFTable[this.point.index][0] + ' hours), ' + this.y + ' cals (' + TimePPFTable[this.point.index][1]+ ' hours)';
+                        return this.x + ' logs (' + TimePPFTable[this.point.index][0] + ' hours), ' + this.y + ' cals (' + TimePPFTable[this.point.index][1] + ' hours)';
                     },
-                    snap:0
+                    snap: 0
                 },
                 plotOptions: {
-                    series:{
-                        stickyTracking:false
+                    series: {
+                        stickyTracking: false
                     }
                 },
                 xAxis: {
@@ -524,43 +525,43 @@ var _ModuleCharts = (function () {
                     enabled: false
                 },
                 series: [{
-                        id: 'userppfser',
-                        name: 'Your PPF',
-                        type: 'spline',
-                        lineWidth: 0,
-                        data: [],
-                        color: ColorCodes.user,
-                        marker: {
-                            enabled: true,
-                            radius: 5,
-                            symbol: "circle"
-                        },
-                        states: {
-                            hover: {
-                                lineWidthPlus: 0
-                            }
-                        }
+                    id: 'userppfser',
+                    name: 'Your PPF',
+                    type: 'spline',
+                    lineWidth: 0,
+                    data: [],
+                    color: ColorCodes.user,
+                    marker: {
+                        enabled: true,
+                        radius: 5,
+                        symbol: "circle"
                     },
-                    {
-                        id: 'fridayppfser',
-                        name: "Friday's PPF",
-                        type: 'spline',
-                        lineWidth: 0,
-                        data: [],
-                        color: ColorCodes.friday,
-                        marker: {
-                            enabled: true,
-                            radius: 5,
-                            symbol: "circle"
-                        },
-                        states: {
-                            hover: {
-                                lineWidthPlus: 0
-                            }
+                    states: {
+                        hover: {
+                            lineWidthPlus: 0
                         }
                     }
+                },
+                {
+                    id: 'fridayppfser',
+                    name: "Friday's PPF",
+                    type: 'spline',
+                    lineWidth: 0,
+                    data: [],
+                    color: ColorCodes.friday,
+                    marker: {
+                        enabled: true,
+                        radius: 5,
+                        symbol: "circle"
+                    },
+                    states: {
+                        hover: {
+                            lineWidthPlus: 0
+                        }
+                    }
+                }
                 ]
-            }, function() {
+            }, function () {
                 _CustomPage.SetPageAccesibility();
             });
         },
@@ -573,32 +574,32 @@ var _ModuleCharts = (function () {
             if (currPage.datalevel == 4) {
                 localUserPPF = _Scenario.GetUserData();
                 localfridayPPF = _Scenario.GetFridayData();
-                if(_Scenario.GetScenarioIndex()==0){
+                if (_Scenario.GetScenarioIndex() == 0) {
                     usermax = 5000;
                     fridaymax = 5000;
                 }
-                else{
+                else {
                     usermax = 8000;
                     fridaymax = 5000;
                 }
             }
-            else{
+            else {
                 localUserPPF = userPPF;
                 localfridayPPF = fridayPPF;
             }
             Highcharts.chart('studenttradeGraph', {
-                title: {                    
+                title: {
                     text: ' '
                 },
                 tooltip: {
                     formatter: function () {
-                        return this.x + ' logs (' + TimePPFTable[this.point.index][0] + ' hours), ' + this.y + ' cals (' + TimePPFTable[this.point.index][1]+ ' hours)';
+                        return this.x + ' logs (' + TimePPFTable[this.point.index][0] + ' hours), ' + this.y + ' cals (' + TimePPFTable[this.point.index][1] + ' hours)';
                     },
-                    snap:0
+                    snap: 0
                 },
                 plotOptions: {
-                    series:{
-                        stickyTracking:false
+                    series: {
+                        stickyTracking: false
                     }
                 },
                 xAxis: {
@@ -652,7 +653,7 @@ var _ModuleCharts = (function () {
                         symbol: "circle"
                     }
                 }]
-            }, function() {
+            }, function () {
                 _CustomPage.SetPageAccesibility();
             });
             Highcharts.chart('fridaytradeGraph', {
@@ -661,13 +662,13 @@ var _ModuleCharts = (function () {
                 },
                 tooltip: {
                     formatter: function () {
-                        return this.x + ' logs (' + TimePPFTable[this.point.index][0] + ' hours), ' + this.y + ' cals (' + TimePPFTable[this.point.index][1]+ ' hours)';
+                        return this.x + ' logs (' + TimePPFTable[this.point.index][0] + ' hours), ' + this.y + ' cals (' + TimePPFTable[this.point.index][1] + ' hours)';
                     },
-                    snap:0
+                    snap: 0
                 },
                 plotOptions: {
-                    series:{
-                        stickyTracking:false
+                    series: {
+                        stickyTracking: false
                     }
                 },
                 xAxis: {
@@ -721,7 +722,7 @@ var _ModuleCharts = (function () {
                         symbol: "circle"
                     }
                 }]
-            }, function() {
+            }, function () {
                 _CustomPage.SetPageAccesibility();
             });
         },
@@ -745,7 +746,7 @@ var _ModuleCharts = (function () {
                         lineColor: ColorCodes.sliderPoint,
                         radius: 6,
                         symbol: "circle"
-                    },                    
+                    },
                     states: {
                         hover: {
                             lineWidthPlus: 0
@@ -767,6 +768,78 @@ var _ModuleCharts = (function () {
             chart.get(seriesid).update({
                 lineWidth: 1
             });
+        },
+        setPlottedPointsAccessibility: function () {
+            var chart = $('#questionchart').highcharts();
+            var _currentPage = _Navigator.GetCurrentPage();
+            var _currPageId = _currentPage.pageId;
+            var _currPageQId = _Question.GetCurrentQuestion().Id;
+            if (_currPageId == "l1p2" && _currPageQId == "Q3") {
+                var s = chart.series[1].data[0].x + " Wood(logs) " + chart.series[1].data[0].y + " Fish(cals), " + chart.series[1].data[1].x + " Wood(logs) " + chart.series[1].data[1].y + " Fish(cals) ";
+                $("#questionchart").attr("aria-label", "Your Production Possibility Frontier graph for Firewoods from 0 to 120 in logs vs. Fish from 0 to 3500 in calories 0 Wood(logs) 3000 Fish(cals), 96 Wood(logs) 0 Fish(cals). Plotted points: " + s + ". Refer above table for more details.");
+            }
+            if (_currPageId == "l1p4" && _currPageQId == "Q7") {
+                var s = chart.series[1].data[0].x + " Wood(logs) " + chart.series[1].data[0].y + " Fish(cals), " + chart.series[1].data[1].x + " Wood(logs) " + chart.series[1].data[1].y + " Fish(cals) ";
+                $("#questionchart").attr("aria-label", "Friday's Production Possibility Frontier graph for Firewoods from 0 to 120 in logs vs. Fish from 0 to 6500 in calories. Plotted points: " + s + ". Refer above table for more details.");
+            }
+            if (_currPageId == "l4p2" && _currPageQId == "Q18") {
+                var s = chart.series[1].data[0].x + " Wood(logs) " + chart.series[1].data[0].y + " Fish(cals), " + chart.series[1].data[1].x + " Wood(logs) " + chart.series[1].data[1].y + " Fish(cals) ";
+                $("#questionchart").attr("aria-label", " Your Production Possibility Frontier graph for Firewoods from 0 to 120 in logs vs. Fish from 0 to 6500 in calories. Plotted points: " + s + ". Refer above table for more details.");
+            }
+            if (_currPageId == "l4p3" && _currPageQId == "Q19") {
+                $("#questionchart").attr("aria-label", "Your Production Possibility Frontier graph for Firewoods from 0 to 120 in logs vs. Fish from 0 to 4500 in calories. Plotted points: " + s + ". Refer above table for more details.");
+            }
+        },
+        setSurplusChartAccessibility: function () {
+            var chart = $('#questionchart').highcharts();
+            var _currentPage = _Navigator.GetCurrentPage();
+            var _currPageId = _currentPage.pageId;
+            var _currPageQId = _Question.GetCurrentQuestion().Id;
+            var chart = $('#surpluschart_c').highcharts();
+            var s = "";
+            for (var i = 0; i < chart.get('Fish').data.length; i++) {
+                s += "Day " + chart.get('Fish').data[i].x + ":" + " Fish: " + chart.get('Fish').data[i].y + "(cals), Wood: " + chart.get('Wood').data[i].y + "(logs). "
+            }
+            if (_currPageQId == "Q15" || _currPageQId == "Q16" || _currPageQId == "Q17" || _currPageQId == "Q22")
+                $("#surpluschart_c").attr("aria-label", "Goals: Wood: 90(logs) - Fish: 9000(cals). Surplus Inventory graph for inventory of fish and woods from " + s + ". Refer table for more details.")
+        },
+        DrawPPFChartonBookmark: function () {
+            debugger;
+            var _currentQuestionObj = _Question.GetCurrentQuestion();
+            var ppfdata = _Navigator.Get();
+            if (ppfdata.l1p2.questions[2].isAnswered) {
+                    $("#ppfchart_c").attr("aria-label", "Production Possibilities Frontier graph for Firewoods from 0 to 120 in logs vs. Fish from 0 to 3500 in calories. Your PPF line has been drawn. Refer table for more details.");
+            }
+            else if (ppfdata.l1p2.questions[1].isAnswered) {
+                _ModuleCharts.AddPointToPPFChart("userppfser", [96, 0])
+                $(".userppftable tbody tr:nth-child(13) td:nth-child(3)").text(96)
+                $(".userppftable tbody tr:nth-child(13) td:nth-child(4)").text(0)
+                $("#ppfchart_c").attr("aria-label", "Production Possibilities Frontier graph for Firewoods from 0 to 120 in logs vs. Fish from 0 to 3500 in calories. Plotted points: 0 Wood(logs) 3000 Fish(cals), 96 Wood(logs) 0 Fish(cals). Refer table for more details.");
+            }
+            else if (ppfdata.l1p2.questions[0].isAnswered) {
+                _ModuleCharts.AddPointToPPFChart("userppfser", [0, 3000])
+                $(".userppftable tbody tr:nth-child(1) td:nth-child(3)").text(0)
+                $(".userppftable tbody tr:nth-child(1) td:nth-child(4)").text(3000)
+                $("#ppfchart_c").attr("aria-label", "Production Possibilities Frontier graph for Firewoods from 0 to 120 in logs vs. Fish from 0 to 3500 in calories. Plotted points: 0 Wood(logs) 3000 Fish(cals). Refer table for more details.");
+            }
+
+            //Friday ppf//
+            if (ppfdata.l1p4.questions[2].isAnswered) {
+                    $("#ppfchart_c").attr("aria-label", "Production Possibilities Frontier graph for Firewoods from 0 to 120 in logs vs. Fish from 0 to 3500 in calories. Both PPF lines are been drawn. Refer table for more details.");
+            }
+            else if (ppfdata.l1p4.questions[1].isAnswered) {
+                _ModuleCharts.AddPointToPPFChart("fridayppfser", [48, 0])
+                $(".fridayppftable tbody tr:nth-child(13) td:nth-child(3)").text(48)
+                $(".fridayppftable tbody tr:nth-child(13) td:nth-child(4)").text(0)
+                $("#ppfchart_c").attr("aria-label", "Production Possibilities Frontier graph for Firewoods from 0 to 120 in logs vs. Fish from 0 to 3500 in calories. Plotted points: 0 Wood(logs) 6000 Fish(cals), 48 Wood(logs) 0 Fish(cals). Refer table for more details.");
+            }
+            else if (ppfdata.l1p4.questions[1].isAnswered) {
+                $(".fridayppftable").closest(".tablewrapper").k_show();
+                _ModuleCharts.AddPointToPPFChart("fridayppfser", [0, 6000])
+                $(".fridayppftable tbody tr:nth-child(1) td:nth-child(3)").text(0)
+                $(".fridayppftable tbody tr:nth-child(1) td:nth-child(4)").text(6000)
+                $("#ppfchart_c").attr("aria-label", "Production Possibilities Frontier graph for Firewoods from 0 to 120 in logs vs. Fish from 0 to 3500 in calories. Plotted points: 0 Wood(logs) 6000 Fish(cals). Refer table for more details.");
+            }
         }
     };
 })();

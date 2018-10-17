@@ -6,6 +6,7 @@
         _CustomQuestion.OnQuestionLoad();
         //_Question.SetOptionClone();
         //_Question.SetOptionPosition();
+        _ModuleCharts.DrawPPFChartonBookmark();
         if (_currentQuestionObj.isAnswered) {
             _Question.PrevAnswer();
         }
@@ -15,6 +16,7 @@
             if (jsonObj == undefined) {
                 jsonObj = {};
             }
+            _ModuleCharts.DrawPPFChartonBookmark();
             var currPage = _Navigator.GetCurrentPage();
             var firstQuestion = "";
             for (var i = 0; i < currPage.questions.length; i++) {
@@ -141,6 +143,7 @@
             }
         },
         Retry: function () {
+            _CustomPage.SetPageAccesibility();
             this.UnloadFeedback()
             $(".btncheckanswer").k_enable();
             $("#div_question").find("input[type='text'].incorrect").val("").k_enable();
@@ -361,6 +364,7 @@
                         _optD.isCorrect = true;
                         _qPoints += optPoints;
                         $("#" + _optD.id).addClass("correct")
+                        
                     }
                 }
             }
