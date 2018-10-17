@@ -534,6 +534,11 @@ var EventManager = function () {
             $("#givefish-range").k_enable();
             _Question.UnloadFeedback();
             _TradeSlider.ResetTradeSlider();
+            if (isIpad) {
+                _Common.SetReader(_Settings.hiddenAnchor, "progress", true);
+            } else {
+                _Common.SetReader(_Settings.hiddenAnchor, "progress_bar", true);
+            }
             $('body').animate({
                 scrollTop: $(".t_animation_c").position().top - _Settings.topMargin
             }, 200);

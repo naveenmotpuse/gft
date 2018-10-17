@@ -804,7 +804,6 @@ var _ModuleCharts = (function () {
                 $("#surpluschart_c").attr("aria-label", "Goals: Wood: 90(logs) - Fish: 9000(cals). Surplus Inventory graph for inventory of fish and woods from " + s + ". Refer table for more details.")
         },
         DrawPPFChartonBookmark: function () {
-            debugger;
             var _currentQuestionObj = _Question.GetCurrentQuestion();
             var ppfdata = _Navigator.Get();
             if (ppfdata.l1p2.questions[2].isAnswered) {
