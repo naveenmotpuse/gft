@@ -839,7 +839,7 @@ var _ModuleCharts = (function () {
                 var questiondata = ppfdata.l1p2.questions[2];
                 _ModuleCharts.UpdatePPFChartSeries("userppfser", questiondata.correctData)
                 for (var i = 0; i < questiondata.correctData.length; i++) {
-                    var point = ppfdata.correctData[i];
+                    var point = questiondata.correctData[i];
                     $(".fridayppftable tbody tr:nth-child(" + (i + 1) + ") td:nth-child(3)").text(point[0])
                     $(".fridayppftable tbody tr:nth-child(" + (i + 1) + ") td:nth-child(4)").text(point[1])
                     $("#ppfchart_c").attr("aria-label", "Production Possibilities Frontier graph for Firewoods from 0 to 120 in logs vs. Fish from 0 to 3500 in calories. Both PPF lines are been drawn. Refer table for more details.");
