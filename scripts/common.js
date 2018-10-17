@@ -62,9 +62,11 @@ var _Common = (function () {
         IsEmptyObject: function (obj) {
             return JSON.stringify(obj) === JSON.stringify({});
         },
-        SetReader: function (hiddenAnchor, idToStartReading) {
+        SetReader: function (hiddenAnchor, idToStartReading, isLoaded) {
             $(hiddenAnchor).attr("href", "#" + idToStartReading);
-            $(hiddenAnchor)[0].click();
+            if(isLoaded != undefined && isLoaded) {
+                $(hiddenAnchor)[0].click();
+            }
         },
         ValidateDecimal:function (evt, obj) {
             var charCode = (evt.which) ? evt.which : event.keyCode

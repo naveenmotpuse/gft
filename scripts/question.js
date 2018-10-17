@@ -37,13 +37,13 @@
                     OnQuestionLoad(qObj);
                     if (firstQuestion == _currentQuestionObj.Qid) {
                         if (isIpad) {
-                            _Common.SetReader(_Settings.hiddenAnchor, "progress");
+                            _Common.SetReader(_Settings.hiddenAnchor, "progress", true);
                         } else {
-                            _Common.SetReader(_Settings.hiddenAnchor, "progress_bar");
+                            _Common.SetReader(_Settings.hiddenAnchor, "progress_bar", true);
                         }
                     }
                     else {
-                        _Common.SetReader(_Settings.hiddenAnchor, "question");
+                        _Common.SetReader(_Settings.hiddenAnchor, "progress_bar", true);
                     }
 
                 });
@@ -53,13 +53,13 @@
                         OnQuestionLoad(qObj);
                         if (firstQuestion == _currentQuestionObj.Qid) {
                             if (isIpad) {
-                                _Common.SetReader(_Settings.hiddenAnchor, "progress");
+                                _Common.SetReader(_Settings.hiddenAnchor, "progress", true);
                             } else {
-                                _Common.SetReader(_Settings.hiddenAnchor, "progress_bar");
+                                _Common.SetReader(_Settings.hiddenAnchor, "progress_bar", true);
                             }
                         }
                         else {
-                            _Common.SetReader(_Settings.hiddenAnchor, "question");
+                            _Common.SetReader(_Settings.hiddenAnchor, "progress_bar", true);
                         }
                     })
                 });
@@ -71,7 +71,7 @@
             }
             if(currPage.isLevelStart && currPage.questions[0].Qid == _currentQuestionObj.Id && _Navigator.GetBookmarkData().levelRetry == 'level') {
                 $("#linkprevious").k_disable();
-            } if(currPage.isLevelStart && _currentQuestionObj.pageId == "l1p2" && (_Navigator.GetBookmarkData().levelRetry == 'level' || _Navigator.GetBookmarkData().levelRetry == 'all')) {
+            }else if(currPage.isLevelStart && _currentQuestionObj.pageId == "l1p2" && (_Navigator.GetBookmarkData().levelRetry == 'level' || _Navigator.GetBookmarkData().levelRetry == 'all')) {
                 $("#linkprevious").k_disable();
             } else {
                 $("#linkprevious").k_enable();
@@ -175,7 +175,7 @@
             })
             $("#div_feedback").css("margin-top", "0px");
         },
-        Loadfeedback: function (fId, isWorse) {
+        Loadfeedback: function (fId, isWorse, isLoaded) {
             var fdbkUrl = _Settings.dataRoot + _currentQuestionObj.feedback[fId] + _Caching.GetUrlExtension();
             $("#div_feedback").k_show();
             $("#div_feedback").load(fdbkUrl, function () {
@@ -186,10 +186,12 @@
                 if(isWorse) {
                     $("#div_feedback p:last").prepend($('<p class="popupNote"><span><i>Note: Even though you missed this question, because you got a better score in a previous attempt, the score from that attempt will count towards the final grade.</i></span></p></br>'));
                 }
-                $("body").animate({
-                    scrollTop: $(document).height()
-                }, 1000);
-                _Common.SetReader(_Settings.hiddenAnchor, "div_feedback");
+                if(isLoaded !== true) {
+                    $("body").animate({
+                        scrollTop: $(document).height()
+                    }, 1000);
+                    _Common.SetReader(_Settings.hiddenAnchor, "div_feedback");
+                }
             });
         },
         DisplayRemainingDataInFeedback: function () {
@@ -256,7 +258,7 @@
                         }
                     }
                 }
-                this.Loadfeedback(_currentQuestionObj.feedbackIndex);
+                this.Loadfeedback(_currentQuestionObj.feedbackIndex, undefined, true);
                 this.SetQuestionStatus();
             } else {
                 _CustomQuestion.PrevAnswer();
