@@ -278,7 +278,7 @@ var _CustomQuestion = (function () {
                 EventManager.UpdateDayInFeedback();
             }
         },
-        ActionAfterCheckAnswer: function () {
+       /* ActionAfterCheckAnswer: function () {
             var _currentQuestionObj = _Question.GetCurrentQuestion();
             if (_currentQuestionObj.Id == "Q1") {
                 _ModuleCharts.AddPointToPPFChart("userppfser", [0, 3000])
@@ -320,7 +320,7 @@ var _CustomQuestion = (function () {
                     $("#ppfchart_c").attr("aria-label","Production Possibilities Frontier graph for Firewoods from 0 to 120 in logs vs. Fish from 0 to 3500 in calories. Friday's PPF line has been drawn. Refer table for more details.");
                 }
             }
-        },
+        }*/
         OnQuestionLoad: function () {
             var qObj = _Question.GetCurrentQuestion();
             if (qObj.type != undefined && qObj.type == "graph") {
@@ -476,7 +476,7 @@ var _CustomQuestion = (function () {
                 _currentQuestionObj.feedbackIndex = feedbackIndex;
                 //Need to think on generic logic.
                 _CustomQuestion.UpdateGraphSubmitStatus();
-                _CustomQuestion.ActionAfterCheckAnswer();
+                _ModuleCharts.DrawPPFChartonBookmark();
                 _Navigator.UpdateScore();
                 _Module.SaveSessionData();
                 $("#linknext").k_enable();
@@ -536,7 +536,7 @@ var _CustomQuestion = (function () {
                     $("#linknext").k_enable();
                     _CustomQuestion.UpdateGraphSubmitStatus();
                     //Need to think on generic logic.
-                    _CustomQuestion.ActionAfterCheckAnswer();
+                    _ModuleCharts.DrawPPFChartonBookmark();
                     _Navigator.UpdateScore();
                     _Module.SaveSessionData();
                 }

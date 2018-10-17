@@ -16,7 +16,7 @@
             if (jsonObj == undefined) {
                 jsonObj = {};
             }
-            _ModuleCharts.DrawPPFChartonBookmark();
+            //_ModuleCharts.DrawPPFChartonBookmark();
             var currPage = _Navigator.GetCurrentPage();
             var firstQuestion = "";
             for (var i = 0; i < currPage.questions.length; i++) {
@@ -385,7 +385,7 @@
                 this.SetQuestionStatus();
                 //Need to think on generic logic.
                 //Module specific.
-                _CustomQuestion.ActionAfterCheckAnswer();
+               _ModuleCharts.DrawPPFChartonBookmark();
 
                 _Navigator.UpdateScore();
                 _Module.SaveSessionData();
@@ -408,7 +408,7 @@
                     this.SetQuestionStatus();
                     //Need to think on generic logic.
                     //Module specific
-                    _CustomQuestion.ActionAfterCheckAnswer();
+                    _ModuleCharts.DrawPPFChartonBookmark();
                     _Navigator.UpdateScore();
                     //Show final incorrect feedback
                     this.Loadfeedback(feedbackIndex, isWorsen);
