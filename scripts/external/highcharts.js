@@ -2467,7 +2467,8 @@
          * @param {String} id
          */
         clip: function (clipRect) {
-            return this.attr('clip-path', clipRect ? 'url(' + this.renderer.url + '#' + clipRect.id + ')' : NONE);
+           // return this.attr('clip-path', clipRect ? 'url(' + this.renderer.url + '#' + clipRect.id + ')' : NONE);
+           return this.attr('clip-path', clipRect ? NONE : NONE);
         },
 
         /**

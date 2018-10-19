@@ -307,6 +307,7 @@ var _Navigator = (function () {
         _Navigator.UpdateScore();
         _Module.SaveSessionData();
         _ModuleCharts.DrawPPFChartonBookmark();
+        _CustomPage.SetPageAccesibility();
     }
     return {
         Get: function () {

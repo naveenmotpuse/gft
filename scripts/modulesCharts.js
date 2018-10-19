@@ -798,7 +798,7 @@ var _ModuleCharts = (function () {
             var chart = $('#surpluschart_c').highcharts();
             var s = "";
             for (var i = 0; i < chart.get('Fish').data.length; i++) {
-                s += "Day " + chart.get('Fish').data[i].x + ":" + " Fish: " + chart.get('Fish').data[i].y + "(cals), Wood: " + chart.get('Wood').data[i].y + "(logs). "
+                s += "Day " + chart.get('Fish').data[i].x + ":" + " Fish: " + chart.get('Fish').data[i].y + "(cals), Wood: " + chart.get('Wood').data[i].y + "(logs) "
             }
             if (_currPageQId == "Q15" || _currPageQId == "Q16" || _currPageQId == "Q17" || _currPageQId == "Q22")
                 $("#surpluschart_c").attr("aria-label", "Goals: Wood: 90(logs) - Fish: 9000(cals). Surplus Inventory graph for inventory of fish and woods from " + s + ". Refer table for more details.")
@@ -819,9 +819,9 @@ var _ModuleCharts = (function () {
             }
             else if (ppfdata.l1p2.questions[1].isAnswered) {
                 //_ModuleCharts.AddPointToPPFChart("userppfser", [0, 3000]);
-                _ModuleCharts.UpdatePPFChartSeries("userppfser", [[0, 3000],[96,0]], 0);
-                 $(".userppftable tbody tr:nth-child(1) td:nth-child(3)").text(0)
-                 $(".userppftable tbody tr:nth-child(1) td:nth-child(4)").text(3000)
+                _ModuleCharts.UpdatePPFChartSeries("userppfser", [[0, 3000], [96, 0]], 0);
+                $(".userppftable tbody tr:nth-child(1) td:nth-child(3)").text(0)
+                $(".userppftable tbody tr:nth-child(1) td:nth-child(4)").text(3000)
                 $(".userppftable tbody tr:nth-child(13) td:nth-child(3)").text(96);
                 $(".userppftable tbody tr:nth-child(13) td:nth-child(4)").text(0);
 
@@ -836,30 +836,30 @@ var _ModuleCharts = (function () {
 
             //Friday ppf//
             if (ppfdata.l1p4.questions[2].isAnswered) {
-                var questiondata = ppfdata.l1p2.questions[2];
-                _ModuleCharts.UpdatePPFChartSeries("userppfser", questiondata.correctData)
+                var questiondata = ppfdata.l1p4.questions[2];
+                _ModuleCharts.UpdatePPFChartSeries("fridayppfser", questiondata.correctData)
                 for (var i = 0; i < questiondata.correctData.length; i++) {
-                    var point = ppfdata.correctData[i];
+                    var point = questiondata.correctData[i];
                     $(".fridayppftable tbody tr:nth-child(" + (i + 1) + ") td:nth-child(3)").text(point[0])
                     $(".fridayppftable tbody tr:nth-child(" + (i + 1) + ") td:nth-child(4)").text(point[1])
                     $("#ppfchart_c").attr("aria-label", "Production Possibilities Frontier graph for Firewoods from 0 to 120 in logs vs. Fish from 0 to 3500 in calories. Both PPF lines are been drawn. Refer table for more details.");
                 }
             }
             else if (ppfdata.l1p4.questions[1].isAnswered) {
-                _ModuleCharts.UpdatePPFChartSeries("fridayppfser", [[0, 6000],[48, 0]], 0)
+                _ModuleCharts.UpdatePPFChartSeries("fridayppfser", [[0, 6000], [48, 0]], 0)
                 $(".fridayppftable tbody tr:nth-child(1) td:nth-child(3)").text(0)
                 $(".fridayppftable tbody tr:nth-child(1) td:nth-child(4)").text(6000)
                 $(".fridayppftable tbody tr:nth-child(13) td:nth-child(3)").text(48)
                 $(".fridayppftable tbody tr:nth-child(13) td:nth-child(4)").text(0)
 
-                $("#ppfchart_c").attr("aria-label", "Production Possibilities Frontier graph for Firewoods from 0 to 120 in logs vs. Fish from 0 to 3500 in calories. Your PPF line has been drawn. Plotted points: 0 Wood(logs) 6000 Fish(cals), 48 Wood(logs) 0 Fish(cals). Refer table for more details.");
+                $("#ppfchart_c").attr("aria-label", "Production Possibilities Frontier graph for Firewoods from 0 to 120 in logs vs. Fish from 0 to 3500 in calories. Plotted points: 0 Wood(logs) 6000 Fish(cals), 48 Wood(logs) 0 Fish(cals). Refer table for more details.");
             }
             else if (ppfdata.l1p4.questions[0].isAnswered) {
                 $(".fridayppftable").closest(".tablewrapper").k_show();
                 _ModuleCharts.AddPointToPPFChart("fridayppfser", [0, 6000])
                 $(".fridayppftable tbody tr:nth-child(1) td:nth-child(3)").text(0)
                 $(".fridayppftable tbody tr:nth-child(1) td:nth-child(4)").text(6000)
-                $("#ppfchart_c").attr("aria-label", "Production Possibilities Frontier graph for Firewoods from 0 to 120 in logs vs. Fish from 0 to 3500 in calories. Your PPF line has been drawn. Plotted points: 0 Wood(logs) 6000 Fish(cals). Refer table for more details.");
+                $("#ppfchart_c").attr("aria-label", "Production Possibilities Frontier graph for Firewoods from 0 to 120 in logs vs. Fish from 0 to 3500 in calories. Plotted points: 0 Wood(logs) 6000 Fish(cals). Refer table for more details.");
             }
         }
     };
