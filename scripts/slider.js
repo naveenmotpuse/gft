@@ -100,8 +100,8 @@ var DataStorage = DataStorage || function (ui) {
             }
             return returnDataRow;
         },
-        getActivityData: function () {
-            var pageid = _Navigator.GetCurrentPage().pageId;
+        getActivityData: function (_pageId) {
+            var pageid = typeof _pageId == 'undefined' ? _Navigator.GetCurrentPage().pageId : _pageId;
             var pageDataCollection = [];
             for (var i = 0; i < _DataCollection.length; i++) {
                 if (_DataCollection[i].pageId == pageid) {
@@ -913,14 +913,16 @@ var _TradeSlider = (function () {
             var currentDay = DataStorage.getCurrentDay();
             var tDataMap = DataStorage.getPageDate("today");
             var yDataMap = DataStorage.getPageDate("yesterday");
-            var resettbl = true;
-            if(_Navigator.GetCurrentPage().IsComplete) {
+            
+            var resettbl = true, isOtherFilled = true;
+            var actvtPageId;
+
+            if(_Navigator.GetCurrentPage().IsComplete && tDataMap) {
                 currentDay = tDataMap.day;
             }
             if(cPage) {
-                var actvtPageId;
                 if(cPage.datalevel == 3) {
-                    if(_Navigator.Get()['l3p3'].isComplete) {
+                    if(_Navigator.Get()['l3p3'].IsComplete) {
                         actvtPageId = 'l3p3';
                     } else {
                         actvtPageId = 'l3p2';
@@ -931,7 +933,13 @@ var _TradeSlider = (function () {
                 if(actvtPageId) {
                     tDataMap = DataStorage.getPageDate("today", actvtPageId);
                     yDataMap = DataStorage.getPageDate("yesterday", actvtPageId);
-                    currentDay = tDataMap.day; //TODO
+                    if(tDataMap) {
+                        currentDay = tDataMap.day;
+                    } else {
+                        isOtherFilled = false;    
+                    }
+                } else {
+                    isOtherFilled = false;
                 }
             }
             if (tDataMap == undefined && yDataMap == undefined) {
@@ -971,7 +979,7 @@ var _TradeSlider = (function () {
             } else {
                 resettbl = true;
             }
-            if (resettbl) {
+            if (resettbl && isOtherFilled) {
                 $("td#woodstartofdaytoday").text(0);
                 $("td#fishstartofdaytoday").text(0);
                 //Friday
@@ -988,7 +996,7 @@ var _TradeSlider = (function () {
                 $("td#fridayfishdifference").text(0);
             }
 
-            var activityData = DataStorage.getActivityData();
+            var activityData = DataStorage.getActivityData(actvtPageId);
             var woodColletion = [];
             var fishCollection = [];
             for (var i in activityData) {
