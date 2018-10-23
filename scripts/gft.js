@@ -787,6 +787,12 @@ var _CustomPage = (function () {
                     $("input.goalRadio").k_disable();
                 }
             }
+            if (currPage.pageId == 'l3p2' || currPage.pageId == 'l3p3' || currPage.pageId == 'l4p5') {
+
+            } else {
+                _TradeSlider.UpdateInventoryTables(currPage);
+            }
+            
             this.ResetInventoryData(currPage);
             //this.SetPageAccesibility();
         },

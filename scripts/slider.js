@@ -80,8 +80,8 @@ var DataStorage = DataStorage || function (ui) {
                 }
             }
         },
-        getPageDate: function (_day) {
-            var pageid = _Navigator.GetCurrentPage().pageId;
+        getPageDate: function (_day, _pageId) {
+            var pageid = typeof _pageId == 'undefined' ? _Navigator.GetCurrentPage().pageId : _pageId;
             var pageDataCollection = [];
             var returnDataRow = undefined;
             for (var i = 0; i < _DataCollection.length; i++) {
@@ -908,16 +908,32 @@ var _TradeSlider = (function () {
             }
             return returnVal;
         },
-        UpdateInventoryTables: function () {
+        UpdateInventoryTables: function (cPage) {
             debugger;
             var currentDay = DataStorage.getCurrentDay();
             var tDataMap = DataStorage.getPageDate("today");
             var yDataMap = DataStorage.getPageDate("yesterday");
             var resettbl = true;
-            //  if(_Navigator.GetCurrentPage().IsComplete) {
-            //      currentDay = tDataMap.day;
-            //  }
-
+            if(_Navigator.GetCurrentPage().IsComplete) {
+                currentDay = tDataMap.day;
+            }
+            if(cPage) {
+                var actvtPageId;
+                if(cPage.datalevel == 3) {
+                    if(_Navigator.Get()['l3p3'].isComplete) {
+                        actvtPageId = 'l3p3';
+                    } else {
+                        actvtPageId = 'l3p2';
+                    }
+                } else if(cPage.datalevel == 4) {
+                    actvtPageId = 'l4p5';
+                }
+                if(actvtPageId) {
+                    tDataMap = DataStorage.getPageDate("today", actvtPageId);
+                    yDataMap = DataStorage.getPageDate("yesterday", actvtPageId);
+                    currentDay = tDataMap.day; //TODO
+                }
+            }
             if (tDataMap == undefined && yDataMap == undefined) {
                 resettbl = true;
             }
