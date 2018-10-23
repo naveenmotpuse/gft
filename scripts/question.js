@@ -348,7 +348,7 @@
 
                     }
                     _optD.selectedAnswer = Number(inputval);
-                    if (_optD.answer != _optD.selectedAnswer) {
+                    if (parseFloat(_optD.answer) != parseFloat(_optD.selectedAnswer)) {
                         isAllCorrect = false;
                         _optD.points = 0.0;
                         _optD.isCorrect = false;
