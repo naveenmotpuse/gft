@@ -57,7 +57,7 @@ var DataStorage = DataStorage || function (ui) {
         },
         ResetDataCollection: function() {
             for(var i=0, arr = ['l3p2', 'l3p3', 'l4p5']; i < arr.length; i++ ) {
-                if(!_Navigator.Get()[arr[i]].isComplete) {
+                if(!_Navigator.Get()[arr[i]].IsComplete) {
                     _DataCollection = _Common.Remove(_DataCollection, 'pageId', arr[i]);
                 }
             }            

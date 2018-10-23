@@ -794,15 +794,15 @@ var _CustomPage = (function () {
         ResetInventoryData: function (cPage) {
             var nextpage = _Navigator.Get();
             var currPage = cPage.pageId;
-            if (currPage == "l3p1" || !nextpage.l3p2.isComplete) {
+            if (currPage == "l3p1" && !nextpage.l3p2.isComplete) {
                 _ModuleCharts.UpdateSurplusChartData([], []);
                 DataStorage.ResetDataCollection();
             }
-            if (currPage == "l3p2" || !nextpage.l3p3.IsComplete) {
+            if (currPage == "l3p2" && !nextpage.l3p3.IsComplete) {
                 _ModuleCharts.UpdateSurplusChartData([], []);
                 DataStorage.ResetDataCollection();
             }
-            if (currPage == "l4p2" || !nextpage.l4p5.IsComplete) {
+            if (currPage == "l4p4" && !nextpage.l4p5.IsComplete) {
                 _ModuleCharts.UpdateSurplusChartData([], []);
                 DataStorage.ResetDataCollection();
             }
