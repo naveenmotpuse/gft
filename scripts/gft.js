@@ -794,7 +794,7 @@ var _CustomPage = (function () {
         ResetInventoryData: function (cPage) {
             var nextpage = _Navigator.Get();
             var currPage = cPage.pageId;
-            if (currPage == "l3p1" && !nextpage.l3p2.isComplete) {
+            if (currPage == "l3p1" && !nextpage.l3p2.IsComplete) {
                 _ModuleCharts.UpdateSurplusChartData([], []);
                 DataStorage.ResetDataCollection();
             }

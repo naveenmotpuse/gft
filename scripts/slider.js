@@ -191,7 +191,7 @@ var DataStorage = DataStorage || function (ui) {
         updateCollection: function (isComplete) {
             var copy = $.extend({}, _DataMap);
             copy.pageId = _Navigator.GetCurrentPage().pageId;
-            copy.isComplete = true;
+            copy.IsComplete = true; //isComplete
             _DataCollection.push(copy);
         },
         getCollection: function () {
