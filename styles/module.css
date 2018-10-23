@@ -870,10 +870,10 @@ input[type='button'].disabled, a.disabled, input[type='range'].disabled{
     float: left;
 }
 
-.questionband input[type='text'],
 .questionband input[type='text'] {
     text-align: center;
     width: 100px;
+    border: 1px solid #ccc;
 }
 
 .checkAnswer,

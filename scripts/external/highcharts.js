@@ -2467,8 +2467,8 @@
          * @param {String} id
          */
         clip: function (clipRect) {
-           // return this.attr('clip-path', clipRect ? 'url(' + this.renderer.url + '#' + clipRect.id + ')' : NONE);
-           return this.attr('clip-path', clipRect ? NONE : NONE);
+            return this.attr('clip-path', clipRect ? 'url(' + this.renderer.url + '#' + clipRect.id + ')' : NONE);
+           //return this.attr('clip-path', clipRect ? NONE : NONE);
         },
 
         /**
@@ -10314,7 +10314,7 @@
                     series.group.attr(seriesAttribs);
                     if (series.markerGroup) {
                         series.markerGroup.attr(seriesAttribs);
-                        series.markerGroup.clip(clip ? chart.clipRect : null);
+                        //series.markerGroup.clip(clip ? chart.clipRect : null);
                     }
                     if (series.dataLabelsGroup) {
                         series.dataLabelsGroup.attr(seriesAttribs);
