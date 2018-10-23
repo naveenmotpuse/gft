@@ -787,7 +787,7 @@ var _CustomPage = (function () {
                     $("input.goalRadio").k_disable();
                 }
             }
-            //this.ResetInventoryData(currPage);
+            this.ResetInventoryData(currPage);
             //this.SetPageAccesibility();
         },
         //RA-6Sep18 - Function to set graph labels - start
@@ -796,10 +796,15 @@ var _CustomPage = (function () {
             var currPage = cPage.pageId;
             if (currPage == "l3p1" || !nextpage.l3p2.isComplete) {
                 _ModuleCharts.UpdateSurplusChartData([], []);
-                
+                DataStorage.ResetDataCollection();
             }
             if (currPage == "l3p2" || !nextpage.l3p3.IsComplete) {
                 _ModuleCharts.UpdateSurplusChartData([], []);
+                DataStorage.ResetDataCollection();
+            }
+            if (currPage == "l4p2" || !nextpage.l4p5.IsComplete) {
+                _ModuleCharts.UpdateSurplusChartData([], []);
+                DataStorage.ResetDataCollection();
             }
         },
 

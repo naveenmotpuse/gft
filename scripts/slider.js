@@ -55,8 +55,12 @@ var DataStorage = DataStorage || function (ui) {
             _DataMap.remFish = 0;
             _DataMap.remWood = 0;
         },
-        ResetDataCollection: function(){
-            _DataCollection = [];
+        ResetDataCollection: function() {
+            for(var i=0, arr = ['l3p2', 'l3p3', 'l4p5']; i < arr.length; i++ ) {
+                if(!_Navigator.Get()[arr[i]].isComplete) {
+                    _DataCollection = _Common.Remove(_DataCollection, 'pageId', arr[i]);
+                }
+            }            
         },
         retry: function () {
             var pageid = _Navigator.GetCurrentPage().pageId;
@@ -366,7 +370,6 @@ var _Slider = (function () {
             });
 
             DataStorage.ResetDataMap1();
-
             DataStorage.ResetDataCollection();
 
             _Slider.submitValidate();
