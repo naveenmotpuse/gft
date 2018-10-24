@@ -28,13 +28,13 @@ var DataStorage = DataStorage || function (ui) {
         ModuleRetry: function (dlevel) {
             if (dlevel) { //retry level
                 for (var i in _DataCollection) {
-                    if (_Navigator.Get(_DataCollection[i].pageId).datalevel == dlevel) {
+                    if (_Navigator.Get()[_DataCollection[i].pageId].datalevel == dlevel) {
                         _RetryDataCollection[i] = $.extend(true, {}, _DataCollection[i]);
                         _DataCollection[i].markfordeletion = true;
                     }
                 }
             }
-            _Common.Remove(_DataCollection, 'markfordeletion', true);
+            _DataCollection = _Common.Remove(_DataCollection, 'markfordeletion', true);
         },
         ModuleRetryAll: function () {
             // retry all  
@@ -613,7 +613,7 @@ var _TradeSlider = (function () {
                 $("#givewood-range").val(defaulValues.givewood);
             }
             _TradeSlider.SetTradeResult();
-            this.UpdateInventoryTables();
+            this.UpdateInventoryTables(currPage);
         },
         ResetTradeSlider: function () {
             //called in onTryAgain, onNextDay.
@@ -941,7 +941,7 @@ var _TradeSlider = (function () {
                     isOtherFilled = false;
                 }
             }
-            if (tDataMap == undefined && yDataMap == undefined) {
+            if ((tDataMap == undefined && yDataMap == undefined) || (cPage.datalevel == 1 || cPage.datalevel == 2)) {
                 resettbl = true;
             }
             else if (currentDay == "1") {
@@ -1000,7 +1000,7 @@ var _TradeSlider = (function () {
             var fishCollection = [];
             for (var i in activityData) {
                 var data = activityData[i];
-                if (data.tradeData.TR != undefined) {
+                if (data.tradeData != undefined && data.tradeData.TR != undefined) {
                     woodColletion.push([data.day, Number(data.tradeData.TR.remData.wood)]);
                     fishCollection.push([data.day, Number(data.tradeData.TR.remData.fish)]);
                 }
