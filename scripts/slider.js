@@ -369,8 +369,8 @@ var _Slider = (function () {
                 _Slider.compare($(this));
             });
 
-            DataStorage.ResetDataMap1();
-            DataStorage.ResetDataCollection();
+           // DataStorage.ResetDataMap1();
+           // DataStorage.ResetDataCollection();
 
             _Slider.submitValidate();
             $(".selecttimeslider .h_right").html(AnimConfig.dayTime + " hour");
