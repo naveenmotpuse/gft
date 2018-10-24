@@ -791,11 +791,10 @@ var _ModuleCharts = (function () {
             }
         },
         setSurplusChartAccessibility: function () {
-            var chart = $('#questionchart').highcharts();
+            var chart = $('#surpluschart_c').highcharts();
             var _currentPage = _Navigator.GetCurrentPage();
             var _currPageId = _currentPage.pageId;
             var _currPageQId = _Question.GetCurrentQuestion().Id;
-            var chart = $('#surpluschart_c').highcharts();
             var s = "";
             for (var i = 0; i < chart.get('Fish').data.length; i++) {
                 s += "Day " + chart.get('Fish').data[i].x + ":" + " Fish: " + chart.get('Fish').data[i].y + "(cals), Wood: " + chart.get('Wood').data[i].y + "(logs) "
