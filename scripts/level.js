@@ -143,7 +143,7 @@ var _LevelAccess = (function() {
           if (tmp[i].level === key+'') {
             do {
               i--;
-            } while (i > 0 && (_this.IsLevelVisible(tmp[i]) == false || (isLevelRetry && _this.IsLevelAttempted(tmp[i]))));
+            } while (i > 0 && (_this.IsLevelVisible(tmp[i]) == false || (isLevelRetry && _this.IsLevelAttempted(i))));
             var lvl = Number(tmp[i].level);
             gotopageid = _this.GetLevelPageId(lvl);
             break;
