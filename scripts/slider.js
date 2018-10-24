@@ -613,7 +613,7 @@ var _TradeSlider = (function () {
                 $("#givewood-range").val(defaulValues.givewood);
             }
             _TradeSlider.SetTradeResult();
-            this.UpdateInventoryTables(currPage); //Check:
+            this.UpdateInventoryTables(); //Check: by adding currPage as variable will cause issue in resetting L2 activity 2
         },
         ResetTradeSlider: function () {
             //called in onTryAgain, onNextDay.
@@ -941,8 +941,7 @@ var _TradeSlider = (function () {
                     isOtherFilled = false;
                 }
             }
-            if ((tDataMap == undefined && yDataMap == undefined) || (cPage && (cPage.datalevel == 1 || cPage.datalevel == 2))) {
-                _ModuleCharts.UpdateSurplusChartData([], []);
+            if ((tDataMap == undefined && yDataMap == undefined) || (_Navigator.GetCurrentPage().datalevel == 1 || _Navigator.GetCurrentPage().datalevel == 2)) {
                 resettbl = true;
                 isOtherFilled = true;
             }
@@ -1007,8 +1006,10 @@ var _TradeSlider = (function () {
                     fishCollection.push([data.day, Number(data.tradeData.TR.remData.fish)]);
                 }
             }
-
             _ModuleCharts.UpdateSurplusChartData(fishCollection, woodColletion)
+            if (_Navigator.GetCurrentPage().datalevel == 1 || _Navigator.GetCurrentPage().datalevel == 2) {
+                _ModuleCharts.UpdateSurplusChartData([], []);
+            }
         }
     }
 })();
