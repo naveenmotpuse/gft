@@ -1006,7 +1006,7 @@ var _TradeSlider = (function () {
                 }
             }
 
-            _ModuleCharts.UpdateSurplusChartData(fishCollection, woodColletion, actvtPageId)
+            _ModuleCharts.UpdateSurplusChartData(fishCollection, woodColletion)
         }
     }
 })();
