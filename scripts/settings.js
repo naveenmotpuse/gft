@@ -19,14 +19,12 @@ var Utility = function () {
 }();
 
 $(document).ready(function () {
-    //debugger;
     _problem_guid = Utility.getParameterByName("pid", window.location.href);
     _resourceId = Utility.getParameterByName("resid", window.location.href);
     getInflationSettings();
 
     // attach handlers here
     $("#savebtn").on("click", function () {
-        //debugger;
         if ($(this).closest(".savebtn").hasClass("k_disable"))
             return;
     
@@ -52,7 +50,6 @@ function getInflationSettings() {
         data: jsonSerialized,
         success: function (result) {
             _interactivesesstings = JSON.parse(JSON.stringify(result));
-            //debugger;
             if (_interactivesesstings.level1 == true) {
                 $("#checkoxlevel1").attr("checked", "checked")
             }
