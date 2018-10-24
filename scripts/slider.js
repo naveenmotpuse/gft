@@ -55,12 +55,14 @@ var DataStorage = DataStorage || function (ui) {
             _DataMap.remFish = 0;
             _DataMap.remWood = 0;
         },
-        ResetDataCollection: function() {
-            for(var i=0, arr = ['l3p2', 'l3p3', 'l4p5']; i < arr.length; i++ ) {
-                if(!_Navigator.Get()[arr[i]].IsComplete) {
-                    _DataCollection = _Common.Remove(_DataCollection, 'pageId', arr[i]);
-                }
-            }            
+        ResetDataCollection: function(isDayRetry) {
+            if(!isDayRetry) {
+                for(var i=0, arr = ['l3p2', 'l3p3', 'l4p5']; i < arr.length; i++ ) {
+                    if(!_Navigator.Get()[arr[i]].IsComplete) {
+                        _DataCollection = _Common.Remove(_DataCollection, 'pageId', arr[i]);
+                    }
+                }            
+            }
         },
         retry: function () {
             var pageid = _Navigator.GetCurrentPage().pageId;
@@ -338,7 +340,7 @@ var _Slider = (function () {
                 EventManager.onNightAnimComplete();
             });
         },
-        InitSelectTimeSlider: function () {
+        InitSelectTimeSlider: function (isRetry) {
             $("#wood-range").attr("max", AnimConfig.dayTime);
             $("#fish-range").attr("max", AnimConfig.dayTime);
 
@@ -370,7 +372,7 @@ var _Slider = (function () {
             });
 
             DataStorage.ResetDataMap1();
-            DataStorage.ResetDataCollection();
+            DataStorage.ResetDataCollection(isRetry);
 
             _Slider.submitValidate();
             $(".selecttimeslider .h_right").html(AnimConfig.dayTime + " hour");

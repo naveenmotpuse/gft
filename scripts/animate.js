@@ -492,7 +492,7 @@ var EventManager = function () {
             $("#dayno").text(DataStorage.getCurrentDay());
             var currPage = _Navigator.GetCurrentPage();
             //NM: Need to check this call.
-            _Slider.InitSelectTimeSlider();
+            _Slider.InitSelectTimeSlider(true);
             if (currPage.hasTradeSlider != undefined && currPage.hasTradeSlider) {
                 _Animation.MngAnimationEle();
                 _TradeSlider.ResetTradeSlider();
