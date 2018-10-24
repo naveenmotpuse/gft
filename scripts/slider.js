@@ -1007,7 +1007,7 @@ var _TradeSlider = (function () {
                 }
             }
             _ModuleCharts.UpdateSurplusChartData(fishCollection, woodColletion)
-            if ((cPage && (cPage.datalevel == 1 || cPage.datalevel == 2))) {
+            if (_Navigator.GetCurrentPage().datalevel == 1 || _Navigator.GetCurrentPage().datalevel == 2) {
                 _ModuleCharts.UpdateSurplusChartData([], []);
             }
         }
