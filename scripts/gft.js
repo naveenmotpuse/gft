@@ -228,7 +228,6 @@ var _Template = (function () {
             var pageUrl = "templates/tradeslider.htm" + _Caching.GetUrlExtension();
             $(".trade_slider_wrapper").load(pageUrl, function () {
                 var currPage = _Navigator.GetCurrentPage();
-                //debugger;
                 if (currPage.IsComplete == undefined || !currPage.IsComplete) {
                     _Slider.InitSelectTimeSlider();
                 }
@@ -666,7 +665,6 @@ var _CustomQuestion = (function () {
                 };
                 var isonline = this.IsPointOnLine(currPoint, point1, point2)
                 if (!isonline) {
-                    //debugger;
                     chart.get('new_series').data[i].graphic.attr({
                         fill: ColorCodes.red
                     });
@@ -815,7 +813,6 @@ var _CustomPage = (function () {
         },
 
         SetPageAccesibility: function () {
-            //debugger;
             var _currentPage = _Navigator.GetCurrentPage();
             var _currPageId = _currentPage.pageId;
             var _currPageQId = '';

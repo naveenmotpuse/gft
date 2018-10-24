@@ -466,8 +466,7 @@ var _ModuleCharts = (function () {
             if (chart.get('Wood') != undefined && chart.get('Wood') != null) {
                 chart.get('Wood').setData(_wooddata)
             }
-            _ModuleCharts.setSurplusChartAccessibility();
-            //chart.series[0].setData(_data)
+            _ModuleCharts.setSurplusChartAccessibility(_fishdata, _wooddata);
         },
         DrawPPFChart: function () {
             Highcharts.chart('ppfchart_c', {
@@ -790,21 +789,19 @@ var _ModuleCharts = (function () {
                 $("#questionchart").attr("aria-label", "Your Production Possibility Frontier graph for Firewoods from 0 to 120 in logs vs. Fish from 0 to 4500 in calories. Plotted points: " + s + ". Refer above table for more details.");
             }
         },
-        setSurplusChartAccessibility: function () {
-            var chart = $('#surpluschart_c').highcharts();
-            var _currentPage = _Navigator.GetCurrentPage();
-            var _currPageId = _currentPage.pageId;
+        setSurplusChartAccessibility: function (fish, wood) {
             var _currPageQId = _Question.GetCurrentQuestion().Id;
             var s = "";
-            for (var i = 0; i < chart.get('Fish').data.length; i++) {
-                s += "Day " + chart.get('Fish').data[i].x + ":" + " Fish: " + chart.get('Fish').data[i].y + "(cals), Wood: " + chart.get('Wood').data[i].y + "(logs) "
+            for (var i = 0; i < fish.length; i++) {
+                s += "Day " + fish[i][0] + ":" + " Fish: " + fish[i][1] + "(cals), Wood: " + wood[i][1] + "(logs) ";
             }
-            if (_currPageQId == "Q15" || _currPageQId == "Q16" || _currPageQId == "Q17" || _currPageQId == "Q22")
-                $("#surpluschart_c").attr("aria-label", "Goals: Wood: 90(logs) - Fish: 9000(cals). Surplus Inventory graph for inventory of fish and woods from " + s + ". Refer table for more details.")
+            //if (_currPageQId == "Q15" || _currPageQId == "Q16" || _currPageQId == "Q17" || _currPageQId == "Q22")
+            if(s!=="") {
+                $("#surpluschart_c").attr("aria-label", "Goals: Wood: 90(logs) - Fish: 9000(cals). Surplus Inventory graph for inventory of fish and woods from " + s + ". Refer table for more details.");
+            }
         },
         DrawPPFChartonBookmark: function () {
             //user ppf //
-            debugger;
             var ppfdata = _Navigator.Get();
             if (ppfdata.l1p2.questions[2].isAnswered) {
                 var questiondata = ppfdata.l1p2.questions[2];

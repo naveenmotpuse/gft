@@ -657,7 +657,7 @@ var _Navigator = (function () {
             _Navigator.UpdateProgressBar();
             _Navigator.UpdateScore();
             DataStorage.ModuleRetryAll();
-            var goto = _LevelAccess.JumpToNextAccessibleLevel(1, true);
+            var goto = _LevelAccess.JumpToNextAccessibleLevel(0, true);
             _Navigator.LoadPage(goto);
 
             var progData = this.GetProgressData();

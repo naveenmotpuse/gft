@@ -20458,7 +20458,6 @@
          * are given null values.
          */
         setData: function (data, redraw) {
-            //debugger;
             var options = this.options,
                 mapData = options.mapData,
                 joinBy = options.joinBy,
