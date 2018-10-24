@@ -942,7 +942,6 @@ var _TradeSlider = (function () {
                 }
             }
             if ((tDataMap == undefined && yDataMap == undefined) || (cPage && (cPage.datalevel == 1 || cPage.datalevel == 2))) {
-                _ModuleCharts.UpdateSurplusChartData([], []);
                 resettbl = true;
                 isOtherFilled = true;
             }
@@ -1007,8 +1006,10 @@ var _TradeSlider = (function () {
                     fishCollection.push([data.day, Number(data.tradeData.TR.remData.fish)]);
                 }
             }
-
             _ModuleCharts.UpdateSurplusChartData(fishCollection, woodColletion)
+            if ((cPage && (cPage.datalevel == 1 || cPage.datalevel == 2))) {
+                _ModuleCharts.UpdateSurplusChartData([], []);
+            }
         }
     }
 })();
