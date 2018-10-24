@@ -266,6 +266,7 @@
             }
         },
         CheckAnswer: function () {
+            debugger;
             var isWorsen = false;
             var _qPoints = 0.0;
             var isAllCorrect = true;
@@ -338,6 +339,7 @@
                         $("#" + _optD.selectedId).addClass("correct");
                     }
                 } else if (_optD.type == "input") {
+                    debugger;
                     $("input[type='text']").attr('readonly', true);
                     var inputval = $("#" + _optD.id).val();
                     var _boxGrp = $("#" + _optD.id);
@@ -377,6 +379,7 @@
             }
             else if (isAllCorrect) {
                 //Show Correct Feedback
+                debugger;
                 feedbackIndex = 0;
                 this.Loadfeedback(feedbackIndex);
                 _currentQuestionObj.points = _qPoints;
@@ -426,6 +429,7 @@
         },
         lastdummyfunct: function () { },
         SetQuestionStatus: function () {
+            debugger;
             for (var i = 0; i < _currentQuestionObj.options.length; i++) {
                 var _optD = _currentQuestionObj.options[i];
                 if (_optD.type == "select") {
@@ -470,7 +474,7 @@
                         }
                     }
                 } else if (_optD.type == "input") {
-                    if (_optD.isCorrect && _optD.answer == $("#" + _optD.id).val()) {
+                    if (_optD.isCorrect && Number(_optD.answer) == Number($("#" + _optD.id).val())) {
                         $("#" + _optD.id).css({
                             'color': ColorCodes.green,
                             'font-weight': 'bold'
