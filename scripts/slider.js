@@ -613,7 +613,7 @@ var _TradeSlider = (function () {
                 $("#givewood-range").val(defaulValues.givewood);
             }
             _TradeSlider.SetTradeResult();
-            this.UpdateInventoryTables(currPage);
+            this.UpdateInventoryTables(currPage); //Check:
         },
         ResetTradeSlider: function () {
             //called in onTryAgain, onNextDay.
@@ -941,7 +941,7 @@ var _TradeSlider = (function () {
                     isOtherFilled = false;
                 }
             }
-            if ((tDataMap == undefined && yDataMap == undefined) || (cPage.datalevel == 1 || cPage.datalevel == 2)) {
+            if ((tDataMap == undefined && yDataMap == undefined) || (cPage && (cPage.datalevel == 1 || cPage.datalevel == 2))) {
                 resettbl = true;
             }
             else if (currentDay == "1") {
