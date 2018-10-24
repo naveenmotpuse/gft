@@ -942,7 +942,9 @@ var _TradeSlider = (function () {
                 }
             }
             if ((tDataMap == undefined && yDataMap == undefined) || (cPage && (cPage.datalevel == 1 || cPage.datalevel == 2))) {
+                _ModuleCharts.UpdateSurplusChartData([], []);
                 resettbl = true;
+                isOtherFilled = true;
             }
             else if (currentDay == "1") {
                 resettbl = false;
