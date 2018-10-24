@@ -909,7 +909,6 @@ var _TradeSlider = (function () {
             return returnVal;
         },
         UpdateInventoryTables: function (cPage) {
-            debugger;
             var currentDay = DataStorage.getCurrentDay();
             var tDataMap = DataStorage.getPageDate("today");
             var yDataMap = DataStorage.getPageDate("yesterday");
@@ -1007,7 +1006,7 @@ var _TradeSlider = (function () {
                 }
             }
 
-            _ModuleCharts.UpdateSurplusChartData(fishCollection, woodColletion)
+            _ModuleCharts.UpdateSurplusChartData(fishCollection, woodColletion, actvtPageId)
         }
     }
 })();

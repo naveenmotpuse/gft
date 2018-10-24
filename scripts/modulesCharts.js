@@ -458,7 +458,7 @@ var _ModuleCharts = (function () {
                 }]
             });
         },
-        UpdateSurplusChartData: function (_fishdata, _wooddata) {
+        UpdateSurplusChartData: function (_fishdata, _wooddata, _pageId) {
             var chart = $('#surpluschart_c').highcharts();
             if (chart.get('Fish') != undefined && chart.get('Fish') != null) {
                 chart.get('Fish').setData(_fishdata)
@@ -466,7 +466,7 @@ var _ModuleCharts = (function () {
             if (chart.get('Wood') != undefined && chart.get('Wood') != null) {
                 chart.get('Wood').setData(_wooddata)
             }
-            _ModuleCharts.setSurplusChartAccessibility();
+            _ModuleCharts.setSurplusChartAccessibility(_pageId);
             //chart.series[0].setData(_data)
         },
         DrawPPFChart: function () {
@@ -791,9 +791,8 @@ var _ModuleCharts = (function () {
             }
         },
         setSurplusChartAccessibility: function () {
+            debugger;
             var chart = $('#questionchart').highcharts();
-            var _currentPage = _Navigator.GetCurrentPage();
-            var _currPageId = _currentPage.pageId;
             var _currPageQId = _Question.GetCurrentQuestion().Id;
             var chart = $('#surpluschart_c').highcharts();
             var s = "";
@@ -805,7 +804,6 @@ var _ModuleCharts = (function () {
         },
         DrawPPFChartonBookmark: function () {
             //user ppf //
-            debugger;
             var ppfdata = _Navigator.Get();
             if (ppfdata.l1p2.questions[2].isAnswered) {
                 var questiondata = ppfdata.l1p2.questions[2];
