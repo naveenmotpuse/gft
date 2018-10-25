@@ -52,8 +52,14 @@ var DataStorage = DataStorage || function (ui) {
             _DataMap.fishcollectingHr = 0;
             _DataMap._fishCals = 0;
             _DataMap._woodsLbs = 0;
-            _DataMap.remFish = 0;
-            _DataMap.remWood = 0;
+            if(this.getCurrentDay() == 1) {
+                _DataMap.remFish = 0;
+                _DataMap.remWood = 0;
+            } else {
+                var remain = _TradeSlider.GetTradeResult().remData;
+                _DataMap.remFish = remain.fish;
+                _DataMap.remWood = remain.wood;
+            }
         },
         ResetDataCollection: function(isDayRetry) {
             if(!isDayRetry) {
