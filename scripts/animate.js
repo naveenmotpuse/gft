@@ -469,6 +469,14 @@ var EventManager = function () {
             $("#collect-fish .fish-slider").val(fishhrs);
             $(".fishcounter .count").text(fishhrs);
             $(".woodcounter .count").text(woodhrs);
+            if(DataStorage.getCurrentDay() > 1) {
+                var remain = _TradeSlider.GetTradeResult().remData;
+                $(".fishcounter .count").text(remain.fish);
+                $(".woodcounter .count").text(remain.wood);
+            } else {
+                $(".fishcounter .count").text(fishhrs);
+                $(".woodcounter .count").text(woodhrs);
+            }
             $("#w_val").text(woodhrs);
             $("#f_val").text(fishhrs);
             $(".colorful-slider1").css("width", (fishhrs * 10) + "%");

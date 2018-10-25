@@ -213,6 +213,7 @@ var _Template = (function () {
         LoadRangeSlider: function () {
             var pageUrl = "templates/slider.htm" + _Caching.GetUrlExtension();
             $(".t_range-slider_c").load(pageUrl, function () {
+                DataStorage.resetDay();
                 _Slider.InitSelectTimeSlider();
             });
         },
@@ -712,7 +713,7 @@ var _CustomPage = (function () {
     return {
         OnPageLoad: function () {
             var currPage = _Navigator.GetCurrentPage();
-            if (true || window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") {
+            if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") {
                 $('.exambtnsubmindiv').hide();
             }
             if (currPage.datalevel == 2) {
