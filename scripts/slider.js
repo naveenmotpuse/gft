@@ -1002,6 +1002,10 @@ var _TradeSlider = (function () {
                 $("td#fridayfishstartofdayyesterday").text(0);
                 $("td#fridaywooddifference").text(0);
                 $("td#fridayfishdifference").text(0);
+                $("#surpluschart_c").find(".highcharts-container").attr("aria-hidden", "true");
+                $("#surpluschart_c").attr({
+                    "aria-label": "Goals: Wood: 90 (logs) - Fish: 9000 (cals). Surplus Inventory graph for inventory of fish and woods from day 0 to 4."
+                });
             }
 
             var activityData = DataStorage.getActivityData(actvtPageId);
