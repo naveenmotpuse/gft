@@ -410,10 +410,11 @@ var _CustomQuestion = (function () {
                         $("#fishlogtools").val("");
                         if (series.data.length >= valPoints) {
                             _ModuleCharts.setPlottedPointsAccessibility();
-                            $("#addpointbtn").k_disable()
-                            $("#woodlogtools").k_disable()
-                            $("#fishlogtools").k_disable()
-                            $(".graphbtncheckanswer").k_enable()
+                            $("#woodlogtools").k_disable();
+                            $("#fishlogtools").k_disable();
+                            $(".graphbtncheckanswer").k_enable();
+                            $(".graphbtncheckanswer").focus();
+                            $("#addpointbtn").k_disable();
                         } else {
                             $("#woodlogtools").focus();
                         }
