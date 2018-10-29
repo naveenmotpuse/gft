@@ -63,7 +63,7 @@ $(function () {
                 $(this).parent().find('li').css({ 'background': '#FFF' });
                 $("#appmenu").children('li:first').css({ "border": "2px solid #045C42", "border-bottom": "0px", "border-top-left-radius": "5px", "border-top-right-radius": "5px" });
                 $(this).children('img').attr("src", "scripts/external/menu/menu-icon-rollover-v1.png");
-
+                $('#appmenulist').find('li:nth-child(1)').focus();
             } else {
                 this.setAttribute('aria-expanded', "false");
                 $(this).parent().find('li').css({ 'background': '#045C42' })
