@@ -38,12 +38,14 @@ $(function () {
         if (0 == i) {
             //el.setAttribute('tabindex', '0');
             el.addEventListener("focus", function () {
+                console.log("focus1:appsMenuItems");
                 currentIndex = 0;
             });
         } else {
             //el.setAttribute('tabindex', '-1');
         }
         el.addEventListener("focus", function () {
+            console.log("focus2:appsMenuItems");
             subIndex = 0;
             Array.prototype.forEach.call(appsMenuItems, function (el, i) {
                 el.setAttribute('aria-expanded', "false");
@@ -55,6 +57,7 @@ $(function () {
         
         el.setAttribute('tabindex', '1');
         el.addEventListener("click", function (event) {
+            console.log("click:appsMenuItems");
             if (this.getAttribute('aria-expanded') == 'false' || this.getAttribute('aria-expanded') == null) {
                 this.setAttribute('aria-expanded', "true");
                 $(this).parent().find('li').css({ 'background': '#FFF' });
@@ -70,6 +73,7 @@ $(function () {
             return false;
         });
         el.addEventListener("keydown", function (event) {
+            console.log("keydown:appsMenuItems");
             var prevdef = false;
             switch (event.keyCode) {
                 case keys.right:
@@ -97,8 +101,8 @@ $(function () {
                     prevdef = true;
                     break;
                 case keys.esc:
-                    document.querySelector('#escape').setAttribute('tabindex', '-1');
-                    document.querySelector('#escape').focus();
+                    document.querySelector('#appmenulibar').setAttribute('tabindex', '-1');
+                    document.querySelector('#appmenulibar').focus();
                     prevdef = true;
             }
             if (prevdef) {
@@ -110,6 +114,10 @@ $(function () {
     Array.prototype.forEach.call(subMenuItems, function (el, i) {
         el.setAttribute('tabindex', '-1');
         el.addEventListener("keydown", function (event) {
+            console.log("keydown:subMenuItems");
+            if(event.target.id === "appmenulibar") return;
+            
+            var prevdef = false;
             switch (event.keyCode) {
                 case keys.tab:
                     if (event.shiftKey) {
@@ -129,7 +137,6 @@ $(function () {
                     break;
                 case keys.esc:
                     gotoIndex(0);
-                    //alert(1);
                     prevdef = true;
                     break;
                 case keys.down:
@@ -146,7 +153,6 @@ $(function () {
                     $("#appmenu li").attr("aria-expanded", false).css({ 'background': '#045C42' });
                     $("#appmenu li img").attr("src", "scripts/external/menu/menu-icon.png");
                 case keys.space:
-                    //addEventListener();
                     prevdef = true;
                     break;
             }
@@ -157,8 +163,8 @@ $(function () {
             return false;
         });
         el.addEventListener("click", function (event) {
+            console.log("click:subMenuItems");
             var levelPageId = event.target.getAttribute("data-id");
-            //_Navigator.LoadPage(levelPageId);
             var jsonObj = {};
             jsonObj.isMenuVisit = true;
             jsonObj.pageId = levelPageId;
@@ -170,4 +176,71 @@ $(function () {
             return false;
         });
     });
+    
+/*
+
+    //other
+    var $otherTrigger = $('.other-trigger'),
+      $otherTriggerWord = $('.other-trigger-status'),
+      $otherMenu = $('.other-primary-navigation');
+
+  function toggleOtherTriggerClass() {
+    if (!$otherTrigger.hasClass('is-active')) {
+      $otherTrigger.addClass('is-active');
+      $otherTrigger.attr("aria-expanded","true");
+    } else {
+      $otherTrigger.removeClass('is-active');
+      $otherTrigger.attr("aria-expanded","false");
+    }
+  };
+
+  function toggleOtherTriggerWord() {
+    if ($otherTriggerWord.hasClass('closed')) {
+      $otherTriggerWord.removeClass('closed');
+      $otherTriggerWord.addClass('open');
+      $otherTrigger.children('img').attr("src", "scripts/external/menu/menu-icon-rollover-v1.png");
+    } else {
+      $otherTriggerWord.removeClass('open');
+      $otherTriggerWord.addClass('closed');
+      $otherTrigger.children('img').attr("src", "scripts/external/menu/menu-icon.png");
+    }
+  };
+
+  function toggleOtherMenuClass() {
+    if (!$otherMenu.hasClass('is-visible')) {
+      $otherMenu.addClass('is-visible');
+      $otherMenu.focus();
+    } else {
+      $otherMenu.removeClass('is-visible');
+    }
+  };
+
+  function toggleOtherMenu() {
+    $otherTrigger.on("click", function(e){
+        debugger;
+      toggleOtherTriggerClass();
+      toggleOtherMenuClass();
+      toggleOtherTriggerWord();
+      $otherMenu.slideToggle("fast");
+    });
+  };
+
+  function resetOtherMenu() {
+    if (!$otherMenu.hasClass('is-visible')) {
+      $otherMenu.removeAttr('style');
+    } else {
+      $otherMenu.removeClass('is-visible').removeAttr('style');
+    }
+  };
+
+  function resetOtherMenuTrigger() {
+    if (!$otherTrigger.hasClass('is-active')) {
+      return
+    } else {
+      $otherTrigger.removeClass('is-active');
+    }
+  };
+  debugger;
+  toggleOtherMenu();
+*/  
 })

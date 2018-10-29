@@ -650,3 +650,12 @@ var _QData = {
         ]
     }
 }
+
+var MenuItems = {
+    'l1p1': 'Introduction', 
+    'l1p2': 'Level 1: Your Production Possibility', 
+    'l2p1': 'Level 2: Opportunity Cost, Comparative Advantage, and Specialization', 
+    'l3p1': 'Level 3: Implementing Trade and Exploring the Gains from Trade', 
+    'l4p1': 'Level 4: Gains from Trade with Absolute Advantage', 
+    'summary': 'Summary'
+};

@@ -297,7 +297,7 @@ var _Animation = (function () {
                 $('.castawaySprites1').removeClass('castawaySprites1').addClass('castawaySprites');
                 $('.friday-raftSprites, .fridaySprites').k_show();
                     setTimeout(function(){
-                        if (isIpad) {
+                        if(isIpad || IsIphone){
                             _Common.SetReader(_Settings.hiddenAnchor, "progress");
                         } else {
                             _Common.SetReader(_Settings.hiddenAnchor, "progress_bar");
@@ -325,7 +325,7 @@ var _Animation = (function () {
                  $('.fishBarrelRaft2').k_hide();
                 //Added for on level start page giving focus after animation completion
                  setTimeout(function(){
-                    if (isIpad) {
+                    if(isIpad || IsIphone){
                         _Common.SetReader(_Settings.hiddenAnchor, "progress");
                     } else {
                         _Common.SetReader(_Settings.hiddenAnchor, "progress_bar");
@@ -542,7 +542,7 @@ var EventManager = function () {
             $("#givefish-range").k_enable();
             _Question.UnloadFeedback();
             _TradeSlider.ResetTradeSlider();
-            if (isIpad) {
+            if(isIpad || IsIphone){
                 _Common.SetReader(_Settings.hiddenAnchor, "progress", true);
             } else {
                 _Common.SetReader(_Settings.hiddenAnchor, "progress_bar", true);

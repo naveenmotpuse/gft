@@ -411,7 +411,7 @@ var _Navigator = (function () {
                         $(this).fadeTo(600, 1)
                         OnPageLoad(jsonObj, buttonPressed);
                         
-                        if (isIpad) {
+                        if(isIpad || IsIphone){
                             _Common.SetReader(_Settings.hiddenAnchor, "progress", true);
                         } else {
                             _Common.SetReader(_Settings.hiddenAnchor, "progress_bar", true);
@@ -522,13 +522,18 @@ var _Navigator = (function () {
             for (var i = 0; i < _levelStartPages.length; i++) {
                 if(_NData[_levelStartPages[i]].isVisited)
                 {
-                    $("a.menuitem[data-id='" + _NData[_levelStartPages[i]].pageId + "']").closest("li").css("display", "block"); 
+                    var menuElem = $("a.menuitem[data-id='" + _NData[_levelStartPages[i]].pageId + "']");
+                    debugger;
+                    /*if(menuElem.length == 0) {
+                        $("#appmenulist").append('<li role="menuitem"><a href="javascript:void(0)" data-id="'+_NData[_levelStartPages[i]].pageId+'" class="menuitem">'+MenuItems[_NData[_levelStartPages[i]].pageId]+'</a></li>');
+                    }*/
+                    menuElem.closest("li").css("display", "block");
                     // double reading issue //
-                    //$("a.menuitem[data-id='" + _NData[_levelStartPages[i]].pageId + "']").closest("li").removeAttr("aria-hidden");
+                    //menuElem.closest("li").removeAttr("aria-hidden");
                     if (isAndroid){
-                        var panel=  $("a.menuitem[data-id='" + _NData[_levelStartPages[i]].pageId + "']").closest("li a").text();
-                         $("a.menuitem[data-id='" + _NData[_levelStartPages[i]].pageId + "']").closest("li").attr('aria-label', panel).removeAttr('aria-hidden');
-                         $("a.menuitem[data-id='" + _NData[_levelStartPages[i]].pageId + "']").closest("li a").attr('aria-hidden','true');
+                        var panel=  menuElem.closest("li a").text();
+                        menuElem.closest("li").attr('aria-label', panel).removeAttr('aria-hidden');
+                        menuElem.closest("li a").attr('aria-hidden','true');
                     }
                 }
             }
@@ -571,8 +576,8 @@ var _Navigator = (function () {
                     $(".pgBgItem[data-level='" + i + "']").addClass("pgBgItemComplete")
                 }
             }
-            if(isIpad){
-                $(".progress").attr("aria-label", arialabel);
+            if(isIpad || IsIphone){
+                $(".progress").attr({"aria-label": arialabel, "role": "text"});
             }else{
                 $(".progress .background").attr("aria-label", arialabel);
             }

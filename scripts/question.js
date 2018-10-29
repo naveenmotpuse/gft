@@ -36,7 +36,7 @@
                 $("#div_question").load(pageUrl, function () {
                     OnQuestionLoad(qObj);
                     if (firstQuestion == _currentQuestionObj.Qid) {
-                        if (isIpad) {
+                        if(isIpad || IsIphone){
                             _Common.SetReader(_Settings.hiddenAnchor, "progress", true);
                         } else {
                             _Common.SetReader(_Settings.hiddenAnchor, "progress_bar", true);
@@ -52,7 +52,7 @@
                     $(this).hide().fadeIn("slow", function () {
                         OnQuestionLoad(qObj);
                         if (firstQuestion == _currentQuestionObj.Qid) {
-                            if (isIpad) {
+                            if(isIpad || IsIphone){
                                 _Common.SetReader(_Settings.hiddenAnchor, "progress", true);
                             } else {
                                 _Common.SetReader(_Settings.hiddenAnchor, "progress_bar", true);
