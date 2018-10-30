@@ -603,7 +603,7 @@ var _CustomQuestion = (function () {
                 $("#givewood-range").attr("max", activityData.tradeData.TR.consumptionwood + activityData.tradeData.TR.givewood)
                 $("#givewood-range").val(activityData.tradeData.TR.givewood)
                 $("#givewood-logs").text(activityData.tradeData.TR.givewood)
-                $("#receivefish-cals").text(activityData.tradeData.TR.receivefish)
+                $("#receivefish-cals").text(activityData.tradeData.TR.receivefish - activityData.remFish)
 
                 $("#consumption-wood").text(activityData.tradeData.TR.consumptionwood)
                 $(".consumption-wood.r_label").text(activityData.tradeData.TR.consumptionwood + activityData.tradeData.TR.givewood)
@@ -925,11 +925,12 @@ var _CustomPage = (function () {
                 }
 
             } else {
-                if (_currPageId == "l1p1") {
+                if (_currentPage.datalevel == 0 || _currPageId == "l1p1") {
                     $("#ppfchart_c").find(".highcharts-container").attr("aria-hidden", "true");
-                    $("#ppfchart_c").attr({
-                        "aria-label": "Production Possibilities Frontier graph for Firewoods from 0 to 120 in logs vs. Fish from 0 to 3500 in calories. Refer table for more details."
-                    });
+                    // $("#ppfchart_c").attr({
+                    //     "aria-label": "Production Possibilities Frontier graph for Firewoods from 0 to 120 in logs vs. Fish from 0 to 3500 in calories. Refer table for more details."
+                    // });
+                    _ModuleCharts.IEGraphAccessibility("ppfchart_c", "Production Possibilities Frontier graph for Firewoods from 0 to 120 in logs vs. Fish from 0 to 3500 in calories. Refer table for more details.");
                 }
                 $("#ppfchart_c").find(".highcharts-container").attr("aria-hidden", "true");
                 $("#ppfchart_c").attr({
@@ -937,9 +938,10 @@ var _CustomPage = (function () {
                 });
                 if(_currentPage.datalevel == 1 || _currentPage.datalevel == 2){
                 $("#surpluschart_c").find(".highcharts-container").attr("aria-hidden", "true");
-                $("#surpluschart_c").attr({
-                    "aria-label": "Goals: Wood: 90 (logs) - Fish: 9000 (cals). Surplus Inventory graph for inventory of fish and woods from day 0 to 4."
-                });
+                // $("#surpluschart_c").attr({
+                //     "aria-label": "Surplus Inventory graph for inventory of fish and woods from day 0 to 4. Goals: Wood: 90 (logs) - Fish: 9000 (cals). "
+                // });
+                _ModuleCharts.IEGraphAccessibility("surpluschart_c", "Surplus Inventory graph for inventory of fish and woods from day 0 to 4. Goals: Wood: 90 (logs) - Fish: 9000 (cals). ");
             }
 
                 if (_currPageId == "l1p2" && _currPageQId == "Q3") {

@@ -707,7 +707,7 @@ var _TradeSlider = (function () {
                 $("#consumption-fish-range").attr("max", (TradeSettings.fridayfishCals + TradeResults.remData.fridayfish));
                 $(".consumption-fish.r_label").text((TradeSettings.fridayfishCals + TradeResults.remData.fridayfish));
                 $("#givewood-logs").text(TradeResults.givewood);
-                $("#receivefish-cals").text(TradeResults.receivefish).attr("aria-label", TradeResults.consumptionfish);
+                $("#receivefish-cals").text(TradeResults.receivefish).attr("aria-label", TradeResults.consumptionfish - TradeResults.remData.fish);
             }
             $("#consumption-wood").text(TradeResults.consumptionwood);
             $("#consumption-fish").text(TradeResults.consumptionfish);
@@ -1004,7 +1004,7 @@ var _TradeSlider = (function () {
                 $("td#fridayfishdifference").text(0);
                 $("#surpluschart_c").find(".highcharts-container").attr("aria-hidden", "true");
                 $("#surpluschart_c").attr({
-                    "aria-label": "Goals: Wood: 90 (logs) - Fish: 9000 (cals). Surplus Inventory graph for inventory of fish and woods from day 0 to 4."
+                    "aria-label": "Surplus Inventory graph for inventory of fish and woods from day 0 to 4. Goals: Wood: 90 (logs) - Fish: 9000 (cals). "
                 });
             }
 

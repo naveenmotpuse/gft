@@ -45,6 +45,7 @@ $(document).on("click", "#ppfchart .btnclose", function (event) {
   } else {
     _TopSlider.TogglePPf($("#linkppf"));
   }
+  $("#linkppf").focus();
 });
 
 $(document).on("click", "#linksurplus", function (event) {
@@ -67,6 +68,7 @@ $(document).on("click", "#surpluschart .btnclose", function (event) {
   } else {
     _TopSlider.ToggleSurplus($("#linksurplus"));
   }
+  $("#linksurplus").focus();
 });
 
 $(document).on("click", "#addpointbtn", function (event) {
