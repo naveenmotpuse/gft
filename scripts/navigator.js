@@ -356,7 +356,7 @@ var _Navigator = (function () {
                 }
 
             }
-            if(isIpad){
+            if(isIpad || IsIphone || isAndroid){
                 $('.progress *').removeAttr('aria-hidden');
                 $('.progress').attr('aria-label','Level 1 progress 0%, Level 2 progress 0%, Level 3 progress 0%, Level 4 progress 0%')
                 $('.progress').attr('role','text');
@@ -411,9 +411,9 @@ var _Navigator = (function () {
                         $(this).fadeTo(600, 1)
                         OnPageLoad(jsonObj, buttonPressed);
                         
-                        if(isIpad || IsIphone){
-                            _Common.SetReader(_Settings.hiddenAnchor, "progress", true);
-                        } else {
+                        if(isIpad || IsIphone || isAndroid){
+                            $("#progress").focus();
+                        }else {
                             _Common.SetReader(_Settings.hiddenAnchor, "progress_bar", true);
                         }
                         if(_Navigator.GetBookmarkData().levelRetry == 'level' || _Navigator.GetBookmarkData().levelRetry == 'all') {
@@ -576,8 +576,10 @@ var _Navigator = (function () {
                     $(".pgBgItem[data-level='" + i + "']").addClass("pgBgItemComplete")
                 }
             }
-            if(isIpad || IsIphone){
-                $(".progress").attr({"aria-label": arialabel, "role": "text"});
+            if(isIpad || IsIphone || isAndroid){
+                $(".progress").attr({"aria-label": arialabel, "role": "text","tabindex":"-1"});
+                $(".progress .background").removeAttr("aria-label")
+                $(".progress .background").removeAttr("tabindex")
             }else{
                 $(".progress .background").attr("aria-label", arialabel);
             }
