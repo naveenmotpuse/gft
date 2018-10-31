@@ -217,7 +217,7 @@
                 $("body").animate({
                     scrollTop: window.innerHeight || $(document).height() || $(document).height()
                 }, 1000);
-                _Common.SetReader(_Settings.hiddenAnchor, "div_feedback");
+                _Common.SetReader(_Settings.hiddenAnchor, "div_feedback");  
             });
         },
         SetFeedbackTop: function () {
@@ -375,7 +375,7 @@
                 }
             }
             if (isEmpty) {
-                this.LoadAlertFeedback();
+                this.LoadAlertFeedback();                                           
                 return;
             }
             else if (isAllCorrect) {
@@ -387,6 +387,11 @@
                 _currentQuestionObj.isAnswered = true;
                 _currentQuestionObj.feedbackIndex = feedbackIndex;
                 $("#linknext").k_enable();
+                setTimeout(function () {
+                    if(isIpad || IsIphone || isAndroid){
+                    $("#div_feedback").focus();
+                    }
+                }, 1000)
                 this.SetQuestionStatus();
                 //Need to think on generic logic.
                 //Module specific.
@@ -400,6 +405,11 @@
                 if (_currentQuestionObj.tryCount < _currentQuestionObj.totalTry) {
                     //Show tryCount incorrect feedback
                     this.Loadfeedback(feedbackIndex);
+                    setTimeout(function () {
+                        if(isIpad || IsIphone || isAndroid){
+                        $("#div_feedback").focus();
+                        }
+                    }, 1000)
                 } else {
                     _currentQuestionObj.points = _qPoints;
                     _currentQuestionObj.isAnswered = true;
@@ -417,6 +427,11 @@
                     _Navigator.UpdateScore();
                     //Show final incorrect feedback
                     this.Loadfeedback(feedbackIndex, isWorsen);
+                    setTimeout(function () {
+                        if(isIpad || IsIphone || isAndroid){
+                        $("#div_feedback").focus();
+                        }
+                    }, 1000)
                     _Module.SaveSessionData();
                 }
             }

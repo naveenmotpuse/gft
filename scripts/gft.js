@@ -433,7 +433,7 @@ var _CustomQuestion = (function () {
                 return true;
         },
         CheckGraphAnswer: function (valPoints) {
-            var isWorsen = false;
+           var isWorsen = false;
             var feedbackIndex = 0;
             $(".graphbtncheckanswer").k_disable();
             var point1 = {}
@@ -533,6 +533,11 @@ var _CustomQuestion = (function () {
                     }
 
                     _Question.Loadfeedback(feedbackIndex, isWorsen);
+                    setTimeout(function () {
+                    if(isIpad || IsIphone || isAndroid){
+                    $("#div_feedback").focus();
+                    }
+                }, 1000)
                     $("#linknext").k_enable();
                     _CustomQuestion.UpdateGraphSubmitStatus();
                     //Need to think on generic logic.
