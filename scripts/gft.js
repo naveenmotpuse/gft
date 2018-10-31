@@ -125,7 +125,6 @@ var _TopSlider = (function () {
             hideOtherChart("surplus")
             $("#ppfchart").slideToggle("slow", function () {
                 if ($(this).is(":visible")) {
-                    //console.log("ppf visible")
                     setTimeout(function () {
                         $("#linkppf").focus();
                     }, 500);

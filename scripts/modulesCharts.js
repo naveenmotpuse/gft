@@ -883,6 +883,7 @@ var _ModuleCharts = (function () {
         },
         IEGraphAccessibility: function(id, lblText){
             if(isIE11version || isIEEdge){
+                $("#" + id).removeAttr("aria-label");
                 $("#" + id).append("<span style='height:0px;font-size:0px'>"+ lblText +"</span>");
             }
             else

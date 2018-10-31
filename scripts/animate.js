@@ -574,6 +574,7 @@ var EventManager = function () {
                     $('.startbtnpanel').k_hide();
                     $(".questionband").k_show();
                     $(".questionband").removeClass("displaynone");
+                    $("#btnfindout").focus();
                     $('.castawaySprites').removeClass('castawaySprites').addClass('castawaySprites1');
                     //$("#onewoodfor-range").k_enable()
                     //$("#givewood-range").k_enable()
@@ -590,6 +591,7 @@ var EventManager = function () {
                 $('.startbtnpanel').k_hide();
                 $(".questionband").k_show();
                 $(".questionband").removeClass("displaynone");
+                $("#btnfindout").focus();
                 $('.castawaySprites').removeClass('castawaySprites').addClass('castawaySprites1');
                 //$("#onewoodfor-range").k_enable()
                 //$("#givewood-range").k_enable()
