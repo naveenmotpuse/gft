@@ -86,48 +86,6 @@ var _Common = (function () {
             return _arr;
         },
         ordinalInWord: function(t){var e=["zeroth","first","second","third","fourth","fifth","sixth","seventh","eighth","ninth","tenth","eleventh","twelfth","thirteenth","fourteenth","fifteenth","sixteenth","seventeenth","eighteenth","nineteenth","twentieth"];return t<=20?e[t]:t%10==0?{30:"thirtieth",40:"fortieth",50:"fiftieth",60:"sixtieth",70:"seventieth",80:"eightieth",90:"ninetieth",100:"hundredth"}[t]:{20:"twenty ",30:"thirty ",40:"forty ",50:"fifty ",60:"sixty ",70:"seventy ",80:"eighty ",90:"ninety ",100:"hundred "}[t-t%10]+e[t%10]},
-        /*onlyDotsAndNumbers(event, obj) {
-            var charCode = (event.which) ? event.which : event.keyCode
-            if (charCode == 46) {
-                if (obj.value.indexOf(".") < 0)
-                    return true;
-                else
-                    return false;
-            }
-        
-            if (txt.value.indexOf(".") > 0) {
-                var txtlen = obj.value.length;
-                var dotpos = obj.value.indexOf(".");
-                if ((txtlen - dotpos) > 2)
-                    return false;
-            }
-        
-            if (charCode > 31 && (charCode < 48 || charCode > 57))
-                return false;
-        
-            return true;
-        }*/
-         /*isNumberKey(evt) {
-            var charCode = (evt.which) ? evt.which : event.keyCode
-            if (charCode > 31 && (charCode < 48 || charCode > 57) && charCode != 46)
-                return false;
-            else {
-                var len = document.getElementById("input[type='text']").val().length;
-                var index = document.getElementById("input[type='text']").val().indexOf('.');
-                
-                if (index > 0 && charCode == 46) {
-                    return false;
-                }
-                if (index > 0) {
-                    var CharAfterdot = (len + 1) - index;
-                    if (CharAfterdot > 3) {
-                        return false;
-                    }
-                }
-   
-            }
-            return true;
-         }*/
     }
 })();
 
