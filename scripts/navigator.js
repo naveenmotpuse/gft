@@ -401,6 +401,9 @@ var _Navigator = (function () {
                 $(".main-content").load(pageUrl, function () {
                     OnPageLoad(jsonObj, buttonPressed);                    
                     _Common.SetReader(_Settings.hiddenAnchor,"pagetitle");
+                    $("#pagetitle").attr("tabindex","-1")                    
+                        $("#pagetitle").focus();                  
+                   
                     if(_Navigator.GetBookmarkData().levelRetry == 'level' || _Navigator.GetBookmarkData().levelRetry == 'all') {
                         $("#appmenu").k_disable();
                     }

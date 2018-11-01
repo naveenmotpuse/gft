@@ -532,12 +532,7 @@ var _CustomQuestion = (function () {
                         _currentQuestionObj.feedbackIndex = feedbackIndex;
                     }
 
-                    _Question.Loadfeedback(feedbackIndex, isWorsen);
-                    setTimeout(function () {
-                    if(isIpad || IsIphone || isAndroid){
-                    $("#div_feedback").focus();
-                    }
-                }, 1000)
+                    _Question.Loadfeedback(feedbackIndex, isWorsen);                  
                     $("#linknext").k_enable();
                     _CustomQuestion.UpdateGraphSubmitStatus();
                     //Need to think on generic logic.

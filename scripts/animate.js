@@ -504,7 +504,9 @@ var EventManager = function () {
             if (currPage.hasTradeSlider != undefined && currPage.hasTradeSlider) {
                 _Animation.MngAnimationEle();
                 _TradeSlider.ResetTradeSlider();
-            }
+            }            
+                $("#collect-wood .wood-slider").focus();
+        
         },
         onNextDay: function () {
             $('.stickBarrelRaft2, .fishBarrelRaft2').k_hide();

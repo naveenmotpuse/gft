@@ -164,8 +164,9 @@
             } else {
                 $("body").animate({
                     scrollTop: $("#div_question .question_img").position().top - _Settings.topMargin
-                }, 1000);
+                }, 1000);               
                 $("#div_question").find("input[type='text'].incorrect:first").focus();
+                $(".questionband").find("#option1").focus();
             }
 
             $(".incorrect").removeClass("incorrect");
@@ -199,11 +200,13 @@
                         if(isIpad || IsIphone || isAndroid){
                         $("#div_feedback").attr("tabindex","-1");
                         }
-                    
-                    _Common.SetReader(_Settings.hiddenAnchor, "div_feedback", true);
+                        if(isIpad){
+                            $("#div_feedback").attr("role","text");
+                        }
+                     _Common.SetReader(_Settings.hiddenAnchor, "div_feedback", true); //TODO: need to set tabindex for feedback text
                     setTimeout(function(){
-                    $("#div_feedback").focus(); //TODO: need to set tabindex for feedback text
-                }, 1000);
+                    $("#div_feedback").focus();
+                      }, 500);
                 }
             });
         },
@@ -283,7 +286,6 @@
             }
         },
         CheckAnswer: function () {
-            debugger;
             var isWorsen = false;
             var _qPoints = 0.0;
             var isAllCorrect = true;
@@ -356,7 +358,6 @@
                         $("#" + _optD.selectedId).addClass("correct");
                     }
                 } else if (_optD.type == "input") {
-                    debugger;
                     $("input[type='text']").attr('readonly', true);
                     var inputval = $("#" + _optD.id).val();
                     var _boxGrp = $("#" + _optD.id);
@@ -396,7 +397,6 @@
             }
             else if (isAllCorrect) {
                 //Show Correct Feedback
-                debugger;
                 feedbackIndex = 0;
                 this.Loadfeedback(feedbackIndex);
                 _currentQuestionObj.points = _qPoints;
@@ -447,7 +447,6 @@
         },
         lastdummyfunct: function () { },
         SetQuestionStatus: function () {
-            debugger;
             for (var i = 0; i < _currentQuestionObj.options.length; i++) {
                 var _optD = _currentQuestionObj.options[i];
                 if (_optD.type == "select") {
