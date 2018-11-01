@@ -1,0 +1,75 @@
+.menu_button {
+  position: absolute;
+  padding: 0px;
+  top: 0px;
+  margin: 0% 2%;
+}
+
+.menu_button button {
+  /*
+  font-size: 110%;
+  display: block;
+  padding: 0.25em;
+  border: inset 2px gray;
+  width: 12em;
+  text-align: center;
+  background-color: #EEEEEE;
+  text-decoration: none;
+  color: black;
+  */
+  float: left;
+  background-color: #045C42;
+  text-align: center;
+  position: relative;
+  cursor: pointer;
+  color: #000;
+  white-space: nowrap;
+  display: block;
+  margin-top: 15px;
+  padding: 5px 8px;
+  padding-bottom: 18px;
+
+}
+
+.menu_button ul[role="menu"] {
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  font-size: 110%;
+
+  list-style: none;
+  background-color: #EEEEEE;
+  display: none;
+  z-index: 1;
+}
+
+.menu_button ul[role="menu"] li {
+  margin: 0;
+  padding: 0;
+}
+
+.menu_button ul[role="menu"] a[role="menuitem"],
+.menu_button ul[role="menu"] a[role="menuitem"]:visited {
+  display: block;
+  text-decoration: none;
+  padding: 0.25em;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+  background-color: #E0E0E0;
+  width: 22em;
+  color: black;
+}
+
+/* focus and hover styling */
+
+.menu_button a[role="button"]:focus,
+.menu_button a[role="button"]:hover {
+  border: 2px solid black;
+  background-color: #F8F8F8;
+}
+
+.menu_button ul[role="menu"] a[role="menuitem"]:focus,
+.menu_button ul[role="menu"] a[role="menuitem"]:hover{
+  background-color: black;
+  color: white;
+}

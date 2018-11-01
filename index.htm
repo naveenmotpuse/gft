@@ -8,14 +8,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="styles/font.css" rel="stylesheet" />
-    <link href="scripts/external/menu/menu.css" rel="stylesheet" />
+    <!-- <link href="scripts/external/menu/menu.css" rel="stylesheet" /> -->
     <link href="styles/layout.css" rel="stylesheet" />
     <link href="styles/module.css" rel="stylesheet" />
     <link href="styles/device.css" rel="stylesheet" />
 
     <script src="scripts/external/jquery-2.1.4.min.js"></script>
     <script src="scripts/external/highcharts.js"></script>
-    <script src="scripts/external/menu/menu.js"></script>    
+    <!-- <script src="scripts/external/menu/menu.js"></script>     -->
     <script src="scripts/common.js"></script>
     <script src="scripts/data.js"></script>
     <script src="scripts/caching.js"></script>
@@ -29,6 +29,12 @@
     <script src="scripts/slider.js"></script>
     <script src="scripts/animate.js"></script>
     <script src="scripts/events.js"></script>
+    
+    <!--  JS and CSS for menu -->
+    <link href="scripts/external/menu/css/MenubuttonLinks.css" rel="stylesheet">
+    <script src="scripts/external/menu/js/Menubutton2.js" type="text/javascript"></script>
+    <script src="scripts/external/menu/js/PopupMenuLinks.js" type="text/javascript"></script>
+    <script src="scripts/external/menu/js/MenuItemLinks.js" type="text/javascript"></script>
 
     <script src="scripts/external/cooker.js"></script>
     <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=MML_HTMLorMML"></script>
@@ -41,34 +47,36 @@
                 <div id="header-content" class="mxwidth">
                     <div id="header-title">
                         <h1 id="pagetitle">Gains From Trade</h1>
-                        <ul id="appmenu" class="wrapper" role="menu" aria-label="gains from trade">
-                            <li class="menu-icon" role="menuitem" aria-haspopup="true" tabindex="1" id="appmenulibar" 
-                                class="appmenulibar">
-                                <img src="scripts/external/menu/menu-icon.png" alt="" aria-hidden="true" id="menu-icon-img" />
-                            
-                                <ul role="menu" id="appmenulist">
-                                    <li role="menuitem" style="display: none;">
-                                        <a href="javascript:void(0)" data-id="l1p1" class="menuitem">Introduction</a>
-                                    </li>
-                                    <li role="menuitem" style="display: none;">
-                                        <a href="javascript:void(0)" data-id="l1p2" class="menuitem">Level 1: Your Production Possibility</a>
-                                    </li>
-                                    <li role="menuitem" style="display: none;">
-                                        <a href="javascript:void(0)" data-id="l2p1" class="menuitem">Level 2: Opportunity Cost,<br>Comparative Advantage, and <br>Specialization</a>
-                                    </li>
-                                    <li role="menuitem" style="display: none;">
-                                        <a href="javascript:void(0)" data-id="l3p1" class="menuitem">Level 3: Implementing Trade and<br>Exploring the Gains from Trade</a>
-                                    </li>
-                                    <li role="menuitem" style="display: none;">
-                                        <a href="javascript:void(0)" data-id="l4p1" class="menuitem" >Level 4: Gains from Trade with<br>Absolute Advantage</a>
-                                    </li>
-                                    <li role="menuitem" style="display: none;">
-                                        <a href="javascript:void(0)" data-id="summary" class="menuitem">Summary</a>
-                                    </li>
-                                </ul>
-                            
-                            </li>
-                        </ul>
+                        <!-- <ul id="appmenu" class="wrapper" role="menu" aria-label="gains from trade">
+                            <li class="menu-icon" role="menuitem" aria-haspopup="true" tabindex="1" id="appmenulibar" class="appmenulibar"> -->
+                                <!-- <img src="scripts/external/menu/menu-icon.png" alt="" aria-hidden="true" id="menu-icon-img" /> -->
+                        <div class="menu_button">
+                            <button id="appmenu" aria-haspopup="true" aria-controls="appmenulist">
+                                <img src="scripts/external/menu/menu-icon.png" alt="" aria-hidden="true" id="menu-icon-img">
+                            </button>
+                            <ul id="appmenulist" role="menu" aria-labelledby="appmenu">
+                                <li role="menuitem" style="display: none;">
+                                    <a href="javascript:void(0)" data-id="l1p1" class="menuitem">Introduction</a>
+                                </li>
+                                <li role="menuitem" style="display: none;">
+                                    <a href="javascript:void(0)" data-id="l1p2" class="menuitem">Level 1: Your Production Possibility</a>
+                                </li>
+                                <li role="menuitem" style="display: none;">
+                                    <a href="javascript:void(0)" data-id="l2p1" class="menuitem">Level 2: Opportunity Cost,<br>Comparative Advantage, and <br>Specialization</a>
+                                </li>
+                                <li role="menuitem" style="display: none;">
+                                    <a href="javascript:void(0)" data-id="l3p1" class="menuitem">Level 3: Implementing Trade and<br>Exploring the Gains from Trade</a>
+                                </li>
+                                <li role="menuitem" style="display: none;">
+                                    <a href="javascript:void(0)" data-id="l4p1" class="menuitem" >Level 4: Gains from Trade with<br>Absolute Advantage</a>
+                                </li>
+                                <li role="menuitem" style="display: none;">
+                                    <a href="javascript:void(0)" data-id="summary" class="menuitem">Summary</a>
+                                </li>
+                            </ul>
+                        </div>
+                            <!-- </li>
+                        </ul> -->
                     </div>
 
                     <div id="header-progress">
