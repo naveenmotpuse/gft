@@ -123,4 +123,7 @@ $(document).ready(function () {
         jsonObj.bookmarkdata = bookmarkdata;
     }
     _Navigator.Start(jsonObj);
+    
+    var menubutton = new Menubutton(document.getElementById('appmenu'));
+    menubutton.init();
 });

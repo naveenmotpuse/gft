@@ -123,6 +123,11 @@ $(document).on("keyup", ".levelbtnretry", function(event) {
   }
 });*/
 
+$(document).on("click", "#appmenu > li li", function (event) {
+  var levelPageId = $(event.target).find(".menuitem").attr("data-id");
+  _Navigator.LoadPage(levelPageId);
+});
+
 $(document).on("click", ".bookmark", function (event) {
   _Navigator.Start();
 });
@@ -146,7 +151,6 @@ $(document).on("keyup", "input[type='text']", function (event) {
     }
   }
 });
-
 $(document).on("keypress", "input[type='text']", function (event) {
   return _Common.ValidateDecimal(event, $(this));
 });
@@ -157,6 +161,3 @@ $(document).on('click', function (event) {
     $("#appmenu > li").css({ "background-color": "#045C42" });
   }
 });
-/*$(document).on("blur", "input[type='text']", function (event) {    
-    return _Common.checkDecimal($(this));
-})*/
