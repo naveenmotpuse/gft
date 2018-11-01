@@ -59,7 +59,11 @@
                             }
                         }
                         else {
+                            if(isIpad || IsIphone || isAndroid){
+                                $("#progress").focus();
+                            } else{
                             _Common.SetReader(_Settings.hiddenAnchor, "progress_bar", true);
+                            }
                         }
                     })
                 });
@@ -191,8 +195,15 @@
                     $("body").animate({
                         scrollTop: $(document).height()
                     }, 1000);
-                    _Common.SetReader(_Settings.hiddenAnchor, "feedback_text", true);
-                    //$("#div_feedback").focus(); //TODO: need to set tabindex for feedback text
+                    
+                        if(isIpad || IsIphone || isAndroid){
+                        $("#div_feedback").attr("tabindex","-1");
+                        }
+                    
+                    _Common.SetReader(_Settings.hiddenAnchor, "div_feedback", true);
+                    setTimeout(function(){
+                    $("#div_feedback").focus(); //TODO: need to set tabindex for feedback text
+                }, 1000);
                 }
             });
         },
@@ -217,7 +228,12 @@
                 $("body").animate({
                     scrollTop: window.innerHeight || $(document).height() || $(document).height()
                 }, 1000);
-                _Common.SetReader(_Settings.hiddenAnchor, "div_feedback");  
+                if(isIpad || IsIphone || isAndroid){
+                    $("#div_feedback").attr("tabindex","-1");
+                    }
+                _Common.SetReader(_Settings.hiddenAnchor, "div_feedback"); 
+                $("#div_feedback").focus(); 
+
             });
         },
         SetFeedbackTop: function () {
@@ -387,11 +403,7 @@
                 _currentQuestionObj.isAnswered = true;
                 _currentQuestionObj.feedbackIndex = feedbackIndex;
                 $("#linknext").k_enable();
-                setTimeout(function () {
-                    if(isIpad || IsIphone || isAndroid){
-                    $("#div_feedback").focus();
-                    }
-                }, 1000)
+
                 this.SetQuestionStatus();
                 //Need to think on generic logic.
                 //Module specific.
@@ -405,11 +417,6 @@
                 if (_currentQuestionObj.tryCount < _currentQuestionObj.totalTry) {
                     //Show tryCount incorrect feedback
                     this.Loadfeedback(feedbackIndex);
-                    setTimeout(function () {
-                        if(isIpad || IsIphone || isAndroid){
-                        $("#div_feedback").focus();
-                        }
-                    }, 1000)
                 } else {
                     _currentQuestionObj.points = _qPoints;
                     _currentQuestionObj.isAnswered = true;
@@ -427,11 +434,6 @@
                     _Navigator.UpdateScore();
                     //Show final incorrect feedback
                     this.Loadfeedback(feedbackIndex, isWorsen);
-                    setTimeout(function () {
-                        if(isIpad || IsIphone || isAndroid){
-                        $("#div_feedback").focus();
-                        }
-                    }, 1000)
                     _Module.SaveSessionData();
                 }
             }
