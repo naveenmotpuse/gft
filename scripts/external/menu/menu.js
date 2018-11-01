@@ -64,10 +64,12 @@ $(function () {
                 $("#appmenu").children('li:first').css({ "border": "2px solid #045C42", "border-bottom": "0px", "border-top-left-radius": "5px", "border-top-right-radius": "5px" });
                 $(this).children('img').attr("src", "scripts/external/menu/menu-icon-rollover-v1.png");
                 $('#appmenulist').find('li:nth-child(1)').focus();
+                $("#header-progress, #header-btn-container, main, footer").attr("aria-hidden", "true");
             } else {
                 this.setAttribute('aria-expanded', "false");
                 $(this).parent().find('li').css({ 'background': '#045C42' })
                 $(this).children('img').attr("src", "scripts/external/menu/menu-icon.png");
+                $("#header-progress, #header-btn-container, main, footer").removeAttr("aria-hidden");
             }
             event.preventDefault();
             return false;
@@ -101,6 +103,7 @@ $(function () {
                     prevdef = true;
                     break;
                 case keys.esc:
+                    $("#header-progress, #header-btn-container, main, footer").removeAttr("aria-hidden");
                     document.querySelector('#appmenulibar').setAttribute('tabindex', '-1');
                     document.querySelector('#appmenulibar').focus();
                     prevdef = true;
@@ -136,6 +139,7 @@ $(function () {
                     prevdef = true;
                     break;
                 case keys.esc:
+                    $("#header-progress, #header-btn-container, main, footer").removeAttr("aria-hidden");
                     gotoIndex(0);
                     prevdef = true;
                     break;
@@ -148,6 +152,7 @@ $(function () {
                     prevdef = true;
                     break;
                 case keys.enter:
+                    $("#header-progress, #header-btn-container, main, footer").removeAttr("aria-hidden");
                     var levelPageId = $(event.target).find(".menuitem").attr("data-id");
                     _Navigator.LoadPage(levelPageId);
                     $("#appmenu li").attr("aria-expanded", false).css({ 'background': '#045C42' });
@@ -164,6 +169,7 @@ $(function () {
         });
         el.addEventListener("click", function (event) {
             console.log("click:subMenuItems");
+            $("#header-progress, #header-btn-container, main, footer").removeAttr("aria-hidden");
             var levelPageId = event.target.getAttribute("data-id");
             var jsonObj = {};
             jsonObj.isMenuVisit = true;
