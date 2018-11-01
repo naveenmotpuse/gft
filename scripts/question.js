@@ -195,11 +195,14 @@
                 if(isLoaded !== true) {
                     $("body").animate({
                         scrollTop: $(document).height()
-                    }, 1000);
-                    
-                        $("#div_feedback").attr("tabindex","-1").css("outline","none");
-                         if(isIpad){
-                            $("#div_feedback").attr("role","text");
+                    }, 1000);                  
+
+                        if(isIpad ){
+                            $("#feedback_text").attr({"role":"text","tabindex":"-1"});
+                            $("#feedback_text").focus(); 
+                        }else{
+                            $("#div_feedback").attr("tabindex","-1").css("outline","none");
+                            $("#div_feedback").focus(); 
                         }
                     _Common.SetReader(_Settings.hiddenAnchor, "div_feedback", true); //TODO: need to set tabindex for feedback text
                 }
