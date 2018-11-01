@@ -2,22 +2,26 @@ $(document).on("click", "#ppfchart .imggraph", function (event) {
   var _this = $(this);
   $("#ppfcharttable_c").hide(function () {
     $(".imgtable").addClass("custIdisabled");
-    $(".imgtable").attr({"aria-expanded": "false", "aria-current": "false", "aria-hidden": "true"});
+    $(".imgtable").attr({"aria-expanded": "false", "aria-current": "false"});
+    $(this).attr("aria-hidden", "true");
   });
   $("#ppfchart_c").show(function () {
     _this.removeClass("custIdisabled");
-    _this.attr({"aria-expanded": "true", "aria-current": "true", "aria-hidden": "false"});
+    _this.attr({"aria-expanded": "true", "aria-current": "true"});
+    $(this).attr("aria-hidden", "false");
   });
 });
 $(document).on("click", "#ppfchart .imgtable", function (event) {
   var _this = $(this);
   $("#ppfcharttable_c").show(function () {
     _this.removeClass("custIdisabled");
-    _this.attr({"aria-expanded": "true", "aria-current": "true", "aria-hidden": "false"});
+    _this.attr({"aria-expanded": "true", "aria-current": "true"});
+    $(this).attr("aria-hidden", "false");
   });
   $("#ppfchart_c").hide(function () {
     $(".imggraph").addClass("custIdisabled");
-    $(".imggraph").attr({"aria-expanded": "false", "aria-current": "false", "aria-hidden": "true"});
+    $(".imggraph").attr({"aria-expanded": "false", "aria-current": "false"});
+    $(this).attr("aria-hidden", "true");
   });
 });
 
