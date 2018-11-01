@@ -226,13 +226,17 @@ PopupMenuLinks.prototype.open = function () {
 
   // set aria-expanded attribute
   this.controller.domNode.setAttribute('aria-expanded', 'true');
+
+  $("#header-progress, #header-btn-container, main, footer").a("aria-hidden", true);
 };
 
 PopupMenuLinks.prototype.close = function (force) {
 
   if (force || (!this.hasFocus && !this.hasHover && !this.controller.hasHover)) {
     this.domNode.style.display = 'none';
-    this.controller.domNode.removeAttribute('aria-expanded');
+    this.controller.domNode.setAttribute('aria-expanded', 'false');
     this.controller.domNode.children[0].src = 'scripts/external/menu/menu-icon.png';
+
+    $("#header-progress, #header-btn-container, main, footer").removeAttr("aria-hidden");
   }
 };
