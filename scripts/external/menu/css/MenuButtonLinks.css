@@ -18,6 +18,7 @@
   padding: 5px 8px;
   padding-bottom: 18px;
   border: 0px;
+  min-width: initial;
 }
 
 .menu_button button[aria-expanded="true"] {
@@ -31,7 +32,7 @@
   margin: 0;
   padding: 0;
   position: absolute;
-  font-size: 110%;
+  font-size: 100%;
   text-align: left;
   list-style: none;
   background-color: #EEEEEE;
@@ -39,6 +40,7 @@
   z-index: 1;
   border: 2px solid #045C42;
   border-top: 0;
+  width: 276px;
 }
 
 .menu_button ul[role="menu"] li {
@@ -54,7 +56,7 @@
   padding-left: 0.5em;
   padding-right: 0.5em;
   background-color: #FFF;
-  width: 22em;
+  width: 260px;
   color: black;
 }
 
