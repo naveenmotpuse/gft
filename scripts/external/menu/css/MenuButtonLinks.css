@@ -6,17 +6,6 @@
 }
 
 .menu_button button {
-  /*
-  font-size: 110%;
-  display: block;
-  padding: 0.25em;
-  border: inset 2px gray;
-  width: 12em;
-  text-align: center;
-  background-color: #EEEEEE;
-  text-decoration: none;
-  color: black;
-  */
   float: left;
   background-color: #045C42;
   text-align: center;
@@ -28,7 +17,14 @@
   margin-top: 15px;
   padding: 5px 8px;
   padding-bottom: 18px;
+  border: 0px;
+}
 
+.menu_button button[aria-expanded="true"] {
+  background: rgb(255, 255, 255);
+  border-radius: 5px 5px 0px 0px;
+  border: 2px solid #045c42;
+  border-bottom-width: 0;
 }
 
 .menu_button ul[role="menu"] {
