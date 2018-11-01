@@ -356,6 +356,7 @@ var _Navigator = (function () {
                 }
 
             }
+            
             if(isIpad || IsIphone || isAndroid){
                 $('.progress *').removeAttr('aria-hidden');
                 $('.progress').attr('aria-label','Level 1 progress 0%, Level 2 progress 0%, Level 3 progress 0%, Level 4 progress 0%')
@@ -401,7 +402,7 @@ var _Navigator = (function () {
                 $(".main-content").load(pageUrl, function () {
                     OnPageLoad(jsonObj, buttonPressed);                    
                     _Common.SetReader(_Settings.hiddenAnchor,"pagetitle");
-                    $("#pagetitle").attr("tabindex","-1")                    
+                    $("#pagetitle").attr("tabindex","-1").css("outline","none");                    
                         $("#pagetitle").focus();                  
                    
                     if(_Navigator.GetBookmarkData().levelRetry == 'level' || _Navigator.GetBookmarkData().levelRetry == 'all') {

@@ -197,16 +197,11 @@
                         scrollTop: $(document).height()
                     }, 1000);
                     
-                        if(isIpad || IsIphone || isAndroid){
-                        $("#div_feedback").attr("tabindex","-1");
-                        }
-                        if(isIpad){
+                        $("#div_feedback").attr("tabindex","-1").css("outline","none");
+                         if(isIpad){
                             $("#div_feedback").attr("role","text");
                         }
-                     _Common.SetReader(_Settings.hiddenAnchor, "div_feedback", true); //TODO: need to set tabindex for feedback text
-                    setTimeout(function(){
-                    $("#div_feedback").focus();
-                      }, 500);
+                    _Common.SetReader(_Settings.hiddenAnchor, "div_feedback", true); //TODO: need to set tabindex for feedback text
                 }
             });
         },
