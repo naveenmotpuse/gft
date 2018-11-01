@@ -32,11 +32,13 @@
   padding: 0;
   position: absolute;
   font-size: 110%;
-
+  text-align: left;
   list-style: none;
   background-color: #EEEEEE;
   display: none;
   z-index: 1;
+  border: 2px solid #045C42;
+  border-top: 0;
 }
 
 .menu_button ul[role="menu"] li {
@@ -51,7 +53,7 @@
   padding: 0.25em;
   padding-left: 0.5em;
   padding-right: 0.5em;
-  background-color: #E0E0E0;
+  background-color: #FFF;
   width: 22em;
   color: black;
 }
@@ -60,12 +62,12 @@
 
 .menu_button a[role="button"]:focus,
 .menu_button a[role="button"]:hover {
-  border: 2px solid black;
-  background-color: #F8F8F8;
+  border: 2px solid #045C42;
+  background-color: #FFF;
 }
 
 .menu_button ul[role="menu"] a[role="menuitem"]:focus,
 .menu_button ul[role="menu"] a[role="menuitem"]:hover{
-  background-color: black;
-  color: white;
+  background-color: #FFF;
+  color: #000;
 }

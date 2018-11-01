@@ -216,12 +216,13 @@ PopupMenuLinks.prototype.getIndexFirstChars = function (startIndex, char) {
 PopupMenuLinks.prototype.open = function () {
   // get position and bounding rectangle of controller object's DOM node
   var rect = this.controller.domNode.getBoundingClientRect();
-
+  var adjustment = 15;
   // set CSS properties
   this.domNode.style.display = 'block';
   this.domNode.style.position = 'absolute';
-  this.domNode.style.top  = rect.height + 'px';
+  this.domNode.style.top  = (rect.height+adjustment) + 'px';
   this.domNode.style.left = '0px';
+  this.controller.domNode.children[0].src = 'scripts/external/menu/menu-icon-rollover-v1.png';
 
   // set aria-expanded attribute
   this.controller.domNode.setAttribute('aria-expanded', 'true');
@@ -232,5 +233,6 @@ PopupMenuLinks.prototype.close = function (force) {
   if (force || (!this.hasFocus && !this.hasHover && !this.controller.hasHover)) {
     this.domNode.style.display = 'none';
     this.controller.domNode.removeAttribute('aria-expanded');
+    this.controller.domNode.children[0].src = 'scripts/external/menu/menu-icon.png';
   }
 };
