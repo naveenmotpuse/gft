@@ -199,11 +199,13 @@
                         if(isIpad || IsIphone || isAndroid){
                         $("#div_feedback").attr("tabindex","-1");
                         }
-                    
-                    _Common.SetReader(_Settings.hiddenAnchor, "div_feedback", true);
+                        if(isIpad){
+                            $("#div_feedback").attr("role","text");
+                        }
+                     _Common.SetReader(_Settings.hiddenAnchor, "div_feedback", true); //TODO: need to set tabindex for feedback text
                     setTimeout(function(){
-                    $("#div_feedback").focus(); //TODO: need to set tabindex for feedback text
-                }, 1000);
+                    $("#div_feedback").focus();
+                      }, 500);
                 }
             });
         },

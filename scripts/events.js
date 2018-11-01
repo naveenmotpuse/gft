@@ -156,3 +156,4 @@ $(document).on('click', function (event) {
 /*$(document).on("blur", "input[type='text']", function (event) {    
     return _Common.checkDecimal($(this));
 })*/
+
