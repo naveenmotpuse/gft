@@ -227,7 +227,7 @@ PopupMenuLinks.prototype.open = function () {
   // set aria-expanded attribute
   this.controller.domNode.setAttribute('aria-expanded', 'true');
 
-  $("#header-progress, #header-btn-container, main, footer").a("aria-hidden", true);
+  $("#header-progress, #header-btn-container, main, footer").attr("aria-hidden", true);
 };
 
 PopupMenuLinks.prototype.close = function (force) {
