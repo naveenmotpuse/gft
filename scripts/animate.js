@@ -466,7 +466,9 @@ var EventManager = function () {
             var fishhrs = 0;
             var woodhrs = 0;
             $("#collect-wood .wood-slider").val(woodhrs);
+            $("#collect-wood .woodFiller").css('width', woodhrs);
             $("#collect-fish .fish-slider").val(fishhrs);
+            $("#collect-fish .fishFiller").css('width', fishhrs);
             $(".fishcounter .count").text(fishhrs);
             $(".woodcounter .count").text(woodhrs);
             if(DataStorage.getCurrentDay() > 1) {
@@ -522,7 +524,9 @@ var EventManager = function () {
             var fishhrs = 0;
             var woodhrs = 0;
             $("#collect-wood .wood-slider").val(fishhrs);
+            $("#collect-wood .woodFiller").css('width', woodhrs);
             $("#collect-fish .fish-slider").val(woodhrs);
+            $("#collect-fish .fishFiller").css('width', fishhrs);
             $("#w_val").text(woodhrs);
             $("#f_val").text(fishhrs);
             $(".colorful-slider1").css("width", (fishhrs * 10) + "%");

@@ -18,7 +18,7 @@
 }
 
 .woodFiller, .fishFiller, #oneWoodFiller, #giveWoodFiller, #giveFishFiller, #consumeWoodFiller, #consumeFishFiller {
-    width: 50%;
+    width: 0%;
     height: 12px;
     background: #A3610A;
     border-radius: 5px 0px 0px 5px;
