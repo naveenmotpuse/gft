@@ -17,7 +17,7 @@
     border: 1px solid #9D0B0E;
 }
 
-.woodFiller, .fishFiller, .oneWoodFiller, .giveWoodFiller, .giveFishFiller, .consumeWoodFiller, .consumeFishFiller {
+.woodFiller, .fishFiller, #oneWoodFiller, #giveWoodFiller, #giveFishFiller, #consumeWoodFiller, #consumeFishFiller {
     width: 50%;
     height: 12px;
     background: #A3610A;
@@ -29,11 +29,11 @@
 .fishFiller {
     background: #9D0B0E;
 }
-.oneWoodFiller{background: #575694;}
-.giveWoodFiller{background: #575694;} 
-.giveFishFiller{background: #9D0B0E;} 
-.consumeWoodFiller{background: #A3610A;} 
-.consumeFishFiller{background: #9D0B0E;}
+#oneWoodFiller{background: #575694;}
+#giveWoodFiller{background: #575694;} 
+#giveFishFiller{background: #9D0B0E;} 
+#consumeWoodFiller{background: #A3610A;} 
+#consumeFishFiller{background: #9D0B0E;}
 
 .tot-range-wrapper {
     width: 100%;

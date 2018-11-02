@@ -594,6 +594,7 @@ var _CustomQuestion = (function () {
                         $("p.goaldesc[goal='" + target.goal + "']").k_show()
                     }
                 }
+                debugger;
                 $("#dayno").text(activityData.day);
                 $(".fishcounter .count").text(activityData.remFish);
                 $(".woodcounter .count").text(activityData.remWood);

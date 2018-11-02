@@ -718,6 +718,16 @@ var _TradeSlider = (function () {
             $("#consumption-fish").text(TradeResults.consumptionfish);
             $("#consumption-wood-range").val(TradeResults.consumptionwood).attr("aria-valuenow", TradeResults.consumptionwood);
             $("#consumption-fish-range").val(TradeResults.consumptionfish).attr("aria-valuenow", TradeResults.consumptionfish);
+
+            var _wPerc = Number($("#onewoodfor-range").val()) / Number($("#onewoodfor-range").attr('max')) * 95 + '%';
+            $("#oneWoodFiller").css("width", _wPerc);
+            _wPerc = Number($("#givewood-range").val()) / Number($("#givewood-range").attr('max')) * 95 + '%';
+            $("#giveWoodFiller").css("width", _wPerc);
+            _wPerc = Number($("#consumption-wood-range").val()) / Number($("#consumption-wood-range").attr('max')) * 95 + '%';
+            $("#consumeWoodFiller").css("width", _wPerc);
+            _wPerc = Number($("#consumption-fish-range").val()) / Number($("#consumption-fish-range").attr('max')) * 95 + '%';
+            $("#consumeFishFiller").css("width", _wPerc);
+
             if (currPage.datalevel == 4 && _Scenario.GetScenarioIndex() == 1) {
                 $(".assistive-text").text('');
                 $(".assistive-text").text("Your PPF graph, Friday's PPF graph updated. Terms of Trade changed to 1 Wood (logs) for: " + TradeResults.onewoodfor + " fish (cals), Give fish (logs):" + TradeResults.givefish + " and Receive wood (logs): " + TradeResults.receivewood + ". Consumption changed to Collect Wood: " + TradeResults.consumptionwood + " logs and Collect Fish: " + TradeResults.consumptionfish + " cals.");
