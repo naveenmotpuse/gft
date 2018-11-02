@@ -808,7 +808,7 @@ var _ModuleCharts = (function () {
             if(s!=="") {
                 //$("#surpluschart_c").attr("aria-label", "Surplus Inventory graph for inventory of fish and woods from day 0 t0 4. Goals: Wood: 90(logs) - Fish: 9000(cals). Plotted points: " + s + ". Refer table for more details.");
            
-                this.IEGraphAccessibility("#surpluschart_c","Surplus Inventory graph for inventory of fish and woods from day 0 t0 4. Goals: Wood: 90(logs) - Fish: 9000(cals). Plotted points: " + s + ". Refer table for more details.");
+                this.IEGraphAccessibility("surpluschart_c","Surplus Inventory graph for inventory of fish and woods from day 0 t0 4. Goals: Wood: 90(logs) - Fish: 9000(cals). Plotted points: " + s + ". Refer table for more details.");
             }
         },
         DrawPPFChartonBookmark: function () {
