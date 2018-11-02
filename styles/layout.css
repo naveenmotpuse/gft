@@ -640,17 +640,3 @@ table.tableFridayInventory.ppftablestyle {
     padding: 0px;
     float: left;
 }
-
-.woodFiller {
-    width:0%;height: 10px;background: #A3610A;border-radius: 5px 0px 0px 5px;position: absolute;bottom: 3px;
-    z-index:-1 
-}
-
-
-.fishFiller{
-    width:0%;height: 10px;background: #9D0B0E;border-radius: 5px 0px 0px 5px;position: absolute;bottom: 3px;z-index:-1;
-}
-
-#blankspan{
-    font-size: 0px;
-}
