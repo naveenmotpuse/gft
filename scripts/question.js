@@ -36,14 +36,18 @@
                 $("#div_question").load(pageUrl, function () {
                     OnQuestionLoad(qObj);
                     if (firstQuestion == _currentQuestionObj.Qid) {
-                        if(isIpad || IsIphone || isAndroid){
+                        if(isIpad || IsIphone || isAndroid|| isIE11version ){
                             $("#progress").focus();
                         } else {
                             _Common.SetReader(_Settings.hiddenAnchor, "progress_bar", true);
                         }
                     }
                     else {
-                        _Common.SetReader(_Settings.hiddenAnchor, "progress_bar", true);
+                        if(isIpad || IsIphone || isAndroid|| isIE11version ){
+                            $("#progress").focus();
+                        } else {
+                            _Common.SetReader(_Settings.hiddenAnchor, "progress_bar", true);
+                        }
                     }
 
                 });
@@ -52,14 +56,14 @@
                     $(this).hide().fadeIn("slow", function () {
                         OnQuestionLoad(qObj);
                         if (firstQuestion == _currentQuestionObj.Qid) {
-                            if(isIpad || IsIphone || isAndroid){
+                            if(isIpad || IsIphone || isAndroid|| isIE11version ){
                                 $("#progress").focus();
                             } else {
                                 _Common.SetReader(_Settings.hiddenAnchor, "progress_bar", true);
                             }
                         }
                         else {
-                            if(isIpad || IsIphone || isAndroid){
+                            if(isIpad || IsIphone || isAndroid|| isIE11version ){
                                 $("#progress").focus();
                             } else{
                             _Common.SetReader(_Settings.hiddenAnchor, "progress_bar", true);
