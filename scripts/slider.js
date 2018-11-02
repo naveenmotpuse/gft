@@ -237,6 +237,9 @@ var _Slider = (function () {
             $("#f_val").text(fishhrs);
             $("#collect-wood .wood-slider").val(woodhrs);
             $("#collect-fish .fish-slider").val(fishhrs);
+            $(".fishFiller").css('width', fishhrs * (100 / AnimConfig.dayTime) + '%');
+            $(".woodFiller").css('width', woodhrs * (100 / AnimConfig.dayTime) + '%');
+
             $(".colorful-slider1").css("width", (fishhrs * 10) + "%");
             $(".animate-slider1").css("width", (fishhrs * 10) + "%");
             $(".colorful-slider2").css("width", (woodhrs * 10) + "%");
@@ -290,6 +293,8 @@ var _Slider = (function () {
             $(".animate-slider2").css("width", (val2 * (100 / AnimConfig.dayTime)) + "%");
             $(".animate-slider3").css("width", (AnimConfig.toolTime * (100 / AnimConfig.dayTime)) + "%");
             $(".colorful-slider3").css("width", (AnimConfig.toolTime * (100 / AnimConfig.dayTime)) + "%");
+            $(".woodFiller").css('width', val1 * (100 / slidermax_val) + '%');
+            $(".fishFiller").css('width', val2 * (100 / slidermax_val) + '%');
 
             var totalhrs = val1 + val2;
 
@@ -386,6 +391,8 @@ var _Slider = (function () {
         setSlidervalue: function (wood, fish) {
             $("#collect-wood .wood-slider").val(wood);
             $("#collect-fish .fish-slider").val(fish);
+            $(".fishFiller").css('width', fish * (100 / AnimConfig.dayTime) + '%');
+            $(".woodFiller").css('width', wood * (100 / AnimConfig.dayTime) + '%');
         },
         InitTimeScheduler: function () {
             this.InitDayTimeScheduler();
