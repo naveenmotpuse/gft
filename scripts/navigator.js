@@ -581,7 +581,7 @@ var _Navigator = (function () {
                 }
             }
             if(isIpad || IsIphone || isAndroid){
-                $(".progress").attr({"aria-label": arialabel, "role": "text","tabindex":"-1"});
+                $(".progress").attr({"aria-label": arialabel, "role": "text","tabindex":"-1"}).css("outline","none");
                 $(".progress .background").removeAttr("aria-label")
                 $(".progress .background").removeAttr("tabindex")
             }else{
