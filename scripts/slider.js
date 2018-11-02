@@ -705,8 +705,6 @@ var _TradeSlider = (function () {
                 $("#givefish-cals").text(TradeResults.givefish);
                 $("#receivewood-logs").text(TradeResults.receivewood);
             } else {
-                //$("#givewood-range").attr("max", (TradeSettings.yourwoodlogs + TradeResults.remData.wood));
-                //$(".givewood.r_label").text((TradeSettings.yourwoodlogs + TradeResults.remData.wood));
                 $("#givewood-range").attr("max", defaulValues.givewoodmax);
                 $(".givewood.r_label").text(defaulValues.givewoodmax);
                 $("#consumption-wood-range").attr("max", (TradeSettings.yourwoodlogs + TradeResults.remData.wood));
@@ -727,7 +725,6 @@ var _TradeSlider = (function () {
                 $(".assistive-text").text('');
                 $(".assistive-text").text("Your PPF graph, Friday's PPF graph updated. Terms of Trade changed to 1 Wood (logs) for: " + TradeResults.onewoodfor + " fish (cals), Give wood (logs): " + TradeResults.givewood + " and Receive fish (cals): " + TradeResults.receivefish + ". Consumption changed to Collect Wood: " + TradeResults.consumptionwood + " logs and Collect Fish: " + TradeResults.consumptionfish + " cals.");
             }
-            //_TradeSlider.DisplayPointOnGraph();
         },
         GetTradeSettings: function () {
             return TradeSettings;
