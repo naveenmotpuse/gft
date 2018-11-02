@@ -361,8 +361,16 @@ var _Navigator = (function () {
                 $('.progress *').removeAttr('aria-hidden');
                 $('.progress').attr('aria-label','Level 1 progress 0%, Level 2 progress 0%, Level 3 progress 0%, Level 4 progress 0%')
                 $('.progress').attr('role','text');
-                $('.progress').attr('tabindex','0')
+                // $('.progress').attr('tabindex','0')
             }
+            if(isIE11version){
+                $('.progress').attr('aria-label','Level 1 progress 0%, Level 2 progress 0%, Level 3 progress 0%, Level 4 progress 0%')
+                var aLabel = $('.progress').attr("aria-label")
+                if($("#blankspan").length == 0){
+                $(".progress").append("<span id='blankspan'>" + aLabel + "</span>");  
+                }              
+            }
+
             this.UpdateProgressBar();
             
             // if level retry then jump to summary page
@@ -415,7 +423,7 @@ var _Navigator = (function () {
                         $(this).fadeTo(600, 1)
                         OnPageLoad(jsonObj, buttonPressed);
                         
-                        if(isIpad || IsIphone || isAndroid){
+                        if(isIpad || IsIphone || isAndroid || isIE11version ){
                             $("#progress").focus();
                         }else {
                             _Common.SetReader(_Settings.hiddenAnchor, "progress_bar", true);
@@ -584,6 +592,8 @@ var _Navigator = (function () {
                 $(".progress").attr({"aria-label": arialabel, "role": "text","tabindex":"-1"}).css("outline","none");
                 $(".progress .background").removeAttr("aria-label")
                 $(".progress .background").removeAttr("tabindex")
+            } else if(isIE11version){ 
+                $("#blankspan").text(arialabel)
             }else{
                 $(".progress .background").attr("aria-label", arialabel);
             }
