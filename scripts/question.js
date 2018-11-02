@@ -198,7 +198,7 @@
                     }, 1000);                  
 
                         if(isIpad ){
-                            $("#feedback_text").attr({"role":"text","tabindex":"-1"});
+                            $("#feedback_text").attr({"role":"text","tabindex":"-1"}).css("outline","none");
                             $("#feedback_text").focus(); 
                         }else{
                             $("#div_feedback").attr("tabindex","-1").css("outline","none");
@@ -230,7 +230,7 @@
                     scrollTop: window.innerHeight || $(document).height() || $(document).height()
                 }, 1000);
                 if(isIpad ){
-                    $(".alert_text").attr({"role":"text","tabindex":"-1"});
+                    $(".alert_text").attr({"role":"text","tabindex":"-1"}).css("outline","none");
                     $(".alert_text").focus(); 
                 }else{
                     $("#div_feedback").attr("tabindex","-1").css("outline","none");
