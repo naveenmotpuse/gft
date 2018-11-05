@@ -613,6 +613,16 @@ var _CustomQuestion = (function () {
                 $("#consumption-fish-range").attr("max", activityData.tradeData.TR.fridayconsumptionfish + activityData.tradeData.TR.receivefish)
                 $("#consumption-fish-range").val(activityData.tradeData.TR.consumptionfish);
                 $(".consumption-fish.r_label").text(activityData.tradeData.TR.fridayconsumptionfish + activityData.tradeData.TR.receivefish);
+                
+                //reset range slider fillers
+                var _wPerc = Number($("#onewoodfor-range").val()) / Number($("#onewoodfor-range").attr('max')) * 95 + '%';
+                $("#oneWoodFiller").css("width", _wPerc);
+                _wPerc = Number($("#givewood-range").val()) / Number($("#givewood-range").attr('max')) * 95 + '%';
+                $("#giveWoodFiller").css("width", _wPerc);
+                _wPerc = Number($("#consumption-wood-range").val()) / Number($("#consumption-wood-range").attr('max')) * 95 + '%';
+                $("#consumeWoodFiller").css("width", _wPerc);
+                _wPerc = Number($("#consumption-fish-range").val()) / Number($("#consumption-fish-range").attr('max')) * 95 + '%';
+                $("#consumeFishFiller").css("width", _wPerc);
 
                 _TradeSlider.ShowSliderPoint("studenttradeGraph", [activityData.tradeData.TR.consumptionwood, activityData.tradeData.TR.consumptionfish]);
                 _TradeSlider.ShowSliderPoint("fridaytradeGraph", [activityData.tradeData.TR.fridayconsumptionwood, activityData.tradeData.TR.fridayconsumptionfish]);
@@ -931,7 +941,7 @@ var _CustomPage = (function () {
                     //     "aria-label": "Production Possibilities Frontier graph for Firewoods from 0 to 120 in logs vs. Fish from 0 to 3500 in calories. Refer table for more details."
                     // });
                     if($("#blankspan").length == 0){
-                    _ModuleCharts.IEGraphAccessibility("ppfchart_c", "Production Possibilities Frontier graph for Firewoods from 0 to 120 in logs vs. Fish from 0 to 3500 in calories. Refer table for more details.");
+                        _ModuleCharts.IEGraphAccessibility("ppfchart_c", "Production Possibilities Frontier graph for Firewoods from 0 to 120 in logs vs. Fish from 0 to 3500 in calories. Refer table for more details.");
                     }
                 }
                 $("#ppfchart_c").find(".highcharts-container").attr("aria-hidden", "true");
@@ -944,7 +954,7 @@ var _CustomPage = (function () {
                 //     "aria-label": "Surplus Inventory graph for inventory of fish and woods from day 0 to 4. Goals: Wood: 90 (logs) - Fish: 9000 (cals). "
                 // });
                 if($("#blankspan").length == 0){
-                _ModuleCharts.IEGraphAccessibility("surpluschart_c", "Surplus Inventory graph for inventory of fish and woods from day 0 to 4. Goals: Wood: 90 (logs) - Fish: 9000 (cals). ");
+                    _ModuleCharts.IEGraphAccessibility("surpluschart_c", "Surplus Inventory graph for inventory of fish and woods from day 0 to 4. Goals: Wood: 90 (logs) - Fish: 9000 (cals). ");
                 }
             }
 
