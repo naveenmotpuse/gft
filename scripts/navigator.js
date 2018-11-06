@@ -535,10 +535,6 @@ var _Navigator = (function () {
                 if(_NData[_levelStartPages[i]].isVisited)
                 {
                     var menuElem = $("a.menuitem[data-id='" + _NData[_levelStartPages[i]].pageId + "']");
-                    debugger;
-                    /*if(menuElem.length == 0) {
-                        $("#appmenulist").append('<li role="menuitem"><a href="javascript:void(0)" data-id="'+_NData[_levelStartPages[i]].pageId+'" class="menuitem">'+MenuItems[_NData[_levelStartPages[i]].pageId]+'</a></li>');
-                    }*/
                     menuElem.closest("li").css("display", "block");
                     // double reading issue //
                     //menuElem.closest("li").removeAttr("aria-hidden");

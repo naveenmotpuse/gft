@@ -1,7 +1,7 @@
 ﻿var _KnowdlServiceManager = (function () {
     var _data = {}
     _data.CompletionStatus = "Inprogress";
-    var _globals = {}
+    var _globals = { Mode : 'do'}
 
     //var _knowdlPostUrl = "http://dev.knowdl.com/diinteraction/process";
     var _knowdlPostUrl = window.location.protocol + "//stage1.knowdl.com/diinteraction/process"

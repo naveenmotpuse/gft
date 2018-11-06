@@ -752,6 +752,8 @@ var _CustomPage = (function () {
                 // set TPI completion
                 _Module.PostFinalGrade();
                 _Module.SaveSessionData();
+                _KnowdlServiceManager.SetCompletion();
+
                 if (_LevelAccess.IsAllLevelsAttempted()) {
                     $(".exambtnretry").k_disable();
                 } else {

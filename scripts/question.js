@@ -77,9 +77,14 @@
             } else {
                 $("#linknext").k_enable();
             }
+            debugger;
+            if(currPage.isLevelStart) {
+                _KnowdlServiceManager.InitLevel("Level" + currPage.datalevel);
+                _KnowdlServiceManager.SendPageData();
+            }
             if(currPage.isLevelStart && currPage.questions[0].Qid == _currentQuestionObj.Id && _Navigator.GetBookmarkData().levelRetry == 'level') {
                 $("#linkprevious").k_disable();
-            }else if(currPage.isLevelStart && _currentQuestionObj.pageId == "l1p2" && (_Navigator.GetBookmarkData().levelRetry == 'level' || _Navigator.GetBookmarkData().levelRetry == 'all')) {
+            } else if(currPage.isLevelStart && _currentQuestionObj.pageId == "l1p2" && (_Navigator.GetBookmarkData().levelRetry == 'level' || _Navigator.GetBookmarkData().levelRetry == 'all')) {
                 $("#linkprevious").k_disable();
             } else {
                 $("#linkprevious").k_enable();
