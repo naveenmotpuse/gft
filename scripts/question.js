@@ -313,12 +313,13 @@
             var pageId = _Navigator.GetCurrentPage().pageId;
             var Qid = _currentQuestionObj.Qid;
             var attemptCurrentQuestionData = _Navigator.GetQuestionAttemptData(pageId, Qid);
+            
+            var currPage = _Navigator.GetCurrentPage();
 
             $(".btncheckanswer").k_disable();
             $(".questionband").find("input").k_disable();
             for (var i = 0; i < totalOptions; i++) {
                 var _optD = _currentQuestionObj.options[i];
-                var currPage = _Navigator.GetCurrentPage();
                 var attemptCurrentQuestionData_Options = undefined;
                 if (attemptCurrentQuestionData != undefined) {
                     attemptCurrentQuestionData_Options = attemptCurrentQuestionData.options[i];
@@ -427,7 +428,17 @@
 
                 _Navigator.UpdateScore();
                 _Module.SaveSessionData();
-                _KnowdlServiceManager.SendPageData(_optD);
+
+                var currAttDett = {
+                    LevelNo: currPage.datalevel,
+                    QId: Qid,
+                    QPoints: _qPoints,
+                    QText: $('.question_txt').text(),
+                    QTotal: 1,
+                    IsCorrect: true,
+                    IsWorsen: isWorsen
+                  };
+                _KnowdlServiceManager.SendPageData(currAttDett);
             } else {
                 _currentQuestionObj.tryCount += 1;
                 feedbackIndex = _currentQuestionObj.tryCount;
@@ -452,7 +463,17 @@
                     //Show final incorrect feedback
                     this.Loadfeedback(feedbackIndex, isWorsen);
                     _Module.SaveSessionData();
-                    _KnowdlServiceManager.SendPageData(_optD);
+
+                    var currAttDett = {
+                        LevelNo: currPage.datalevel,
+                        QId: Qid,
+                        QPoints: _qPoints,
+                        QText: $('.question_txt').text(),
+                        QTotal: 1,
+                        IsCorrect: false,
+                        IsWorsen: isWorsen
+                      };
+                    _KnowdlServiceManager.SendPageData(currAttDett);
                 }
             }
         },

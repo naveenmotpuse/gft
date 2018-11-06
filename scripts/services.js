@@ -59,7 +59,7 @@
                 QDetails = {};
                 if (qObj != undefined && qObj != null) {
                     QDetails.QId = qObj.QId;
-                    QDetails.QText = qObj.QText;
+                    QDetails.QText = $("<div>" + qObj.QText + "</div>").text();
                     QDetails.QTotal = qObj.QTotal;
                     QDetails.QPoints = qObj.QPoints;
                     if (QDetails.QTotal == undefined) {
