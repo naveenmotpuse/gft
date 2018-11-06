@@ -169,7 +169,7 @@
                 //Calculate level score
                 _data.LevelScore = _Navigator.GetLevelScore(idx);
 
-                _data.OverallTimeSpent = parseInt((new Date().getTime() - _startTime.getTime()) / 1000) + g_TPIDuration;
+                _data.OverallTimeSpent = _Navigator.GetTotalDuration();
                 _data.OverallScore = _Navigator.GetTotalScore();
                 //calculate overall points
                 /*var arrScore = g_userScore.GetScoreArray();
@@ -178,6 +178,7 @@
                     total += arrScore[i];
                 }
                 _data.OverallPoints = total;*/
+                _data.OverallPoints = _Navigator.GetTotalScore();
                 //end
 
                 if (_data.LevelScore == undefined || _data.LevelScore == null || isNaN(parseFloat(_data.LevelScore))) {
