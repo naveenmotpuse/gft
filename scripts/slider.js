@@ -1022,9 +1022,7 @@ var _TradeSlider = (function () {
                 $("td#fridaywooddifference").text(0);
                 $("td#fridayfishdifference").text(0);
                 $("#surpluschart_c").find(".highcharts-container").attr("aria-hidden", "true");
-                $("#surpluschart_c").attr({
-                    "aria-label": "Surplus Inventory graph for inventory of fish and woods from day 0 to 4. Goals: Wood: 90 (logs) - Fish: 9000 (cals). "
-                });
+                _ModuleCharts.IEGraphAccessibility("surpluschart_c", "Surplus Inventory graph for inventory of fish and woods from day 0 to 4. Goals: Wood: 90 (logs) - Fish: 9000 (cals). ");
             }
 
             var activityData = DataStorage.getActivityData(actvtPageId);

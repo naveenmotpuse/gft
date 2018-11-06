@@ -135,7 +135,8 @@ var _TopSlider = (function () {
                 }
             });
         } else if (_type == "surplus") {
-            hideOtherChart("ppf")
+            hideOtherChart("ppf");
+
             $("#surpluschart").slideToggle("slow", function () {
                 if ($(this).is(":visible")) {
                     //console.log("surplus visible")
