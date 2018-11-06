@@ -110,6 +110,8 @@
                     break;
                 case "Level3":
                     idx = 3;
+                case "Level4":
+                    idx = 4;
                     break;
             }
             return idx;
