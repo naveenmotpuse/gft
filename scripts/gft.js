@@ -479,6 +479,7 @@ var _CustomQuestion = (function () {
                 _ModuleCharts.DrawPPFChartonBookmark();
                 _Navigator.UpdateScore();
                 _Module.SaveSessionData();
+                _KnowdlServiceManager.SendPageData();
                 $("#linknext").k_enable();
             } else {
                 _currentQuestionObj.tryCount += 1;
@@ -539,6 +540,7 @@ var _CustomQuestion = (function () {
                     _ModuleCharts.DrawPPFChartonBookmark();
                     _Navigator.UpdateScore();
                     _Module.SaveSessionData();
+                    _KnowdlServiceManager.SendPageData();
                 }
             }
 

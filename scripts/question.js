@@ -423,6 +423,7 @@
 
                 _Navigator.UpdateScore();
                 _Module.SaveSessionData();
+                _KnowdlServiceManager.SendPageData();
             } else {
                 _currentQuestionObj.tryCount += 1;
                 feedbackIndex = _currentQuestionObj.tryCount;
@@ -447,6 +448,7 @@
                     //Show final incorrect feedback
                     this.Loadfeedback(feedbackIndex, isWorsen);
                     _Module.SaveSessionData();
+                    _KnowdlServiceManager.SendPageData();
                 }
             }
         },
