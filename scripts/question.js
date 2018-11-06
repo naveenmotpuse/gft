@@ -206,7 +206,7 @@
                         scrollTop: $(document).height()
                     }, 1000);                  
 
-                        if(isIpad ){
+                        if(isIpad || IsIphone){
                             $("#feedback_text").attr({"role":"text","tabindex":"-1"}).css("outline","none");
                             $("#feedback_text").focus(); 
                         }else{
