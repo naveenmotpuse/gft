@@ -212,8 +212,9 @@
                         }else{
                             $("#div_feedback").attr("tabindex","-1").css("outline","none");
                             $("#div_feedback").focus(); 
+                            _Common.SetReader(_Settings.hiddenAnchor, "div_feedback", true); //TODO: need to set tabindex for feedback text
                         }
-                    _Common.SetReader(_Settings.hiddenAnchor, "div_feedback", true); //TODO: need to set tabindex for feedback text
+                    
                 }
             });
         },
