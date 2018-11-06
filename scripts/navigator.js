@@ -537,12 +537,11 @@ var _Navigator = (function () {
                     var menuElem = $("a.menuitem[data-id='" + _NData[_levelStartPages[i]].pageId + "']");
                     menuElem.closest("li").css("display", "block");
                     // double reading issue //
-                    //menuElem.closest("li").removeAttr("aria-hidden");
-                    if (isAndroid){
+                    /*if (isAndroid){
                         var panel=  menuElem.closest("li a").text();
                         menuElem.closest("li").attr('aria-label', panel).removeAttr('aria-hidden');
                         menuElem.closest("li a").attr('aria-hidden','true');
-                    }
+                    }*/
                 }
             }
             if(isIpad){
