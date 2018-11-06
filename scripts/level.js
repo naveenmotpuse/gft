@@ -39,7 +39,7 @@ var _LevelAccess = (function() {
   ];
 
   return {
-    GetLevelsData: function() {
+    /*GetLevelsData: function() {
       return levels;
     },
     SetLevelsData: function(lvlData) {
@@ -47,7 +47,7 @@ var _LevelAccess = (function() {
     },
     GetVisibleLevels: function() {
       return visibleLevels;
-    },
+    },*/
     SetVisibleLevels: function(visLev) {
       if(typeof visLev != undefined && !_Common.IsEmptyObject(visLev)) {
         if(typeof visLev.intro != undefined) {
