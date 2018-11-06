@@ -854,7 +854,7 @@ var _CustomPage = (function () {
                 });
                 $("#surpluschart_c").attr({
                     "role": "text",
-                    "aria-label": "Surplus Inventory graph for inventory of fish and woods from day 0 to 4."
+                    "aria-label": "Surplus Inventory graph for inventory of fish and woods from day 0 to 4. Goals: Wood: 90 (logs) - Fish: 9000 (cals)."
                 });
 
                 if (_currPageId == "l1p2" && _currPageQId == "Q3") {
