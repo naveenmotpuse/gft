@@ -78,7 +78,7 @@
                 $("#linknext").k_enable();
             }
             debugger;
-            if(currPage.isLevelStart) {
+            if(currPage.isLevelStart && currPage.questions[0].Qid == _currentQuestionObj.Id) {
                 _KnowdlServiceManager.InitLevel("Level" + currPage.datalevel);
                 _KnowdlServiceManager.SendPageData();
             }
