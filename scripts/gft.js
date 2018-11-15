@@ -408,15 +408,22 @@ var _CustomQuestion = (function () {
                         $(".graphbtncheckanswer").k_disable();
                         $("#woodlogtools").val("");
                         $("#fishlogtools").val("");
+                        
+                        var isQAnswered = _Question.GetCurrentQuestion().isAnswered;
+
                         if (series.data.length >= valPoints) {
                             _ModuleCharts.setPlottedPointsAccessibility();
                             $("#woodlogtools").k_disable();
                             $("#fishlogtools").k_disable();
                             $(".graphbtncheckanswer").k_enable();
-                            $(".graphbtncheckanswer").focus();
+                            if(!isQAnswered) {
+                                $(".graphbtncheckanswer").focus();
+                            }
                             $("#addpointbtn").k_disable();
                         } else {
-                            $("#woodlogtools").focus();
+                            if(!isQAnswered) {
+                                $("#woodlogtools").focus();
+                            }
                         }
                     }
                 }
