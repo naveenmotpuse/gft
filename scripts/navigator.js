@@ -367,7 +367,7 @@ var _Navigator = (function () {
                 $('.progress').attr('aria-label','Level 1 progress 0%, Level 2 progress 0%, Level 3 progress 0%, Level 4 progress 0%')
                 var aLabel = $('.progress').attr("aria-label")
                 if($("#blankspan").length == 0){
-                $(".progress").append("<span id='blankspan'>" + aLabel + "</span>");  
+                    $(".progress").append("<span id='blankspan'>" + aLabel + "</span>");  
                 }              
             }
 

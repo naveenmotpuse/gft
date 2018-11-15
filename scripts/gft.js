@@ -952,9 +952,9 @@ var _CustomPage = (function () {
                     // $("#ppfchart_c").attr({
                     //     "aria-label": "Production Possibilities Frontier graph for Firewoods from 0 to 120 in logs vs. Fish from 0 to 3500 in calories. Refer table for more details."
                     // });
-                    if($("#blankspan").length == 0){
+                    //if($("#blankspan").length == 0){
                         _ModuleCharts.IEGraphAccessibility("ppfchart_c", "Production Possibilities Frontier graph for Firewoods from 0 to 120 in logs vs. Fish from 0 to 3500 in calories. Refer table for more details.");
-                    }
+                    //}
                 }
                 $("#ppfchart_c").find(".highcharts-container").attr("aria-hidden", "true");
                 $("#ppfchart_c").attr({
@@ -965,9 +965,9 @@ var _CustomPage = (function () {
                 // $("#surpluschart_c").attr({
                 //     "aria-label": "Surplus Inventory graph for inventory of fish and woods from day 0 to 4. Goals: Wood: 90 (logs) - Fish: 9000 (cals). "
                 // });
-                if($("#blankspan").length == 0){
+                //if($("#blankspan").length == 0){
                     _ModuleCharts.IEGraphAccessibility("surpluschart_c", "Surplus Inventory graph for inventory of fish and woods from day 0 to 4. Goals: Wood: 90 (logs) - Fish: 9000 (cals). ");
-                }
+                //}
             }
 
                 if (_currPageId == "l1p2" && _currPageQId == "Q3") {
