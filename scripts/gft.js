@@ -564,7 +564,7 @@ var _CustomQuestion = (function () {
 
             this.AddGraphPoints(selectedAnswer_point1.x, selectedAnswer_point1.y, 2);
             this.AddGraphPoints(selectedAnswer_point2.x, selectedAnswer_point2.y, 2);
-            _Question.Loadfeedback(_currentQuestionObj.feedbackIndex);
+            _Question.Loadfeedback(_currentQuestionObj.feedbackIndex, undefined, true);
             _CustomQuestion.UpdateGraphSubmitStatus();
             $(".graphbtncheckanswer").k_disable();
             $("#linknext").k_enable();
@@ -579,17 +579,17 @@ var _CustomQuestion = (function () {
             if (currPage.hasTradeSlider != undefined && currPage.hasTradeSlider) {
                 var target = activityData.tradeData.Target;
                 if (target.goal == "survive") {
-                    _Question.Loadfeedback(0);
+                    _Question.Loadfeedback(0, undefined, true);
                 } else if (target.goal == "shelter") {
-                    _Question.Loadfeedback(3);
+                    _Question.Loadfeedback(3, undefined, true);
                 } else if (target.goal == "feast") {
-                    _Question.Loadfeedback(4);
+                    _Question.Loadfeedback(4, undefined, true);
                 } else if (target.goal == "book") {
-                    _Question.Loadfeedback(5);
+                    _Question.Loadfeedback(5, undefined, true);
                 } else if (target.goal == "wayoff") {
-                    _Question.Loadfeedback(3);
+                    _Question.Loadfeedback(3, undefined, true);
                 } else if (target.goal == "betteroff") {
-                    _Question.Loadfeedback(1);
+                    _Question.Loadfeedback(1, undefined, true);
                 }
                 if (currPage.pageId == "l3p2") {
                     if (target.goal != "survive") {
@@ -638,7 +638,7 @@ var _CustomQuestion = (function () {
                     Table.setWood(activityData._woodsLbs, 0);
                     Table.setfish(activityData._fishCals, 0);
                 }
-                _Question.Loadfeedback(0);
+                _Question.Loadfeedback(0, undefined, true);
             }
 
             $("#btnfindout").k_disable();
