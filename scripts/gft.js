@@ -145,14 +145,25 @@ var _TopSlider = (function() {
     }
     if (_type == "ppf") {
       hideOtherChart("surplus");
+
       $("#ppfchart").slideToggle("slow", function() {
         if ($(this).is(":visible")) {
           setTimeout(function() {
-            $("#linkppf").focus();
+            if(isIE11version || isIEEdge) {
+              _Common.SetReader(_Settings.hiddenAnchor, "linkppf", true);
+            } else {
+              $("#linkppf").focus();
+            }
           }, 500);
         } else {
           setTimeout(function() {
-            $(".questionband .headinglevel2div").focus();
+            if(isIE11version || isIEEdge) {
+              _Common.SetReader(_Settings.hiddenAnchor, "question", true);
+              //$(".questionband .headinglevel2div").attr('tabindex', '-1');
+              //$(".questionband .headinglevel2div").focus();
+            } else {
+              $(".questionband .headinglevel2div").focus();
+            }
           }, 100);
         }
       });
@@ -161,10 +172,17 @@ var _TopSlider = (function() {
 
       $("#surpluschart").slideToggle("slow", function() {
         if ($(this).is(":visible")) {
-          //console.log("surplus visible")
           setTimeout(function() {
-            $("#linksurplus").focus();
+            if(isIE11version || isIEEdge) {
+              _Common.SetReader(_Settings.hiddenAnchor, "linksurplus", true);
+            } else {
+              $("#linksurplus").focus();
+            }
           }, 500);
+        } else {
+          if(isIE11version || isIEEdge) {
+            _Common.SetReader(_Settings.hiddenAnchor, "linksurplus", true);
+          }
         }
       });
     }
