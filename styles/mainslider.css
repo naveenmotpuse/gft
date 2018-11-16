@@ -64,6 +64,37 @@
     z-index: 999;
 }
 
+/* CSS specific to iOS devices */ 
+@supports (-webkit-overflow-scrolling: touch) {
+    #collect-wood .wood-slider::-webkit-slider-thumb,
+    #collect-fish .fish-slider::-webkit-slider-thumb,
+    .tot-slider::-webkit-slider-thumb,
+    .consumption-wood-range::-webkit-slider-thumb,
+    .consumption-fish-range::-webkit-slider-thumb,
+    .tot-slider,
+    .consumption-wood-range,
+    .consumption-fish-range {
+        width: 30px;
+    }
+}
+
+/* CSS specific to iPhone 6, 7, & 8 Plus in portrait & landscape */ 
+/*
+@media only screen 
+and (min-device-width : 414px) 
+and (max-device-width : 736px) {
+    #collect-wood .wood-slider::-webkit-slider-thumb,
+    #collect-fish .fish-slider::-webkit-slider-thumb,
+    .tot-slider::-webkit-slider-thumb,
+    .consumption-wood-range::-webkit-slider-thumb,
+    .consumption-fish-range::-webkit-slider-thumb,
+    .tot-slider,
+    .consumption-wood-range,
+    .consumption-fish-range {
+        width: 30px;
+    }
+}
+*/
 #collect-fish .fish-slider::-webkit-slider-thumb {
     background: #9D0B0E;
 }

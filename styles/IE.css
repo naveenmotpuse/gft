@@ -1,128 +1,49 @@
-#collect-wood .wood-slider {
-    width: 100%;
-    margin-top: -15px;
-    padding: 0px;
-}
+.dayfigcaption { width: 418px; }
+
+.tot-slider { padding: 0; }
+
+#collect-wood .wood-slider,
 #collect-fish .fish-slider {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -o-appearance: none;
+    -ms-appearance: none;
+    appearance: none;
+    background: transparent;
     width: 100%;
-    margin-top: -15px;
+    /*
+    height: 11px;
+    border: 1px solid #A3610A;
+    outline: 0;
+    border-radius: 5px;
+
+    margin: -10px 0;*/
     padding: 0px;
 }
-#collect-wood .wood-slider::-ms-track {
-     width: 100%;
-     height: 11px;
-     cursor: pointer;
-     background: transparent;
-     border-color: transparent;
-     border-width: 20px 0;
-     color: transparent;
-     padding: 0;
-}
-#collect-wood .wood-slider::-ms-fill-lower {
-     background: #A3610A;
-}
-#collect-wood .wood-slider::-ms-fill-upper {
-     background: #A3610A;
-}
 
 
-#collect-fish .fish-slider::-ms-track {
-    width: 100%;
+.woodFiller, .fishFiller, #oneWoodFiller, #giveWoodFiller, #giveFishFiller, #consumeWoodFiller, #consumeFishFiller {
+    width: 0%;
     height: 11px;
-    cursor: pointer;
-    background: transparent;
-    border-color: transparent;
-    border-width: 20px 0;
-    color: transparent;
-    padding: 0;
-}
-#collect-fish .fish-slider::-ms-fill-lower {
-     background: #9D0B0E;
-}
-#collect-fish .fish-slider::-ms-fill-upper {
-     background: #9D0B0E;
-}
-
-#collect-wood .wood-slider::-ms-thumb {
-     height: 30px;
-     width: 20px;
-     border-radius: 7px;
-     background: #A3610A;
-     cursor: pointer;
-}
-
-#collect-fish .fish-slider::-ms-thumb {
-    height: 30px;
-    width: 20px;
-    border-radius: 7px;
-    background: #9D0B0E;
-    cursor: pointer;
-}
-
-
-
-.tot-range-wrapper::-ms-track {
-    width: 100%;
-    height: 11px;
-    position: relative;
-    margin-top: 10px;
-    margin-bottom: 28px;
-}
-
-/**/
-.tot-slider{
-    padding: 0;
-}
-.tot-slider::-ms-track {
-    width: 100%;
-    height: 11px;
-    cursor: pointer;
-    background: transparent;
-    border-color: transparent;
-    border-width: 20px 0;
-    color: transparent;
-    padding: 0;
-}
-.tot-slider::-ms-fill-lower {
-    background: #575694;
-}
-.tot-slider::-ms-fill-upper {
-    background: #575694;
-}
-
-.tot-slider::-ms-thumb {
-    height: 30px;
-    width: 20px;
-    border-radius: 7px;
-    background: #575694;
-    cursor: pointer;
-}
-.slider-wrapper .tot-range-wrapper input[type='range']{
-    padding:0px!important;
- }
- .tot-range-wrapper div, .tot-range-wrapper input[type='range']{
-    margin-top:-17px;
-}
-
-/**/
-
-.consumption-wood-range::-ms-track {
-    width: 100%;
-    height: 11px;
-    cursor: pointer;
-    background: transparent;
-    border-color: transparent;
-    border-width: 20px 0;
-    color: transparent;
-    padding: 0;
-}
-.consumption-wood-range::-ms-fill-lower {
     background: #A3610A;
+    border-radius: 5px 0px 0px 5px;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    z-index: -1;
+    display: none;
 }
-.consumption-wood-range::-ms-fill-upper {
-    background: #A3610A;
-}
+.fishFiller {background: #9D0B0E;}
+#oneWoodFiller{background: #575694;}
+#giveWoodFiller{background: #575694;} 
+#giveFishFiller{background: #9D0B0E;} 
+#consumeWoodFiller{background: #A3610A;} 
+#consumeFishFiller{background: #9D0B0E;}
 
+#collect-wood .wood-slider::-ms-track,
+#collect-fish .fish-slider::-ms-track,
+.tot-slider::-ms-track,
+.consumption-wood-range::-ms-track,
 .consumption-fish-range::-ms-track {
     width: 100%;
     height: 11px;
@@ -133,27 +54,90 @@
     color: transparent;
     padding: 0;
 }
-.consumption-fish-range::-ms-fill-lower {
+
+.tot-range-wrapper::-ms-track {
+    width: 100%;
+    height: 11px;
+    position: relative;
+    margin-top: 10px;
+    margin-bottom: 28px;
+}
+    
+#collect-wood .wood-slider::-ms-fill-lower,
+#collect-wood .wood-slider::-ms-fill-upper {
+    border:1px solid #A3610A;
+    background: #A3610A;
+}
+#collect-fish .fish-slider::-ms-fill-lower,
+#collect-fish .fish-slider::-ms-fill-upper {
+    border:1px solid #9D0B0E;
     background: #9D0B0E;
 }
+.tot-slider::-ms-fill-lower,
+.tot-slider::-ms-fill-upper {
+    border:1px solid #575694;
+    background: #575694;
+}
+.consumption-wood-range::-ms-fill-lower,
+.consumption-wood-range::-ms-fill-upper {
+    border:1px solid #A3610A;
+    background: #A3610A;
+}
+.consumption-fish-range::-ms-fill-lower,
 .consumption-fish-range::-ms-fill-upper {
+    border:1px solid #9D0B0E;
     background: #9D0B0E;
 }
 
-.consumption-wood-range::-ms-thumb {
+#collect-wood .wood-slider::-ms-fill-lower,
+#collect-fish .fish-slider::-ms-fill-lower,
+.tot-slider::-ms-fill-lower,
+.consumption-wood-range::-ms-fill-lower,
+.consumption-fish-range::-ms-fill-lower {
+    border-radius: 5px;
+}
+
+#collect-wood .wood-slider::-ms-fill-upper,
+#collect-fish .fish-slider::-ms-fill-upper,
+.tot-slider::-ms-fill-upper,
+.consumption-wood-range::-ms-fill-upper,
+.consumption-fish-range::-ms-fill-upper {
+    background: transparent;
+    border-radius: 5px;
+}
+
+#collect-wood .wood-slider::-ms-thumb,
+#collect-fish .fish-slider::-ms-thumb,
+.tot-slider::-ms-thumb,
+.consumption-wood-range::-ms-thumb,
+.consumption-fish-range::-ms-thumb {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -o-appearance: none;
+    -ms-appearance: none;
     appearance: none;
     width: 20px;
     height: 30px;
+    cursor: pointer;
+    z-index: 999;
+    border-radius: 7px;
+    box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
     background: #A3610A;
-    cursor: pointer;
-    border-radius: 5px;
-}
-.consumption-fish-range::-ms-thumb {
-    width: 20px;
-    height: 30px;
-    background: #9D0B0E;
-    cursor: pointer;
-    border-radius: 5px;
 }
 
-.dayfigcaption{width: 418px;}
+#collect-fish .fish-slider::-ms-thumb {
+    background: #9D0B0E;
+}
+.tot-slider::-ms-thumb {
+    background: #575694;
+}
+.consumption-fish-range::-ms-thumb {
+    background: #9D0B0E;
+}
+
+.slider-wrapper .tot-range-wrapper input[type='range']{
+    padding: 0px !important;
+ }
+ .tot-range-wrapper div, .tot-range-wrapper input[type='range']{
+    margin-top: -17px;
+}
