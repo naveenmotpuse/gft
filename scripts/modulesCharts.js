@@ -776,9 +776,9 @@ var _ModuleCharts = (function () {
             var _currPageQId = _Question.GetCurrentQuestion().Id;
             if (_currPageId == "l1p2" && _currPageQId == "Q3") {
                 var s = chart.series[1].data[0].x + " Wood(logs) " + chart.series[1].data[0].y + " Fish(cals), " + chart.series[1].data[1].x + " Wood(logs) " + chart.series[1].data[1].y + " Fish(cals) ";
-                //$("#questionchart").attr("aria-label", "Your Production Possibility Frontier graph for Firewoods from 0 to 120 in logs vs. Fish from 0 to 3500 in calories 0 Wood(logs) 3000 Fish(cals), 96 Wood(logs) 0 Fish(cals). Plotted points: " + s + ". Refer above table for more details.");
+                //$("#questionchart").attr("aria-label", "Your Production Possibility Frontier graph for Firewoods from 0 to 120 in logs vs. Fish from 0 to 7000 in calories 0 Wood(logs) 3000 Fish(cals), 96 Wood(logs) 0 Fish(cals). Plotted points: " + s + ". Refer above table for more details.");
             
-                this.IEGraphAccessibility("questionchart", "Your Production Possibility Frontier graph for Firewoods from 0 to 120 in logs vs. Fish from 0 to 3500 in calories 0 Wood(logs) 3000 Fish(cals), 96 Wood(logs) 0 Fish(cals). Plotted points: " + s + ". Refer above table for more details.");
+                this.IEGraphAccessibility("questionchart", "Your Production Possibility Frontier graph for Firewoods from 0 to 120 in logs vs. Fish from 0 to 7000 in calories 0 Wood(logs) 3000 Fish(cals), 96 Wood(logs) 0 Fish(cals). Plotted points: " + s + ". Refer above table for more details.");
             }
             if (_currPageId == "l1p4" && _currPageQId == "Q7") {
                 var s = chart.series[1].data[0].x + " Wood(logs) " + chart.series[1].data[0].y + " Fish(cals), " + chart.series[1].data[1].x + " Wood(logs) " + chart.series[1].data[1].y + " Fish(cals) ";
@@ -821,9 +821,9 @@ var _ModuleCharts = (function () {
                     var point = questiondata.correctData[i];
                     $(".userppftable tbody tr:nth-child(" + (i + 1) + ") td:nth-child(3)").text(point[0])
                     $(".userppftable tbody tr:nth-child(" + (i + 1) + ") td:nth-child(4)").text(point[1])
-                  //  $("#ppfchart_c").attr("aria-label", "Production Possibilities Frontier graph for Firewoods from 0 to 120 in logs vs. Fish from 0 to 3500 in calories. Your PPF line has been drawn. Refer table for more details.");
+                  //  $("#ppfchart_c").attr("aria-label", "Production Possibilities Frontier graph for Firewoods from 0 to 120 in logs vs. Fish from 0 to 7000 in calories. Your PPF line has been drawn. Refer table for more details.");
                 
-                    this.IEGraphAccessibility("ppfchart_c","Production Possibilities Frontier graph for Firewoods from 0 to 120 in logs vs. Fish from 0 to 3500 in calories. Your PPF line has been drawn. Refer table for more details.");
+                    this.IEGraphAccessibility("ppfchart_c","Production Possibilities Frontier graph for Firewoods from 0 to 120 in logs vs. Fish from 0 to 7000 in calories. Your PPF line has been drawn. Refer table for more details.");
                 }
             }
             else if (ppfdata.l1p2.questions[1].isAnswered) {
@@ -834,17 +834,17 @@ var _ModuleCharts = (function () {
                 $(".userppftable tbody tr:nth-child(13) td:nth-child(3)").text(96);
                 $(".userppftable tbody tr:nth-child(13) td:nth-child(4)").text(0);
 
-                //$("#ppfchart_c").attr("aria-label", "Production Possibilities Frontier graph for Firewoods from 0 to 120 in logs vs. Fish from 0 to 3500 in calories. Plotted points: 0 Wood(logs) 3000 Fish(cals), 96 Wood(logs) 0 Fish(cals). Refer table for more details.");
+                //$("#ppfchart_c").attr("aria-label", "Production Possibilities Frontier graph for Firewoods from 0 to 120 in logs vs. Fish from 0 to 7000 in calories. Plotted points: 0 Wood(logs) 3000 Fish(cals), 96 Wood(logs) 0 Fish(cals). Refer table for more details.");
            
-                this.IEGraphAccessibility("ppfchart_c","Production Possibilities Frontier graph for Firewoods from 0 to 120 in logs vs. Fish from 0 to 3500 in calories. Plotted points: 0 Wood(logs) 3000 Fish(cals), 96 Wood(logs) 0 Fish(cals). Refer table for more details.");
+                this.IEGraphAccessibility("ppfchart_c","Production Possibilities Frontier graph for Firewoods from 0 to 120 in logs vs. Fish from 0 to 7000 in calories. Plotted points: 0 Wood(logs) 3000 Fish(cals), 96 Wood(logs) 0 Fish(cals). Refer table for more details.");
             }
             else if (ppfdata.l1p2.questions[0].isAnswered) {
                 _ModuleCharts.AddPointToPPFChart("userppfser", [0, 3000])
                 $(".userppftable tbody tr:nth-child(1) td:nth-child(3)").text(0)
                 $(".userppftable tbody tr:nth-child(1) td:nth-child(4)").text(3000)
-                //$("#ppfchart_c").attr("aria-label", "Production Possibilities Frontier graph for Firewoods from 0 to 120 in logs vs. Fish from 0 to 3500 in calories. Plotted points: 0 Wood(logs) 3000 Fish(cals). Refer table for more details.");
+                //$("#ppfchart_c").attr("aria-label", "Production Possibilities Frontier graph for Firewoods from 0 to 120 in logs vs. Fish from 0 to 7000 in calories. Plotted points: 0 Wood(logs) 3000 Fish(cals). Refer table for more details.");
             
-                this.IEGraphAccessibility("ppfchart_c","Production Possibilities Frontier graph for Firewoods from 0 to 120 in logs vs. Fish from 0 to 3500 in calories. Plotted points: 0 Wood(logs) 3000 Fish(cals). Refer table for more details.");
+                this.IEGraphAccessibility("ppfchart_c","Production Possibilities Frontier graph for Firewoods from 0 to 120 in logs vs. Fish from 0 to 7000 in calories. Plotted points: 0 Wood(logs) 3000 Fish(cals). Refer table for more details.");
             }
 
             //Friday ppf//
@@ -855,9 +855,9 @@ var _ModuleCharts = (function () {
                     var point = questiondata.correctData[i];
                     $(".fridayppftable tbody tr:nth-child(" + (i + 1) + ") td:nth-child(3)").text(point[0])
                     $(".fridayppftable tbody tr:nth-child(" + (i + 1) + ") td:nth-child(4)").text(point[1])
-                  //  $("#ppfchart_c").attr("aria-label", "Production Possibilities Frontier graph for Firewoods from 0 to 120 in logs vs. Fish from 0 to 3500 in calories. Both PPF lines are been drawn. Refer table for more details.");
+                  //  $("#ppfchart_c").attr("aria-label", "Production Possibilities Frontier graph for Firewoods from 0 to 120 in logs vs. Fish from 0 to 7000 in calories. Both PPF lines are been drawn. Refer table for more details.");
                 
-                    this.IEGraphAccessibility("ppfchart_c","Production Possibilities Frontier graph for Firewoods from 0 to 120 in logs vs. Fish from 0 to 3500 in calories. Both PPF lines are been drawn. Refer table for more details.");
+                    this.IEGraphAccessibility("ppfchart_c","Production Possibilities Frontier graph for Firewoods from 0 to 120 in logs vs. Fish from 0 to 7000 in calories. Both PPF lines are been drawn. Refer table for more details.");
                 }
             }
             else if (ppfdata.l1p4.questions[1].isAnswered) {
@@ -866,18 +866,18 @@ var _ModuleCharts = (function () {
                 $(".fridayppftable tbody tr:nth-child(1) td:nth-child(4)").text(6000)
                 $(".fridayppftable tbody tr:nth-child(13) td:nth-child(3)").text(48)
                 $(".fridayppftable tbody tr:nth-child(13) td:nth-child(4)").text(0)
-                //$("#ppfchart_c").attr("aria-label", "Production Possibilities Frontier graph for Firewoods from 0 to 120 in logs vs. Fish from 0 to 3500 in calories. Plotted points: 0 Wood(logs) 6000 Fish(cals), 48 Wood(logs) 0 Fish(cals). Refer table for more details.");
+                //$("#ppfchart_c").attr("aria-label", "Production Possibilities Frontier graph for Firewoods from 0 to 120 in logs vs. Fish from 0 to 7000 in calories. Plotted points: 0 Wood(logs) 6000 Fish(cals), 48 Wood(logs) 0 Fish(cals). Refer table for more details.");
             
-                this.IEGraphAccessibility("ppfchart_c","Production Possibilities Frontier graph for Firewoods from 0 to 120 in logs vs. Fish from 0 to 3500 in calories. Plotted points: 0 Wood(logs) 6000 Fish(cals), 48 Wood(logs) 0 Fish(cals). Refer table for more details.");
+                this.IEGraphAccessibility("ppfchart_c","Production Possibilities Frontier graph for Firewoods from 0 to 120 in logs vs. Fish from 0 to 7000 in calories. Plotted points: 0 Wood(logs) 6000 Fish(cals), 48 Wood(logs) 0 Fish(cals). Refer table for more details.");
             }
             else if (ppfdata.l1p4.questions[0].isAnswered) {
                 $(".fridayppftable").closest(".tablewrapper").k_show();
                 _ModuleCharts.AddPointToPPFChart("fridayppfser", [0, 6000])
                 $(".fridayppftable tbody tr:nth-child(1) td:nth-child(3)").text(0)
                 $(".fridayppftable tbody tr:nth-child(1) td:nth-child(4)").text(6000)
-                //$("#ppfchart_c").attr("aria-label", "Production Possibilities Frontier graph for Firewoods from 0 to 120 in logs vs. Fish from 0 to 3500 in calories. Plotted points: 0 Wood(logs) 6000 Fish(cals). Refer table for more details.");
+                //$("#ppfchart_c").attr("aria-label", "Production Possibilities Frontier graph for Firewoods from 0 to 120 in logs vs. Fish from 0 to 7000 in calories. Plotted points: 0 Wood(logs) 6000 Fish(cals). Refer table for more details.");
                
-                this.IEGraphAccessibility("ppfchart_c","Production Possibilities Frontier graph for Firewoods from 0 to 120 in logs vs. Fish from 0 to 3500 in calories. Plotted points: 0 Wood(logs) 6000 Fish(cals). Refer table for more details.");
+                this.IEGraphAccessibility("ppfchart_c","Production Possibilities Frontier graph for Firewoods from 0 to 120 in logs vs. Fish from 0 to 7000 in calories. Plotted points: 0 Wood(logs) 6000 Fish(cals). Refer table for more details.");
             }
             //this.IEGraphAccessibility("ppfchart_c",);
         },
