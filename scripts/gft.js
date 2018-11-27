@@ -423,6 +423,11 @@ var _CustomQuestion = (function() {
           //Validation failed.
         } else {
           //Add Point
+          if ($(".assistive-text").length == 0) {
+              $("main[role='main']").append(
+                '<span id="assist-txt" aria-live="assertive" class="assistive-text"></span>'
+              );
+          }
           $(".assistive-text").text("");
           $(".assistive-text").text(
             "Production Possibility Frontier updated for points, wood " +
@@ -435,10 +440,10 @@ var _CustomQuestion = (function() {
           //NM: Need to show feedback when user add same point twice.
           //Point will not get added if the same point is added.
           /*for (var i = 0; i < series.data.length; i++) {
-                        if ((series.data[i]['x'] == wood) && (series.data[i]['y'] == fish)) {
-                            return;
-                        }
-                    }*/
+              if ((series.data[i]['x'] == wood) && (series.data[i]['y'] == fish)) {
+                  return;
+              }
+          }*/
           if (series.data.length < valPoints) {
             series.addPoint([Number(wood), Number(fish)]);
             //point grap
