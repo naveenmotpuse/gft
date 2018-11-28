@@ -621,7 +621,7 @@ var _Navigator = (function () {
         },
         UpdateScore: function () {
             var percScore = this.GetTotalScore()
-            $("#scorediv").html("Overall Score: " + (percScore.toFixed(2)) + "%");
+            $("#scorediv").html("Overall Score: " + (percScore.toFixed(0)) + "%");
         },
         GetLevelScore: function (Data_Level) {
             var ObtainPoint = 0;
