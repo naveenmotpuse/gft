@@ -10,6 +10,7 @@ var _Navigator = (function () {
     var _AttemptNData = {};
     var _TempNData = {};
     var _bookmarkData = {};
+    var presentermode =false;
 
     var _lastDuration = 0;
     var _levelStartPages = ["l1p1", "l1p2", "l2p1", "l3p1", "l4p1","summary"];
@@ -298,7 +299,6 @@ var _Navigator = (function () {
             if(_currentPageObject.pageId == "summary") {
                 _bookmarkData.levelRetry = "";    
             }
-            
         }
         _TopSlider.OnLoad();
         _CustomPage.OnPageLoad();
@@ -308,6 +308,26 @@ var _Navigator = (function () {
         _Module.SaveSessionData();
         _ModuleCharts.DrawPPFChartonBookmark();
         _CustomPage.SetPageAccesibility();
+          // RK 30-11-18
+          if(_Navigator.IsPresenterMode() == true)
+          {
+              $("#appmenulist li").show();
+              $("#PresenterModeDiv").show();
+              if(_currentPageObject.pageId == "summary"){
+                $(".exambtnretry").hide();
+                $("#linknext").k_disable();
+                $(".levelbtnretry").hide();
+                $("#level1score").text(0);
+                $("#level2score").text(0);
+                $("#level3score").text(0);
+                $("#level4score").text(0);
+              }else{
+                $("#linknext").k_enable();
+              }
+              if( _currentPageObject.customNext != 'undefined'){
+                _currentPageObject.customNext.isComplete = true;
+              }
+          }
     }
     return {
         Get: function () {
@@ -370,9 +390,8 @@ var _Navigator = (function () {
                     $(".progress").append("<span id='blankspan'>" + aLabel + "</span>");  
                 }              
             }
-
-            this.UpdateProgressBar();
-            
+               this.UpdateProgressBar();
+    
             // if level retry then jump to summary page
             if(this.GetBookmarkData().levelRetry == 'level') {
                 if(_currentPageObject.datalevel < _NData[_currentPageId].datalevel) {
@@ -390,12 +409,24 @@ var _Navigator = (function () {
             }
             if (_currentPageObject.hasActivity != undefined && _currentPageObject.hasActivity &&
                 (_currentPageObject.IsComplete == undefined || !_currentPageObject.IsComplete)) {
-                $("#linknext").k_disable();
+            //    RK 30-18
+              if(_Navigator.IsPresenterMode() != true)
+                {  
+                    $("#linknext").k_disable();
+                }else{
+                    $("#linknext").k_enable();
+                }
             } else {
                 $("#linknext").k_enable();
             }
             if (_currentPageObject.isLastPage != undefined && _currentPageObject.isLastPage) {
-                $("#linknext").k_disable();
+               //    RK 30-18
+               if(_Navigator.IsPresenterMode() != true)
+               {  
+                   $("#linknext").k_disable();
+               }else{
+                   $("#linknext").k_enable();
+               }
                 $("#header-btn-container *").hide();
                 $("#scorediv").css("bottom","9px");
             }
@@ -436,6 +467,12 @@ var _Navigator = (function () {
                             $("#appmenu").removeAttr('disabled');
                             $("#appmenu").removeClass('disabled');
                             _LevelAccess.InitLevels();
+                            //    RK 30-18
+                           debugger
+                            if(_Navigator.IsPresenterMode() == true)
+                            {  
+                                $("#linknext").k_disable();
+                            }
                         }
                     });
                 })
@@ -596,6 +633,13 @@ var _Navigator = (function () {
         GetCurrentPage: function () {
             return _currentPageObject;
         },
+        // RK
+        SetPresenterMode:function(val){
+            presentermode = val;
+        },
+        IsPresenterMode:function(){
+            return presentermode;
+        },
         CompletePage: function (extendedJson) {
             _currentPageObject.IsComplete = true;
             _currentPageObject = $.extend(true, _currentPageObject, extendedJson)
@@ -621,7 +665,13 @@ var _Navigator = (function () {
         },
         UpdateScore: function () {
             var percScore = this.GetTotalScore()
+           if(_Navigator.IsPresenterMode() == true)
+          {
+            $("#scorediv").html("Overall Score: " + 0 + "%");
+          }else{
             $("#scorediv").html("Overall Score: " + (percScore.toFixed(0)) + "%");
+          }
+          
         },
         GetLevelScore: function (Data_Level) {
             var ObtainPoint = 0;

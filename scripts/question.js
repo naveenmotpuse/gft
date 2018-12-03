@@ -7,8 +7,10 @@
         //_Question.SetOptionClone();
         //_Question.SetOptionPosition();
         _ModuleCharts.DrawPPFChartonBookmark();
-        if (_currentQuestionObj.isAnswered) {
-            _Question.PrevAnswer();
+        if(_Navigator.IsPresenterMode() != true){
+            if (_currentQuestionObj.isAnswered) {
+                _Question.PrevAnswer();
+            }
         }
     }
     return {
@@ -73,7 +75,14 @@
                 });
             }
             if (_currentQuestionObj.isAnswered == undefined || !_currentQuestionObj.isAnswered) {
-                $("#linknext").k_disable();
+                if(_Navigator.IsPresenterMode() != true)
+                    {  
+                      $("#linknext").k_disable();
+                    }
+                    else{
+                        $("#linknext").k_enable();
+                        _currentQuestionObj.isAnswered = true;
+                      } 
             } else {
                 $("#linknext").k_enable();
             }

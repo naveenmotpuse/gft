@@ -864,6 +864,7 @@ var _CustomPage = (function() {
       ) {
         $(".exambtnsubmindiv").hide();
       }
+
       if (currPage.datalevel == 2) {
         _ModuleCharts.DrawL2QuestionIntroChart();
       }
@@ -951,6 +952,7 @@ var _CustomPage = (function() {
       }
 
       this.ResetInventoryData(currPage);
+       
     },
     //RA-6Sep18 - Function to set graph labels - start
     ResetInventoryData: function(cPage) {
