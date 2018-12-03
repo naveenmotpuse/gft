@@ -494,7 +494,6 @@
         },
         PositionOptionElements: function () { },
         SetAriaProps: function () {
-
         },
         lastdummyfunct: function () { },
         SetQuestionStatus: function () {
