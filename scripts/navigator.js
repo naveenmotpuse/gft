@@ -315,6 +315,7 @@ var _Navigator = (function () {
               $("#PresenterModeDiv").show();
               if(_currentPageObject.pageId == "summary"){
                 $(".exambtnretry").hide();
+                $(".exambtnsubmindiv").hide(); 
                 $("#linknext").k_disable();
                 $(".levelbtnretry").hide();
                 $("#level1score").text(0);
