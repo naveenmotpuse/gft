@@ -565,7 +565,8 @@ var EventManager = function () {
             }, 200);
         },
         onAnimComplete: function () {
-            $("#assist-txt").attr("aria-hidden","true");
+            //$("#assist-txt").attr("aria-hidden","true");
+            $("#assist-txt").text("Day time schedule calculation complete. " + $('.woodcounter').text() + ' ' + $('.fishcounter').text());
             var currPage = _Navigator.GetCurrentPage();
             var fish = DataStorage.getPotData().fish;
             var wood = DataStorage.getPotData().wood;
@@ -621,7 +622,8 @@ var EventManager = function () {
             }else{
                 $("#appmenu").k_enable();
             }
-            $("#assist-txt").attr("aria-hidden","true");
+            $("#assist-txt").text("Night time schedule calculation complete. " + $('.woodcounter').text() + ' ' + $('.fishcounter').text());
+            //$("#assist-txt").attr("aria-hidden","true");
             _Animation.day();
             var currPage = _Navigator.GetCurrentPage();
             var isdie = false;
