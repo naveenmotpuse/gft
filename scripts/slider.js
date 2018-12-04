@@ -728,6 +728,10 @@ var _TradeSlider = (function () {
             $("#oneWoodFiller").css("width", _wPerc);
             _wPerc = Number($("#givewood-range").val()) / Number($("#givewood-range").attr('max')) * 95 + '%';
             $("#giveWoodFiller").css("width", _wPerc);
+            //for scene 1
+            _wPerc = Number($("#givefish-range").val()) / Number($("#givefish-range").attr('max')) * 95 + '%';
+            $("#giveFishFiller").css("width", _wPerc);
+            
             _wPerc = Number($("#consumption-wood-range").val()) / Number($("#consumption-wood-range").attr('max')) * 95 + '%';
             $("#consumeWoodFiller").css("width", _wPerc);
             _wPerc = Number($("#consumption-fish-range").val()) / Number($("#consumption-fish-range").attr('max')) * 95 + '%';
