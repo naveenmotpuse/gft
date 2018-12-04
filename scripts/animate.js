@@ -771,7 +771,7 @@ var EventManager = function () {
         UpdateDayInFeedback: function () {
             var currentDay = DataStorage.getCurrentDay();
             var dayval = _Navigator.ordinalInWord(currentDay);
-            $("#dayval").text(dayval);
+            $("#dayval").text(dayval.toLowerCase());
              //var remdata = DataStorage.getRemainingPotData();
             // PPFQuestion.FindOutComplete({ IsAlive: true, totalRemainingLbs: remdata.wood, totalRemainingCals: remdata.fish, day: dayval });
            // var dayval = ""
