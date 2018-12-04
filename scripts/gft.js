@@ -256,6 +256,12 @@ var _Template = (function() {
         $(".imgtable").attr("aria-current", "false");
         _ModuleCharts.DrawSurplusChart();
         _ModuleCharts.DrawPPFChart();
+        var chart = $('#ppfchart_c').highcharts();
+        if(IsIphone) {
+          chart.xAxis[0].update({
+              tickInterval: 20
+          });
+        }
       });
     },
     LoadAnimateArea: function() {

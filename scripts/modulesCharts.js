@@ -471,9 +471,7 @@ var _ModuleCharts = (function () {
         DrawPPFChart: function (_data) {
             Highcharts.chart('ppfchart_c', {
                 title: {
-                    //   text: 'Production Possibilities Frontier'
                     text: ' '
-
                 },
                 tooltip: {
                     formatter: function () {
