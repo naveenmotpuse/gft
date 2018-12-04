@@ -321,6 +321,7 @@ var _Navigator = (function () {
                 $("#level2score").text(0);
                 $("#level3score").text(0);
                 $("#level4score").text(0);
+                $(".exambtnsubmindiv").hide();
               }else{
                 $("#linknext").k_enable();
               }
