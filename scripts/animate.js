@@ -515,7 +515,14 @@ var EventManager = function () {
             $('.castawaySprites1').removeClass('castawaySprites1').addClass('castawaySprites');
             $('.fridaySprites2').removeClass('fridaySprites2').addClass('fridaySprites');
             $('.friday-raftSprites2').removeClass('friday-raftSprites2').addClass('friday-raftSprites');
-            $("#linknext").k_disable();
+          
+            //    RK 30-18
+            if(_Navigator.IsPresenterMode() != true)
+            {  
+                $("#linknext").k_disable();
+            }else{
+                $("#linknext").k_enable();
+            }
             _TradeSlider.UpdateInventoryTables();
             DataStorage.updateDay();
             var currentDay = DataStorage.getCurrentDay();

@@ -1147,3 +1147,18 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
 .sub_question_txt{
     display: inline; 
 }
+/* RK 30-18 */
+
+#PresenterModeDiv{
+    width: 100%;
+    text-align: center;
+    height: 30px;
+    font-size: 16px;
+    background: #005B3D;
+    float: left;
+    clear: both;
+    color: #fff;
+    font-weight: bold;
+    line-height: 30px;
+    display: none;
+}
