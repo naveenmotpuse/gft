@@ -707,15 +707,16 @@ var _Navigator = (function () {
                 }
             }
             var score = (ObtainPoint / totalPoints) * 100;
-            if(_Navigator.IsPresenterMode() == true){
-                if(ObtainPoint == totalPoints){
-                    return score
-                }else{
-                    return 0;
-                }
-            }else{
-                return score
-            }
+            // if(_Navigator.IsPresenterMode() == true){
+            //     if(ObtainPoint == totalPoints){
+            //         return score
+            //     }else{
+            //         return 0;
+            //     }
+            // }else{
+            //     return score;
+            // }
+            return score;
         },
         UpdateDefaultNData: function () {
             //NM: The call to this function should be only once in document.ready first call.
