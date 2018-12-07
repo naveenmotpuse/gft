@@ -166,4 +166,15 @@ $(document).on('click', function (event) {
 /*$(document).on("blur", "input[type='text']", function (event) {    
     return _Common.checkDecimal($(this));
 })*/
-
+$(document).on("click", ".exambtnsubmin", function (event) {
+  if ($(this).hasClass("disabled")) {
+    event.preventDefault();
+    return false;
+  } else {
+	// set TPI completion
+	_Module.PostFinalGrade();
+  _Module.SaveSessionData();
+  //_KnowdlServiceManager.SetCompletion();
+    window.close();
+  }
+});
