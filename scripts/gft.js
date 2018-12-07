@@ -148,7 +148,7 @@ var _TopSlider = (function() {
 
       $("#ppfchart").slideToggle("slow", function() {
         if ($(this).is(":visible")) {
-          $(this).attr('aria-hidden', false);
+          $(this).attr("aria-hidden", false);
           setTimeout(function() {
             if (isIE11version || isIEEdge) {
               _Common.SetReader(_Settings.hiddenAnchor, "linkppf", true);
@@ -173,7 +173,7 @@ var _TopSlider = (function() {
 
       $("#surpluschart").slideToggle("slow", function() {
         if ($(this).is(":visible")) {
-          $(this).attr('aria-hidden', false);
+          $(this).attr("aria-hidden", false);
           setTimeout(function() {
             if (isIE11version || isIEEdge) {
               _Common.SetReader(_Settings.hiddenAnchor, "linksurplus", true);
@@ -256,10 +256,10 @@ var _Template = (function() {
         $(".imgtable").attr("aria-current", "false");
         _ModuleCharts.DrawSurplusChart();
         _ModuleCharts.DrawPPFChart();
-        var chart = $('#ppfchart_c').highcharts();
-        if(IsIphone) {
+        var chart = $("#ppfchart_c").highcharts();
+        if (IsIphone) {
           chart.xAxis[0].update({
-              tickInterval: 20
+            tickInterval: 20
           });
         }
       });
@@ -432,9 +432,9 @@ var _CustomQuestion = (function() {
         } else {
           //Add Point
           if ($(".assistive-text").length == 0) {
-              $("main[role='main']").append(
-                '<span id="assist-txt" aria-live="assertive" class="assistive-text"></span>'
-              );
+            $("main[role='main']").append(
+              '<span id="assist-txt" aria-live="assertive" class="assistive-text"></span>'
+            );
           }
           $(".assistive-text").text("");
           $(".assistive-text").text(
@@ -883,21 +883,23 @@ var _CustomPage = (function() {
         for (var i = 1; i <= 4; i++) {
           var levelscore = _Navigator.GetLevelScore(i);
           $("#level" + i + "score").html(levelscore.toFixed(0));
-          if (Number(levelscore) >= 80) {
-            $("#imglevel" + i).attr("src", "assets/images/stars_3.png");
-            $("#imglevel" + i)
-              .attr("alt", "Level " + i + " : 3 star")
-              .attr("aria-label", "Level " + i + " : 3 star");
-          } else if (Number(levelscore) >= 50 && Number(levelscore) < 80) {
-            $("#imglevel" + i).attr("src", "assets/images/stars_2.png");
-            $("#imglevel" + i)
-              .attr("alt", "Level " + i + " : 2 star")
-              .attr("aria-label", "Level " + i + " : 2 star");
-          } else {
-            $("#imglevel" + i).attr("src", "assets/images/stars_1.png");
-            $("#imglevel" + i)
-              .attr("alt", "Level " + i + " : 1 star")
-              .attr("aria-label", "Level " + i + " : 1 star");
+          if (_LevelAccess.IsLevelVisible({ level: i })) {
+            if (Number(levelscore) >= 80) {
+              $("#imglevel" + i).attr("src", "assets/images/stars_3.png");
+              $("#imglevel" + i)
+                .attr("alt", "Level " + i + " : 3 star")
+                .attr("aria-label", "Level " + i + " : 3 star");
+            } else if (Number(levelscore) >= 50 && Number(levelscore) < 80) {
+              $("#imglevel" + i).attr("src", "assets/images/stars_2.png");
+              $("#imglevel" + i)
+                .attr("alt", "Level " + i + " : 2 star")
+                .attr("aria-label", "Level " + i + " : 2 star");
+            } else {
+              $("#imglevel" + i).attr("src", "assets/images/stars_1.png");
+              $("#imglevel" + i)
+                .attr("alt", "Level " + i + " : 1 star")
+                .attr("aria-label", "Level " + i + " : 1 star");
+            }
           }
         }
 
@@ -939,7 +941,10 @@ var _CustomPage = (function() {
             $("p.goaldesc").k_hide();
             $("p.goaldesc[goal='" + target.goal + "']").k_show();
           }
-          if(_Navigator.IsPresenterMode() == true && target.goal == "survive"){
+          if (
+            _Navigator.IsPresenterMode() == true &&
+            target.goal == "survive"
+          ) {
             debugger;
             $("p.goaldesc[goal='book']").k_hide();
             $("p.goaldesc[goal='feast']").k_hide();
@@ -965,7 +970,6 @@ var _CustomPage = (function() {
       }
 
       this.ResetInventoryData(currPage);
-       
     },
     //RA-6Sep18 - Function to set graph labels - start
     ResetInventoryData: function(cPage) {
