@@ -900,6 +900,9 @@ var _CustomPage = (function() {
                 .attr("alt", "Level " + i + " : 1 star")
                 .attr("aria-label", "Level " + i + " : 1 star");
             }
+          } else {
+            $("#imglevel" + i).css('visibility', 'hidden');
+            $("#imglevel" + i).closest('.summary_level').css('opacity', '0.3');
           }
         }
 
