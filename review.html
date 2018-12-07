@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <title>Gains From Trade</title>
+    <link href="content/styles/styles.css" rel="stylesheet" type="text/css" />
+    <link href='theme/theme.css' rel='stylesheet' type='text/css' />
+    <link href='content/styles/device.css' rel='stylesheet' type='text/css' />
+    <link href="theme/content.css" rel="stylesheet" type="text/css" />
+    <script src="content/scripts/jquery-1.8.1.js" type="text/javascript"></script>
+    <link href="content/scripts/fancybox/jquery.fancybox-1.3.4.css" rel="stylesheet" type="text/css" />
+    <script src="content/scripts/fancybox/jquery.fancybox-1.3.4.pack.js" type="text/javascript"></script>
+    <style type="text/css">
+        input[type=checkbox] {
+            width: 15px;
+            height: 15px;
+        }
+		.BrandingBarReview{ background: url('top-bar-900px.png') no-repeat transparent; min-height:60px; border:0px;}
+        .error {
+            color: red !important;
+        }
+
+        .disabledcust {
+            pointer-events: none;
+            opacity: .5;
+        }
+
+        #statusdiv {
+            color: #f60;
+        }
+        table {
+            border-collapse: collapse;
+           width:100%;           
+        }
+        table, td, th {
+            border: 1px solid black;
+            padding: 5px;
+            text-align:center;
+        }
+
+        .dtitle{
+            padding-left:20px;
+            padding-top:20px;            
+        }
+
+        .dtitle input{width:18px;height:18px;}
+
+        #reportlink a{color:#a3494d; text-decoration:underline;font-weight:bold;}
+        .disabled{cursor:default; pointer-events:none;opacity:0.5;}
+    </style>
+    <script>
+        var _sessionId = "";
+        var _problem_guid = "";
+        var _currentProblemId = "";
+        var _serviceurl = window.location.origin + "/econservice";
+        var _sessionObj = {};
+        var _resourceId = "";
+        var _location = "";
+        var _sstate = {};
+        var _students = [];
+        var _interactivesesstings = {};
+
+        var _stusessionobj = {};
+
+        $(document).ready(function () {
+            $("#reportlink").css("height",500);
+            $("#reportlink").css("width","100%");
+            window.resizeTo(screen.width, screen.height);
+            _location = window.location.hostname;
+            var arr = window.location.href.split("?");
+            _sessionId = arr[arr.length - 1];
+            get_session_data(_sessionId)
+            
+            //_sessionId = "iushdiushdisgyusgssoidhisuhiusd";
+            //_sstate = { "Attempts": [{ "status": "complete", "no": 1, "overallScore": "57.50%", "levels": [{ "score": "50" }, { "score": "--" }, { "score": "56.25" }, { "score": "0" }, { "score": "100" }], "duration": 371, "lastVisitedPgIndex": 37, "reqdData": {} }, { "status": "complete", "no": 2, "overallScore": "85%", "levels": [{ "score": "100" }, { "score": "--" }, { "score": "75" }, { "score": "50" }, { "score": "100" }], "duration": 540, "lastVisitedPgIndex": 37, "reqdData": {} }] };
+            showStudentReviewMode();
+
+        });
+
+        function get_session_data(sid) {
+            var servcUrl = _serviceurl + "/gldata/get_session_data/" + sid + "/";
+            $("#statusdiv").removeClass("error").html("Fetching session state data...")
+            $.ajax({
+                type: "GET",
+                url: servcUrl,
+                dataType: "json",
+                async: false,
+                success: function (result) {
+                    debugger;
+                    _sessionObj = JSON.parse(JSON.stringify(result));
+                    _currentProblemId = _sessionObj.launch_data['custom_currentquestion'];
+                    _problem_guid = _sessionObj.launch_data['custom_target_' + _currentProblemId];
+                    _resourceId = _sessionObj.launch_data["custom_resource_id"];
+                    _sstate = _sessionObj.session_state;
+
+                    $("#reportlink").removeClass("disabled");
+
+                    getInflationSettings();
+                },
+                error: function (error) {
+                    $("#statusdiv").addClass("error").html("Error while fetching session state data.")
+                }
+            });
+        }
+
+        function getstudent_session_data(sid) {
+            var servcUrl = _serviceurl + "/gldata/get_session_data/" + sid + "/";
+            $("#statusdiv").removeClass("error").html("Fetching session state data for selected student...")
+            $.ajax({
+                type: "GET",
+                url: servcUrl,
+                dataType: "json",
+                async: false,
+                success: function (result) {
+                    $("#statusdiv").removeClass("error").html("");
+                    debugger;
+                    var hsrecord = false;
+                    _stusessionobj = JSON.parse(JSON.stringify(result));
+                    if (_stusessionobj.session_state != undefined) {
+                        if (_stusessionobj.session_state.Attempts != undefined && _stusessionobj.session_state.Attempts.length > 0) {
+                            hsrecord = true;
+                          //  displayattempts(_stusessionobj.session_state.Attempts, sid);
+                           displayStudentReport();
+                        }
+                    }
+                    if (!hsrecord) {
+                        $("#attemptstable").empty().append("<tr><td align='center'>No records found.</td></tr>")
+                    }
+                },
+                error: function (error) {
+                    $("#statusdiv").addClass("error").html("Error while fetching session state data for selected student.")
+                }
+            });
+        }
+
+        function getInflationSettings() {
+            var obj = {};
+            obj.knowdlresourceid = _resourceId;
+            obj.knowdltargetapp = _problem_guid;
+            $("#statusdiv").removeClass("error").html("Fetching settings data...")
+            var jsonSerialized = JSON.stringify(obj);
+            var servcUrl = _serviceurl + "/data/econ/inflation/getInflationSettings/";
+            $.ajax({
+                type: "POST",
+                url: servcUrl,
+                async: false,
+                data: jsonSerialized,
+                success: function (result) {
+                    $("#statusdiv").removeClass("error").html("");
+                    debugger;
+                    _interactivesesstings = JSON.parse(JSON.stringify(result));                    
+                },
+                error: function (error) {
+                    $("#statusdiv").addClass("error").html("Error while fetching default settings.")
+                }
+            });
+        }
+
+        function getStudents()
+        {
+            var obj = {};
+            obj.knowdlresourceid = _resourceId;
+            obj.knowdltargetapp = _problem_guid;
+            obj.knowdlcontextid = _sessionObj.launch_data['context_id'];
+            obj.roles = _sessionObj.launch_data['roles'];
+
+            
+            $("#statusdiv").removeClass("error").html("Fetching students list...")
+            var jsonSerialized = JSON.stringify(obj);
+            var servcUrl = _serviceurl + "/data/econ/inflation/getStudents/";
+            $.ajax({
+                type: "POST",
+                url: servcUrl,
+                async: false,
+                data: jsonSerialized,
+                success: function (result) {
+                    debugger;
+                    $("#statusdiv").removeClass("error").html("");
+                    var stlist = JSON.parse(result);
+                    _students = stlist.students;
+                    fillstudents();
+
+                },
+                error: function (error) {
+                    $("#statusdiv").addClass("error").html("Error while fetching student list.")
+                }
+            });
+        }
+
+        function showStudentReviewMode()
+        {
+            var hsrecord = false;
+            $("#statusdiv").addClass("error").html("");
+            $("#studentReview").attr("selected", "selected");
+            $(".cr").hide();
+            $(".sr").show();
+            if (_sstate != undefined) {
+                if (_sstate.Attempts != undefined && _sstate.Attempts.length > 0) {
+                    hsrecord = true;
+                   // displayattempts(_sstate.Attempts, _sessionId);
+                   displayStudentReport();
+                }
+            }
+
+            if(!hsrecord)
+            {
+                $("#attemptstable").empty().append("<tr><td align='center'>No records found.</td></tr>")
+            }
+        }
+
+        function showClassReviewMode() {
+            $("#attemptstable").empty();
+            $("#statusdiv").addClass("error").html("");
+            $("#classReview").attr("selected", "selected");
+            $(".sr").hide();
+            $(".cr").show();
+
+            if ($("#studentlist option").length <= 0) {
+                getStudents();                
+            }
+            else {
+                showselectedstudentdata();
+            }
+        }
+
+        function fillstudents()
+        {
+            $("#studentlist").empty()
+            if (_students.length > 0) {
+                for (var i = 0; i < _students.length; i++) {
+                    var optstr = '<option value="' + _students[i].session_id + '">' + _students[i].name + '</option>';
+                    $("#studentlist").append($(optstr));
+                }
+                showselectedstudentdata();
+            }            
+        }
+
+        $("#studentlist").live("change", function () {
+            showselectedstudentdata();
+        });
+
+        function showselectedstudentdata()
+        {
+            var selval = $("#studentlist option:selected").val();
+            if (selval != "") {
+                getstudent_session_data(selval);
+            }
+        }
+
+        $('input[type=radio][name=review]').live("click", function () {
+            var revmode = $('input[type=radio][name=review]:checked').val()
+            if (revmode == "cr") {
+                showClassReviewMode();
+            }
+            else {
+                showStudentReviewMode();
+            }
+        });        
+
+        function displayattempts(attempts, sid) {
+            if (attempts != undefined && attempts.length > 0) {
+                isStudentReview = true;
+                var header = '<tr style="border:0px;"><th style="border:0px;"></th><th>Duration</th><th>Overall Score</th><th>Intro Score</th><th>Level 1 Score</th><th>Level 2 Score</th><th>Level 3 Score</th><th>Level 4 Score</th><th style="border:0px;"></th></tr>'
+                $("#attemptstable").empty().append($(header));
+                for (var i = 0; i < attempts.length; i++) {
+                    if (attempts[i].status == "complete") {
+                        if (attempts[i].levels[0] == undefined)
+                        {
+                            attempts[i].levels[0] = {}
+                            attempts[i].levels[0].score = 0;
+                        }
+                        if (attempts[i].levels[1] == undefined) {
+                            attempts[i].levels[1] = {}
+                            attempts[i].levels[1].score = 0;
+                        }
+                        if (attempts[i].levels[2] == undefined) {
+                            attempts[i].levels[2] = {}
+                            attempts[i].levels[2].score = 0;
+                        }
+                        if (attempts[i].levels[3] == undefined) {
+                            attempts[i].levels[3] = {}
+                            attempts[i].levels[3].score = 0;
+                        }
+                        if (attempts[i].levels[4] == undefined) {
+                            attempts[i].levels[4] = {}
+                            attempts[i].levels[4].score = 0;
+                        }
+                        if (attempts[i].levels[5] == undefined) {
+                            attempts[i].levels[5] = {}
+                            attempts[i].levels[5].score = 0;
+                        }
+                        var ovralsc = 0
+                        try{
+                            ovralsc =  Number(attempts[i].overallScore.replace("%","")).toFixed(0);
+                        }
+                        catch (err) {
+                            ovralsc = attempts[i].overallScore;
+                        }
+                        
+                        var str = '<tr><td> Attempt ' + attempts[i].no + '</td><td>'
+                            + getformattedtime(attempts[i].duration) + '</td><td>'
+                            + ovralsc + '%</td><td>'
+                        + (_interactivesesstings.intro ? (Number(attempts[i].levels[0].score).toFixed(0) + '%') : '--NA--') + '</td><td>'
+                        + (_interactivesesstings.level1 ? (Number(attempts[i].levels[1].score).toFixed(0) + '%') : '--NA--') + '</td><td>'
+                        + (_interactivesesstings.level2 ? (Number(attempts[i].levels[2].score).toFixed(0) + '%') : '--NA--') + '</td><td>--NA--</td><td>'                        
+                        + (_interactivesesstings.level4 ? (Number(attempts[i].levels[4].score).toFixed(0) + '%') : '--NA--') + '</td><td>'                        
+                        + ("<a href='javascript:void();' sid='" + sid + "' onclick='return launchReview(this);' dataurl='/" + _problem_guid + "/#/" + sid + "/?att=" + attempts[i].no + "&mode=review'>Review</a>") + '</td></tr>';
+
+                        $('#attemptstable tr:last').after(str);
+                    }
+                }
+            }
+        }
+
+        function launchReview(_ths)
+        {            
+            var durl = $(_ths).attr("dataurl");
+            sid = $(_ths).attr("sid");
+            window.open(durl, sid, screen.width, screen.height);
+        }
+
+
+        function getformattedtime(seconds) {
+
+            seconds = Number(seconds);            
+            mints = parseInt(seconds / 60);
+            hrs = parseInt(mints / 60);
+
+            mints = mints % 60;
+
+            seconds = seconds % 60;
+            var str="";
+
+            if (hrs > 0)
+                str += hrs + "h ";
+            if(mints>0)
+                str += mints + "m ";
+
+            str += seconds + "s";
+
+            return str;
+        }
+
+
+		function autoresize(){
+            $(".column").css("width",screen.width);
+            $(".column").css("height",screen.height);
+        }
+        function displayStudentReport(){
+            var STU = "all";
+            var isFromStage = "false";
+            var serviceurl = window.location.origin;
+				var baseurl = window.location.protocol + "//stage1.knowdl.com/MyEconLabAnalytics"
+                //var baseurl = "https://stage1.knowdl.com/MyEconLabAnalytics"
+                var reportUrl = baseurl + "/ShowAllStudentDetails?DI_Id=" + encodeURIComponent(_problem_guid) + "&LOC=" + encodeURIComponent(_location) + "&ASGN=" + encodeURIComponent(_resourceId) + "&STU=" + encodeURIComponent(STU) + "&serviceurl="+encodeURIComponent(serviceurl)+"&knowdlcontextid=" + encodeURIComponent(_sessionObj.launch_data['context_id']) + "&role=" + encodeURIComponent(_sessionObj.launch_data['roles']);
+                debugger;
+                $("#reportlink").attr("src",reportUrl);
+        }
+    </script>
+</head>
+<body>
+	<div id="pageScriptDiv"></div>
+    <div class="pageWrapper" style="width:100% !important;height:auto !important;background-color: rgb(240, 240, 240) !important;">
+        <div class="wrapper" style="overflow: visible;">
+            <div id="restOftheContent" class="clearfix" style="border: 1px solid rgb(134, 134, 134); margin-top: -1px;background-color: rgb(240, 240, 240) !important;">
+                <div class="BrandingBarContainer clearfix" style="width: 100% !important;max-width: 100% !important;background: url('onepx.png') transparent;">
+                    <div class="BrandingBarReview" style="float:right;    width: 900px!important;">&nbsp;
+                    </div>
+                    <div class="CaseTitle" title="Gains From Trade" style="padding-top: 15px;">
+                        <div class="cke_format_wrap"><span style="color:#FFFFFF;"><span style="font-size:22px;"><span style="font-family:helvetica;"><strong>Gains From Trade</strong></span></span></span></div>
+                    </div>
+                </div>
+                <div class="BrandingBarClone clearfix" style="width: 938px;">
+                    <div class="BrandingBar">
+                        <div class="CaseTitle" title="Gains From Trade">
+                            <div class="cke_format_wrap"><span style="color:#FFFFFF;"><span style="font-size:22px;"><span style="font-family:helvetica;"><strong>Gains From Trade</strong></span></span></span></div>
+                        </div>
+                    </div>
+                </div>
+                <div id="contentContainer" style="float:left;width: 100%;" class="contentTopPosition">
+                    <div class="ContentArea" style="font-size: 16px; font-family:Arial; color:#333">
+                        <div class="band" style="width: 100%; height: auto;">
+                            <div class="column"   style=" width: 100%; margin: auto; position: relative; background-color: rgb(240, 240, 240);" ow="940" oh="740" >
+                              <!--  <div class="dtitle">
+                                    <input type="radio" name="review" id="classReview" value="cr" /><label for="classReview">Class Review</label>
+                                    <input type="radio" name="review" id="studentReview" checked="checked" value="sr" /><label for="studentReview">Student Review</label>
+                                </div>
+                                <div class="dtitle sr"><strong>Student Item Analysis:</strong></div>
+                                <div class="dtitle cr">
+                                    <select id="studentlist">
+
+                                    </select>
+                                </div>
+                                <div style="padding:10px;">
+                                    <table cellspacing="10" style="width:100%" id="attemptstable">
+
+                                    </table>
+                                </div>
+                                <div id="statusdiv"></div>
+                                <div id="reportlink" style="padding:10px;padding-top:30px;">
+                                    Click <a href="javascript:void(0);" class="disabled">here</a> to view detailed report.
+                                </div> -->
+                                <iframe id="reportlink" class="disabled" src="" style="width:100%;height:100%;overflow:auto;"></iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+
+
+
+
