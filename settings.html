@@ -8,8 +8,43 @@
     <script src="scripts/external/jquery-2.1.4.min.js"></script>
     <script src="scripts/settings.js"></script>
     <style>
+        .mxwidth {
+            max-width: 940px;
+            margin: 0 auto;
+        }
+        #wrapper {
+            width: 100%;
+            height: auto;
+            border: 1px solid #868686;
+            border-top: 0px;
+            min-height: 80px;
+            margin: 0 auto;
+            display: table;
+            margin-bottom: 10px;
+            background-color: rgb(240, 240, 240);
+        }
+        #header-content {
+            float: left;
+            position: fixed;
+            right: 0;
+            left: 0;
+            margin-right: auto;
+            margin-left: auto;
+            width: 100%;
+            z-index: 999;
+            background-color: #ffffff;
+        }
+        #header-title {
+            background: #045C42;
+            text-align: center;
+            height: 60px;
+        }
+        #header-title h1 {
+            color: #fff;
+            margin-top: 0;
+            padding-top: 10px;
+        }
        #checkbox-elements {
-            background: #fff;
             border-radius: 5px;
             padding: 2%;
         } 
@@ -58,12 +93,23 @@
             margin-left: 21%;
             padding-bottom: 2%;
         }
-
+        .savebtn input{
+            padding: 4px;
+            border-radius: 5px;
+            border-color: rgb(0, 0, 0);
+            border-width: 0px;
+            width: 80px;
+            height: 30px;
+            background-color: rgb(56, 124, 187);
+            color: #fff;
+            font-size: 17px;
+        }
         #statusdiv {
             margin-left: 21%;
             padding-bottom: 2%;
             color: #f60;
         }
+
     </style>
 </head>
 <body>
