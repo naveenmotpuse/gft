@@ -148,6 +148,7 @@ var _TopSlider = (function() {
 
       $("#ppfchart").slideToggle("slow", function() {
         if ($(this).is(":visible")) {
+          $(this).attr('aria-hidden', false);
           setTimeout(function() {
             if (isIE11version || isIEEdge) {
               _Common.SetReader(_Settings.hiddenAnchor, "linkppf", true);
@@ -172,6 +173,7 @@ var _TopSlider = (function() {
 
       $("#surpluschart").slideToggle("slow", function() {
         if ($(this).is(":visible")) {
+          $(this).attr('aria-hidden', false);
           setTimeout(function() {
             if (isIE11version || isIEEdge) {
               _Common.SetReader(_Settings.hiddenAnchor, "linksurplus", true);
@@ -254,6 +256,12 @@ var _Template = (function() {
         $(".imgtable").attr("aria-current", "false");
         _ModuleCharts.DrawSurplusChart();
         _ModuleCharts.DrawPPFChart();
+        var chart = $('#ppfchart_c').highcharts();
+        if(IsIphone) {
+          chart.xAxis[0].update({
+              tickInterval: 20
+          });
+        }
       });
     },
     LoadAnimateArea: function() {
