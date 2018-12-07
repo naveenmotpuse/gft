@@ -318,10 +318,10 @@ var _Navigator = (function () {
                 $(".exambtnsubmindiv").hide(); 
                 $("#linknext").k_disable();
                 $(".levelbtnretry").hide();
-                $("#level1score").text(0);
-                $("#level2score").text(0);
-                $("#level3score").text(0);
-                $("#level4score").text(0);
+                // $("#level1score").text(0);
+                // $("#level2score").text(0);
+                // $("#level3score").text(0);
+                // $("#level4score").text(0);
                 $(".exambtnsubmindiv").hide();
               }else{
                 $("#linknext").k_enable();
@@ -392,7 +392,13 @@ var _Navigator = (function () {
                     $(".progress").append("<span id='blankspan'>" + aLabel + "</span>");  
                 }              
             }
-               this.UpdateProgressBar();
+      
+            if(_Navigator.IsPresenterMode() == true){
+                 if(buttonPressed != "prev"){
+                    this.UpdateProgressBar();
+                 }
+                
+            }
     
             // if level retry then jump to summary page
             if(this.GetBookmarkData().levelRetry == 'level') {
@@ -589,15 +595,21 @@ var _Navigator = (function () {
         },
         GetProgressData: function () {
             var progData = [];
-
+          debugger;
             for (var p = 0; p < _progressLevels.length; p++) {
                 var visitpage = 0;
                 for (var i in _NData) {
                     if (p == _NData[i].datalevel) {
                         if (_NData[i].questions.length > 0) {
                             for (var j = 0; j < _NData[i].questions.length; j++) {
-                                if (_NData[i].questions[j].isAnswered) {
-                                    visitpage++;
+                               if(_Navigator.IsPresenterMode() == true){
+                                    if (_NData[i].questions[j].isQuestionVisit) {
+                                        visitpage++;
+                                    }
+                                }else{
+                                    if (_NData[i].questions[j].isAnswered) {
+                                        visitpage++;
+                                    }
                                 }
                             }
                         } else {
@@ -648,6 +660,7 @@ var _Navigator = (function () {
             _StateData[_currentPageObject.pageId] = $.extend(true, {}, _currentPageObject);
         },
         GetTotalScore: function () {
+            debugger;
             var ObtainPoint = 0;
             var totalPoints = 0;
             for (var i in _NData) {
@@ -656,7 +669,13 @@ var _Navigator = (function () {
                         for (var j = 0; j < _NData[i].questions.length; j++) {
                             totalPoints = totalPoints + _QData[_NData[i].questions[j].Id].totalPoints;
                             if (_NData[i].questions[j].isAnswered != undefined && _NData[i].questions[j].isAnswered) {
-                                ObtainPoint = ObtainPoint + (_NData[i].questions[j].points);
+                                if(_Navigator.IsPresenterMode() == true){
+                                  if(_NData[i].questions[j].points != undefined){
+                                    ObtainPoint = ObtainPoint + (_NData[i].questions[j].points);
+                                  }
+                                }else{
+                                    ObtainPoint = ObtainPoint + (_NData[i].questions[j].points);
+                                }
                             }
                         }
                     }
@@ -666,16 +685,12 @@ var _Navigator = (function () {
             return Number(score.toFixed(2));
         },
         UpdateScore: function () {
+            debugger;
             var percScore = this.GetTotalScore()
-           if(_Navigator.IsPresenterMode() == true)
-          {
-            $("#scorediv").html("Overall Score: " + 0 + "%");
-          }else{
-            $("#scorediv").html("Overall Score: " + (percScore.toFixed(0)) + "%");
-          }
-          
+          $("#scorediv").html("Overall Score: " + (percScore.toFixed(0)) + "%");
         },
         GetLevelScore: function (Data_Level) {
+            debugger;
             var ObtainPoint = 0;
             var totalPoints = 0;
             //var levelScrore = [];
@@ -692,7 +707,15 @@ var _Navigator = (function () {
                 }
             }
             var score = (ObtainPoint / totalPoints) * 100;
-            return score
+            if(_Navigator.IsPresenterMode() == true){
+                if(ObtainPoint == totalPoints){
+                    return score
+                }else{
+                    return 0;
+                }
+            }else{
+                return score
+            }
         },
         UpdateDefaultNData: function () {
             //NM: The call to this function should be only once in document.ready first call.

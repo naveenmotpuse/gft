@@ -380,6 +380,10 @@ var EventManager = function () {
         onStart: function () {
             $("#linkprevious").k_disable();
             $("#appmenu").k_disable();
+            if(_Navigator.IsPresenterMode() == true)
+               {  
+                   $("#linknext").k_disable();
+                }
             $("#assist-txt").attr("aria-hidden","false");
             $('body').animate({
                 scrollTop: $(".t_animation_c").position().top - _Settings.topMargin
@@ -479,6 +483,10 @@ var EventManager = function () {
                 $(".fishcounter .count").text(fishhrs);
                 $(".woodcounter .count").text(woodhrs);
             }
+            // if(_Navigator.IsPresenterMode() == true)
+            // {  
+            //     $("#linknext").k_enable();
+            // }
             $("#w_val").text(woodhrs);
             $("#f_val").text(fishhrs);
             $(".colorful-slider1").css("width", (fishhrs * 10) + "%");
@@ -620,6 +628,10 @@ var EventManager = function () {
                 $("#appmenu").k_disable();
             }else{
                 $("#appmenu").k_enable();
+                if(_Navigator.IsPresenterMode() == true)
+                    {  
+                      $("#linknext").k_enable();
+                    }
             }
             $("#assist-txt").attr("aria-hidden","true");
             _Animation.day();

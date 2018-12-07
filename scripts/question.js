@@ -7,11 +7,9 @@
         //_Question.SetOptionClone();
         //_Question.SetOptionPosition();
         _ModuleCharts.DrawPPFChartonBookmark();
-        if(_Navigator.IsPresenterMode() != true){
             if (_currentQuestionObj.isAnswered) {
-                _Question.PrevAnswer();
+                  _Question.PrevAnswer();
             }
-        }
     }
     return {
         Load: function (qObj, jsonObj) {
@@ -29,10 +27,11 @@
                 }
 
             }
+            debugger;
             qObj = $.extend(true, qObj, _QData[qObj.Id]); //true because need to  extend bookmard data
             _currentQuestionObj = qObj;
             //qObj.isCurrent = true;
-
+    
             var pageUrl = _Settings.dataRoot + qObj.dataurl + _Caching.GetUrlExtension();
             if (jsonObj.disableEffect != undefined && jsonObj.disableEffect) {
                 $("#div_question").load(pageUrl, function () {
@@ -81,7 +80,8 @@
                     }
                     else{
                         $("#linknext").k_enable();
-                        _currentQuestionObj.isAnswered = true;
+                        // _currentQuestionObj.isAnswered = true;
+                        _currentQuestionObj.isQuestionVisit = true;
                       } 
             } else {
                 $("#linknext").k_enable();
@@ -168,6 +168,7 @@
             }
         },
         Retry: function () {
+            debugger;
             _CustomPage.SetPageAccesibility();
             this.UnloadFeedback()
             $(".btncheckanswer").k_enable();
@@ -202,6 +203,7 @@
             $("#div_feedback").css("margin-top", "0px");
         },
         Loadfeedback: function (fId, isWorse, isLoaded) {
+            debugger;
             var fdbkUrl = _Settings.dataRoot + _currentQuestionObj.feedback[fId] + _Caching.GetUrlExtension();
             $("#div_feedback").k_show();
             $("#div_feedback").load(fdbkUrl, function () {
@@ -247,7 +249,9 @@
             }
         },
         LoadAlertFeedback: function () {
+            debugger;
             var fdbkUrl = _Settings.dataRoot + "alert.htm" + _Caching.GetUrlExtension();
+
             $("#div_feedback").k_show();
             $("#div_feedback").load(fdbkUrl, function () {
                 _Question.SetFeedbackTop()
@@ -276,6 +280,7 @@
             }
         },
         PrevAnswer: function () {
+            debugger;
             if (_currentQuestionObj.type == "question") {
                 var totalOptions = _currentQuestionObj.options.length;
                 $(".btncheckanswer").k_disable();
@@ -314,6 +319,7 @@
             }
         },
         CheckAnswer: function () {
+            debugger;
             var isWorsen = false;
             var _qPoints = 0.0;
             var isAllCorrect = true;
@@ -321,6 +327,7 @@
             var totalOptions = _currentQuestionObj.options.length;
             var feedbackIndex = 0;
 
+            
             //best score
             var pageId = _Navigator.GetCurrentPage().pageId;
             var Qid = _currentQuestionObj.Qid;

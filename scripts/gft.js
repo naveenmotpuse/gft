@@ -931,6 +931,11 @@ var _CustomPage = (function() {
             $("p.goaldesc").k_hide();
             $("p.goaldesc[goal='" + target.goal + "']").k_show();
           }
+          if(_Navigator.IsPresenterMode() == true && target.goal == "survive"){
+            debugger;
+            $("p.goaldesc[goal='book']").k_hide();
+            $("p.goaldesc[goal='feast']").k_hide();
+          }
         }
       }
       if (currPage.hasActivity != undefined && currPage.hasActivity) {
