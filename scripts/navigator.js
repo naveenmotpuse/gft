@@ -10,7 +10,7 @@ var _Navigator = (function () {
     var _AttemptNData = {};
     var _TempNData = {};
     var _bookmarkData = {};
-    var presentermode =false;
+    var presentermode = false;
 
     var _lastDuration = 0;
     var _levelStartPages = ["l1p1", "l1p2", "l2p1", "l3p1", "l4p1","summary"];
