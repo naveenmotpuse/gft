@@ -437,12 +437,15 @@ var _CustomQuestion = (function() {
             );
           }
           $(".assistive-text").text("");
-          $(".assistive-text").text(
-            "Production Possibility Frontier updated for points, wood " +
-              wood +
-              " and fish " +
-              fish
-          );
+          setTimeout(function() {
+            $(".assistive-text").text(
+              "Production Possibility Frontier updated for points, wood " +
+                wood +
+                " and fish " +
+                fish
+            );
+          }, 100);
+          
           var chart = $("#questionchart").highcharts();
           var series = chart.get("new_series");
           //NM: Need to show feedback when user add same point twice.
